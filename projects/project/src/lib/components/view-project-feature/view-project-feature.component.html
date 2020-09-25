@@ -1,0 +1,65 @@
+<kt-page title="Project- {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Feature
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Feature Name </th>
+                                <th>Module </th>
+                                <th>Priority</th>
+                                <th>Created By</th>
+                                <th>Created Date</th>                                
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="feature">                                
+                                <td>{{feature.name}}</td>                                
+                                <td> <span class="badge badge-primary">{{feature.projectModule.name}}</span></td>
+                                <td><span class="badge badge-primary">{{feature.priority}}</span> </td>
+                                <td> <i class="fa fa-user-circle-o " aria-hidden="true"></i> {{feature.createdBy}}</td>
+                                <td>{{feature.createdDate}}</td>                                                          
+                                <td>               
+                                    <button *ngIf="isLoggedInUser && mode!='edit'" class="btn btn-info btn-sm" (click)="mode='edit'"> <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>    &nbsp;               
+                                    <button *ngIf="isLoggedInUser && mode=='edit'" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Description
+                </div>
+                <div class="card-body">
+                    <table class="">                        
+                        <tbody>
+                            <tr *ngIf="feature">
+
+                                <td *ngIf="mode=='edit'"><textarea rows="20" cols="180" [(ngModel)]="feature.description" name="description"></textarea>
+                                    
+                                </td>                              
+                                <td  *ngIf="mode!='edit'"> {{feature.description}}</td>                            
+                                <td class="text-center">                                                   
+                                    <button *ngIf="mode=='edit'" class="btn btn-success btn-sm" (click)="update(feature)"> Save</button>    &nbsp;                                                   
+                                    <button *ngIf="mode=='edit'" class="btn btn-danger btn-sm" (click)="mode=''"> Cancel</button>  &nbsp;                                                   
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

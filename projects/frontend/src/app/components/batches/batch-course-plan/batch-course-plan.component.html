@@ -1,0 +1,69 @@
+<kt-page title=" Batch Course Plan - {{course?course.title:''}}" [breadcrumbItems]="breadcrumbItems" showSidebar="true">
+    <div class="row" *ngIf="reportData">
+        <div class="col-2" *ngFor="let r of reportData;let z=index;">                
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[z]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+    
+    <div  *ngIf="courseTopics; else loading">  
+    <div class="row" *ngFor="let i=index;let ct of courseTopics | keyvalue">
+        <div class="col">
+            <div class="card card-custom gutter-b">
+                <div class="card-header card-blue">
+                    Module #{{i+1}} - {{ct.key}} ( {{ct.value.length}} Topics )
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>    
+                                <th width="40%">Topic</th>                                
+                                <th>Duration(mins)</th>
+                                <th>PlannedDate</th>
+                                <th>Completion Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let j=index;let t of ct.value">
+                                <td>{{j+1}}</td>
+                                <td>   
+                                    <font [color]="getColor(t)"> {{t.topicName}} </font>
+                                </td>
+                                <!--t.topicId-->
+                                <!--t.userTopicId-->
+                                <!--t.completed, t.core-->
+                                <!-- <td>{{t.status}}</td> -->
+                                 
+                                    <td *ngIf="mode=='edit' &&selectedTopic == t.topicId">
+                                        <input type="number" [(ngModel)]="t.duration" name="duration" min="1"/>
+                                    </td>
+                                    <td *ngIf="selectedTopic != t.topicId">
+                                        {{t.duration}}</td>                                      
+                                <td *ngIf="selectedTopic != t.topicId">{{t.plannedDate}}</td>
+                                <td *ngIf="mode=='edit' &&selectedTopic == t.topicId">                               
+                                    <input type="date" [(ngModel)]="t.plannedDate" name="plannedDate" />
+                                </td> 
+                                <td>{{t.completionDate}}</td>
+                                <td>
+                                    <button  [ngxPermissionsOnly]="['T']"  (click)="edit(t.topicId)" *ngIf="mode!='edit'"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
+                                    <button (click)="update(t)" class="btn btn-success btn-sm" *ngIf="mode=='edit' && selectedTopic == t.topicId">Save</button> &nbsp; 
+                                    <button (click)="cancel()" class="btn btn-danger btn-sm" *ngIf="mode=='edit' && selectedTopic == t.topicId"><i class="fas fa-window-close    "></i></button>
+                                    <!-- <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info"> Send</button>
+                                    <button *ngIf="t.topicSentOn!=null" class="btn btn-success btn-sm"> 
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</kt-page>

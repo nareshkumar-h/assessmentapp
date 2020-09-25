@@ -1,0 +1,56 @@
+<kt-page title="Project Tasks - {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">        
+    
+    <div class="row" *ngIf="reportData">
+        <div class="col-2"
+        *ngFor="let r of reportData;let i=index;"> 
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div> 
+    
+    <div class="row" *ngFor="let i=index;let m of projectTasks | keyvalue">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    <div class="card-title text-white">
+                        Module #{{i+1}} - {{m.key}} ( {{projectTasks[m.key].length}} Topics )
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>    
+                                <th>Task Type</th>
+                                <th width="40%">Task Name</th>
+                                <th>Estimation(Hrs)</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th>Sprint</th> 
+                                <th>Developed By</th>                                                               
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let j=index;let t of m.value">
+                                <td>{{j+1}}</td>             
+                                <td> <span class="badge badge-primary">Feature</span> </td>                   
+                                <td>{{t.name}}</td>
+                                <td>{{t.estimation}}</td>
+                                <td>{{t.startDate}}</td>
+                                <td>{{t.completionDate}}</td>
+                                <td>{{t.status}}</td>
+                                <td>{{t.sprintNo}}</td>
+                                <td>{{t.assignedTo}}</td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    </kt-page>
+    

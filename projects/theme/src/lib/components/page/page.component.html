@@ -1,0 +1,7 @@
+<div class="page" [ngClass]="{'sidebar-open':showSidebar}" >
+    <kt-page-bar [items]="breadcrumbItems"  *ngIf="breadcrumbItems"></kt-page-bar>
+    <div class="page-content">
+        <h3 class="page-title" *ngIf="title"> {{title}} </h3>
+        <ng-content></ng-content>
+    </div>
+</div>

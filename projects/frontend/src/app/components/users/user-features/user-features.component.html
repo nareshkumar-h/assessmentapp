@@ -1,0 +1,18 @@
+<kt-page title="Features" [breadcrumbItems]="breadcrumbItems" showSidebar="true">
+    
+    <div class="row">
+       <div class="col-6" *ngIf="userFeatures">
+           <table class="table bordered">
+               <thead><tr><th>#</th><th>Feature</th><th>Enabled</th></tr></thead>
+               <tbody>
+                   <tr *ngFor="let f of userFeatures;let i =index;">
+                    <td>{{i+1}}</td>
+                    <td>{{f.featureName}}</td>
+                    <td>{{f.enabled?"Y":"N"}}</td>
+                   </tr>
+               </tbody>
+           </table>
+        </div>
+    </div>
+
+</kt-page>

@@ -1,0 +1,14 @@
+<kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar>
+<kt-page showSidebar="true" [breadcrumbItems]="breadcrumbItems" >
+
+    <!-- <div class="btn-toolbar m-1" role="toolbar">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-secondary" [ngClass]="{active:page=='curriculum'}" (click)="page='curriculum'">Curriculum</button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{active:page=='topics'}" (click)="page='topics'">Topics</button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{active:page=='content'}" (click)="page='content'">Content</button>            
+          </div>
+    </div> -->
+     
+    <router-outlet></router-outlet> 
+    <!-- <app-user-course-content-list *ngIf="page=='content'"></app-user-course-content-list> -->
+</kt-page>

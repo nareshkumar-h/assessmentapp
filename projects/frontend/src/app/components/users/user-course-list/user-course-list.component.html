@@ -1,0 +1,55 @@
+<div class="page-content">
+    <app-page-bar [items]="breadcrumbItems"></app-page-bar>
+    
+    <h3 class="page-title"> Course Dashboard  {{category?"- " + category :""}} </h3>
+    <div class="row" *ngIf="reportData">
+        <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12"  -->
+            <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;"
+        *ngFor="let r of reportData;let i=index;">            
+            <app-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></app-dashboard-widget>
+        </div>
+    </div>
+<div class="row" *ngFor="let category of categories">
+        <div class="col-12" *ngIf="courses[category]" >
+            <div class="card" >
+                <div class="card-header card-blue">
+                    {{category}}
+                    <!-- <div class="tools pull-right">
+                        <a routerLink="../addbatchcourse" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div> -->
+                </div>
+                <div class="card-body">
+                    <table class="table w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>   
+                                <th width="60%">Course Title</th>    
+                                <th>Topics</th>
+                                <th>Percentage</th>
+                                <!-- <th>Status</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let c of courses[category]">
+                                <td>{{i+1}}</td>                                
+                                <td>{{c.course_id}} - {{c.course_name}}</td>
+                                <td>{{c.completed_topics}} / {{c.no_of_topics}}</td>
+                                <td>{{getPercentage(c)}} %</td>
+                                <!-- <td>{{c.status}}</td> -->
+                                <td>
+                                    <button class="btn btn-info btn-sm" (click)="navigate(['usercourse',c.course_id],['USER_COURSE',c.course_id])">View</button>
+                                    
+                                    
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

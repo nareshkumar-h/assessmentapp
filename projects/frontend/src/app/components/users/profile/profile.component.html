@@ -1,0 +1,51 @@
+<kt-page title="Profile" [breadcrumbItems]="breadcrumbItems" showSidebar="false">
+
+    <div class="row">
+       <div class="col-6" *ngIf="user">
+                   
+                    <form #aForm="ngForm" (ngSubmit)="submit()">  
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Username</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Username" id="username"
+                                name="username" [(ngModel)]="user.username" required readonly>
+                                
+                          </div>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Name</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Name" id="name"
+                                name="name" [(ngModel)]="user.name" required autofocus>
+                          </div>                      
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Email</span>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Enter Email" id="email"
+                                name="email" [(ngModel)]="user.email" required >
+                          </div> 
+                          <!-- 
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Active</span>
+                            </div>
+                            
+                            {{user.active?"Y":"N"}} 
+                          
+                            
+                            
+                          </div>          -->
+                          <br/>
+                        <button type="submit" [disabled]="aForm.invalid" class="btn btn-info">Submit</button> &nbsp;
+
+                        <button type="reset" class="btn btn-danger" (click)="cancel()">Cancel </button> &nbsp;
+                        <!-- <button [ngxPermissionsOnly]="['HR']" type="button" class="btn btn-danger" (click)="delete(user.id)"><i class="fas fa-trash    "></i> </button> -->
+                        
+                    </form>
+                
+        </div>
+    </div>
+
+</kt-page>

@@ -1,0 +1,47 @@
+<kt-page title="Academics" [breadcrumbItems]="breadcrumbItems" showSidebar="true">
+    <div class="row">
+       <div class="col-6" *ngIf="user">
+                    <form #aForm="ngForm" (ngSubmit)="submit()">  
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Organization</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Organization" id="organization"
+                              name="organization"  [(ngModel)]="user.academic.organization" required >
+                          </div>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Degree</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Degree" id="degree"
+                                name="degree" [(ngModel)]="user.academic.degree" required autofocus>
+                          </div>                      
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Department</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Department" id="department"
+                                name="department" [(ngModel)]="user.academic.department" required >
+                          </div>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Percentage(%)</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Enter Percentage" id="percentage"
+                                name="percentage" [(ngModel)]="user.academic.percentage" required >
+                          </div>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Year of Passing</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Year of Passing" id="yearOfPassing"
+                                name="yearOfPassing" [(ngModel)]="user.academic.yearOfPassing" required >
+                          </div>
+                                                   
+                          <br/>
+                        <button type="submit" [disabled]="aForm.invalid" class="btn btn-info">Submit</button>
+                    </form>
+                
+        </div>
+    </div>
+</kt-page>

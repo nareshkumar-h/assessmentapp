@@ -1,0 +1,61 @@
+<div class="sidebar">
+    <!-- <app-brand></app-brand> -->
+	
+	<ul class="nav sidebar-menu">
+	
+		<li class="nav-item">
+            <a class="nav-link" routerLink="/">
+                <i class="fas fa-arrow-left"> &nbsp;&nbsp; </i>
+                <span class="title">Back</span>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId],['BATCH',batchId])">
+                <i class="fas fa-home"> &nbsp;&nbsp; </i>
+                <span class="title">Batch Home</span>
+            </a>
+		</li>	
+
+		<li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId,'users'],['BATCH',batchId])">
+                <i class="fas fa-users"> &nbsp;&nbsp; </i>
+                <span class="title">Users</span>
+            </a>
+		</li>		
+		
+		<li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId,'courses'],['BATCH',batchId])">
+                <i class="fas fa-book-open"> &nbsp;&nbsp; </i>
+                <span class="title">Courses</span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId,'projects'],['BATCH',batchId])">
+                <i class="fas fa-laptop-code"> &nbsp;&nbsp; </i>
+                <span class="title">Projects </span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId,'interviews'],['BATCH',batchId])">
+                <i class="fas fa-book-open"> &nbsp;&nbsp; </i>
+                <span class="title">Interviews</span>
+            </a>
+        </li>
+       
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId,'slack'],['BATCH',batchId])">
+                <i class="fab fa-slack"> &nbsp;&nbsp; </i>
+                <span class="title">Slack</span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['batches',batchId,'activity'],['BATCH',batchId])">
+                <i class="fas fa-chart-line"> &nbsp;&nbsp; </i>
+                <span class="title">Activity</span>
+            </a>
+        </li>
+
+	</ul>
+
+</div>

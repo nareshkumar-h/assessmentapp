@@ -1,0 +1,102 @@
+<kt-page title="Course Contents - {{courseId}}" showSidebar="true">
+    <div class="row" *ngIf="reportData">
+        <div class="col-2" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <div class="row" *ngIf="contents && contents.length==0">
+        <div class="col">
+            No records.
+        </div>
+    </div>
+    <div *ngIf="contents" (keydown.ArrowLeft)="previousPage(pageNo)" (keydown.ArrowRight)="nextPage(pageNo)">
+
+        <section class="text-right mr-3">
+
+            Page - <input type="number" [(ngModel)]="pageNo" name="pageNo" value="{{pageNo}}" min="1"
+                max="{{totalPages}}" (keyup)="goto(pageNo)" required /> &nbsp;/ {{totalPages}}
+
+            <a *ngIf="pageNo > 1" class="btn btn-info btn-rounded btn-sm waves-effect waves-light"
+                (click)="previousPage(pageNo)" role="button">
+                <i class="fas fa-arrow-left mr-2"></i>Previous </a>
+
+            &nbsp;&nbsp;
+
+            <a *ngIf="pageNo > 0 && pageNo < totalPages"
+                class="btn btn-info btn-rounded btn-sm waves-effect waves-light" (click)="nextPage(pageNo)"
+                role="button">Next <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+
+        </section>
+
+        <div class="row" *ngFor="let i=index;let c of contents">
+            <div class="col">
+
+                <br />
+
+                <div class="card card-custom glutter-b">
+                    <div class="card-header card-blue">
+                        <div class="card-title">
+                            <div class="card-label text-white">
+                                {{c.title}}
+                                <small>( Duration : ~{{c.duration}} mins)</small>
+                                <a *ngIf="c.contentType=='C'" (click)="callServiceToCopy(c.content)" class="btn btn btn-sm"><i
+                                    class="fas fa-clipboard"></i></a>
+                            </div>
+                        </div>
+                        
+                       
+                        <div class="tools pull-right">
+
+                            <!-- <button (click)="update(c,i,'C')" class="btn btn-success btn-sm">
+                            <i class="fas fa-check" aria-hidden="true"></i> 
+                            Mark as Completed</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                             <button (click)="update(c,i,'S')" class="btn btn-danger btn-sm">                                
+                                Skip</button> -->
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <pre class="pre-code" *ngIf="c.contentType=='C'">
+                        <code [highlight]="c.content" [lang]="c.lang?c.language:'java'"></code>
+                      </pre>
+                        <section *ngIf="c.contentType=='L'">
+                            <br />
+                            <a href="{{c.url}}" target="_blank">{{c.url}}</a>
+                            <br />
+                        </section>
+                        <section *ngIf="c.contentType=='V'">
+                            <br />
+                            <iframe width="560" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(c.url)"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            <br />
+                            Reference: <a href="{{c.url}}" target="_blank">{{c.url}}</a>
+                            <br />
+                        </section>
+                        <section *ngIf="c.contentType=='I'">
+                            <img [src]="c.url" />
+                            <p *ngIf="c.content">{{c.content}}</p>
+                        </section>
+                        <section class="pdf" *ngIf="c.contentType=='P'">
+
+                            <pdf-viewer [src]="c.url" [fit-to-page]="true" [show-borders]="true"
+                                [original-size]="false"></pdf-viewer>
+                            <br />
+                            <br />
+
+                        </section>
+                    </div>
+                    <div class='card-footer'>
+                        Tags: <span *ngFor="let t of c.tags"><span class="badge badge-info">{{t}}</span>&nbsp;</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</kt-page>

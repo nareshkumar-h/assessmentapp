@@ -1,0 +1,38 @@
+<mat-dialog-content class="mat-typography">
+    <h3 class="page-title"> New Batch </h3>
+    <div class="row">
+        <div class="col">
+            <form (submit)="save(batch)">
+                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <tr>
+                            <th width="30%">Code </th>
+                            <td width="70%">
+                                <input type="text" [(ngModel)]="batch.code" name="code" required autofocus />
+                                </td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Name</th>
+                            <td width="70%"><input type="text" [(ngModel)]="batch.name" name="title" required autofocus /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Start Date</th>
+                            <td width="70%"><input type="date" [(ngModel)]="batch.startDate" name="startDate" required autofocus /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">End Date</th>
+                            <td width="70%"><input type="date" [(ngModel)]="batch.endDate" name="endDate" required autofocus /></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                           <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                            <button type="reset" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                        </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                </form>
+        </div>
+    </div>
+</mat-dialog-content>

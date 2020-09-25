@@ -1,0 +1,62 @@
+<div class="row" *ngIf="reportData">
+    <!-- <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;" -->
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" *ngFor="let r of reportData;let i=index;">
+        <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+    </div>
+</div>
+
+<div class="row" *ngFor="let i=index;let m of modules">
+    <div class="col-12">
+        <div class="card card-custom">
+            <div class="card-header card-blue">
+                Module #{{i+1}} - {{m.name}} ( {{moduleTopics[m.code].length}} Topics)
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+
+                            <th width="40%">Topic</th>
+                            <th>Day</th>
+                            <th>Duration(mins)</th>
+                            <th width="20%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="moduleTopics">
+                        <tr *ngFor="let j=index;let t of moduleTopics[m.code]">
+                            <td>{{j+1}}</td>
+                            <td>{{t.name}} </td>
+                            <td *ngIf="mode=='edit' &&selectedTopic == t.code">
+                                <input type="number" [(ngModel)]="t.day" name="day" min="1" />
+                            </td>
+                            <td *ngIf="selectedTopic != t.code">
+                                {{t.day}}</td>
+                            <td *ngIf="mode=='edit' &&selectedTopic == t.code">
+                                <input type="number" [(ngModel)]="t.duration" name="duration" min="1" />
+                            </td>
+                            <td *ngIf="selectedTopic != t.code">
+                                {{t.duration}}</td>
+
+                            <!-- <td *ngIf="mode=='edit' &&selectedTopic == t.code">                               
+                                <input type="date" [(ngModel)]="t.plannedDate" name="plannedDate" />
+                            </td> -->
+                            <!-- <td *ngIf="selectedTopic != t.code">
+                                {{t.plannedDate}}</td>                             -->
+                            <td>
+                                <button (click)="edit(t.code)" *ngIf="mode!='edit'"><i class="fas fa-pencil-alt"
+                                        aria-hidden="true"></i></button>
+                                <button (click)="update(t)" class="btn btn-success btn-sm"
+                                    *ngIf="mode=='edit' && selectedTopic == t.code">Save</button> &nbsp;
+                                <button (click)="cancel()" class="btn btn-danger btn-sm"
+                                    *ngIf="mode=='edit' && selectedTopic == t.code">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<h3 class="page-title">{{courseName}}</h3>
+    <div class="row d-none d-lg-flex" *ngIf="reportData">
+        <!-- <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" -->
+        <div class="col-md-1" style="width: 20%;
+        flex: 0 0 20%;max-width: 20%;" 
+        *ngFor="let r of reportData;let i=index;"> 
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    
+    <ng-template #loading>
+       <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+    
+    <div *ngIf="modules else loading">
+
+    <div class="row" *ngFor="let i=index;let m of modules">
+        <div class="col">
+            <div class="card card-custom gutter-b">
+                <div class="card-header card-blue">
+                    <div class="card-title">
+                        <h3 class="card-label text-white">Module #{{i+1}} - {{m.name}} ( {{courseTopics[m.name].length}} Topics )</h3>
+                    </div>   
+                    
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+    
+                                <th width="60%">Topic</th>
+                                <th class="d-none d-lg-block">Completion Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let j=index;let t of m.topics">
+                                <td> <input type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
+                                    (change)="updateStatus(t, topicCheckbox.checked)" /> </td>                                
+                                <td>
+                                    <font [color]="getColor(t)"> {{t.name}} </font>
+                                </td>
+                                <td class="d-none d-lg-block">{{t.completionDate}}</td>
+                                <td>
+                                    <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info"> Send</button>
+                                    <button *ngIf="t.topicSentOn!=null" class="btn btn-success btn-sm"> 
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

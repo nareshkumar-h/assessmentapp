@@ -1,0 +1,59 @@
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center"><strong>Add Project Activity</strong></h3>
+            <form class="form" (submit)="save(activity)">
+                <table class="table table-borderless w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <!-- <tr>
+                                <th width="30%">Module </th>
+                                <td width="70%">
+                                    <select class="form-control" [(ngModel)]="feature.projectModule.id" [value]="moduleId" required >
+                                        <option *ngFor="let m of modules" [selected]="m.id === moduleId" [value]="m.id">{{m.name}}</option>
+                                    </select>
+                                    <input type="number"  class="form-control"  [(ngModel)]="feature.projectModule.id" name="code" placeholder="" required autofocus />
+                                    </td>
+                            </tr> -->
+                        <tr>
+                            <th width="30%">Name</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="activity.activityName"
+                                    placeholder="" name="name" required autofocus /></td>
+                        </tr>
+                        <!-- <tr>
+                            <th width="30%">Description</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="feature.description"
+                                    name="description" required /></td>
+                        </tr> -->
+                        <tr>
+                            <th width="30%">Category</th>
+                            <td width="70%">
+                                <select class="form-control" [(ngModel)]="activity.category" name="category" >
+                                    <option *ngFor="let type of categories" [value]="type.name">{{type.id}} - {{type.name}}</option>
+                                </select>
+                            </td>
+
+                        </tr>
+                         <tr>
+                            <th width="30%">Start Date</th>
+                            <td width="70%"><input class="form-control" type="date" [(ngModel)]="activity.startDate"
+                                    name="startDate" required /></td>
+                        </tr>
+                        <!-- <tr>
+                                <th width="30%">Completion Date</th>
+                                <td width="70%"><input type="date"  class="form-control"  [(ngModel)]="project.completionDate" name="completionDate" required autofocus /></td>
+                            </tr> -->
+
+                        <tr>
+                            <th></th>
+                            <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

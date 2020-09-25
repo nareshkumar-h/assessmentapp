@@ -1,0 +1,69 @@
+<kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar>
+<kt-page title="Course Dashboard  {{category?'- '+ category :''}} " showSidebar="true"
+    [breadcrumbItems]="breadcrumbItems">
+    <div class="row d-none d-lg-flex" *ngIf="reportData">
+        <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12"  -->
+        <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+    <section *ngIf="categories;else loading">
+        <div class="row" *ngFor="let category of categories">
+            <div class="col-12" *ngIf="courses[category]">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        {{category}}
+
+                        <!-- <div class="tools pull-right">
+                        <a routerLink="../addbatchcourse" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div> -->
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <!-- <th>#</th>    -->
+                                    <th width="40%">Course Title</th>
+                                    <th>Organization</th>
+                                    <th>Topics</th>
+                                    <th>Percentage</th>
+                                    <th>Status</th>
+                                    <!-- <th>Status</th> -->
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let i=index;let c of courses[category]">
+                                    <!-- <td>{{i+1}}</td>                                 -->
+                                    <td><a routerLink="../courses/{{c.course_code}}/{{c.course_name}}/topics"
+                                            class="text-dark">{{c.course_code}} - {{c.course_name}} </a></td>
+                                    <td><span class="badge badge-info">{{c.organization | uppercase}}</span>
+                                    </td>
+                                    <td>{{c.completed_topics}} / {{c.no_of_topics}}</td>
+                                    <td>{{getPercentage(c)}} %</td>
+                                    <td><span class="badge"
+                                            [ngClass]="{'badge-success':c.status=='COMPLETED','badge-info':c.status!='COMPLETED'}">{{c.status}}</span>
+                                    </td>
+                                    <!-- <td>{{c.status}}</td> -->
+                                    <td>
+                                        <!-- <button class="btn btn-info btn-sm" (click)="navigate(['usercourse',c.course_id],['USER_COURSE',c.course_id])">View</button> -->
+
+                                        <button class="btn btn-info btn-sm"
+                                            routerLink="../courses/{{c.course_code}}/{{c.course_name}}/topics">View</button>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</kt-page>

@@ -1,0 +1,66 @@
+<kt-page title="Course Questions - {{course?course.title:''}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+
+    <!-- <div class="row">
+        <div class="col">
+            <div>             
+                
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"  *ngIf="courses">
+                    <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group"  *ngFor="let c of categories">
+                      <button type="button" class="btn btn-secondary"   [routerLink]="['/courses']" [queryParams]="{ category: c }" 
+                      [ngClass]="{'active': c == selectedCategory}">{{c}}</button>
+                  </div>
+
+            </div>
+
+
+        </div>
+        <br/> -->
+
+    <div class="row">
+        <div class="col" >
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Questions
+                    <div class="tools pull-right">
+                         <a routerLink="addquestion" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                     </div>
+                </div>
+                <div class="card-body">
+                    <table class="table theme-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Question </th>
+                                <th>Created Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let obj of questions">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    {{obj.title}}
+                                </td>
+                                <td>{{obj.createdDate |moment}}</td>
+                                <td>
+                                    <a routerLink="{{obj.id}}" class="btn btn-info btn-sm">View</a> &nbsp;
+                                    <button (click)="delete(obj.id)" class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt    "></i> </button>
+                                    <!-- <button (click)="navigate(c.code"+"/plan"+,'COURSE_PLAN')" class="btn btn-info btn-sm">Plan</button> -->
+                                    <!-- <button (click)="publish(c)"> <i class="fas fa-cloud-upload-alt"></i></button> -->
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" *ngIf="questions">
+                    Results : {{questions.length}}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</kt-page>

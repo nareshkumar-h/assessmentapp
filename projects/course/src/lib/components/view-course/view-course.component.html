@@ -1,0 +1,21 @@
+<kt-sidebar [menus]="menus" *ngIf="showSidebar">
+    <!-- <div class="nav-item">
+        <a class="nav-link" [ngClass]="{'nav-link-active':pageName=='overview'}" (click)="pageName='overview'">Overview</a>
+        <a class="nav-link" [ngClass]="{'nav-link-active':pageName=='curriculum'}" (click)="pageName='curriculum'">Curriculum</a>
+        <a class="nav-link" [ngClass]="{'nav-link-active':pageName=='competency'}" (click)="pageName='competency'">Competency</a>
+    </div> -->
+</kt-sidebar>
+<kt-page  showSidebar="true" [breadcrumbItems]="breadcrumbItems" *ngIf="course">        
+ 
+<!-- <ng-container *ngIf="pageName=='overview'">    
+    <ct-course-overview [course]="course"></ct-course-overview>
+</ng-container>
+<ng-container *ngIf="pageName=='curriculum'">
+    <ct-view-course-curriculum [course]="course" ></ct-view-course-curriculum>
+</ng-container>
+<ng-container *ngIf="pageName=='competency'">
+    <ct-view-course-topics [course]="course" ></ct-view-course-topics>
+</ng-container> -->
+<router-outlet></router-outlet> 
+</kt-page>
+

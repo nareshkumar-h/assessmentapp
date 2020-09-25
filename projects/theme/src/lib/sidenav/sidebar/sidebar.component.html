@@ -1,0 +1,34 @@
+<div class="sidebar" *ngIf="!isMobile">
+    <!-- <app-brand></app-brand> -->
+	
+	<div class="nav sidebar-menu">
+		<ng-container *ngFor="let m of menus" >
+		<div class="nav-item" [ngClass]="{dropdown: m.type=='sub'}" *ngIf="m.access">            
+
+            <!-- <a class="nav-link" routerLinkActive="nav-link-active"   [routerLink]="[{ outlets: {primary: m.link, sidebar: m.sidelink?m.sidelink:null}}]"  -->
+				<a class="nav-link" routerLinkActive="nav-link-active"  [routerLinkActiveOptions]="{exact: true}" [routerLink]="m.path" [queryParams]="m.queryParams"
+					*ngIf="!m.type" title="{{m.title}}">					
+					<i class="{{m.icontype}}"> &nbsp;&nbsp; </i>
+			<span class="title">{{m.title}}</span>			
+			</a>
+
+            <a class="nav-link" href="#{{m.collapse}}" data-toggle="collapse"
+				*ngIf="m.type=='sub'" (click)="updatePS()">  
+				<i class="{{m.icontype}}"> &nbsp;&nbsp;</i>  
+				<span class="title">{{m.title}}</span>
+				&nbsp;&nbsp;
+				<i class="fas fa-caret-left pull-right" aria-hidden="true"></i>
+				</a>
+			
+			<div class="sub-menu collapse" id="{{m.collapse}}" style="display: block;" *ngIf="m.type=='sub'">
+				<div class="nav-item side-menu-dropdown-item">
+                <a class="nav-link" *ngFor="let sm of m.children"  [routerLink]="[{ outlets: {primary: sm.path, sidebar: null}}]" [queryParams]="sm.queryParams">
+					<i class="{{sm.path}}">&nbsp;&nbsp;</i> {{sm.title}}</a>                
+			</div>
+			</div>
+		</div>
+		</ng-container>
+		<ng-content></ng-content>
+	</div>
+	
+</div>

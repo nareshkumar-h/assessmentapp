@@ -1,0 +1,75 @@
+<kt-sidebar [menus]="menus"></kt-sidebar>
+<kt-page  [breadcrumbItems]="breadcrumbItems" showSidebar="true"> 
+    
+    <h3 class="page-title">Batches</h3>
+    
+    <div class="row" *ngIf="reportData">
+        <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;"
+        *ngFor="let r of reportData;let z=index;">                
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[z]"></kt-dashboard-widget>
+        </div>
+    </div>
+
+    <br/>
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Batches
+                     <div class="tools pull-right">
+                        <a [ngxPermissionsOnly]="['HR']" (click)="openDialog()" class="btn btn btn-sm text-white">
+                            <i class="fa fa-plus "></i></a>
+                        
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="batches">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Code </th>
+                                <th>Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>#Participants</th>
+
+                                <th>Status</th>
+                                <th>Active</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let batch of batches">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    {{batch.code}}
+                                </td>
+                                <td>{{batch.name}}</td>
+
+                                <td>{{batch.startDate}}</td>
+                                <td>{{batch.endDate}}</td>
+                                <td>{{batch.noOfParticipants}}</td>
+                                <td>{{batch.status}}</td>
+                                <td>{{batch.active?"Y":"N"}}</td>
+
+                                <td>
+                                    <button class="btn btn-info btn-sm" [routerLink]="batch.code">View</button>
+                                    
+
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" *ngIf="batches">
+                    Results : {{batches.length}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</kt-page>

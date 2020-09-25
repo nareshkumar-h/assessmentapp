@@ -1,0 +1,15 @@
+<div class="angular-editor"  #angularEditor >
+    <ct-content-editor-toolbar (valueChange)="setContentType($event)" *ngIf="toolbar"></ct-content-editor-toolbar>
+
+    <div class="angular-editor-wrapper show-placeholder" #editorWrapper>
+        <!-- <div #editor class="angular-editor-textarea" (input)="onContentChange()" 
+        (focus)="onTextAreaFocus($event)"
+         (blur)="onTextAreaBlur($event)"
+         contenteditable="true"  style="height: auto; min-height: 0px;">
+            
+        </div> -->
+        <textarea contenteditable="true" style="height: auto; min-height: 0px;" class="angular-editor-textarea"  [(ngModel)]="content" rows="10" cols="100" required></textarea>
+        <!-- <span class="angular-editor-placeholder" *ngIf="showPlaceholder">Enter content here...</span> -->
+        <button (click)="saveDraft()" [disabled]="!content || content.length<=0"><i class="fas fa-save    "></i>Save</button>
+    </div>
+</div>

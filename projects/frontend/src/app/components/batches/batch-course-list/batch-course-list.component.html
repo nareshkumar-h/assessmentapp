@@ -1,0 +1,73 @@
+<kt-page title="Batch Courses - {{batchId}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+    <div class="row" *ngIf="reportData">
+        <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12"  -->
+            <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;"
+        *ngFor="let r of reportData;let i=index;">            
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+    
+    <div class="row" *ngIf="batchCourses; else loading">       
+        <div class="col" *ngIf="batchCourses">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    <div class="card-title text-white"> Batch Courses</div>
+                    <div class="tools pull-right">
+                        <a  [ngxPermissionsOnly]="['HR']" (click)="assignCourseDialog()" class="btn btn btn-sm text-white"><i class="fas fa-plus "></i></a>
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>   
+                                <th>Course Title</th>                             
+                                <th>Start Date</th>
+                                <th>Completion Date </th>
+                                <th>Completed Topics</th>
+                                <th>Pending Topics</th>
+                                <th>Trainer</th>
+                                <!-- <th>Order</th>                                 -->
+                                <th>Status</th>
+                                
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let b of batchCourses">
+                                <td>{{i+1}}</td>
+                                <td>{{b.course_id}} - {{b.course_name}}</td>
+                                <td>{{b.start_date}}</td>
+                                <td>{{b.end_date}}</td>
+                                
+                                <td>{{b.completed_topics}}</td>
+                                <td>{{b.pending_topics}}</td>
+                                <!-- <td>{{b.display_order}}</td> -->
+                                <td>{{b.trainer_id}}</td>
+                                <td>{{b.status}}</td>
+                                <td>
+                                    <a  [ngxPermissionsOnly]="['HR']" (click)="editCourseDialog(b)" class="btn btn-info btn-sm text-white"><i class="fas fa-pencil-alt    "></i></a> &nbsp;
+                                    <a  routerLink="{{b.course_id}}" class="btn btn-info btn-sm">View</a> &nbsp;
+                                    <a  routerLink="{{b.course_id}}/topics" class="btn btn-info btn-sm">Topics</a> &nbsp;
+                                    <a  routerLink="{{b.course_id}}/plan" class="btn btn-info btn-sm">Plan</a> &nbsp;
+                                    
+                                    
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    Results : {{batchCourses.length}}
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

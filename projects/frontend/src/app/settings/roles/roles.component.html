@@ -1,0 +1,28 @@
+<kt-page showSidebar="false">
+    <div class="row">
+        <div class="page-title col-6">Roles</div>
+        <!-- <div class="page-actions ml-auto">
+            <button  mat-raised-button color="primary" [ngxPermissionsOnly]="['HR']" routerLink="adduser">
+                Add User</button>
+                <button  mat-raised-button color="primary" [ngxPermissionsOnly]="['HR']" routerLink="adduser">
+                    Add User</button>
+        </div> -->
+    </div>
+    <div class="page-section col-6" *ngIf="dataSource">
+        <!-- <h3 class="page-section-title">Users</h3> -->
+        <div class="mat-elevation-z8">
+            <table mat-table matSort [dataSource]="dataSource" style="width: 100%;">
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.code}} </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                <tr mat-row *matRowDef="let row;columns: displayedColumns"></tr>
+            </table>
+        </div>
+    </div>
+</kt-page>

@@ -1,0 +1,49 @@
+
+    <div class="row">
+        <div class="col" >
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Questions
+                    <!-- <div class="tools pull-right">
+                         <a routerLink="addquestion" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                     </div> -->
+                </div>
+                <div class="card-body">
+                    <table class="table theme-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th width="60%">Question </th>
+                                <th>Created Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="questions">
+                            <tr *ngFor="let i=index;let obj of questions">
+                                <td>
+                                    <input type="checkbox" #topicCheckbox [checked]="obj.status=='C'" name="topic"
+                                        (change)="updateStatus( obj, topicCheckbox.checked)" />    
+                                </td>
+                                <td>
+                                    {{obj.title}} 
+                                </td>
+                                <td>{{obj.createdDate |moment}}</td>
+                                <td>
+                                    <!-- <a routerLink="{{obj.id}}" class="btn btn-info btn-sm">View</a> &nbsp; -->
+                                    <!-- <button (click)="navigate(c.code"+"/plan"+,'COURSE_PLAN')" class="btn btn-info btn-sm">Plan</button> -->
+                                    <!-- <button (click)="publish(c)"> <i class="fas fa-cloud-upload-alt"></i></button> -->
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" *ngIf="questions">
+                    Results : {{questions.length}}
+                </div>
+            </div>
+
+
+        </div>
+    </div>

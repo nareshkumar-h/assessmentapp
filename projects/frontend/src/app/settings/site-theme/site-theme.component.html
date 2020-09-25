@@ -1,0 +1,66 @@
+<kt-page title="Theme Settings" showSidebar="true">
+    <div class="row" *ngIf="siteInfo">
+        <div class="page-card col-6">
+  
+            
+            <h4 class="page-card-title">Configuration</h4>
+            
+    <table class="table table-bordered">
+        <thead>
+            <tr><th>Name</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of siteInfo">
+                <td>{{t.description}}</td>
+                <td>{{t.value}}</td>
+            </tr>
+        </tbody>
+     </table>
+     <!-- {{siteInfo | json}}  -->
+  <!--      <form class="form-horizontal" (submit)="update()" *ngIf="locked">
+               
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>Background Color</strong></label>
+                    <div class="col">
+                        <input type="text" class="form-control input-lg" id="bgColor" placeholder="Background Color"
+                            [(ngModel)]="siteInfo.bgColor" name="bgColor" required autofocus />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>Background Image</strong></label>
+                    <div class="col">
+                        <input type="text" class="form-control input-lg" id="bgImage" placeholder="Background Color"
+                            [(ngModel)]="siteInfo.bgImage" name="bgImage" required autofocus />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>AuthBox Color(Left)</strong></label>
+                    <div class="col">
+                            <input type="text" class="form-control input-lg" id="authBoxLeftColor" placeholder="Color"
+                            [(ngModel)]="siteInfo.authBoxLeftColor" name="authBoxLeftColor" required autofocus />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>AuthBox Color(Right)</strong></label>
+                    <div class="col">
+                        <input type="text" class="form-control input-lg" id="authBoxRightColor" placeholder="Color"
+                            [(ngModel)]="siteInfo.authBoxRightColor" name="authBoxRightColor" required autofocus />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-4 offset-3">
+                        <button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                    </div>
+                    <div class="col-4">
+                        <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+
+            </form> -->
+                
+        </div>
+    </div>
+</kt-page>

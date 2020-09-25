@@ -1,0 +1,60 @@
+<kt-sidebar [menus] = "menus" ></kt-sidebar> 
+<kt-page title="Trainer Dashboard" showSidebar="true" [breadcrumbItems] = "breadcrumbItems" >
+
+    <!-- <div class="row" *ngIf="reportData">
+            <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;"
+        *ngFor="let r of reportData;let i=index;">            
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+        </div>
+    </div>
+     -->
+<div class="row" *ngIf="trainerCourses">
+        <div class="col-12" *ngFor="let tc of trainerCourses | keyvalue" >
+            <div class="card card-custom" >
+                <div class="card-header card-blue">
+                    Batch - {{tc.key}}
+                    <!-- <div class="tools pull-right">
+                        <a routerLink="../addbatchcourse" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div> -->
+                </div>
+                <div class="card-body">
+                    <table class="table w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>   
+                                <th>Course Title</th>                             
+                                <th>Start Date</th>
+                                <th>Completion Date </th>
+                                <th>Completed Topics</th>
+                                <th>Pending Topics</th>
+                                
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let c of tc.value">
+                                <td>{{i+1}}</td>
+                                <td>{{c.course_id}} - {{c.course_name}}</td>
+                                <td>{{c.start_date}}</td>
+                                <td>{{c.end_date}}</td>                                
+                                <td>{{c.completed_topics}}</td>
+                                <td>{{c.pending_topics}}</td>
+                                <td>{{c.status}}</td>
+                                <td>
+                                    <a routerLink="../../batches/{{tc.key}}/courses/{{c.course_id}}/overview" class="btn btn-info btn-sm">View</a> &nbsp; 
+                                    
+                                    
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</kt-page>

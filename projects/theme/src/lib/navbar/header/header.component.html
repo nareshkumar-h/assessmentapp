@@ -1,0 +1,41 @@
+<header>
+    <!-- Fixed navbar -->
+      <!-- <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color:cadetblue"> -->
+      <nav class="navbar navbar-expand-md fixed-top navbar-dark" [style.background-color]="bgColor"> <!--#2b3643-->
+      <a class="navbar-brand" href="#" >{{navbrand}}</a>
+      
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarCollapse" aria-controls="navbarCollapse"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+      </button>
+      
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+       
+            
+            <ul class="navbar-nav">
+              <li class="nav-item" *ngFor="let m of menus" >                
+                <a class="nav-link" [routerLink]="m.link" [queryParams]="m.queryParams">{{m.name}} </a>
+              </li>
+            </ul>
+                <ul class="navbar-nav ml-auto">
+              <li class="nav-item" *ngIf="!user" >
+                <a class="nav-link" routerLink="auth/login" [queryParams]="{ redirectUrl: 'dashboard'}">Login </a>
+              </li>
+             
+              
+              <li class="nav-item" *ngIf="!user">
+                  <a class="nav-link" routerLink="auth/register">Register</a>
+                </li> 
+                 
+                 <li class="nav-item" *ngIf="user">
+                  <a class="nav-link" routerLink="user/{{user.username}}">Welcome {{user.name}}</a>
+                </li>
+                <li class="nav-item" *ngIf="user">
+                  <a class="nav-link" (click)="logout()" alt="logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></a>
+                </li>              
+            </ul>  
+          </div>
+      </nav>	   	
+  </header>
+  

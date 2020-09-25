@@ -1,0 +1,82 @@
+<kt-page title="Batch Users - {{batchId}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+<!--     
+    <div class="row">
+        <div class="col-1 dropdown dropdown-inline ml-auto">
+            <a href="#" class="btn btn-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
+            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
+                
+                <div class="navi navi-hover">
+                   
+                    <div class="navi-item">
+                        <a (click)="openDialog()" class="navi-link">
+                            <span class="navi-icon">
+                                <i class="fa fa-plus"> </i> &nbsp;
+                            </span>
+                            <span class="navi-text"> Add User</span>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div> -->
+    <br/>
+
+    <div class="row">
+        <div class="col" *ngIf="users">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Users ( {{users.length}} )
+                    <div class="tools pull-right">
+                         <a  [ngxPermissionsOnly]="['HR']"  (click)="openDialog()" class="btn btn btn-sm text-white"><i class="fas fa-plus "></i></a> 
+                        <!-- <button  [ngxPermissionsOnly]="['HR','T']"  (click)="updateMode('edit')" class="btn btn btn-sm text-white"><i class="fas fa-pencil-alt"></i></button> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>   
+                                <th></th>                             
+                                <th>Name</th>
+                                <th>Username </th>
+                                <th>Email</th>
+                                <th>Active</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="users">
+                            <tr *ngFor="let i=index;let b of users">
+                                <td>{{i+1}}</td>
+                                
+                                   
+                                
+                                <td>
+                                    
+                                    <span *ngIf="b.user.flagged">
+                                        <app-flag-icon [rating]="b.user.flagged"></app-flag-icon>
+                                    </span>
+                                </td>
+                                <td>
+                                    {{b.user.name}}
+                                </td>
+                                <td>{{b.user.username}}</td>
+                                <td>{{b.user.email}}</td>
+                                <td>{{b.active?"Y":"N"}}</td>                                
+                                <td>
+                                    <button  [ngxPermissionsOnly]="['HR']"  *ngIf="mode=='edit'" (click)="delete(b.user.username)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt    "></i></button> &nbsp;
+                                    <!-- <a *ngIf="mode!='edit'" routerLink="../../feedback/{{b.user.username}}" class="btn btn-info btn-sm">Feedback</a> -->
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" *ngIf="users">
+                    Results : {{users.length}}
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

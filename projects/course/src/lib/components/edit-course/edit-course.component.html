@@ -1,0 +1,111 @@
+
+<mat-dialog-content class="mat-typography">
+
+    <div class="row">
+        <div class="col-6">
+            <img src="assets/img/courses.jpg" width="400" height="300"/>
+        </div>
+        <div class="col-6">
+            <h2 mat-dialog-title class="text-center">Update Course</h2>
+    <form class="form-horizontal" (submit)="update(course)">
+        <div class="form-group row">
+            <label for="code" class="control-label col-3"><strong>Code</strong></label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control input-sm" id="code" placeholder="Course Code" [(ngModel)]="course.code" name="code"
+                    required autofocus readonly/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="title" class="control-label col-3"><strong>Title</strong></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control input-lg" id="title" placeholder="Course Title" [(ngModel)]="course.title" name="title"
+                    required autofocus />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="category" class="control-label col-3"><strong>Category</strong></label>
+            <div class="col-sm-8">                
+                <select class="form-control input-sm" placeholder="Category" name="category" id="category"
+                            [(ngModel)]="course.categoryId" required >                            
+                            <option [ngValue]="category.id" [selected]="category == course.categoryId" *ngFor="let category of categories">{{category.name}}</option>
+                        </select>                        
+            </div>
+        </div>
+            <div class="form-group row">
+                <div class="col-3 offset-3">
+                    <button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                </div>
+                <div class="col-3">
+                    <button mat-button mat-dialog-close class="btn btn-danger">Cancel</button>
+                </div>
+                <div class="col-1">
+                    <button type="button" (click)="delete()" class=""><i class="fas fa-trash-alt"></i></button> &nbsp;
+                </div>
+            </div>
+        
+    </form>
+    
+</div>
+</div>
+
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="add()">Install</button>
+      </mat-dialog-actions> -->
+
+<!-- <div class="page-content">
+    <kt-page-bar [items]="breadcrumbItems"></kt-page-bar>
+    <h3 class="page-title"> Edit Course </h3>
+    <div class="row">
+        <div class="col">
+            <div class="card" *ngIf="course">
+                <div class="card-header card-blue">
+                    Course - {{course.title}}
+                    <div class="tools pull-right" *ngIf="course">
+                        <a (click)="delete(course.id)" class="btn btn btn-sm"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form (submit)="update(course)">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="30%">Code </th>
+                                <td>{{course.code}}</td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Title</th>
+                                <td>{{course.title}}</td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Category</th>
+                                <td>{{course.category}}</td>
+                            </tr>
+                            <tr>
+                                <th width="30%"> Created Date</th>
+                                <td>{{course.createdDate}}</td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Active</th>
+                                <td>{{course.active}}</td>
+                            </tr>
+                            <tr>
+                                <th>Organization</th>
+                                <td>{{course.orgId}}</td>
+                            </tr>
+                            <tr>
+                                <th>Action</th>
+                               <td>
+                                <button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button  (click)="cancel()" class="btn btn-info">Cancel</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div> -->

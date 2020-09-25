@@ -1,0 +1,108 @@
+<!-- <kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar> -->
+<div class="sidebar" >
+    
+    <ul class="nav sidebar-menus">
+
+        <li class="nav-item"><a class="nav-link" (click)="back()">
+                <i class="fas fa-arrow-left"> &nbsp;&nbsp; </i>
+                <span class="title">Back</span>
+            </a></li>
+    </ul>
+    <ul class="nav sidebar-menus" *ngIf="categories && categoryData">
+        <li class="nav-item"><a class="nav-link">
+                <i class="fas fa-filter"> &nbsp;&nbsp; </i>
+                <span class="title">Categories</span>
+            </a></li>
+        <li class="nav-item" >
+            <a class="nav-link filter-menu-item" (click)="filterCourses('All')"
+                [ngClass]="{'nav-link-active':'All'==selectedCategory}">
+                <!-- <i class="fas fa-book"> &nbsp;&nbsp; </i> -->
+                <span class="title">All
+                    <span class="badge badge-primary pull-right">{{courses.length}}</span>
+                </span>
+            </a>
+        </li>
+        <li class="nav-item" *ngFor="let category of categories">
+
+            <a class="nav-link filter-menu-item" (click)="filterCourses(category)"
+                [ngClass]="{'nav-link-active':category==selectedCategory}">
+                <!-- <i class="fas fa-book"> &nbsp;&nbsp; </i> -->
+                <span class="title">{{category}} <span class="badge badge-primary pull-right">{{categoryData[category].length}}</span></span>
+            </a>
+        </li>
+
+        <!-- <li class="nav-item">
+            <strong class="nav-link">Categories</strong>
+            <ul class="nav sidebar-menus">
+                <li class="nav-item">
+                    <input type="checkbox" class="filter-menu-item" name="selectedCategory" [(ngModel)]="selectedCategory" value="all"/> ALL  	
+                </li>
+                <li class="nav-item" *ngFor="let c of categories">
+                    <input type="checkbox" class="filter-menu-item" [(ngModel)]="selectedCategory" value="{{c}}" /> {{c}}   	
+                </li>
+
+            </ul>
+        </li> -->
+
+    </ul>
+</div>
+<kt-page title="Available Courses - {{selectedCategory}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+    <!-- <div class="row d-none d-lg-flex" *ngIf="reportData">
+            <div class="col-4" 
+        *ngFor="let r of reportData;let i=index;">            
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+        </div>
+    </div> -->
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+    <section *ngIf="filteredCourses else loading">
+
+        <div class="row" >
+            <div class="col-6" *ngFor="let c of filteredCourses">
+            <!-- <div class="col-3">
+
+                <div class="card card-custom gutter-b">
+
+                    <a routerLink="{{c.code}}" class="course_link">
+                        <img class="card-img-top" src="assets/img/courses.jpg" alt="" width="200px">
+                    </a>
+                </div>
+
+            </div> -->
+            <div class="card card-custom gutter-b" style="border-radius: 20px !important;">
+
+                <div class="card-header card-blue">
+                
+                    <a routerLink="{{c.code}}" class="card-title course_title text-white">
+                        {{c.code}} - {{c.title}}
+                    </a>
+                
+            </div>
+                <div class="card-body">
+                <span class="badge badge-primary">{{c.noOfTopics}} Topics</span> &nbsp;
+                &nbsp;
+                <span class="badge badge-success">{{c.orgId}}</span>
+                &nbsp;
+                <span class="badge badge-success">{{c.category}}</span>
+                <br />
+
+                <br />
+<!-- 
+                <p class="author">
+                    <img src="assets/img/naresh.png" width="30px" height="30px" class="rounded">
+                    Naresh Kumar H
+                </p> -->
+                
+                <div class="pull-right">                    
+                    <button class="btn btn-info pull-right" (click)="viewCourse(c)">View</button> &nbsp;&nbsp;
+                    <button class="btn btn-info pull-right" (click)="enrollCourse(c)">Enroll</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+</kt-page>

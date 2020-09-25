@@ -1,0 +1,9 @@
+.filter-menu-item {
+    margin-left: 20px;
+    cursor: pointer;
+    line-height: 10px;
+}
+
+.filter-title{
+    margin-left: 5px;
+}

@@ -1,0 +1,37 @@
+<div class="row">
+    <h3 class="page-title">Add Section</h3>
+</div>
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom" >
+                <div class="card-header card-blue">
+                    New Section
+                </div>
+                <div class="card-body">
+                    <form (submit)="save(module)">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <!-- <tr>
+                                <th width="30%">Code </th>
+                                <td width="70%">
+                                    <input type="text" [(ngModel)]="module.code" name="code" required autofocus />
+                                    </td>
+                            </tr> -->
+                            <tr>
+                                <th width="30%">Name</th>
+                                <td width="70%"><input type="text" [(ngModel)]="module.title" name="title" required autofocus /></td>
+                            </tr>                          
+                            <tr>
+                                <th></th>
+                               <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

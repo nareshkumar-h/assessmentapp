@@ -1,0 +1,27 @@
+<div class="page-bar">
+    <nav aria-label="breadcrumb">
+     <ol class="breadcrumb" *ngIf="items">
+       <li class="breadcrumb-item" [ngClass]="{'active': $last}" *ngFor="let m of items;let i=index;let $last = last">
+         <!-- <a *ngIf="m.link" [routerLink]="[{ outlets: {primary: m.link, sidebar: m.sidelink?m.sidelink:null}}]" > -->
+          <a *ngIf="m.link" [routerLink]="m.link" >
+           <i *ngIf="m.icon" class="fa fa-{{m.icon}}"></i>
+           <small>{{m.name}}</small>
+         </a>
+         <a *ngIf="!m.link" aria-current="page"><small>{{m.name}}</small></a>
+       </li>
+     </ol>
+   </nav> 
+   <div class="page-toolbar" *ngIf="menus">
+         <div class="btn-group" dropdown >
+       <button type="button" dropdownToggle class="btn btn-sm btn-primary dropdown-toggle">
+             Actions <span class="caret"></span>
+             </button>
+             <ul class="dropdown-menu dropdown-menu-right" role="menu" *dropdownMenu >				
+                 <li role="menuitem" *ngFor="let m of menus">
+                     <a href="#" class="dropdown-item" ng-click="addLeave()">
+                     {{m}} </a>
+             </ul>
+         </div>
+     </div>
+ 
+ </div> 

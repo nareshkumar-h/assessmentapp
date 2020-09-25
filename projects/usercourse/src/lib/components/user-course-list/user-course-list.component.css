@@ -1,0 +1,33 @@
+.progress {
+    background-color: white;
+    color:black;
+}
+
+.percentage {
+    float: right;
+    font-size:1rem;
+}
+
+.card{
+    border-radius: 20px;
+}
+
+.course_title {
+    text-decoration: none;
+    color:white;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.gutter-b {
+    margin-bottom: 5px;
+}
+
+a:hover{
+    color:white !important;
+}
+
+.card-title{
+    margin-bottom: 0px !important;
+}
+

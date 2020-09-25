@@ -1,0 +1,33 @@
+<div class="row" *ngIf="selectedCourse">
+    <div class="col">
+        <h3 class="page-title">{{selectedCourse.course_name}}</h3>
+    </div>
+</div>
+<br />
+
+<div class="row" *ngIf="sections">
+    <div class="col-12" *ngFor="let m of sections;let i=index">
+        <div class="card card-custom w100 drag-content gutter-b" *ngIf="contents[m.title]">
+            <div class="card-header card-blue">
+                <a routerLink="../sections/{{m.id}}/{{m.title}}" class="text-white">{{m.title}}</a>
+            </div>
+            <div class="card-body">
+
+
+                <section *ngFor="let t of contents[m.title]" class="">
+                    <div class="card card-custom" draggable="true">
+                        <div class="card-header">
+
+                            
+                                {{t.title}}
+
+                        </div>
+
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>

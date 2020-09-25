@@ -1,0 +1,53 @@
+<kt-sidebar [menus]="menus" showSidebar="true"></kt-sidebar>
+<kt-page title="Add Project" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card card-custom" >
+                <div class="card-header card-blue">
+                    <div class="card-title text-white">
+                        New Project
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form" (submit)="save(project)">
+                    <table class="table table-borderless w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="30%">ShortName </th>
+                                <td width="70%">
+                                    <input type="text"  class="form-control"  [(ngModel)]="project.projectPrefix" name="projectPrefix" placeholder="e.g: busapp" required autofocus />
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Name</th>
+                                <td width="70%"><input class="form-control" type="text" [(ngModel)]="project.name"  placeholder="e.g: Bus Ticket Booking App"  name="title" required autofocus /></td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Description</th>
+                                <td width="70%"><input class="form-control" type="text" [(ngModel)]="project.description"  name="description" required autofocus /></td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Start Date</th>
+                                <td width="70%"><input type="date"  class="form-control"  [(ngModel)]="project.startDate" name="startDate" required autofocus /></td>
+                            </tr>
+                            <!-- <tr>
+                                <th width="30%">Completion Date</th>
+                                <td width="70%"><input type="date"  class="form-control"  [(ngModel)]="project.completionDate" name="completionDate" required autofocus /></td>
+                            </tr> -->
+
+                            <tr>
+                                <th></th>
+                               <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="reset" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

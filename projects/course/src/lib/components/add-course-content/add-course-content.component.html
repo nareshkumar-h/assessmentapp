@@ -1,0 +1,186 @@
+<h3 class="m-3"> {{lectureName}}</h3>
+<!-- <div class="dropdown pull-right m-2">
+    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Add Content
+    </button>
+    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item text-dark" (click)="content.contentType='T'">Text</a>
+      <a class="dropdown-item text-dark" (click)="content.contentType='C'">Code Snippet</a>
+      <a class="dropdown-item text-dark" (click)="content.contentType='V'">Video</a>
+      <a class="dropdown-item text-dark" (click)="content.contentType='A'">Audio</a>
+      <a class="dropdown-item text-dark" (click)="content.contentType='I'">Image</a>
+      <a class="dropdown-item text-dark" (click)="content.contentType='P'">PDF</a>
+      <a class="dropdown-item text-dark" (click)="content.contentType='L'">Link</a>
+    </div>
+  </div>                 -->
+
+<!-- <div class="row">
+    <div class="col-12">
+        <angular-editor [placeholder]="'Enter text here...'" ></angular-editor>
+    </div>
+</div>
+{{htmlContent}} -->
+<!-- {{content | json}} -->
+<div class="row">
+    <div class="col-9">
+
+        <form #frm="ngForm" (submit)="save(content)">
+
+            <div class="form-group row">
+
+                <label for="title" class="col-2 col-form-label">Title</label>
+                <div class="col-10">
+                    <input type="text" class="form-control input-group-lg" [(ngModel)]="content.title" name="title"
+                        id="title" required autofocus />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="contentType" class="col-2 col-form-label">Content Type</label>
+                <div class="col-2">
+                    <select class="form-control" [(ngModel)]="content.contentType" name="contentType" id="contentType"
+                        required>
+                        <option *ngFor="let ct of contentTypes | keyvalue" [value]="ct.key">{{ct.value}}
+                        </option>
+                    </select>
+                </div>
+
+                <label for="duration" class="col-2 col-form-label">Duration(mins):</label>
+                <div class="col-4">
+                    <input type="number" class="form-control col-4" [(ngModel)]="content.duration" name="duration"
+                        placeholder="Duration(mins)" min="1" max="100" required />
+                </div>
+            </div>
+           
+            <div class="form-group row" *ngIf="content.contentType=='T' || content.contentType=='C'">
+                <!-- <ct-content-editor (valueChange)='saveDraft($event)' toolbar="false"></ct-content-editor> -->
+
+                <textarea class="form-control input-lg" [(ngModel)]="content.content" name="content" rows="10"
+                    cols="100"> </textarea>
+
+                <!-- <label class="col-sm-2 col-form-label">Content</label>
+                <div class="col-sm-10">
+                <textarea cdkTextareaAutosize class="form-control" [(ngModel)]="content.content" name="content" 
+                    > </textarea>
+                    </div> -->
+            </div>
+
+            <div class="form-group row" *ngIf="content.contentType!='T'">
+                <label class="col-sm-2 col-form-label">URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-lg" [(ngModel)]="content.url" name="url" />
+                </div>
+            </div>
+<!-- 
+            <div class="form-group row" *ngIf="content.contentType!='T'">
+                <label class="col-sm-2 col-form-label">Filename</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-lg" [(ngModel)]="content.fileName" name="fileName" />
+                </div>
+            </div> -->
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tags</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-group-lg col-10" [(ngModel)]="content.tag" name="tags"
+                         />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-5"></div>
+                <div class="col-5">
+                    <button type="submit" [disabled]="frm.invalid" class="btn btn-success">Submit</button> &nbsp;
+                    <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+            <!-- 
+
+            <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                <tbody>
+                    <tr>
+                        <th width="30%">Content Type</th>
+                        <td width="70%">
+
+                            <select class="form-control input-lg" [(ngModel)]="content.contentType" name="contentType"
+                                required>
+                                <option *ngFor="let ct of contentTypes | keyvalue" [value]="ct.key">{{ct.value}}
+                                </option>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Title </th>
+                        <td width="70%">
+                            <input type="text" class="form-control input-lg" [(ngModel)]="content.title" name="title"
+                                required autofocus />
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="content.contentType=='T'">
+                        <th width="30%">Content</th>
+                        <td width="70%"><textarea class="form-control input-lg" [(ngModel)]="content.content"
+                                name="content" rows="10" cols="100"> </textarea></td>
+                    </tr>
+                    <tr *ngIf="content.contentType!='T'">
+                        <th width="30%">Content URL</th>
+                        <td width="70%"><input type="text" class="form-control input-lg" [(ngModel)]="content.url"
+                                name="url" /></td>
+                    </tr>
+                    <tr *ngIf="content.contentType!='T'">
+                        <th width="30%">Filename</th>
+                        <td width="70%"><input type="text" class="form-control input-lg" [(ngModel)]="content.fileName"
+                                name="fileName" /></td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Duration(mins)</th>
+                        <td width="70%"><input type="number" class="form-control input-lg"
+                                [(ngModel)]="content.duration" name="duration" placeholder="Duration(mins)" min="1"
+                                max="100" required /></td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Tags</th>
+                        <td width="70%"><input type="text" class="form-control input-lg" [(ngModel)]="content.tag"
+                                name="tag" required /></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                            <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table> -->
+        </form>
+
+    </div>
+    <!-- <div class="col-3">
+        <div class="card card-custom">
+            <div class="card-header card-blue">
+                Import Contents
+            </div>
+            <div class="card-body">
+                <div id="import-error-message"></div>
+                <form #rForm="ngForm" (submit)="uploadFile()">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="50%">Select File </th>
+                                <td width="50%">
+                                    <input type="file" (change)="onFileSelect($event)" name="file" required autofocus />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><button type="submit" [disabled]="rForm.invalid"
+                                        class="btn btn-success">Submit</button> &nbsp;
+                                    <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div> -->
+</div>

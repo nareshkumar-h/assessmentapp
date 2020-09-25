@@ -1,0 +1,61 @@
+<kt-page title="Project Features - {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+    
+    
+        <div class="navbar nav float-right" *ngIf="isLoggedInUser">
+            <div class="nav-item"><button class="btn btn-info m-2" (click)="addModule()">Add Module</button></div>
+            
+        </div>
+    <div class="row" *ngIf="reportData">
+        <div class="col-3"
+        *ngFor="let r of reportData;let i=index;"> 
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div> 
+    <div *ngIf="modules && projectFeatures">
+    <div class="row" *ngFor="let i=index;let m of modules">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    <div class="card-title text-white">
+                    Module #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}} Topics )
+                </div>
+                    <div class="tools pull-right">
+                        <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
+                            <i class="fa fa-plus "></i></button> 
+                        <!-- <a routerLink="../addfeature/{{m.name}}" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></a> -->
+                    </div> 
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>    
+                                <th width="60%">Feature Name</th>
+                                <th>Priority</th>
+                                <th>Created By</th>
+                                <th>Created Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let j=index;let t of projectFeatures[m.name]">
+                                <td>{{j+1}}</td>                                
+                                <td>{{t.name}}
+                                </td>
+                                <td>{{t.priority}}</td>
+                                <td>{{t.createdBy}}</td>
+                                <td>{{t.createdDate}}</td>
+                                <td>
+                                    <a routerLink="{{t.id}}" class="btn btn-info btn-sm"> View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</kt-page>

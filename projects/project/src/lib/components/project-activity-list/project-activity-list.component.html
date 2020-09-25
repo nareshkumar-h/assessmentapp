@@ -1,0 +1,67 @@
+<kt-page title="Project Activities - {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">        
+    
+    <div class="navbar nav float-right" *ngIf="isLoggedInUser">
+        <div class="nav-item"><button class="btn btn-info m-2" (click)="addActivity()">Add Activity</button></div>
+        
+    </div>
+
+    <div class="row" *ngIf="reportData">
+        <div class="col-3"
+        *ngFor="let r of reportData;let i=index;"> 
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div> 
+    
+    <div class="row" >
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                   <div class="card-title text-white">Activities</div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>    
+                                <th>Activity Name</th>
+                                <th>Start Date</th>
+                                <th>Completion Date</th>
+                                <!-- <th>Days</th> -->
+                                <th>Repository</th>
+                                <th>Rating</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let t of projectActivities">
+                                <td>{{i+1}}</td>                                
+                                <td>{{t.activityName}}
+                                </td>
+                                <td>{{t.startDate}}</td>
+                                <td>{{t.completionDate}}</td>
+                                <!-- <td>{{t.days}}</td> -->
+                                <td>{{t.githubUrl}}</td>
+                                <td>{{t.rating!=0?t.rating:""}}</td>
+                                <td>{{t.status}}</td>
+                                <td>
+                                    <button *ngIf="isLoggedInUser && t.status=='ASSIGNED'" class="btn btn-info" (click)="startActivity(t)">
+                                        START
+                                    </button>
+                                    <a *ngIf="isLoggedInUser && t.status=='STARTED'" class="btn btn-info" routerLink="{{t.id}}">
+                                        View
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button *ngIf="isLoggedInUser && t.status=='ASSIGNED'" class="btn btn-danger" (click)="deleteActivity(t)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    </kt-page>

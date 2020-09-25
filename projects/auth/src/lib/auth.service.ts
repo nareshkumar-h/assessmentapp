@@ -1,0 +1,161 @@
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Config, AUTH_CONFIG } from './config';
+import { of } from 'rxjs';
+import { SecurityService } from 'projects/security/src/public-api';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl:string;
+  private orgId:string;
+  private role:string;
+  private siteInfo:any;
+  
+  // store the URL so we can redirect after logging in
+  redirectUrl: string;
+
+  constructor(private http:HttpClient, @Inject(AUTH_CONFIG) private config: Config, private securityService:SecurityService) {    
+    this.apiUrl = config.API_ENDPOINT;
+    this.role = config.USER_TYPE;
+    this.orgId =  config.ORG_ID;
+    this.securityService.setEncryption(this.config.ENCRYPTION);
+  }
+
+  getHeaders(){    
+    let headers = new HttpHeaders();
+    //headers = headers.set('org', this.orgId);
+    return headers;
+  }
+
+  getSiteInfo(){
+  //  console.log("Get site info");
+    if(!this.siteInfo){          
+      this.siteInfo = JSON.parse(sessionStorage.getItem("SITE_INFO"));
+    }
+    return this.siteInfo;  
+  }
+  
+  login(user){
+    user["role"] = this.role;
+    let url = "" ;
+    if (user.role =='E'){
+      url = this.apiUrl + "v1/auth/emplogin";
+    }
+    else{
+      url = this.apiUrl + "v1/auth/login";
+    }
+    return this.http.post(url, user);    
+  }
+
+  register(user){
+    user["role"] = this.role;
+    let url = "" ;
+    if (user.role =='E'){
+      url = this.apiUrl + "v1/auth/empregister";
+    }
+    else{
+      url = this.apiUrl + "v1/auth/register";
+    }
+    return this.http.post(url, user, {headers: this.getHeaders()});    
+  }
+
+
+  findOne(userId){
+    
+    let url = this.apiUrl + "v1/users/" + userId;
+    return this.http.get(url);    
+  }
+
+  getLoggedInUsername(){
+    let user = this.getUser();
+    let username = null;
+    if (user){
+      username = user.username;
+    }
+    return username;
+  }
+
+  getLoggedInOrg(){
+    let user = this.getUser();
+    let username = null;
+    if (user){
+      username = user.organization;
+    }
+    return username;
+  }
+
+  getLoggedInUserId(){
+    let user = this.getUser();
+    let username = null;
+    if (user){
+      username = user.id;
+    }
+    return username;
+  }
+
+  isAuthorized(){
+    let user = this.getUser();
+    if (user && user.username){
+        return true;      
+    }
+    return false;
+  }
+  
+  getUser():any{
+    let user = this.securityService.get("LOGGED_IN_USER");
+    return user?JSON.parse(user):null;
+  }
+
+  isLoggedIn():boolean{
+    var user = this.getUser();    
+    return this.getUser() != null && this.getUser().username !=null;
+  }
+
+  activateAccount(account){
+    account["role"] = this.role;
+    let url = this.apiUrl + "v1/auth/activateAccount";    
+    return this.http.post(url, account);    
+  }
+
+  setPassword(account){
+    account["role"] = this.role;
+    let url = this.apiUrl + "v1/auth/setPassword";    
+    return this.http.post(url, account);    
+  }
+
+  resendActivateAccount(account){
+    account["role"] = this.role;
+    let url = this.apiUrl + "v1/auth/resend-activation-email?email="+ account.email;    
+    return this.http.post(url, account);    
+  }
+
+  forgotPassword(account){
+    account["role"] = this.role;
+    let url = this.apiUrl + "v1/auth/forgotPassword";    
+    return this.http.post(url, account);    
+  }
+
+  
+
+  storeUser(res){
+    let username = res["login"];
+    let user = { "id": res["id"], "username": res["login"] , "githubUsername": res["login"],
+    "name": res["name"],"email" : res["email"], "type": res["type"],
+  "created_at": res["created_at"] , "gravatar_id": res["gravatar_id"],
+"avatar_url": res["avatar_url"] , "role":"U","mode":"github"};
+
+    this.findOne(username).subscribe( data =>{
+      if(data){
+        user["username"] = data["username"];
+        user["role"] = data["role"];
+        user["name"] = data["name"];
+        
+      }
+      this.securityService.set("LOGGED_IN_USER", JSON.stringify(user));      
+    });
+    
+  }
+}

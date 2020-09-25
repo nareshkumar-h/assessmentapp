@@ -1,0 +1,38 @@
+
+<div *ngIf="content">
+    <pre class="pre-code" *ngIf="content.contentType=='C'">
+    <code [highlight]="content.content" [lang]="content.lang?content.language:'java'"></code>
+  </pre>
+    <section *ngIf="content.contentType=='L'">
+        <br />
+        <a href="{{content.url}}" target="_blank">{{content.url}}</a>
+        <br />
+    </section>
+    <section *ngIf="content.contentType=='V'">
+        <br />
+        <iframe width="560" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(content.url)" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+        <br />
+        Reference: <a href="{{content.url}}" target="_blank">{{content.url}}</a>
+        <br />
+    </section>
+    <section *ngIf="content.contentType=='I'">
+        <img [src]="content.url" />
+        <p *ngIf="content.content">{{content.content}}</p>
+    </section>
+    <section class="pdf" *ngIf="content.contentType=='P'">
+
+        <pdf-viewer [src]="content.url" [fit-to-page]="true" [show-borders]="true" [original-size]="false"></pdf-viewer>
+        <br />
+        <br />
+
+    </section>
+    <section class="pdf" *ngIf="content.contentType=='T'">
+
+       {{content.content}}
+        <br />
+        <br />
+
+    </section>
+</div>

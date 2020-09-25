@@ -1,0 +1,31 @@
+<app-page-bar [items]="breadcrumbItems"></app-page-bar>
+<div class="page-content">
+    <h3 class="page-title"> SonarCloud </h3>
+    
+    <div class="row">
+       <div class="col-6">
+            <div class="card">
+                <div class="card-header card-default">
+                    <div class="text-center">
+                        <!-- <img src="/assets/theme/img/spinsoft-logo.png" height="20%" style="width: 60%; padding: 0; height: 20%;">  -->
+                        <h4 class="card-title">SonarCloud</h4>
+                    </div>
+                </div>
+                <div class="card-body" >
+                   
+                    <form #aForm="ngForm" (ngSubmit)="submit()">  
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Token</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter Token" id="token"
+                                name="token" [(ngModel)]="token" required >
+                          </div>                                                   
+                          <br/>
+                        <button type="submit" [disabled]="aForm.invalid" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

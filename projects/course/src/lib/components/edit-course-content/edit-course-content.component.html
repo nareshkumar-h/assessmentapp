@@ -1,0 +1,134 @@
+<mat-dialog-content class="mat-typography" style="height: 800px">
+
+    <div class="card card-custom">
+        <div class="card-header card-blue">
+            <div class="card-title text-white">{{content.title}}</div>
+            <div class="tools pull-right">
+                <a (click)="mode='edit'" *ngIf="mode!='edit'" class="btn btn btn-sm text-white"><i
+                        class="fas fa-pencil-alt "></i></a> &nbsp;
+                <button type="submit" *ngIf="mode=='edit'" (click)="update(content)" class="btn btn-success">Save</button> &nbsp;
+                <a (click)="delete(content)" class="btn btn btn-sm text-white"><i class="fas fa-trash-alt "></i></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <ct-view-content [content]="content" *ngIf="mode!='edit'"></ct-view-content>
+            <br />
+            <form (submit)="update(content)" *ngIf="mode=='edit'" class="">
+                <div class="form-group row">
+                    <!-- <label for="module" class="col-2 col-form-label">Module</label>
+                    <div class="col-2">
+                        <select class="form-control" [(ngModel)]="content.moduleId" name="moduleId" id="moduleId"
+                        required>
+                        <option *ngFor="let m of modules" [value]="m.code">{{m.name}}
+                        </option>
+                    </select>
+                    </div> -->
+                    <label for="title" class="col-2 col-form-label">Title</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control input-group-lg" [(ngModel)]="content.title" name="title"
+                            id="title" required autofocus />
+                    </div>
+                </div>
+                <div class="form-group row">                    
+                    <label for="contentType" class="col-2 col-form-label">Content Type</label>
+                    <div class="col-2">
+                        <select class="form-control" [(ngModel)]="content.contentType" name="contentType" id="contentType"
+                            required>
+                            <option *ngFor="let ct of contentTypes | keyvalue" [value]="ct.key">{{ct.value}}
+                            </option>
+                        </select>
+                    </div>
+                
+                    <label for="duration" class="col-2 col-form-label">Duration(mins):</label>
+                    <div class="col-3">
+                    <input type="number" class="form-control col-3" [(ngModel)]="content.duration" name="duration"
+                        placeholder="Duration(mins)" min="1" max="100" required />
+                        </div>
+                </div>
+                <div class="form-group row" >
+                    <label class="col-sm-2 col-form-label">Tags</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control input-group-lg col-10" [(ngModel)]="content.tags" name="tags" required />
+                    </div>
+                </div>
+                <div class="form-group row" *ngIf="content.contentType=='T' || content.contentType=='C'">
+                    <label class="col-sm-2 col-form-label">Content</label>
+                    <div class="col-sm-10">
+                    <textarea cdkTextareaAutosize class="form-control" [(ngModel)]="content.content" name="content" 
+                        > </textarea>
+                        </div>
+                </div>
+
+                <div class="form-group row" *ngIf="content.contentType!='T'">
+                    <label class="col-sm-2 col-form-label">URL</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control input-lg" [(ngModel)]="content.url" name="url" />
+                    </div>
+                </div>
+                
+                <div class="form-group row" *ngIf="content.contentType!='T'">
+                    <label class="col-sm-2 col-form-label">Filename</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control input-lg" [(ngModel)]="content.fileName" name="fileName" />
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                    <div class="col-sm-10 offset-sm-2">
+                        <label class="form-check-label"><input type="checkbox"> Remember me</label>
+                    </div>
+                </div> -->
+                <!--    
+                    <tr>
+                        <th width="20%">Title </th>
+                        <td width="60%">
+                            <input type="text" class="form-control input-lg" [(ngModel)]="content.title" name="title"
+                                required autofocus />
+                        </td>
+                    </tr>
+                    
+                    <tr *ngIf="content.contentType=='T' || content.contentType=='C'">
+                        <th width="20%">Content</th>
+                        <td width="60%"><textarea class="form-control input-lg" [(ngModel)]="content.content"
+                                name="content" rows="10" cols="100"> </textarea></td>
+                    </tr>
+                    <tr *ngIf="content.contentType!='T'">
+                        <th width="20%">Content URL</th>
+                        <td width="60%"><input type="text" class="form-control input-lg" [(ngModel)]="content.url"
+                                name="url" /></td>
+                    </tr>
+                    <tr *ngIf="content.contentType!='T'">
+                        <th width="20%">Filename</th>
+                        <td width="40%"><input type="text" class="form-control input-lg" [(ngModel)]="content.fileName"
+                                name="fileName" /></td>
+                  
+                        <th width="20%">Duration(mins)</th>
+                        <td width="20%">
+                            <input type="number" class="form-control input-lg"
+                                [(ngModel)]="content.duration" name="duration" placeholder="Duration(mins)" min="1"
+                                max="100" required /></td>
+                    </tr>
+                    <tr>
+                        <th width="20%">Tags</th>
+                        <td width="60%"><input type="text" class="form-control input-lg" [(ngModel)]="content.tag"
+                                name="tag" required /></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                            <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table> -->
+            </form>
+
+        </div>
+        <div class="card-footer" *ngIf="mode!='edit'">
+            Tags: <span *ngFor="let t of content.tags"><span class="badge badge-info">{{t}}</span>&nbsp;</span>
+            Duration: <span class="badge badge-success">{{content.duration}} mins </span> &nbsp;
+            Content Type : <span class="badge badge-success">{{contentTypes[content.contentType]}} </span> &nbsp;
+        </div>
+    </div>
+</mat-dialog-content>

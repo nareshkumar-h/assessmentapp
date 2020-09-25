@@ -1,0 +1,66 @@
+<kt-page showSidebar="true">
+    <div class="row">
+        <div class="page-card col-8" *ngIf="domain">
+
+            <h4 class="page-card-title">Account Details</h4>
+            
+
+            <form class="form-horizontal" (submit)="update()">
+                <div class="form-group row">
+                    <label for="code" class="control-label col-3"><strong>Org Id</strong></label>
+                    <div class="col">
+                        <input type="text" class="form-control input-lg" id="orgId" placeholder="OrgId"
+                            [(ngModel)]="domain.organization.code" name="code" required readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>Organization
+                            Name</strong></label>
+                    <div class="col">
+                        <input type="text" class="form-control input-lg" id="orgName" placeholder="Organization Name"
+                            [(ngModel)]="domain.organization.name" name="orgName" required autofocus />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>Domain</strong></label>
+                    <div class="col">
+                        <input type="text" class="form-control input-lg" id="domain" placeholder="Domain"
+                            [(ngModel)]="domain.domain" name="domain" required autofocus readonly />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>Logo</strong></label>
+                    <div class="col">
+                        <input *ngIf="!domain.organization.logo" type="text" class="form-control input-lg" id="logo"
+                            placeholder="Logo" [(ngModel)]="domain.organization.logo" name="Logo" required autofocus />
+                        <img [src]="domain.organization.logo" width="50" *ngIf="domain.organization.logo" />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="title" class="control-label col-3"><strong>Locked</strong></label>
+                    <div class="col">
+                        <input type="checkbox" class="form-control-inline input-lg" id="locked" placeholder="locked"
+                            [(ngModel)]="domain.organization.locked" name="locked" required autofocus />
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4 offset-3">
+                        <button type="submit" [disabled]="domain.organization.locked"
+                            class="btn btn-success">Update</button> &nbsp;
+
+                        <button type="button" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+      
+    </div>
+</kt-page>

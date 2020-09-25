@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col">
+        <h3 class="page-title">{{course.title}}</h3>
+    </div>
+    <div class="col">
+        <a routerLink="../addsection" class="m-2 btn btn-info pull-right">Add Section</a>
+    </div>
+</div>
+<!-- <div class="row">
+        <div class="col">
+            <div class="card card-custom" >
+                <div class="card-header card-blue">
+                    Course Details
+                </div>
+                <div class="card-body" *ngIf="course">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Code </th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Created Date</th>
+                                <th>Active</th>
+                                <th>Organization</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="course">
+
+                                <td>
+                                    {{course.code}}
+                                </td>
+                                <td>{{course.title}}</td>
+                                <td>{{course.category}}</td>
+                                <td>{{course.createdDate}}</td>
+                                <td>{{course.active}}</td>
+                                <td>{{course.orgId}}</td>
+                                <td><span class="badge badge-primary">{{course.status}}</span></td>
+                                <td>
+                                    <a (click)="editCourse(course)" class=""><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> &nbsp;
+                                    <button (click)="download()"> <i class="fas fa-download"></i></button> &nbsp;
+                                    <button (click)="publish()"> <i class="fas fa-cloud-upload-alt"></i></button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> -->
+<!-- 
+    <div class="container" 
+     cdkDropListGroup>
+  <div class="example-container" 
+       *ngFor="let s of sections">
+    <h2>{{s.title}}</h2>
+
+    <div cdkDropList 
+          id="{{s.title}}" 
+          [cdkDropListData]="contents[s.title]"
+          class="example-list"
+          (cdkDropListDropped)="dropTopics($event, s.title)">
+      <div  *ngFor="let product of contents[list.title]"
+            class="example-box" 
+            cdkDrag
+            [class.item__moved]="product.title !== s.title">
+        {{product.title}}
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+
+</div>
+<br />
+<!-- <div cdkDropList class="example-list" (cdkDropListDropped)="dropMovies($event)">
+    <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+  </div> -->
+
+<div cdkDropListGroup>
+<div class="row" *ngFor="let m of sections;let i=index">
+    <div class="col-12" >
+        <div class="card card-custom w100 gutter-b">
+            <div class="card-header card-blue">
+                {{m.title}}
+
+                <div class="tools pull-right">
+                    <a *ngIf="mode!='E' && selectedModule!=i " routerLink="../sections/{{m.id}}/addlecture"
+                        class="text-white"><i class="fas fa-plus"></i>&nbsp;</a> &nbsp;
+                    <a *ngIf="mode!='E' && selectedModule!=i " (click)="mode='E';selectedModule=i" class="text-white"><i
+                            class="fas fa-pencil-alt"></i>&nbsp;</a> &nbsp;
+                    <a *ngIf="mode=='E' && selectedModule ==i" class="drag-icon text-white">
+                        <i class="fas fa-arrows-alt" ></i>&nbsp;
+                    </a> &nbsp;
+                    <a *ngIf="mode=='E' && selectedModule==i" (click)="openDialog(m)" class="text-white"><i
+                            class="fas fa-plus "></i> &nbsp;</a> &nbsp;
+                    <a *ngIf="!hasContents(m.title)" (click)="deleteModule(i,m)" class="text-white"><i
+                            class="fas fa-trash "></i>&nbsp;</a>&nbsp;
+                    <a *ngIf="mode=='E' && selectedModule==i" (click)="mode='';selectedModule=-1" class="text-white"><i
+                            class="fas fa-check "></i>&nbsp;</a>&nbsp;
+                </div>
+            </div>
+            <div class="card-body" >
+
+
+                <section class="example-list" cdkDropList  id="{{m.title}}" 
+                [cdkDropListData]="contents[m.title]" 
+               (cdkDropListDropped)="dropTopics($event,m.title)"
+                >
+                
+                    <div class="example-box" *ngFor="let t of contents[m.title]" cdkDrag>
+                        <a routerLink="../lectures/{{t.id}}/{{t.title}}" class="text-dark">
+                            {{t.title}}</a>
+
+                        <div class="tools pull-right">                            
+                            <a class="fas fa-trash text-dark" (click)="deleteLecture(t)"></a>
+                        </div>
+                    </div>
+                
+
+                    <!-- <div class="card card-custom example-box" draggable="true" *ngFor="let t of contents[m.title]" cdkDrag>
+                        <div class="card-header" >
+
+                            <a routerLink="../lectures/{{t.id}}/{{t.title}}" class="text-dark">
+                                {{t.title}}</a>
+
+                            <div class="tools pull-right">
+                                <a class="drag-icon text-dark"><i class="fas fa-arrows-alt" cdkDragHandle></i></a>
+                                &nbsp;
+                                <a class="fas fa-trash text-dark" (click)="deleteLecture(t)"></a>
+                            </div>
+
+                        </div>
+
+
+                    </div>  -->
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

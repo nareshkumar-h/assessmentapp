@@ -1,0 +1,54 @@
+<kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar>
+<kt-page title="My Courses" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+
+    <div *ngIf="userCourses else loading">
+        <div class="card card-custom gutter-b" *ngFor="let uc of userCourses| keyvalue">
+
+            <div class="card-header"><a class="card-title card-blue text-center">{{uc.key}}</a></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4" *ngFor="let c of uc.value; let i=index">
+                        <div class="card card-custom gutter-b " [style.background-color]="getCardColor(c.percentage)" >
+                            <!-- <div class="card-header text-white" style="background-color: cadetblue;" >{{c.course_name}}
+                    <span class="badge badge-dark pull-right">{{getPercentage(c)}} % </span>                        
+                </div>      -->
+                            <a routerLink="{{c.course_id}}/{{c.course_name}}/topics" class="course_link">
+                                <!-- <img class="card-img-top"  src="assets/img/courses.jpg" alt="" width="200px"> -->
+                                <!-- <div class="course_title text-dark"> <p>{{c.course_name}}</p></div> -->
+                            </a>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <a (click)="goTo(c)" class="course_title">{{c.course_name}}
+                                    </a>
+                                    <span class="badge badge-info lg percentage"
+                                        [style.background-color]="getPercentageBgColor(c.percentage)">{{c.percentage}}
+                                        %</span>
+
+                                </div>
+                                <!-- <p class="text-white"> Topics : {{c.completed_topics + " / " + c.no_of_topics}} 
+                      </p> -->
+                                <!-- <div class="progress">                          
+                        <div class="progress-bar" role="progressbar" [style.width]="c.percentage + '%'" 
+                        [style.background-color]="getPercentageBgColor(c.percentage)" 
+                        [style.color]="getPercentageColor(c.percentage)" 
+                        aria-valuenow="c.percentage" aria-valuemin="0" aria-valuemax="100">{{c.percentage}}%</div>
+                      </div> -->
+
+
+                                <!-- <p class="author">
+                       <img src="assets/img/naresh.png" width="30px" height="30px" class="rounded">
+                        Naresh Kumar H</p>                         -->
+                            </div>
+                            <!-- <div class="card-footer">
+                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

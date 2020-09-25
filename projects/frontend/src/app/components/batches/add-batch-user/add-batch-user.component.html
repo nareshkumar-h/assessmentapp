@@ -1,0 +1,30 @@
+<mat-dialog-content class="mat-typography">
+    
+    <h3 class="page-title">Assign User to Batch</h3>
+    
+    <div class="row" *ngIf="batchUser">
+        <div class="col">
+            <form class="form" (submit)="save(batchUser)">
+                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <tr>
+                            <th width="30%">User</th>
+                            <td width="70%">
+                                <select class="form-control" [(ngModel)]="batchUser.userId" name="userId" required >
+                                    <option *ngFor="let u of users" [value]="u.username" >{{u.name}} ({{u.username}})</option>
+                                </select>
+                        </tr>
+                        <tr>
+                            <th></th>
+                           <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                            <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                        </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                </form>
+        </div>
+    </div>
+
+</mat-dialog-content>

@@ -1,0 +1,29 @@
+.angular-editor {
+    position: relative;
+}
+.angular-editor .angular-editor-wrapper {
+    position: relative;
+    border: 1;
+}
+
+.angular-editor .angular-editor-wrapper .angular-editor-textarea {
+    min-height: 5rem;
+    padding: .5rem .8rem 1rem;
+    border: 1px solid #ddd;
+    /* background-color: transparent; */
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.angular-editor-textarea {
+    min-height: 150px;
+    overflow: auto;
+    margin-top: 5px;
+    resize: vertical;
+}
+
+.angular-editor .angular-editor-wrapper.show-placeholder .angular-editor-placeholder {
+    display: block;
+}

@@ -1,0 +1,41 @@
+
+<mat-dialog-content class="mat-typography" >
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center"><strong>Add Topic</strong></h3>
+            <form #topicForm="ngForm" (submit)="save(topic)" class="form-horizontal">
+
+                <div class="form-group row">
+                    <label class="control-label col-4"><strong>Module</strong></label>
+                    <div class="col-8">
+                            {{module.name}}
+                                </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-4"><strong>Title</strong></label>
+                    <div class="col-8">
+                            <input  class="form-control lg" type="text" placeholder="title" [(ngModel)]="topic.name" name="name" required
+                                    autofocus />
+                                </div>
+                </div>
+                <div class="form-group row">
+                    <label id="duration" class="control-label col-4"><strong>Duration(mins)</strong></label>
+                    <div class="col-8">
+                        <input class="form-control lg" type="number" placeholder="mins" min="1" max="100" [(ngModel)]="topic.duration" name="duration" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    
+                    <div class="col-4 offset-4" >
+                    <button type="submit" [disabled]="topicForm.invalid" class="btn btn-success">Submit</button> &nbsp;
+                    </div>
+                    <div class="col-4">
+                    <button type="button" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>                            
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

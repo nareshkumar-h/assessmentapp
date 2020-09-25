@@ -1,0 +1,58 @@
+<kt-sidebar [menus]="menus"></kt-sidebar>
+
+<kt-page title="Categories" [showSidebar]="showSidebar" [breadcrumbItems]="breadcrumbItems">
+    <div class="row" *ngIf="reportData">
+        <div class="col-3" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+    
+    <div class="row" *ngIf="categories; else loading">
+        <div class="col-6" >
+            
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    <h3 class="card-title text-white">
+                    Categories
+                </h3>
+                <div class="tools pull-right">
+                    <button mat-button (click)="openDialog()" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></button> 
+                </div>
+                </div>
+                <div class="card-body">
+                    <table class="table theme-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Category Name</th>
+                                <!-- <th>Active</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="categories">
+                            <tr *ngFor="let i=index;let c of categories">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    {{c.name}}
+                                </td>
+                                <td>
+                                    <button (click)="editDialog(c)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt    "></i></button> &nbsp;
+                                    <button (click)="delete(c.id)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt    "></i></button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted" *ngIf="categories">
+                    Results : {{categories.length}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</kt-page>

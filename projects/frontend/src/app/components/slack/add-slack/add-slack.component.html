@@ -1,0 +1,38 @@
+<kt-page title="Add Slack" [breadcrumbItems]="breadcrumbItems" showSidebar="true">
+    <div class="row">
+        <div class="col-6">
+                    <form (submit)="save(slack)">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="30%">Application Name </th>
+                                <td width="70%">
+                                    <input type="text" class="form-control" [(ngModel)]="slack.applicationName" name="code" required readonly />
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Slack Url</th>
+                                <td width="70%"><input type="text" class="form-control" [(ngModel)]="slack.url" name="title" required autofocus /></td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Hook Url</th>
+                                <td width="70%"><input type="text" class="form-control" [(ngModel)]="slack.hookUrl" name="hookUrl" required autofocus /></td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Token</th>
+                                <td width="70%"><input type="text" class="form-control" [(ngModel)]="slack.token" name="token" required autofocus /></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                               <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </form>
+               
+        </div>
+    </div>
+</kt-page>

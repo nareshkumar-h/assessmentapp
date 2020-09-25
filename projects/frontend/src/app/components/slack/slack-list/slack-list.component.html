@@ -1,0 +1,47 @@
+<div class="page-content">
+    <app-page-bar [items]="breadcrumbItems"></app-page-bar>
+
+    <h3 class="page-title"> Slack </h3>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header card-default">
+                    Slack
+                    <div class="tools pull-right">
+                        <a routerLink="../addslack" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="slackList">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Application Name </th>
+                                <th>Slack Url</th>
+                                <th>Hook Url</th>
+                                <th>Active</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;let slack of slackList">
+                                <td>{{i+1}}</td>
+                                <td>{{slack.applicationName}}</td>
+                                <td>{{slack.url}}</td>
+                                <td>{{slack.hookUrl}}</td>
+                                <td>{{slack.active}}</td>
+                                <td>
+                                    <a routerLink="{{slack.id}}" class="btn btn-info btn-sm">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" *ngIf="slackList">
+                    Results : {{slackList.length}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

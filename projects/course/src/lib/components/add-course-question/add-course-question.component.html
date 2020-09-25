@@ -1,0 +1,64 @@
+<kt-page title="Add Question" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+    <div class="row">
+        <div class="col-9">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Add Question
+                </div>
+                <div class="card-body">
+                    <form (submit)="save(question)">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="30%">Title </th>
+                                <td width="70%">
+                                    <input type="text" class="form-control input-lg" [(ngModel)]="question.title" name="title" required autofocus />
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th width="30%">Tags</th>
+                                <td width="70%"><input type="text" class="form-control input-lg" [(ngModel)]="question.tag" name="tag" required  /></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                               <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card card-custom" >
+                <div class="card-header card-blue">
+                    Import Questions
+                </div>
+                <div class="card-body">
+                    <div id="import-error-message"></div>
+                    <form #rForm="ngForm" (submit)="uploadFile()">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="50%">Select File </th>
+                                <td width="50%">
+                                    <input type="file" (change)="onFileSelect($event)" name="file" required autofocus />
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                               <td><button type="submit" [disabled]="rForm.invalid" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

@@ -1,0 +1,38 @@
+pre {
+    margin:0 !important;
+
+}
+
+pre > code {
+    white-space: pre;
+    margin-top: -1.00em;
+    display: block;
+}
+
+.hljs {
+    padding:0px;
+}
+
+.card-body{
+    padding: 0px 10px;
+}
+/* 
+a {
+    color:white;
+}
+
+a:hover{
+    color:white;
+} */
+
+.btn {
+    color:white;
+}
+
+.btn:hover{
+    color:white;
+}
+
+.pdf {
+    margin-bottom: 10px;
+}

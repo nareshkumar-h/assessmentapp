@@ -1,0 +1,38 @@
+<mat-dialog-content class="mat-typography">
+    <h3 class="page-title">Edit Batch Course - {{batchId}}</h3>
+
+    <div class="row">
+        <div class="col-12">
+            <form class="form" (submit)="save(batchCourse)">
+                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <tr>
+                            <th width="30%">Course</th>
+                            <td width="70%">
+                                {{batchCourse.course_id}} - {{batchCourse.course_name}}
+                                <!-- <input type="text" [(ngModel)]="batchCourse.courseId" name="courseId" required autofocus readonly/></td>                                     -->
+                        </tr>
+                        <tr>
+                            <th width="30%">Start Date</th>
+                            <td width="70%"><input type="date" [(ngModel)]="batchCourse.start_date" name="startDate" required autofocus /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">End Date</th>
+                            <td width="70%"><input type="date" [(ngModel)]="batchCourse.end_date" name="endDate" required autofocus /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Trainer</th>
+                            <td width="70%"><input type="text" [(ngModel)]="batchCourse.trainer_id" name="trainerId" required autofocus /></td>
+                        </tr>
+                        
+                        <tr>
+                            <th></th>
+                           <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                            <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </form>
+        </div>
+    </div>

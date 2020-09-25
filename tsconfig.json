@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -15,6 +14,36 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "course": [
+        "dist/course/course",
+        "dist/course"
+      ],
+      "project": [
+        "dist/project/project",
+        "dist/project"
+      ],
+      "usercourse": [
+        "dist/usercourse/usercourse",
+        "dist/usercourse"
+      ],
+      "auth": [
+        "dist/auth/auth",
+        "dist/auth"
+      ],
+      "security": [
+        "dist/security/security",
+        "dist/security"
+      ],
+      "theme": [
+        "dist/theme/theme",
+        "dist/theme"
+      ],
+      "content": [
+        "dist/content/content",
+        "dist/content"
+      ]
+    }
   }
 }

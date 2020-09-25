@@ -1,0 +1,40 @@
+<kt-page title="Slack" [breadcrumbItems]="breadcrumbItems" showSidebar="true">
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Slack
+
+                    <div class="tools pull-right">
+                        <a  [ngxPermissionsOnly]="['HR']"  routerLink="../../../batches/{{id}}/addslack" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Application Name </th>
+                                <th>Slack Url</th>
+                                <th>Hook Url</th>
+                                <th>Active</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="slack">
+                                <td>{{slack.applicationName}}</td>
+                                <td>{{slack.url}}</td>
+                                <td>{{slack.hookUrl}}</td>
+                                <td>{{slack.active}}</td>
+                                <td>
+                                    <button  [ngxPermissionsOnly]="['HR']"  (click)="delete(slack.id)" class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt"></i></button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</kt-page>

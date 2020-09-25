@@ -1,0 +1,145 @@
+<kt-sidebar [menus]="menus"></kt-sidebar>
+
+<kt-page title="Courses" [showSidebar]="showSidebar" [breadcrumbItems]="breadcrumbItems">
+    <div class="row" *ngIf="reportData">
+        <div class="col-3" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    
+    <ng-template #loading>
+        <kt-progress-bar></kt-progress-bar>
+    </ng-template>
+
+    <input type="text" name="courseFilter" [(ngModel)]="courseFilter" placeholder="Search courses by name"/> 
+    &nbsp;<button>Search</button>
+
+    <div class="row" *ngIf="categories;else loading">
+        <div class="col">
+            <div>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" *ngIf="courses">
+                    <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group"
+                        *ngFor="let c of categories">
+                        <button type="button" class="btn btn-secondary" [routerLink]="['/courses']"
+                            [queryParams]="{ category: c }" [ngClass]="{'active': c == selectedCategory}">{{c}}</button>
+                    </div>
+
+                    <!-- <ul class="list-group list-group-flush">
+                    <li class="list-group-item" [ngClass]="{'active': c == selectedCategory}"
+                    [routerLink]="['/courses']" [queryParams]="{ category: c }"
+                      
+                        *ngFor="let c of categories">{{c}}
+                        <span class="badge badge-light">{{courseMap[c].length}}</span>
+                    </li>
+                </ul> -->
+                </div>
+
+
+            </div>
+            <br />
+        </div>
+    </div>
+
+
+    <div class="row" *ngIf="courseMap[selectedCategory];else loading">
+        <div class="col" >
+            
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    <h3 class="card-title text-white">
+                    Courses ({{courseMap[selectedCategory].length}}) - {{selectedCategory}}
+                </h3>
+                <div class="tools pull-right">
+                    <button mat-button (click)="openDialog()" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></button> 
+                </div>
+                </div>
+                <div class="card-body">
+                    <table class="table theme-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Code </th>
+                                <th>Title</th>
+                                <th>#Topics</th>
+                                <th>Version</th>
+                                <th>Category</th>
+                                <th>Organization</th>
+                                <th>Status</th>
+                                <th>Created Date</th>
+                                <!-- <th>Active</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i=index;first as isFirst,last as isLast;let c of courseMap[selectedCategory]">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    {{c.code}}
+                                </td>
+                                <td>{{c.title}}</td>
+                                <td>{{c.noOfTopics}}</td>
+                                <td>{{c.version}}</td>
+                                <td>
+                                    <span class="badge badge-secondary">{{c.category}}</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary">{{c.orgId}}</span>
+                                </td>
+                                <td>
+                                    <span class="badge"
+                                        [ngClass]="{'badge-info':c.status=='DRAFT','badge-success':c.status=='PUBLISHED'}">{{c.status}}</span>
+                                </td>
+                                <td>{{c.createdDate}}</td>
+
+
+                                <td>
+                                    <button (click)="navigate(['courses',c.code],['VIEW_COURSE',c.code])"
+                                        class="btn btn-info btn-sm">View</button> &nbsp;
+                                    <button (click)="publish(c)"> <i class="fas fa-cloud-upload-alt"></i></button> &nbsp;
+                                    <button *ngIf="i>=0 && !isLast" (click)="move(i,'DOWN')"><i class="fas fa-arrow-down    "></i></button> &nbsp;
+                                    <button *ngIf="i>0 && !isFirst" (click)="move(i,'UP')" ><i class="fas fa-arrow-up    "></i></button> 
+                                    <!-- <button (click)="navigate(c.code"+"/plan"+,'COURSE_PLAN')" class="btn btn-info btn-sm">Plan</button> -->
+                                    
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted">
+                    Results : {{courseMap[selectedCategory].length}}
+                </div>
+            </div>
+
+            <!-- <mat-card class="quiz-card">
+                            <mat-card-header>
+                              <div mat-card-avatar class="quiz-header-image"></div>
+                              <mat-card-title>Which city is this?</mat-card-title>
+                              <mat-card-subtitle>Click on the correct answer below</mat-card-subtitle>
+                            </mat-card-header>
+                            <img class="image" mat-card-image [src]="'assets/bern.jpeg'" 
+                            alt="Photo of a Shiba Inu">
+                            <mat-card-actions class="answer-section">
+                              <button 
+                              
+                                      mat-stroked-button color="primary"
+                                      >
+                                selection
+                              </button>
+                            </mat-card-actions>
+                          </mat-card>
+                        <mat-toolbar color="primary">
+                            <span>City quiz</span>
+                          </mat-toolbar>
+                          
+                          <button 
+                                  mat-raised-button color="primary"
+                                  class="start-quiz-button"
+                                  >Start quiz</button>
+                          
+                    </div>
+                </div> -->
+        </div>
+    </div>
+</kt-page>

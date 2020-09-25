@@ -1,0 +1,14 @@
+.card-body{
+    padding: 0px 10px;
+}
+
+
+.mat-dialog-content {
+    max-height: 70vh !important;
+    /* overflow-y: hidden !important; */
+}
+
+
+.col-form-label {
+    font-weight: 500;
+}

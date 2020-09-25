@@ -1,0 +1,44 @@
+<app-page-bar [items]="breadcrumbItems"></app-page-bar>
+<div class="page-content">
+    <h3 class="page-title"> Batch Activities - {{batchId}}</h3>
+    <div class="row" *ngIf="reportData">
+        <div class="col-3"
+    *ngFor="let r of reportData;let i=index;">            
+        <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+    </div>
+</div> 
+    <div class="row">
+        <div class="col-6">
+            <div class="card card-custom">
+                <div class="card-header card-default">
+                    Course Activities
+                </div>
+                <div class="card-body">
+                    <table class="table theme-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date </th>
+                                <th># Topics</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf='activities'>
+                            <tr *ngFor="let i=index;let c of activities">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    {{c.DATE}}
+                                </td>
+                                <td>{{c.cnt}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-6" *ngIf="reportMap">            
+            <app-my-chart chartType="bar" chartTitle="Activity Report"
+             [username]="batchId" [chartData]="reportMap"></app-my-chart>
+        </div>
+    </div>
+</div>

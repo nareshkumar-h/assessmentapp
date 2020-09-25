@@ -1,0 +1,50 @@
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center"><strong>Add Project Feature - {{module.name}}</strong></h3>
+            <form class="form" (submit)="save(feature)">
+                <table class="table table-borderless w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <!-- <tr>
+                                <th width="30%">Module </th>
+                                <td width="70%">
+                                    <select class="form-control" [(ngModel)]="feature.projectModule.id" [value]="moduleId" required >
+                                        <option *ngFor="let m of modules" [selected]="m.id === moduleId" [value]="m.id">{{m.name}}</option>
+                                    </select>
+                                    <input type="number"  class="form-control"  [(ngModel)]="feature.projectModule.id" name="code" placeholder="" required autofocus />
+                                    </td>
+                            </tr> -->
+                        <tr>
+                            <th width="30%">Name</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="feature.name"
+                                    placeholder="" name="name" required autofocus /></td>
+                        </tr>
+                        <!-- <tr>
+                            <th width="30%">Description</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="feature.description"
+                                    name="description" required /></td>
+                        </tr> -->
+                        <tr>
+                            <th width="30%">Priority</th>
+                            <td width="70%"><input class="form-control" type="number" [(ngModel)]="feature.priority"
+                                    name="priority" placeholder="1.HIGH 2.MEDIUM 3.LOW" required /></td>
+                        </tr>
+                        <!-- <tr>
+                                <th width="30%">Completion Date</th>
+                                <td width="70%"><input type="date"  class="form-control"  [(ngModel)]="project.completionDate" name="completionDate" required autofocus /></td>
+                            </tr> -->
+
+                        <tr>
+                            <th></th>
+                            <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

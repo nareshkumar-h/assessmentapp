@@ -1,0 +1,42 @@
+<kt-page title="Add Repository" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+    <div class="row">
+        <div class="col-6">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                   <div class="card-title text-white"> Add Repository</div>
+                </div>
+                <div class="card-body">
+                    <form id="createRepoForm" #rForm="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="createRepo()">
+                        <div class="form-group">
+                          <label for="name">Project Name:</label>              
+                          <input type="text" class="form-control" placeholder="Enter Project Name" id="projectName" [(ngModel)]="project.name" name="projectName" required autofocus>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="name">Username:</label>
+                          <input type="text" class="form-control" placeholder="Enter Username" id="username" [(ngModel)]="project.username" name="username" value="${LOGGED_IN_USER.username}" required>
+                        </div>            
+                        
+                        <div class="form-group">
+                          <label for="name">Project Type:</label>
+                          <select class="form-control" name="projectType" [(ngModel)]="project.projectType" required >
+                          <option value="1">Database</option>
+                          <option value="2">Core Java</option>
+                          <option value="3">Web</option>
+                          <option value="4">SpringBoot</option>
+                          <option value="5">JavaScript</option>
+                          </select>
+                          
+                        </div>
+                        
+                        
+                        
+                        <button type="submit" [disabled] = "rForm.invalid" class="btn btn-primary">Submit</button> &nbsp;
+                        
+                        <a routerLink="../repositories" class="btn btn-danger">Cancel</a>
+                      </form>     
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

@@ -1,0 +1,34 @@
+<kt-page title="Course Settings" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Course Settings
+                </div>
+                <div class="card-body">
+                    <form (submit)="save(setting)" class="form-horizontal">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <tbody>
+                            <tr>
+                                <th width="30%"> Course Topics </th>
+                                <td width="70%">
+                                    <input type="radio" class="form-control-inline" [(ngModel)]="setting.COURSE_TOPICS" name="code" value="A" required autofocus /> Show all Topics (Pending + Completed) <br/>
+                                    <input type="radio"  class="form-control-inline"  [(ngModel)]="setting.COURSE_TOPICS" name="code" value="P" required autofocus /> Show only Pending Topics <br/>
+                                    <!-- <input type="radio" [(ngModel)]="setting.COURSE_TOPICS" name="code" value="T" required autofocus /> Show only Training Topics -->
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                               <td><button type="submit" class="btn btn-success">Save</button> &nbsp;
+                                <button type="reset" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+</kt-page>
