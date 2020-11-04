@@ -1,10 +1,16 @@
-<kt-page title="Project- {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+<kt-page title="Project- {{project?.name}}" showSidebar="true" >    
 
     <div class="row">
         <div class="col">
             <div class="card card-custom">
                 <div class="card-header card-blue">
-                    Feature
+                    <div class="card-title text-white">
+                        Feature 
+                    </div>
+                        <!-- <div class="tools pull-right">
+                             <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
+                                <i class="fa fa-plus "></i></button>  
+                     </div>        -->
                 </div>
                 <div class="card-body">
                     <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
@@ -14,7 +20,8 @@
                                 <th>Module </th>
                                 <th>Priority</th>
                                 <th>Created By</th>
-                                <th>Created Date</th>                                
+                                <th>Created Date</th>  
+                                <th>Status</th>                              
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -25,9 +32,19 @@
                                 <td><span class="badge badge-primary">{{feature.priority}}</span> </td>
                                 <td> <i class="fa fa-user-circle-o " aria-hidden="true"></i> {{feature.createdBy}}</td>
                                 <td>{{feature.createdDate}}</td>                                                          
+                                <td>{{feature.status}}</td>
                                 <td>               
                                     <button *ngIf="isLoggedInUser && mode!='edit'" class="btn btn-info btn-sm" (click)="mode='edit'"> <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>    &nbsp;               
-                                    <button *ngIf="isLoggedInUser && mode=='edit'" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button *ngIf="isLoggedInUser && mode=='edit'" class="btn btn-danger btn-sm"  (click)="deleteFeature(feature.id)"><i class="fa fa-trash" aria-hidden="true"></i></button> &nbsp;
+
+                                    
+                                     <button *ngIf="isLoggedInUser && feature.status=='INPROGRESS'" (click)="updateFeatureStatus(feature.id,'UNDER_REVIEW')" class="btn btn-success btn-sm">Send for Review
+                                        </button>
+                                    <button *ngIf="isLoggedInUser && feature.status=='PENDING'" (click)="updateFeatureStatus(feature.id,'INPROGRESS')" class="btn btn-success btn-sm">Start
+                                    </button> 
+                                    <button *ngIf="isLoggedInUser && feature.status=='COMPLETED'" (click)="updateFeatureStatus(feature.id,'INPROGRESS')" class="btn btn-success btn-sm">Reopen
+                                    </button> &nbsp;
+                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -47,7 +64,7 @@
                         <tbody>
                             <tr *ngIf="feature">
 
-                                <td *ngIf="mode=='edit'"><textarea rows="20" cols="180" [(ngModel)]="feature.description" name="description"></textarea>
+                                <td *ngIf="mode=='edit'"><textarea rows="5" cols="130" [(ngModel)]="feature.description" name="description"></textarea>
                                     
                                 </td>                              
                                 <td  *ngIf="mode!='edit'"> {{feature.description}}</td>                            
@@ -62,4 +79,6 @@
             </div>
         </div>
     </div>
+    <lib-feature-tasks [featureId]="featureId"></lib-feature-tasks>
+    
 </kt-page>

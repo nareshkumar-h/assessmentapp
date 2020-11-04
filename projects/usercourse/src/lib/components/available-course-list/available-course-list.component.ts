@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 })
 export class AvailableCourseListComponent implements OnInit {
 
+  
   userId:string;
   selectedCategory:string;
   showSidebar=true;

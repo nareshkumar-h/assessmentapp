@@ -45,7 +45,19 @@ export class UserCourseService {
   }
 
   updateTopicStatus(topicId,status){
-    let url = `${this.apiUrl}v1/usercoursetopics/topics/${topicId}/${status}`;
+    let url = `${this.apiUrl}v1/usercoursetopics/topics/${topicId}/status/${status}`;
+    return this.http.post(url, {headers:this.getHeaders()});
+  }
+
+  assignTopic(usertopic){
+    let url = `${this.apiUrl}v1/usercoursetopics/assignTopic`;
+    return this.http.post(url, usertopic,{headers:this.getHeaders()});
+  }
+
+
+
+  updateTopicReviewStatus(topicId,status){
+    let url = `${this.apiUrl}v1/usercoursetopics/topics/${topicId}/review/${status}`;
     return this.http.post(url, {headers:this.getHeaders()});
   }
 

@@ -35,8 +35,14 @@ export class CourseClientService {
     return this.http.get(url,{headers:this.getHeaders()});
   }
 
+
   getCourseSections(courseId){
     let url = `${this.apiUrl}v1/courses/${courseId}/sections`;
+    return this.http.get(url,{headers:this.getHeaders()});
+  }
+
+  getCourseLectures(courseId,sectionId){
+    let url = `${this.apiUrl}v1/courses/${courseId}/sections/${sectionId}`;
     return this.http.get(url,{headers:this.getHeaders()});
   }
 
@@ -54,14 +60,34 @@ export class CourseClientService {
     let url = `${this.apiUrl}v1/courses/${courseId}/sections/${moduleId}`;
     return this.http.get(url,{headers:this.getHeaders()});
   }
+
+  getCourseSectionContents(courseId,moduleId){
+    let url = `${this.apiUrl}v1/courses/${courseId}/sections/${moduleId}/contents`;
+    return this.http.get(url,{headers:this.getHeaders()});
+  }
+
+  getPendingContents(moduleId,userId){
+    let url = `${this.apiUrl}v1/usercontents/sections/${moduleId}/contents?userId=${userId}`;
+    return this.http.get(url,{headers:this.getHeaders()});
+  }
   
   getCourseContent(courseId,lectureId){
     let url = `${this.apiUrl}v1/courses/${courseId}/lectures/${lectureId}`;
     return this.http.get(url,{headers:this.getHeaders()});
   }
 
-  updateActivity(userId,courseId,lectureId,status){
-    let url = `${this.apiUrl}v1/courses/${courseId}/lectures/${lectureId}/${status}?userId=${userId}`;
+  getContent(contentId){
+    let url = `${this.apiUrl}v1/contents/${contentId}`;
+    return this.http.get(url,{headers:this.getHeaders()});
+  }
+
+  getPendingCourseSections(courseId,userId){
+    let url = `${this.apiUrl}v1/usercontents/pendingSections?userId=${userId}&courseId=${courseId}`;
+    return this.http.get(url,{headers:this.getHeaders()});
+  }
+
+  updateActivity(userId,contentId,status){
+    let url = `${this.apiUrl}v1/usercontents/${contentId}/${status}?userId=${userId}`;
     return this.http.post(url,{headers:this.getHeaders()});
   }
 }

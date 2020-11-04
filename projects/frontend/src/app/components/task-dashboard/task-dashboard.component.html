@@ -1,0 +1,47 @@
+<div class="sidebar">
+
+    <ul class="nav sidebar-menu">
+
+        <li class="nav-item" >
+            <a class="nav-link" routerLink="/">
+                <i class="fas fa-arrow-left"> &nbsp;&nbsp; </i>
+                <span class="title">Back</span>
+            </a>
+        </li>
+
+        <ng-container *ngFor="let m of courses">
+        <li class="nav-item" >
+            <a class="nav-link" (click)="navigate(m)">
+                <i class="fas fa-circle"> &nbsp;&nbsp; </i>
+                <span class="title">{{m.courseId}}</span>
+                ({{m.count}})
+            </a>
+        </li>
+    </ng-container>
+    </ul>
+</div>
+
+<kt-page title="Task Dashboard" showSidebar="true" >
+    <div class="row">
+        <div class="col">
+            Welcome to home page
+        </div>
+        <div *ngIf="content">
+           <div [innerHTML]= "contentText"></div>
+         <ct-view-content [content]="content"></ct-view-content> 
+        </div>
+        <!-- <iframe src="http://api.knowledgetracker.in/1/index.html" width="100%" height="100%"> 
+        </iframe>-->
+    </div>
+    <div *ngIf="selectedCourse">
+        <div class="row">
+            <div class="col">
+                {{selectedCourse.courseId}}
+{{contents | json}}
+            </div>
+        </div>
+    </div>
+</kt-page>
+
+
+<!-- page content -end -->

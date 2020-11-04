@@ -25,12 +25,27 @@ export class UserCourseTopicsComponent implements OnInit {
   report:UserCourseReport;
 
   
+  
   breadcrumbItems:any  = [ {"icon":"home", "name":"Home","link":"/"},
   {"name":"Courses", "link":"../../courses"}];
+
+  readAccess:boolean = false;
+
+  selectedUser:string;
+
+  userType:string;
 
   constructor(private userCourseService: UserCourseService, private authService:AuthService,private courseClientService:CourseClientService, private route: ActivatedRoute,private toastr:ToastrService) {
     //this.userId = params["userId"];
     this.userId = this.authService.getLoggedInUsername();
+    this.selectedUser = this.authService.getSelectedUser();
+    if(this.userId == this.selectedUser){
+      this.userType = "U";
+    }
+    if(this.userId != this.selectedUser){
+      this.userType = "M";
+    }
+    this.readAccess = this.userId != this.selectedUser ;
     this.route.parent.params.subscribe(params => {
       
       this.courseId = params["courseId"];      
@@ -86,10 +101,47 @@ export class UserCourseTopicsComponent implements OnInit {
 
 
 
+  assignTopic(topic){
+    console.log(topic);
+    let date = new Date().toJSON();
+    topic["lectureDate"] = date.substr(0,10);
+    if(topic.userTopicId){
+      this.userCourseService.assignTopic(topic).subscribe (res=>{
+        this.toastr.success("Assigned");        
+        
+        //this.listUserTopics();
+      });
+    }
+    else{
+      let formData = { courseId: this.courseId, topicId: topic["code"], userId: this.selectedUser, assignedBy: this.userId};
+      
+      this.userCourseService.assignTopic(formData).subscribe (res=>{
+        this.toastr.success("Assigned");
+        topic["status"]="P";
+      });
+    }
+       
+  }
+
+  topicReviewStatus(topic, status) {
+      console.log("Update Review Status:", topic, status);
+
+        topic.completionDate= status == "C"? null:null;
+      
+         this.userCourseService.updateTopicReviewStatus(topic.userTopicId, status).subscribe (res=>{
+           this.toastr.success("Success");
+         });
+    
+  }
+
+
+
   modulePercentage = {};
 
+  reviewStatusMap = {"A":"Approved", "R":"Rejected", "P":"Pending"};
+
   listUserTopics() {
-    this.userCourseService.listCourseTopics(this.userId, this.courseId).subscribe(res => {
+    this.userCourseService.listCourseTopics(this.selectedUser, this.courseId).subscribe(res => {
       let data = <[]>res;
       let modules = this.course.modules;
       for (let i=0;i<modules.length;i++) 
@@ -103,6 +155,7 @@ export class UserCourseTopicsComponent implements OnInit {
         let total = topics.length;
         for (let j=0;j<topics.length;j++) {
           let topic = topics[j];
+           
             const obj = <{}>data.find(t => t["topicId"] == topic["code"]);
 //            console.log(obj);
             if (obj) {
@@ -110,6 +163,8 @@ export class UserCourseTopicsComponent implements OnInit {
               this.course.modules[i].topics[j]["userTopicId"] = obj["userTopicId"];
               this.course.modules[i].topics[j]["status"] = status;
               this.course.modules[i].topics[j]["completionDate"] = obj["completionDate"];
+              this.course.modules[i].topics[j]["lectureDate"] = obj["lectureDate"];
+              this.course.modules[i].topics[j]["reviewStatus"] = obj["reviewStatus"];
               if (status == 'C') {
                 completed++;
                 moduleTopicCompleted++;
@@ -130,6 +185,8 @@ export class UserCourseTopicsComponent implements OnInit {
       this.createReport();
     });
   }
+
+  
 
 
   updateStatus(topic, checked) {
@@ -217,7 +274,7 @@ export class UserCourseTopicsComponent implements OnInit {
   getColor(topic) {
     let color = "";
 
-    if (topic.status == 'P' && new Date(topic.plannedDate) < this.today) {
+    if (topic.status == 'P' && new Date(topic.lectureDate.substr(1,10)) < this.today) {
       color = 'red';
     }
 
@@ -243,5 +300,16 @@ export class UserCourseTopicsComponent implements OnInit {
     this.menus.push( {name: "Questions",  link:["questions"], icon:"fas fa-question",  access: true});
     this.menus.push( {name: "Settings",  link:["settings"], icon:"fas fa-gear",  access: true});
   }  
+
+  getTopics(m){
+    let topics = m.topics;
+    if(this.userType=="M"){
+      topics = topics;//topics.filter(obj=> obj.status =='P' || obj.status=='C');
+    }
+    else if (this.userType =="U"){
+      topics = topics;//.filter(obj=> obj.status =='C' || obj.status=='S');
+    }
+    return topics;
+  }
 
 }

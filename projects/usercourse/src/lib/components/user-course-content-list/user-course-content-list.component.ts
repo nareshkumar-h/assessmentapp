@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Output, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClipboardService } from 'ngx-clipboard';
@@ -7,6 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import * as _ from 'lodash';
 import { EventEmitter } from 'events';
+import { AuthService } from 'projects/auth/src/public-api';
+import { Subject } from 'rxjs';
 
 
 declare var hljs: any;
@@ -19,39 +21,47 @@ export enum KEY_CODE {
 @Component({
   selector: 'app-user-course-content-list',
   templateUrl: './user-course-content-list.component.html',
-  styleUrls: ['./user-course-content-list.component.css']
+  styleUrls: ['./user-course-content-list.component.css'],
+  
 })
 export class UserCourseContentListComponent implements OnInit {
 
   userId:string;
   pageNo:number =0;
   totalPages:number;
-  courseId:string;
+  
   breadcrumbItems=[];
-  moduleId:string;
-  sectionName:string;
+
+  @Input() changing: Subject<any>;
+
+  @Input()
+  section:any;
+
 
   constructor(private courseService:CourseClientService, private router:Router, private route:ActivatedRoute,
-    private toastr:ToastrService, private _clipboardService: ClipboardService,
+    private toastr:ToastrService, private _clipboardService: ClipboardService, private authService:AuthService,
     public sanitizer: DomSanitizer) {
-    this.route.parent.params.subscribe(params=>{
-      this.courseId = params["courseId"];
-      this.userId = params["userId"];
-    });
+      console.log("user course content list")
+      this.userId =  this.authService.getLoggedInUsername();
+    
     this.route.params.subscribe(params=>{
       
-      this.moduleId = params["sectionId"];
-      this.sectionName = params["sectionName"];
-      this.lectures=null;
-      this.contents =null;
-      this.currentLecture =null;
-      this.list();
-      this.pageNo=0;
+      let section = { sectionId: params["sectionId"] , sectionName: params["sectionName"] };
+      console.log("params:" , params);
+      this.loadSectionContent(section);
     });
+    
+    
+   }
+   
+   loadSectionContent(section){
+     console.log("loadSectionContent child", section);
+     this.section = section;
+     this.list();
    }
 
   ngOnInit(): void {
-    
+    console.log("init", this.section);       
   }
 
   listModules(){
@@ -73,37 +83,42 @@ export class UserCourseContentListComponent implements OnInit {
 
   lectures:any;
 
+  @Input()
+  sectionContents:any;
+
   list(){
-    this.courseService.getCourseModuleContents(this.courseId, this.moduleId).subscribe(res=>{
-      this.lectures = res;
-      if(this.lectures.length > 0 ){         
-        this.totalPages = this.lectures.length;
-        this.nextPage(this.pageNo);
-      
+    this.sectionContents = null;
+    this.totalPages=0;
+    this.pageNo=0;
+    this.courseService.getPendingContents(this.section.sectionId, this.userId).subscribe(res=>{
+      this.sectionContents = res;
+      if(this.sectionContents.length > 0 ){         
+        this.totalPages = this.sectionContents.length;
+        this.nextPage(this.pageNo);      
       }
       //this.createReport(res);
       
     });
   }
 
-  currentLecture:any;
-  contents:any;
+  
 
-  getContent(lectureId){
-    console.log("Get content id -" + lectureId)
-    this.contents=[];
-    //this.content=this.courseService.getCourseContent(id);
-     this.courseService.getCourseContent(this.courseId,  lectureId).subscribe(res=>{
-       console.log(JSON.stringify(res));
-       this.contents = res;
+  lectureContent:any;
+
+  getContent(content){
+    console.log("Get content id -" ,content)
+    this.lectureContent=null;
+     this.courseService.getContent(content.id).subscribe(res=>{
+       this.lectureContent = res;
      });
   }
 
   nextPage(pageNo){
+    console.log("Next Page," , pageNo);
     if(pageNo>=0 && pageNo<this.totalPages){
-      let obj = this.lectures[pageNo];
-      this.currentLecture = obj;
-      this.getContent(obj.id);
+      let obj = this.sectionContents[pageNo];
+      
+      this.getContent(obj);
       this.pageNo = pageNo + 1;
     }
   }
@@ -111,27 +126,25 @@ export class UserCourseContentListComponent implements OnInit {
   currentPage(pageNo){
     
       this.pageNo = pageNo;
-      let obj = this.lectures[pageNo-1];
-      this.currentLecture = obj;
-      this.getContent(obj.id); 
+      let obj = this.sectionContents[pageNo-1];
+      
+      this.getContent(obj); 
   }
   
   previousPage(pageNo){
     
     if(pageNo>1 && pageNo<=this.totalPages){
       console.log("Previous: Page No:" + pageNo);
-      let obj = this.lectures[pageNo-2];
-      this.currentLecture = obj;
-      this.getContent(obj.id); 
+      let obj = this.sectionContents[pageNo-2];      
+      this.getContent(obj); 
       this.pageNo = pageNo - 1;
     }
   }
 
   goto(pageNo){
     if(pageNo > 0 && pageNo<= this.totalPages){ 
-      let obj = this.lectures[pageNo-1];
-      this.currentLecture = obj;
-      this.getContent(obj.id); 
+      let obj = this.sectionContents[pageNo-1];      
+      this.getContent(obj); 
     }
   }
 
@@ -146,9 +159,9 @@ export class UserCourseContentListComponent implements OnInit {
 
   update(contentId,status){
     
-    this.courseService.updateActivity(this.userId,this.courseId,contentId,status).subscribe(res=>{
-      this.lectures.splice(this.pageNo-1,1);
-      this.totalPages = this.lectures.length;
+    this.courseService.updateActivity(this.userId,contentId,status).subscribe(res=>{
+      this.sectionContents.splice(this.pageNo-1,1);
+      this.totalPages = this.sectionContents.length;
       if(this.pageNo <= this.totalPages){
         console.log("Next Page" + this.pageNo);
         this.nextPage(this.pageNo-1);
@@ -160,7 +173,7 @@ export class UserCourseContentListComponent implements OnInit {
       else {
         console.log("No pages");
         this.pageNo = 0;
-        this.currentLecture =null;
+        //this.currentLecture =null;
       }
       if ( status == 'C'){
         this.toastr.success("Success",null, {timeOut:1000});

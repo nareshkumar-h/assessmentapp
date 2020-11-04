@@ -22,6 +22,7 @@ import { MaterialModule } from './material.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { LoadingBarComponent } from './components/loading-bar/loading-bar.component';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -30,7 +31,6 @@ import { ProgressSpinnerComponent } from './components/progress-spinner/progress
      HomeLayoutComponent, PageBarComponent, DashboardWidgetComponent, MomentPipe, MyChartComponent, 
      PageComponent, ProgressBarComponent,LoadingBarComponent,ProgressSpinnerComponent],
   imports: [
-    CommonModule,
     MDBBootstrapModule.forRoot(),
     ChartsModule,
     NavbarModule,
@@ -40,7 +40,8 @@ import { ProgressSpinnerComponent } from './components/progress-spinner/progress
     CommonModule,FormsModule,RouterModule,HttpClientModule, 
     ToastrModule.forRoot(),
     DeviceDetectorModule,
-    MaterialModule
+    MaterialModule,
+    BrowserModule
   ],
   exports: [ThemeComponent, AuthLayoutComponent,HomeLayoutComponent, PageBarComponent,
     DashboardWidgetComponent,MomentPipe,MyChartComponent,  ProgressSpinnerComponent,

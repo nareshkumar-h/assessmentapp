@@ -15,10 +15,13 @@ export class ProjectDashboardComponent implements OnInit {
     this.userId = this.authService.getLoggedInUsername();
   }
 
+  getFeatures(){
+    return [];
+  }
 
   ngOnInit(): void {
 
-    this.router.navigate(['projects/'+ this.userId]);
+    this.router.navigate(['projects']);
   }
 
 }

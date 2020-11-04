@@ -1,33 +1,29 @@
-<div class="row" *ngIf="selectedCourse">
+<kt-sidebar [menus]="menus" showSidebar="true">
+  
+    <div class="nav-item" >
+      <a class="nav-link" routerLink="../topics"><i class="fa fa-arrow-left" aria-hidden="true"> &nbsp; &nbsp;</i>Back </a>
+  <div class="nav-link">Modules</div> 
+        <a class="nav-link" *ngFor="let section of sections" 
+        title="{{section.title}}"  (click)="loadSectionContent(section)" >
+        <i class="fa-check-circle"> &nbsp;&nbsp; </i>
+        <span _ngcontent-vgb-c104="" class="title">{{section.sectionName}} </span>        
+          ( {{section.pending}} )
+        </a>   
+        <a *ngIf="sections?.length==0">        
+        No Content 
+        </a>   
+    </div>
+</kt-sidebar>
+
+<kt-page showSidebar="true" title="{{courseName}}"> 
+<!-- 
+<router-outlet></router-outlet> -->
+<div *ngIf="!selectedSection">
+  <div class="row">
     <div class="col">
-        <h3 class="page-title">{{selectedCourse.course_name}}</h3>
-    </div>
+  No records
 </div>
-<br />
-
-<div class="row" *ngIf="sections">
-    <div class="col-12" *ngFor="let m of sections;let i=index">
-        <div class="card card-custom w100 drag-content gutter-b" *ngIf="contents[m.title]">
-            <div class="card-header card-blue">
-                <a routerLink="../sections/{{m.id}}/{{m.title}}" class="text-white">{{m.title}}</a>
-            </div>
-            <div class="card-body">
-
-
-                <section *ngFor="let t of contents[m.title]" class="">
-                    <div class="card card-custom" draggable="true">
-                        <div class="card-header">
-
-                            
-                                {{t.title}}
-
-                        </div>
-
-
-                    </div>
-                </section>
-
-            </div>
-        </div>
-    </div>
 </div>
+</div>
+<router-outlet></router-outlet>
+</kt-page>

@@ -27,6 +27,16 @@ export class UserService {
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
+  listUsers(){
+    let url = `${this.apiUrl}v1/users?role=U`;
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+  
+  listEmployees(){
+    let url = `${this.apiUrl}v1/users?role=E`;
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
   findOne(id){
     let url = `${this.apiUrl}v1/users/${id}`;
     return this.http.get(url,{headers:this.getHeaders()});
@@ -73,6 +83,11 @@ export class UserService {
   delete(id){
     let url = this.apiUrl + `v1/users/${id}`;    
     return this.http.delete(url, {headers:this.getHeaders()});  
+  }
+
+  getMentors(userId){
+    let url = this.apiUrl + `v1/users/${userId}/mentors`;    
+    return this.http.get(url, {headers:this.getHeaders()}); 
   }
 
 

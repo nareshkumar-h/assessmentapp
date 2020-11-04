@@ -1,27 +1,37 @@
 <kt-page title="Project Features - {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
     
-    
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+
         <div class="navbar nav float-right" *ngIf="isLoggedInUser">
             <div class="nav-item"><button class="btn btn-info m-2" (click)="addModule()">Add Module</button></div>
             
         </div>
+        <br/>
     <div class="row" *ngIf="reportData">
-        <div class="col-3"
+        <div class="col-2"
         *ngFor="let r of reportData;let i=index;"> 
             <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
         </div>
     </div> 
-    <div *ngIf="modules && projectFeatures">
+    <div *ngIf="modules && projectFeatures else loading">
     <div class="row" *ngFor="let i=index;let m of modules">
         <div class="col">
             <div class="card card-custom">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">
-                    Module #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}} Topics )
+                    Feature #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}} Topics )
                 </div>
                     <div class="tools pull-right">
-                        <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
-                            <i class="fa fa-plus "></i></button> 
+                         <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
+                            <i class="fa fa-plus "></i></button>  
+
+                            
+                        <!--    <button *ngIf="isLoggedInUser" type="button" class="btn btn btn-sm text-white" data-toggle="modal" data-target="#addModule">
+                                <i class="fa fa-plus "></i>
+                              </button>
+                              -->
                         <!-- <a routerLink="../addfeature/{{m.name}}" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></a> -->
                     </div> 
                 </div>
@@ -30,10 +40,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>    
-                                <th width="60%">Feature Name</th>
+                                <th width="40%">Feature Name</th>
                                 <th>Priority</th>
                                 <th>Created By</th>
                                 <th>Created Date</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,8 +56,10 @@
                                 <td>{{t.priority}}</td>
                                 <td>{{t.createdBy}}</td>
                                 <td>{{t.createdDate}}</td>
+                                <td>{{t.status}}</td>
                                 <td>
-                                    <a routerLink="{{t.id}}" class="btn btn-info btn-sm"> View</a>
+                                    <button routerLink="{{t.id}}" class="btn btn-info btn-sm"> View</button> &nbsp;
+                                    <!--  -->
                                 </td>
                             </tr>
                         </tbody>
@@ -57,5 +70,28 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModule" tabindex="-1" role="dialog" aria-labelledby="addModule" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </kt-page>

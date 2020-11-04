@@ -18,11 +18,13 @@ import { AuthGuard } from './guards/auth.guard';
 import { ViewCourseCurriculumComponent } from './components/view-course-curriculum/view-course-curriculum.component';
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { AddLectureComponent } from './components/add-lecture/add-lecture.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 
 const routes: Routes = [
   
   { path: 'categories', component: CategoryListComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} , 
   { path: 'courses', component: CourseListComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} , 
+  { path: 'addcourse', component: AddCourseComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} , 
   { path: 'courses/:id',      component: ViewCourseComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard],
     children: [
       { path: 'edit',      component: EditCourseComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},
@@ -39,7 +41,7 @@ const routes: Routes = [
       { path: 'lectures/:lectureId/:lectureName',      component: CourseContentListComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
       { path: 'lectures/:lectureId/:lectureName/addcontent',      component: AddCourseContentComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
       { path: 'modules/:moduleId/:moduleName/addtopic',      component: AddCourseTopicComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      { path: 'competency',      component: ViewCourseTopicsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},
+      { path: 'topics',      component: ViewCourseTopicsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},
       { path: 'curriculum',      component: ViewCourseCurriculumComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},
       
        { path: '',      component: CourseOverviewComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},

@@ -103,10 +103,28 @@ export class AuthService {
     }
     return false;
   }
+
+  
+  hasRole(user,roles){
+    let allowed = false;
+    for(let role of roles){
+      if(user.roles.indexOf(role) !=-1){
+        allowed = true;
+        break;
+      }
+    }
+    return allowed;
+  }
+
   
   getUser():any{
     let user = this.securityService.get("LOGGED_IN_USER");
     return user?JSON.parse(user):null;
+  }
+
+  getSelectedUser(){
+    let user = this.securityService.get("SELECTED_USER");
+    return user?user:this.getUser().username;
   }
 
   isLoggedIn():boolean{

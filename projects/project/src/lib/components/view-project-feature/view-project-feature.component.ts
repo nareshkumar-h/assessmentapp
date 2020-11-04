@@ -34,16 +34,22 @@ export class ViewProjectFeatureComponent implements OnInit {
   feature:any;
 
   mode:string = "view";
+  noOfTasks:number =0;
 
   findOne(){
     this.projectService.findByFeatureId(this.projectId, this.featureId).subscribe (res=>{
       this.feature  =res;      
-      this.isLoggedInUser = this.authService.getLoggedInUsername() == this.feature["createdBy"];
+      this.isLoggedInUser = this.authService.getSelectedUser() == this.feature["createdBy"];
       this.project = this.feature.projectModule.project;
     });
   }
 
-  
+  updateFeatureStatus(featureId,status){
+    this.projectService.updateFeatureStatus(this.projectId, featureId, status).subscribe(res=>{
+      this.toastr.success("Successfully Updated");
+      this.ngOnInit();
+    });
+  }
 
   update(feature){
     console.log("Description:" , feature.description);
@@ -51,6 +57,18 @@ export class ViewProjectFeatureComponent implements OnInit {
       console.log(res);
       this.mode = null;
     });
+  }
+
+  deleteFeature(id){
+
+    let cfm = confirm("Do you want to delete the feature?");
+    if(cfm){
+      this.mode = "view";
+      this.projectService.deleteFeature(this.projectId, id).subscribe(res=>{
+        this.toastr.success("Successfully Deleted");
+        history.back();
+      })
+    }
   }
 
 }

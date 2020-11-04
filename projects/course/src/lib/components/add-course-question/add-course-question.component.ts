@@ -31,13 +31,19 @@ export class AddCourseQuestionComponent implements OnInit {
   contentTypes = {"G":"Gist", "T":"Text", "I":"Image", "V":"Video"};
 
   save(question){
-    let cTags= question.tag.split(",");
-    question.tags= cTags;
+
+    let cTags= [];
+    if(question.tag && question.tag !=null){
+      cTags= question.tag.split(",");
+      question.tags= cTags;
+    }
+    
     question.courseId = this.courseId;
     this.courseService.addCourseQuestion(this.courseId,question).subscribe (res=>{
       console.log(res);
       this.toastr.success("Success");
-      this.router.navigate(['courses', this.courseId ,"questions"]);
+      this,question = { title:null, tag:null, courseId:null}; //clear
+     // this.router.navigate(['courses', this.courseId ,"questions"]);
     },
     err=>{
       this.toastr.error(err.error.errorMessage);

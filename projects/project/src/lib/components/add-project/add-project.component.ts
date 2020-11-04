@@ -30,7 +30,7 @@ export class AddProjectComponent implements OnInit {
   save(project){
     this.projectService.save(project).subscribe (res=>{
       console.log(res);
-      this.router.navigate([ this.userId +"/myprojects"]);
+      this.router.navigate(["projects"]);
     });
   }
 
@@ -43,11 +43,11 @@ export class AddProjectComponent implements OnInit {
 
   loadMenus(){
     this.menus = [];
-    this.menus.push( {title: "Back",  path:["../dashboard"], icontype:"fas fa-arrow-left", access: true});
+    this.menus.push( {title: "Home",  path:["../"], icontype:"fas fa-home", access: true});
     
-    this.menus.push( {title: "My Projects",  path:["../" + this.userId + "/myprojects"], icontype:"fas fa-user", access: true});
-    this.menus.push( {title: "All Projects",  path:[ "../projects"], icontype:"fas fa-tools", access: true});    
-      
+    this.menus.push( {title: "My Projects",  path:["../"], icontype:"fas fa-user", access: true});
+    this.menus.push( {title: "All Projects",  path:[ "../all"], icontype:"fas fa-tools", access: true});    
+    this.menus.push( {title: "Add Project",  path:[ "../addproject"], icontype:"fas fa-plus", access: true});      
   }
 
 }

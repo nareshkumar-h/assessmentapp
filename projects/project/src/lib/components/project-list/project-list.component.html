@@ -1,5 +1,5 @@
 <kt-sidebar [menus]="menus" showSidebar="true"></kt-sidebar>
-<kt-page title="Projects" [breadcrumbItems]="breadcrumbItems" showSidebar="true">
+<kt-page title="Projects"  showSidebar="true">
 
     <!-- <div class="row" *ngIf="reportData">
             <div class="col-md-1" style="width: 20%;
@@ -9,69 +9,58 @@
         </div>
     </div> -->
     <ng-template #loading>
-        <kt-progress-bar></kt-progress-bar>
+        <kt-loading-bar></kt-loading-bar>
     </ng-template>
-<div class="row" *ngIf="projects else loading">
-        <div class="col-12" >
-            <div class="card card-custom" >
-                <div class="card-header card-blue">
-                   <div class="card-title text-white"> Projects </div>
-                    <!-- <div class="tools pull-right">
-                        <a routerLink="../addbatchcourse" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
-                    </div> -->
-                </div>
-                <div class="card-body">                    
-                    <table class="table table-striped table-bordered table-hover" id="sample_6">
-                        <thead>
-                            <tr>
-                                <th>Sno</th>
-                                <th>Project Name</th>
-                                <th class="hidden-xs">Developed By</th>		
-                                <th class="hidden-xs">Start Date</th>
-                                <th class="hidden-xs">End Date</th>																		
-                                <th class="hidden-xs">Status</th>
-                                							
-                                <!-- <th>Reviewer</th> -->
-                                <th class="hidden-xs">Locked</th>
-                                <th colspan="2">Action</th>																
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="projects">
-                            <tr *ngFor="let p of projects;let i=index">
-                                <td width="5%">  {{i+1}}</td>									
-                                <td> {{p.project.name}} </td>	
-                                <td class="hidden-xs"><a routerLink="../{{p.createdBy}}/projects"> <i class="fa fa-user" aria-hidden="true"></i> {{p.createdBy}} </a> </td>								
-                                <td class="hidden-xs">{{p.startDate}}</td>				
-                                <td class="hidden-xs">{{p.completionDate}}</td>														
-                                <td class="hidden-xs"><span class="badge badge-success">{{p.status}}</span></td>				
-                               
-                                <!-- <td>{{p.project.reviewerId}}</td> -->
-                                
-                                <td class="hidden-xs">
-                                    <i class='fa' [class] = "{'fa-lock':p.project.locked,'fa-unlock': !p.project.locked}" aria-hidden='true'></i>
-                                </td>
-                                <td>
-                                    <a routerLink="{{p.project.id}}/features" class="btn btn-success btn-sm"> Features </a>  &nbsp;
-                                    
-                                    <a routerLink="{{p.project.id}}/plan" class="btn btn-info btn-sm"> Plan </a>  &nbsp; <!-- disabled: p.project.locked-->
-                                
-                                    <a routerLink="{{p.project.id}}/tasks" class="btn btn-secondary btn-sm"> Tasks </a>  &nbsp; <!-- disabled: p.project.locked-->
-                                    <!-- <a href="projects/{{p.project.id}}/sprints/{{p.createdBy}}" class="btn btn-secondary btn-sm"> Sprints </a> 										  -->
-                                    
-                                <!-- <a href="projectvideos/{{p.project.id}}" class="btn btn-primary btn-sm"> Videos </a> -->
-                                 </td>
-                                <!--
-                                <td>
-                                    <a href="#"  ng-click="enrollProject(p)" class="btn btn-primary btn-sm"> Enroll </a>
-                                </td>
-                                -->
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
+    <div class="row" *ngIf="projects else loading">
+        <div class="col-12">
+            <div class="mat-elevation-z8">
+                <table mat-table matSort [dataSource]="dataSource" style="width: 100%;">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Sno </th>
+                        <td mat-cell *matCellDef="let row;let i=index"> {{i+1}} </td>
+                      </ng-container>
+                    
+                    
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Project Name </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="createdBy">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Developed By </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.createdBy}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="startDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date</th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.startDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="completionDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Completion Date</th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.completionDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.status}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+                        <td mat-cell *matCellDef="let obj">
+                            <a routerLink="../{{obj.id}}/features" mat-raised-button color="primary" class="btn btn-success btn-sm text-white">
+                                Features </a> &nbsp;
+
+                            <!-- <a routerLink="../{{p.id}}/plan" class="btn btn-info btn-sm text-white"> Plan </a>   -->
+                            &nbsp;
+                            <!-- disabled: p.project.locked-->
+
+                            <a routerLink="../{{obj.id}}/tasks"  mat-raised-button color="primary" class="btn btn-secondary btn-sm text-white"> Tasks
+                            </a> &nbsp;
+                         </td>
+                    </ng-container>
+                   
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                    <tr mat-row *matRowDef="let row;columns: displayedColumns"></tr>
+                </table>
             </div>
         </div>
-    
-</div>
+
+    </div>
 </kt-page>

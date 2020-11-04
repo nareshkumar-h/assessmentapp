@@ -21,7 +21,7 @@ export class AddUserComponent implements OnInit {
   }
   
 
-  user = { username:null, name:null, email:null, password:null};
+  user = { username:null, name:null, email:null, password:null, role:null};
 
   save(user){
     this.userService.save(user).subscribe (res=>{
@@ -65,7 +65,7 @@ export class AddUserComponent implements OnInit {
     this.menus = [];
     this.menus.push( {title: "Back",  path:["../"], icontype:"fas fa-arrow-left", access: true});
     this.menus.push( {title: "Users",  path:["../"], icontype:"fas fa-users", access: true});
-    this.menus.push( {title: "Employees",  path:["../../employees/ACTIVE"], icontype:"fas fa-users", access: true});
+    //this.menus.push( {title: "Employees",  path:["../../employees/ACTIVE"], icontype:"fas fa-users", access: true});
     // this.menus.push( {title: "Courses",  path:[ "courses"], icontype:"fas fa-book-open", access: true});
     
   }

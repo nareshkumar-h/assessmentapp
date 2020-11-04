@@ -27,10 +27,24 @@
               <li class="nav-item" *ngIf="!user">
                   <a class="nav-link" routerLink="auth/register">Register</a>
                 </li> 
-                 
+               
+                <li class="nav-item" *ngIf="isMentor && user.username ==selectedUser">
+                  <a class="nav-link" >
+                     <input type="text" class="form-control" placeholder="Enter username"  
+                     [value]="selectedUser?selectedUser:''" (keyup.enter)="switchUser($event.target.value)" /> 
+                    </a>
+                </li> 
+                
+                <li class="nav-item" *ngIf="isMentor && user.username != selectedUser">
+                  <a class="nav-link" (click)="clearSwitchUser()"> 
+                    Selected User: {{selectedUser}} <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </a>
+                </li>
+
                  <li class="nav-item" *ngIf="user">
                   <a class="nav-link" routerLink="user/{{user.username}}">Welcome {{user.name}}</a>
                 </li>
+               
                 <li class="nav-item" *ngIf="user">
                   <a class="nav-link" (click)="logout()" alt="logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></a>
                 </li>              

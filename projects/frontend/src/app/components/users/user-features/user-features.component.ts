@@ -18,7 +18,9 @@ export class UserFeaturesComponent implements OnInit {
   breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
   {"name":"Users"}];
   userId:string;
-  constructor(private route: ActivatedRoute, private userService:UserService, private toastr:ToastrService, private authService:AuthService) { 
+  constructor(private route: ActivatedRoute, private userService:UserService, 
+    
+    private toastr:ToastrService, private authService:AuthService) { 
     this.route.parent.params.subscribe(params=>{
       this.userId = params["id"];
     });
@@ -39,7 +41,7 @@ export class UserFeaturesComponent implements OnInit {
   }
 
   listFeatures(){
-    this.userService.getFeatures(this.userId).subscribe (res=>{
+    this.userService.getFeatures(this.authService.getLoggedInUserId()).subscribe (res=>{
       this.userFeatures = res;
     });
   }

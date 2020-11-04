@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   
    // redirect back to the returnUrl before login
    this.route.queryParams.subscribe(params=>{
-    this.redirectUrl = params['redirectUrl'] || '/';;
+    this.redirectUrl = params['redirectUrl'] || '/';
  //   console.log(this.redirectUrl);
    });
   }
@@ -58,7 +58,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  redirectToHomepage(USER:any){    
+  redirectToHomepage(USER:any){  
+    console.log("RedirectUrl:" + this.redirectUrl);  
     if(this.redirectUrl){   
       window.location.href=this.redirectUrl;       
       //this.router.navigate([this.redirectUrl]);
@@ -78,12 +79,12 @@ export class LoginComponent implements OnInit {
 				Validators.required,
 				//Validators.email,
 				Validators.minLength(5),
-				Validators.maxLength(320) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+				Validators.maxLength(50) // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
 			])
 			],
 			password: ["password", Validators.compose([
 				Validators.required,
-				Validators.minLength(3),
+				Validators.minLength(8),
 				Validators.maxLength(100)
 			])
 			]
@@ -113,7 +114,7 @@ export class LoginComponent implements OnInit {
       this.toastr.success("Login Success","",{timeOut:1000});
       let responseUser = res;      
       this.secureService.storeLoggedInUser(responseUser);
-      this.secureService.storeUser("SELECTED_USER",responseUser["username"]);
+      localStorage.setItem("SELECTED_USER",responseUser["username"]);
       this.redirectToHomepage(responseUser);
       
     },err=>{ 

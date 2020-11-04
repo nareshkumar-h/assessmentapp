@@ -42,6 +42,7 @@ export class ViewCourseComponent implements OnInit {
 
   findCourse(){
     this.courseService.findOne(this.courseId).subscribe (res=>{
+      console.log(res);
       this.course = res;
       this.courseService.setCourse(this.course);
       this.breadcrumbItems.push({"name": this.course.title});
@@ -106,7 +107,9 @@ export class ViewCourseComponent implements OnInit {
     this.menus.push( {title: "Back",  path:["../"], icontype:"fas fa-arrow-left", access: true});
     this.menus.push( {title: "Overview",  path:["/courses",this.courseId], icontype:"fas fa-book-open", access: true});
     this.menus.push( {title: "Curriculum",  path:["/courses",this.courseId ,"curriculum"], icontype:"fas fa-book-open", access: true});
-    this.menus.push( {title: "Competency",  path:["/courses",this.courseId ,"competency"], icontype:"fas fa-book-open", access: true});
+    this.menus.push( {title: "Topics",  path:["/courses",this.courseId ,"topics"], icontype:"fas fa-book-open", access: true});
+    this.menus.push( {title: "Contents",  path:["/courses",this.courseId ,"contents"], icontype:"fas fa-book-open", access: true});
+    this.menus.push( {title: "Questions",  path:["/courses",this.courseId ,"questions"], icontype:"fas fa-book-open", access: true});
     //this.menus.push( {title: "Plan",  path:[ "plan"], icontype:"fas fa-calendar", access: true});
     //this.menus.push( {title: "Contents",  path:["contents"], icontype:"fas fa-book", access: true});
     // this.menus.push( {title: "Questions",  path:["questions"], icontype:"fas fa-question", access: true});

@@ -5,7 +5,7 @@ import { AddCourseComponent } from './components/add-course/add-course.component
 import { ViewCourseComponent } from './components/view-course/view-course.component';
 import { CourseTopicsComponent } from './components/course-topics/course-topics.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseRoutingModule } from './course-routing.module';
 import { ThemeModule, CardModule, SidenavModule, NavbarModule } from 'projects/theme/src/public-api';
@@ -55,10 +55,10 @@ import { MaterialModule } from 'projects/theme/src/lib/material.module';
     EditCourseContentComponent,
     ViewCourseCurriculumComponent,
     AddSectionComponent,
-    AddLectureComponent],
+    AddLectureComponent,AddCourseComponent],
   imports: [
     ThemeModule,  SecurityModule.forRoot({ SECURE_KEY: "123", ENCODING_TYPE: "des" }),
-    CommonModule, FormsModule, HttpClientModule, CourseRoutingModule, 
+    CommonModule, FormsModule, ReactiveFormsModule,HttpClientModule, CourseRoutingModule, 
     ContentModule, TextFieldModule, AngularEditorModule,DragDropModule,MaterialModule
   ],
   providers:[CourseService, AuthGuard],

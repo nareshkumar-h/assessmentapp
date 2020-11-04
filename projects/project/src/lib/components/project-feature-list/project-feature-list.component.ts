@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectFeatureComponent } from '../add-project-feature/add-project-feature.component';
 import { AuthService } from 'projects/auth/src/public-api';
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-project-feature-list',
@@ -43,7 +43,7 @@ export class ProjectFeatureListComponent implements OnInit {
   findOne(){
     this.projectService.findOne(this.projectId).subscribe (res=>{
       this.project = res;
-      this.isLoggedInUser = this.authService.getLoggedInUsername() == this.project["createdBy"];
+      this.isLoggedInUser = this.authService.getSelectedUser() == this.project["createdBy"];
     });
   }
 
@@ -66,13 +66,19 @@ export class ProjectFeatureListComponent implements OnInit {
   }
 
   reportData: any = [];
-  widgetColors = [ "green-haze", "blue-madison"];
+  widgetColors = [  "blue-madison","green-haze", "red-intense", "blue-madison", "purple-plum","green-haze"];
 
   createReport(data) {
+    
     this.reportData = [];
 
     let modules = Object.keys(data);
-    console.log(modules);
+    let tasks:any = _.flatten(Object.values(data));
+    
+    let pendingTasks = tasks.filter(obj=>obj.status=="PENDING").length;
+    let inprogressTasks = tasks.filter(obj=>obj.status=="INPROGRESS").length;
+    let reviewTasks = tasks.filter(obj=>obj.status=="UNDER_REVIEW").length;
+    let completedTasks = tasks.filter(obj=>obj.status=="COMPLETED").length;
 
     var count = 0;
     for (let moduleName in this.projectFeatures) {
@@ -80,7 +86,11 @@ export class ProjectFeatureListComponent implements OnInit {
       count += features.length;
     }
     this.reportData.push({"label":"Modules", "value":modules.length});
-    this.reportData.push({"label":"Features", "value":count});
+    this.reportData.push({"label":"Features", "value":tasks.length});
+    this.reportData.push({"label":"PENDING", "value":pendingTasks});    
+    this.reportData.push({"label":"INPROGRESS", "value":inprogressTasks});
+    this.reportData.push({"label":"UNDERREVIEW", "value":reviewTasks});
+    this.reportData.push({"label":"COMPLETED", "value":completedTasks});
   }
 
   addModule(){
@@ -108,5 +118,7 @@ export class ProjectFeatureListComponent implements OnInit {
       this.refresh();
     });
   }
+
+ 
 
 }

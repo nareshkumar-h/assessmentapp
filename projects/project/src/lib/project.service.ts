@@ -27,7 +27,7 @@ export class ProjectService {
 
   list(){
     let username = this.authService.getLoggedInUsername();
-    let url = `${this.apiUrl}v1/userprojects?userId=${username}`;
+    let url = `${this.apiUrl}v1/projects?userId=${username}`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
@@ -60,8 +60,17 @@ export class ProjectService {
     return this.http.delete(url,{headers:this.getHeaders()});
   }
 
+  deleteFeature(projectId,featureId){
+    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}`;
+    return this.http.delete(url,{headers:this.getHeaders()});
+  }
+
   updateActivityStatus(projectId,activityId,status){
     let url = `${this.apiUrl}v1/projects/${projectId}/activities/${activityId}/updatestatus/${status}`;
+    return this.http.patch(url,{headers:this.getHeaders()});
+  }
+  updateFeatureStatus(projectId,featureId,status){
+    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}/updatestatus/${status}`;
     return this.http.patch(url,{headers:this.getHeaders()});
   }
 
@@ -69,6 +78,12 @@ export class ProjectService {
     let url = `${this.apiUrl}v1/projects/${projectId}/tasks`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
+
+  listFeatureTasks(projectId,featureId){
+    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}/tasks`;
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
 
   
   listSprints(projectId){
@@ -86,6 +101,16 @@ export class ProjectService {
   updateFeature(projectId, feature){
     let url = `${this.apiUrl}v1/projects/${projectId}/features/${feature.id}`;
     return this.http.patch(url, feature, {headers:this.getHeaders()});
+  }
+
+  updateTaskStatus(projectId,taskId,status){
+    let url = `${this.apiUrl}v1/projects/${projectId}/tasks/${taskId}/updatestatus/${status}`;
+    return this.http.post(url, null, {headers:this.getHeaders()});
+  }
+
+  deleteTask(projectId,taskId){
+    let url = `${this.apiUrl}v1/projects/${projectId}/tasks/${taskId}`;
+    return this.http.delete(url, {headers:this.getHeaders()});
   }
   
   listModules(projectId){
@@ -106,6 +131,13 @@ export class ProjectService {
     feature["createdBy"] = createdBy;
     let url = `${this.apiUrl}v1/projects/${projectId}/modules/${moduleId}/features`;
     return this.http.post(url, feature, {headers:this.getHeaders()});
+  }
+
+  addTask(projectId, moduleId, task){    
+    let createdBy = this.authService.getLoggedInUsername();    
+    task["createdBy"] = createdBy;
+    let url = `${this.apiUrl}v1/projects/${projectId}/modules/${moduleId}/tasks`;
+    return this.http.post(url, task, {headers:this.getHeaders()});
   }
 
   addModule(projectId, module){    

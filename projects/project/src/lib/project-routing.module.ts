@@ -16,29 +16,34 @@ import { RepoEventsComponent } from './components/repo-events/repo-events.compon
 import { ViewProjectDetailComponent } from './components/view-project-detail/view-project-detail.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ViewProjectActivityComponent } from './components/view-project-activity/view-project-activity.component';
+import { AuthGuard } from 'projects/projecttracker/src/app/auth.guard';
 
 const routes: Routes = [
-  { path: ':userId/myprojects',      component: MyProjectListComponent },
-  { path: ':userId/projects',      component: MyProjectListComponent },
-  { path: 'projects',      component: ProjectListComponent },
-  { path: ':userId/addproject',      component: AddProjectComponent },
-  { path: ':userId/projects/:projectId/view',      component: ViewProjectComponent },
-  { path: ':userId/projects/:projectId',      component: ViewProjectComponent,
-    children: [
-      { path: 'features',      component: ProjectFeatureListComponent },
-      { path: 'addfeature/:moduleId',      component: AddProjectFeatureComponent },
-      { path: 'features/:featureId',      component: ViewProjectFeatureComponent }, 
-      { path: 'plan',      component: ProjectActivityListComponent },   
-      { path: 'tasks',      component: ProjectTasksComponent },
-      { path: 'reviews',      component: ProjectReviewsComponent },
-      { path: 'sprints',      component: ProjectSprintsComponent },
-      { path: 'repositories',      component: ProjectRepositoryListComponent },
-      { path: 'repoevents/:account/:repoName',      component: RepoEventsComponent },
-      { path: '', component: ViewProjectDetailComponent },
+  //{ path: ':userId/myprojects',      component: MyProjectListComponent },
+ // { path: ':userId/projects',      component: MyProjectListComponent },
+  //{ path: 'projects',      component: ProjectListComponent },
+  //{ path: ':userId/addproject',      component: AddProjectComponent },
+  //{ path: ':userId/projects/:projectId/view',      component: ViewProjectComponent },
+  
+  { path: 'projects/all',      component: ProjectListComponent, canActivate:[AuthGuard] },
+  { path: 'projects',      component: MyProjectListComponent ,canActivate:[AuthGuard]},
+  { path: 'projects/addproject',      component: AddProjectComponent ,canActivate:[AuthGuard]},
+  // { path: 'projects/:projectId',      component: ViewProjectComponent, canActivate:[AuthGuard],
+  //   children: [
+  //     { path: 'features',      component: ProjectFeatureListComponent },
+  //     { path: 'addfeature/:moduleId',      component: AddProjectFeatureComponent },
+  //     { path: 'features/:featureId',      component: ViewProjectFeatureComponent }, 
+  //     { path: 'plan',      component: ProjectActivityListComponent },   
+  //     { path: 'tasks',      component: ProjectTasksComponent },
+  //     { path: 'reviews',      component: ProjectReviewsComponent },
+  //     { path: 'sprints',      component: ProjectSprintsComponent },
+  //     { path: 'repositories',      component: ProjectRepositoryListComponent },
+  //     { path: 'repoevents/:account/:repoName',      component: RepoEventsComponent },
+  //     { path: '', component: ViewProjectDetailComponent },
       
-  ]
-  },
-  { path: 'projects/:projectId',      component: ViewProjectComponent,
+  // ]
+  // },
+  { path: 'projects/:projectId',      component: ViewProjectComponent, canActivate:[AuthGuard],
   children: [
     { path: 'view',      component: ViewProjectDetailComponent },
     { path: 'features',      component: ProjectFeatureListComponent },

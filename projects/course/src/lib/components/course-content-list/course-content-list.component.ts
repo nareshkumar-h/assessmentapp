@@ -175,7 +175,7 @@ export class CourseContentListComponent implements OnInit {
 
 
   addContent(moduleId){    
-    this.router.navigate(['addcontent'],{relativeTo:this.route,queryParams:{}});
+    this.router.navigate(['../addcontent'],{relativeTo:this.route,queryParams:{}});
    //this.openDialog(contentType);
   }
 

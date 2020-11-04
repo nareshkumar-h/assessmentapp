@@ -34,6 +34,9 @@ import { GithubService } from './github.service';
 import { AddProjectActivityComponent } from './components/add-project-activity/add-project-activity.component';
 import { AddProjectSprintComponent } from './components/add-project-sprint/add-project-sprint.component';
 import { ViewProjectActivityComponent } from './components/view-project-activity/view-project-activity.component';
+import { FeatureTasksComponent } from './feature-tasks/feature-tasks.component';
+import { AddFeatureTaskComponent } from './add-feature-task/add-feature-task.component';
+import { MaterialModule } from 'projects/theme/src/lib/material.module';
 
 
 
@@ -49,13 +52,13 @@ import { ViewProjectActivityComponent } from './components/view-project-activity
       ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, ProjectRepositoryListComponent,
     RatingIconComponent,TravisBadgeComponent, 
     RepoEventsComponent, EventTypeBadgeComponent,ViewFilesCommittedComponent,
-     AddRepositoryComponent,  ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent
+     AddRepositoryComponent,  ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent
   ],
   imports: [
     CommonModule,HttpClientModule,FormsModule, ProjectRoutingModule, ThemeModule,
-    SidenavModule
+    SidenavModule, MaterialModule
   ],
-  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent],
+  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent],
   exports: [ProjectComponent,ProjectDashboardComponent,
     ProjectListComponent, ViewProjectComponent, MyProjectListComponent, 
     AddProjectComponent, ProjectFeatureListComponent, ProjectPlanComponent, ProjectTasksComponent, 

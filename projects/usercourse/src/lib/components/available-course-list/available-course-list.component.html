@@ -1,4 +1,5 @@
 <!-- <kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar> -->
+
 <div class="sidebar" >
     
     <ul class="nav sidebar-menus">
@@ -47,6 +48,7 @@
     </ul>
 </div>
 <kt-page title="Available Courses - {{selectedCategory}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+
     <!-- <div class="row d-none d-lg-flex" *ngIf="reportData">
             <div class="col-4" 
         *ngFor="let r of reportData;let i=index;">            
@@ -54,7 +56,7 @@
         </div>
     </div> -->
     <ng-template #loading>
-        <kt-progress-bar></kt-progress-bar>
+        <kt-loading-bar></kt-loading-bar>
     </ng-template>
     <section *ngIf="filteredCourses else loading">
 

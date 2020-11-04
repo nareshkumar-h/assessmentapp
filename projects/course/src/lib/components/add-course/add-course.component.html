@@ -1,3 +1,103 @@
+<kt-sidebar [menus]="menus"></kt-sidebar>
+<kt-page title="Add Course" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+
+      <mat-horizontal-stepper [linear]="isLinear" #stepper style="font-size: 16px">
+        <mat-step [stepControl]="courseFormGroup">
+          <form [formGroup]="courseFormGroup">
+            <ng-template matStepLabel>Course Details</ng-template>
+            <mat-form-field>
+              <mat-label>Code</mat-label>
+              <input matInput placeholder="Code" formControlName="code" required>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" formControlName="title" required>
+              </mat-form-field>
+            <div>
+              <!-- <button mat-button matStepperNext class="btn btn-primary">Next</button> -->
+              <button matStepperNext class="btn btn-primary" [disabled]="courseFormGroup.invalid">Next</button> 
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="categoryFormGroup" label="Category">
+          <form [formGroup]="categoryFormGroup">
+            <mat-form-field>
+              <mat-label>Category</mat-label>
+              <mat-select matInput formControlName="categoryId" placeholder="Category">
+                <mat-option *ngFor="let c of categories" [value]="c.id">
+                  {{c.name}}
+                </mat-option>
+              </mat-select>
+              
+            </mat-form-field>
+            <div>
+              <button matStepperPrevious class="btn btn-secondary">Back</button> &nbsp;&nbsp;
+              <button matStepperNext class="btn btn-primary"  [disabled]="categoryFormGroup.invalid">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button class="btn btn-secondary" matStepperPrevious>Back</button> &nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="finish()" [disabled]="courseFormGroup.invalid || categoryFormGroup.invalid">Finish</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+
+<!--       
+    <div class="row">
+        <div class="col-9">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    Add Course
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal"  [formGroup]="form" (submit)="save(course)">
+                        <div class="form-group row">
+                            <label for="code" class="control-label col-3"><strong>Code</strong></label>
+                            <div class="col">
+                                <input type="text" class="form-control input-lg" name="code" id="code" placeholder="Code(e.g:CS001)"
+                                    [(ngModel)]="course.code" name="code" required autofocus />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="title" class="control-label col-3"><strong>Title</strong></label>
+                            <div class="col">
+                                <input type="text" class="form-control input-lg" name="title" id="title" placeholder="Title"
+                                    [(ngModel)]="course.title" name="title" required autofocus />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="category" class="control-label col-3"><strong>Category</strong></label>
+                            <div class="col">
+                                <select name="category" class="form-control input-sm" placeholder="Category" id="category"
+                                    [(ngModel)]="course.category" required>
+                                    <option value="" selected disabled>Select Category</option>
+                                    <option [value]="category.id" *ngFor="let category of categories">{{category.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4 offset-3">
+                                <button mat-button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                            </div>
+                            <div class="col-4">
+                                <button mat-button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </div>
+        
+                    </form>
+                </div>
+            </div>
+        </div>
+ 
+    </div> -->
+</kt-page>
+
+<!--
 <mat-dialog-content class="mat-typography">
 
     <div class="row">
@@ -46,6 +146,7 @@
     </div>
 
 </mat-dialog-content>
+-->
 <!-- <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close (click)="close()">Cancel</button>
         <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="add()">Install</button>

@@ -1,7 +1,8 @@
-
 <div *ngIf="content">
     <pre class="pre-code" *ngIf="content.contentType=='C'">
-    <code [highlight]="content.content" [lang]="content.lang?content.language:'java'"></code>
+    <!-- <code [highlight]="content.content" [lang]="content.lang?content.language:'java'"></code> -->
+    <code [highlight]="content?.content" *ngIf="content.content" #x 
+    [lang]="content.lang?content.language:'java'" (highlighted)="onHighlight($event,x)"></code>
   </pre>
     <section *ngIf="content.contentType=='L'">
         <br />

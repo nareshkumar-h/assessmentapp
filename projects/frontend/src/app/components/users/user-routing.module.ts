@@ -11,6 +11,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { ListEmployeesComponent } from './list-employees/list-employees.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ViewUserComponent } from './view-user/view-user.component';
+import { MentorListComponent } from './mentor-list/mentor-list.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: '', component: ProfileComponent , data: {showSidebar:true}},
           
       { path: 'features', component: UserFeaturesComponent , data: {showSidebar:true}},
+      { path: 'mentors', component: MentorListComponent , data: {showSidebar:true}},
       { path: 'github', component: GithubComponent , data: {showSidebar:true}},
       { path: 'sonarcloud', component: SonarcloudComponent , data: {showSidebar:true}},
         ]

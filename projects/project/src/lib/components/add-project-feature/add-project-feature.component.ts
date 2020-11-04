@@ -50,7 +50,7 @@ export class AddProjectFeatureComponent implements OnInit {
 
   
   cancel(){
-    window.history.back();
+    this.dialog.closeAll();
   }
 
 }

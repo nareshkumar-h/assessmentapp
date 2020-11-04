@@ -37,7 +37,8 @@ export class AddCourseModuleComponent implements OnInit {
     console.log(module);
     this.courseService.addModule(this.courseId,module).subscribe( res=>{
       console.log(res);
-      this.router.navigate(['courses/'+ this.courseId]);
+      //this.router.navigate(['courses/'+ this.courseId]);
+      window.history.back();
     });
   }
 

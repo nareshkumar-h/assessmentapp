@@ -1,0 +1,54 @@
+<div class="row" >
+    <div class="col">
+        <div class="card card-custom">
+            <div class="card-header card-blue">
+                <div class="card-title text-white">
+                    Tasks
+                </div>
+                <div class="tools pull-right">
+                    <button mat-button (click)="addTask()" class="btn btn btn-sm text-white">
+                       <i class="fa fa-plus "></i></button>  
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>    
+                            <th>Task Type</th>
+                            <th width="40%">Task Name</th>
+                            <th>Estimation(Hrs)</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            <th>Sprint</th> 
+                            <th>Developed By</th>                                                               
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i=index;let t of projectTasks">
+                            <td>{{i+1}}</td>             
+                            <td> <span class="badge badge-primary">Feature</span> </td>                   
+                            <td>{{t.name}}</td>
+                            <td>{{t.estimation}}</td>
+                            <td>{{t.startDate}}</td>
+                            <td>{{t.completionDate}}</td>
+                            <td>{{t.status}}</td>
+                            <td>{{t.sprintNo}}</td>
+                            <td>{{t.assignedTo}}</td>
+                            <td>
+                                <button *ngIf="t.status=='ASSIGNED'" (click)="updateStatus(t.id,'STARTED')" class="btn btn-info" > Start</button> &nbsp;
+                                
+                                <button *ngIf="t.status=='IN_PROGRESS'" (click)="updateStatus(t.id,'COMPLETED')" class="btn btn-success" > Completed</button>
+                                &nbsp;
+                                <button  (click)="deleteTask(t.id)" class="btn btn-danger btn-sm" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -38,6 +38,7 @@ export class ViewUserComponent implements OnInit {
     this.menus.push( {title: "Profile",  path:["../" + this.userId+"/profile"], icontype:"fas fa-home", access: true});
     this.menus.push( {title: "Academics",  path:[ "../"+ this.userId + "/academics"], icontype:"fas fa-graduation-cap", access: true});
     this.menus.push( {title: "Features",  path:[ "../"+ this.userId + "/features"], icontype:"fas fa-flag", access: true});
+    this.menus.push( {title: "Mentors",  path:[ "../"+ this.userId + "/mentors"], icontype:"fas fa-user", access: true});
     // this.menus.push( {title: "Change Password",  path:[ "../"+ this.userId + "/changePassword"], icontype:"fas fa-key", access: true});
     
   }

@@ -86,7 +86,7 @@ export class CategoryListComponent implements OnInit {
 
   openDialog(){
     
-    const dialogRef = this.dialog.open(AddCategoryComponent,{ width:"600px"});
+    const dialogRef = this.dialog.open(AddCategoryComponent,{ width:"800px"});
     
     dialogRef.afterClosed().subscribe(result => {    
       this.list();

@@ -19,8 +19,10 @@ export class MyProjectListComponent implements OnInit {
 
   constructor(private projectService:ProjectService, private authService:AuthService, private route:ActivatedRoute, private router:Router) { 
     this.loggedInUserId = this.authService.getLoggedInUsername();
+    this.userId = this.authService.getSelectedUser();
      this.route.params.subscribe ( params=>{
-       this.userId = params["userId"];
+      // this.userId = params["userId"];
+      
      });
   }
 
@@ -71,10 +73,11 @@ export class MyProjectListComponent implements OnInit {
 
   loadMenus(){
     this.menus = [];
-    this.menus.push( {title: "Back",  path:["../../dashboard"], icontype:"fas fa-arrow-left", access: true});
+    this.menus.push( {title: "Home",  path:["../projects"], icontype:"fas fa-home", access: true});
     
-    this.menus.push( {title: "My Projects",  path:["../myprojects"], icontype:"fas fa-user", access: true});
-    this.menus.push( {title: "All Projects",  path:[ "../../projects"], icontype:"fas fa-tools", access: true});    
+    this.menus.push( {title: "My Projects",  path:["../projects"], icontype:"fas fa-user", access: true});
+    this.menus.push( {title: "All Projects",  path:[ "../projects/all"], icontype:"fas fa-tools", access: true});    
+    this.menus.push( {title: "Add Project",  path:[ "addproject"], icontype:"fas fa-plus", access: true});    
     
     
   }

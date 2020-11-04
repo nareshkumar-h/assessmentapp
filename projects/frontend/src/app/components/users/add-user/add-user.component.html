@@ -26,6 +26,15 @@
                                 <td width="70%"><input type="email" [(ngModel)]="user.email" name="email" required  /></td>
                             </tr>
                             <tr>
+                                <th width="30%">Role</th>
+                                <td width="70%">
+                                    <select [(ngModel)]="user.role" name="role" required  >
+                                        <option value="U">User</option>
+                                        <option value="T">Trainer</option>
+                                        </select>
+                                    </td>
+                            </tr>
+                            <tr>
                                 <th></th>
                                <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
                                 <button type="reset" class="btn btn-danger">Cancel</button>

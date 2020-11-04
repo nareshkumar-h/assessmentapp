@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Sidebar:" + JSON.stringify(this.menus));
+   // console.log("Sidebar:" + JSON.stringify(this.menus));
   }
 
   ps:any;

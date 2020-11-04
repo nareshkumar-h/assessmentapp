@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CourseService } from '../../course.service';
 import { CategoryService } from '../../category.service';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-course',
@@ -14,14 +15,26 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddCourseComponent implements OnInit {
 
+  isLinear = false;
+  courseFormGroup: FormGroup;
+  categoryFormGroup: FormGroup;
   
   breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
    {"name":"Courses"}];
    
-  constructor(public dialog: MatDialog,private courseService:CourseService,private categoryService:CategoryService, private router:Router,
+  constructor(private _formBuilder: FormBuilder,public dialog: MatDialog,private courseService:CourseService,private categoryService:CategoryService, private router:Router,
     private toastr:ToastrService) { }
 
   ngOnInit(): void {
+    this.courseFormGroup = this._formBuilder.group({
+      code: ['', Validators.required],
+      title: ['', Validators.required]
+    });
+    this.categoryFormGroup = this._formBuilder.group({
+      categoryId: ['', Validators.required]
+    });
+    
+    this.loadMenus();
     this.listCategories();
   }
 
@@ -33,6 +46,15 @@ export class AddCourseComponent implements OnInit {
     this.categoryService.list().subscribe(res=>{
       this.categories = res;
     });
+  }
+
+  finish(){
+    let course = {
+      ... this.courseFormGroup.value,
+      ... this.categoryFormGroup.value
+    }
+    console.log(course);
+    this.save(course);
   }
 
   save(course){
@@ -86,6 +108,16 @@ export class AddCourseComponent implements OnInit {
   close(){
     this.dialog.closeAll();
   }
+
+  menus:any;
+
+  loadMenus(){
+    this.menus = [];
+    this.menus.push( {title: "Back",  path:["../"], icontype:"fas fa-arrow-left",  access: true});
+    this.menus.push( {title: "Courses",  path:["/courses"], icontype:"fas fa-graduation-cap",  access: true});
+    this.menus.push( {title: "Categories",  path:["/categories"], icontype:"fas fa-book",  access: true});
+    this.menus.push( {title: "Add Course",  path:["/addcourse"], icontype:"fas fa-book",  access: true});
+  }  
 
 
 }

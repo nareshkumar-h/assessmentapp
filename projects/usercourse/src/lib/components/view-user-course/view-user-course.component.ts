@@ -258,8 +258,8 @@ export class ViewUserCourseComponent implements OnInit {
     this.menus.push( {title: "Curriculum",  path:["../"+ this.courseName], icontype:"fas fa-book-open",  access: true});
     this.menus.push( {title: "Topics",  path:["../" +this.courseName+"/topics"], icontype:"fas fa-leaf",  access: true});
     
-    this.menus.push( {title: "Contents",  path:["contents"], icontype:"fas fa-code",  access: this.enrolled});    
-    this.menus.push( {title: "Questions",  path:["questions"], icontype:"fas fa-question",  access: this.enrolled});
+    //this.menus.push( {title: "Contents",  path:["contents"], icontype:"fas fa-code",  access: this.enrolled});    
+    //this.menus.push( {title: "Questions",  path:["questions"], icontype:"fas fa-question",  access: this.enrolled});
     //this.menus.push( {title: "Settings",  path:["settings"], icontype:"fas fa-gear",  access: true});
   }  
 

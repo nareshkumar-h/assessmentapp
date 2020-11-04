@@ -26,8 +26,8 @@ export class CourseOverviewComponent implements OnInit {
   constructor(private courseService:CourseService, private router:Router, private route:ActivatedRoute,
     private toastr: ToastrService, public dialog: MatDialog) { 
 
-    this.route.params.subscribe ( params=>{
-      let courseCode = params["id"];
+    this.route.parent.params.subscribe ( params=>{
+      this.courseId = params["id"];
       
       //this.breadcrumbItems.push({"name": this.course.id});  
     });
@@ -37,13 +37,20 @@ export class CourseOverviewComponent implements OnInit {
 
   courseId:any;
   ngOnInit(): void {
-    
-    this.course = this.courseService.getCourse();
-    console.log('course', this.course);
-    this.courseId = this.course.code;
-    this.breadcrumbItems.push({"name": this.course.title});  
+    console.log(this.courseId);
+   // this.course = this.courseService.getCourse();
+   
+   // console.log('course', this.course);
+    //this.courseId = this.course.code;
+   // this.breadcrumbItems.push({"name": this.course.title});  
+   this.getCourse();
   }
 
+  getCourse(){
+    this.courseService.findOne(this.courseId).subscribe(res=>{
+      this.course = res;
+    });
+  }
 
     
   file:any;

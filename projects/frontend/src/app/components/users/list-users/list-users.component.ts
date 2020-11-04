@@ -42,7 +42,7 @@ export class ListUsersComponent implements OnInit {
   users:any ;
 
   list(){
-    this.userService.list().subscribe (res=>{
+    this.userService.listUsers().subscribe (res=>{
       this.users = res;
       this.dataSource = new MatTableDataSource<any>(this.users);
       
@@ -58,7 +58,7 @@ export class ListUsersComponent implements OnInit {
     this.menus = [];
     this.menus.push( {title: "Back",  path:["../"], icontype:"fas fa-arrow-left", access: true});
     this.menus.push( {title: "Users",  path:["../users"], icontype:"fas fa-users", access: true});
-    this.menus.push( {title: "Employees",  path:["../employees"], icontype:"fas fa-users", access: true});
+    //this.menus.push( {title: "Employees",  path:["../employees"], icontype:"fas fa-users", access: true});
     // this.menus.push( {title: "Courses",  path:[ "courses"], icontype:"fas fa-book-open", access: true});
     
   }

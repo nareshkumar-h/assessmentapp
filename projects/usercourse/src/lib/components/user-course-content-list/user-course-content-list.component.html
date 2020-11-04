@@ -1,21 +1,16 @@
-
+<div *ngIf="section">
+<h3 class="page-title" >{{section.sectionName}}</h3>
     <ng-template #loading>
-        <h3 class="page-title" >{{sectionName}}</h3>
         <kt-progress-bar></kt-progress-bar>
      </ng-template>
      <ng-template #norecords>
-        <h3 class="page-title" >{{sectionName}}</h3>
         <div class="row">
             <div class="col m-5">             
-        No content </div></div>
+        No records </div></div>
      </ng-template>
-    <div *ngIf="lectures;else loading" >
-    <div *ngIf="lectures && lectures.length>0; else norecords" (keydown.ArrowLeft)="previousPage(pageNo)" (keydown.ArrowRight)="nextPage(pageNo)">
-        <div class="row">
-            <div class="col">
-                <h3 class="page-title">  {{currentLecture.title}}</h3>
-            </div>
-        
+    <div *ngIf="sectionContents;else loading" >
+    <div *ngIf="sectionContents && sectionContents.length>0; else norecords" (keydown.ArrowLeft)="previousPage(pageNo)" (keydown.ArrowRight)="nextPage(pageNo)">
+        <div class="row">             
         <div class="col text-right mr-3">
 
             Page - <input type="number" [(ngModel)]="pageNo" name="pageNo" value="{{pageNo}}" min="1"
@@ -33,14 +28,14 @@
             </button>
 
             &nbsp;&nbsp;
-            <button (click)="update(currentLecture.id,'C')" class="btn btn-success btn-sm">
+            <button (click)="update(lectureContent.id,'C')" class="btn btn-success btn-sm">
                 <i class="fas fa-check" aria-hidden="true"></i> 
                 Mark as Completed</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                 <button (click)="update(currentLecture.id,'S')" class="btn btn-danger btn-sm">                                
+                 <button (click)="update(lectureContent.id,'S')" class="btn btn-danger btn-sm">                                
                     Skip</button> 
                  </div>
                 </div>
-       
+                <br/>
         <div class="row" >
             <ng-template #norecords>
                 <div class="col">
@@ -48,25 +43,25 @@
                 </div>
             </ng-template>
             
-            <div class="col" *ngIf="contents; else norecords">
+            <div class="col" *ngIf="lectureContent; else norecords">
                 
-                <div class="card card-custom glutter-b" *ngFor="let obj of contents" >
+                <div class="card card-custom glutter-b"  >
                     <div class="card-header card-blue">
                         <div class="card-title">
                             <div class="card-label text-white">
-                                {{obj?.title}}
+                               #{{lectureContent.id}} - {{lectureContent?.title}}
                               
                                 <!-- <small *ngIf="c.content">( Duration : ~{{c.duration}} mins)</small> -->
-                                <a *ngIf="obj.contentType=='C'" (click)="callServiceToCopy(obj.content)" class="btn btn btn-sm"><i
+                                <a *ngIf="lectureContent.contentType=='C'" (click)="callServiceToCopy(lectureContent.content)" class="btn btn btn-sm"><i
                                     class="fas fa-clipboard"></i></a>
                             </div>
                         </div>                      
                     </div>
                     <div class="card-body" >                        
-                        <ct-view-content [content]="obj"></ct-view-content>
+                        <ct-view-content [content]="lectureContent"></ct-view-content>
                     </div>
                     <div class='card-footer' >
-                        Tags: <span *ngFor="let t of obj.tags"><span class="badge badge-info">{{t}}</span>&nbsp;</span>
+                        Tags: <span *ngFor="let t of lectureContent?.tags"><span class="badge badge-info">{{t}}</span>&nbsp;</span>
                     </div>
                 </div>
 
@@ -76,3 +71,4 @@
     </div>
 </div>
 
+</div>

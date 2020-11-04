@@ -9,7 +9,7 @@
     </div>
     
     <ng-template #loading>
-       <kt-progress-bar></kt-progress-bar>
+       <kt-loading-bar></kt-loading-bar>
     </ng-template>
     
     <div *ngIf="modules else loading">
@@ -28,27 +28,52 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-    
-                                <th width="60%">Topic</th>
-                                <th class="d-none d-lg-block">Completion Date</th>
-                                <th>Action</th>
+                                
+                                <th width="50%">Topic</th>
+                                <th>Assigned Date</th>
+                                <th>Completion Date</th>                                
+                                <th *ngIf="userType!='U'">Review Status</th>
+                                <th *ngIf="userType!='U'">Reviewed By</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr *ngFor="let j=index;let t of m.topics">
-                                <td> <input type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
-                                    (change)="updateStatus(t, topicCheckbox.checked)" /> </td>                                
+                        <tbody >
+                            <ng-container *ngFor="let j=index;let t of getTopics(m)">
+                            <tr>
+                                <td > 
+                                    <i class="fa fa-check" *ngIf="t.status=='C'" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil" *ngIf="t.status=='P'" aria-hidden="true"></i>
+                                    <input *ngIf="t.status!='C'" [disabled]="userType=='M' || userType=='U'" type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
+                                    (change)="updateStatus(t, topicCheckbox.checked)" 
+                                    /> </td>   
+                                <!-- <td *ngIf="userType=='M'">{{t.code}}</td>                                                            -->
                                 <td>
                                     <font [color]="getColor(t)"> {{t.name}} </font>
+                                    
                                 </td>
-                                <td class="d-none d-lg-block">{{t.completionDate}}</td>
+                                <td class="">{{t.lectureDate}}</td>    
+                                <td class="">{{t.completionDate}}</td>    
+                                                            
+                                <td *ngIf="userType!='U'">
+                                    <i class="fa fa-check-circle " *ngIf="t.reviewStatus=='A'" style="color:green" aria-hidden="true"></i>
+                                    <i class="fa fa-ban " *ngIf="t.reviewStatus=='R'" style="color:red" aria-hidden="true"></i>
+                                <button *ngIf="t.status=='C' &&  t.reviewStatus=='P'"  class="btn btn-info btn-sm" (click)="topicReviewStatus(t,'A')">Approve</button> &nbsp;
+                                <button *ngIf="t.status=='C' && t.reviewStatus=='P'"  class="btn btn-danger btn-sm" (click)="topicReviewStatus(t,'R')">Reject</button>
+                                <button *ngIf="t.status!='C' && !t.lectureDate"  class="btn btn-primary btn-sm" (click)="assignTopic(t)">Assign </button>
+                            </td>
                                 <td>
                                     <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info"> Send</button>
                                     <button *ngIf="t.topicSentOn!=null" class="btn btn-success btn-sm"> 
                                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                         </button> 
+                                        <button *ngIf="t.status !='C'" class="btn btn-danger btn-sm"> 
+                                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                            Recap
+                                            </button> 
+                                  
                                 </td>
                             </tr>
+                        </ng-container>
                         </tbody>
                     </table>
     

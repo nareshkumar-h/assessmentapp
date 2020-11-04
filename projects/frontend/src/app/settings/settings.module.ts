@@ -23,7 +23,7 @@ import { RolesComponent } from './roles/roles.component';
     DomainComponent,
     MailComponent,
     FeaturesComponent,
-    SlackComponent,
+    SlackComponent,    
     RolesComponent],
   imports: [
     CommonModule,FormsModule,RouterModule,ThemeModule, SettingsRoutingModule

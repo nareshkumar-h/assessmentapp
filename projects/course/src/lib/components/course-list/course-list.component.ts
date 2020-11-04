@@ -119,6 +119,7 @@ export class CourseListComponent implements OnInit {
     this.menus.push( {title: "Back",  path:["../"], icontype:"fas fa-arrow-left",  access: true});
     this.menus.push( {title: "Courses",  path:["/courses"], icontype:"fas fa-graduation-cap",  access: true});
     this.menus.push( {title: "Categories",  path:["/categories"], icontype:"fas fa-book",  access: true});
+    this.menus.push( {title: "Add Course",  path:["/addcourse"], icontype:"fas fa-book",  access: true});
   }  
 
   move(index, action){

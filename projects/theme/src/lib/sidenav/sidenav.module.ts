@@ -2,13 +2,12 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
-
+import {MetismenuAngularModule} from '@metismenu/angular';
 
 @NgModule({
   declarations: [SidebarComponent],
   imports: [
-    CommonModule,RouterModule
+    CommonModule,RouterModule,MetismenuAngularModule
   ],
   exports:[
     SidebarComponent

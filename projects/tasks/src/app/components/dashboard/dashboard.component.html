@@ -1,0 +1,26 @@
+<kt-sidebar [menus]="menus"></kt-sidebar>
+<kt-page title="Dashboard" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+
+    <div class="row">
+        <div class="col">
+            <div class="card-deck">
+                <div class="card " *ngFor="let f of getFeatures()">
+                    <a routerLink="{{f.link}}" *ngIf="f.active">
+                        <img class="card-img-top" height="300" src="assets/img/{{f.image}}" alt=""></a>
+                    <img *ngIf="!f.active" class="card-img-top" height="300" src="assets/img/{{f.image}}" alt="">
+                    <div class="card-body">
+                        <button routerLink="{{f.link}}" [disabled]="!f.active" class="card-link btn btn-success">{{f.name}}
+                            <i *ngIf="!f.active" class="fas fa-lock    "></i>
+                        </button>
+                      </div>
+                </div>
+                <!-- <div class="card">
+                    <a routerLink="projectdashboard"><img class="card-img-top" height="300" src="assets/img/project1.png" alt=""></a>
+                    <div class="card-body">
+                        <a routerLink="../projectdashboard" class="card-link btn btn-info">Projects</a>
+                      </div>
+                </div>                -->
+        </div>
+    </div>
+</div>
+</kt-page>

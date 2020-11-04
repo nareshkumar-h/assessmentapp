@@ -15,6 +15,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 
 
 const routes: Routes = [
+  
   { path: ':learn/courses', component: UserCourseListComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} ,  
   { path:'learn/:courseId/:courseName', component:ViewUserCourseComponent,
   children:[
@@ -32,12 +33,13 @@ const routes: Routes = [
     {path: 'topics',      component: UserCourseTopicsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]} ,
     {path: 'settings',      component: CourseSettingsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]} ,
     { path: 'questions',      component: UserCourseQuestionsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]} ,
-    { path: 'contents',      component: UserCourseContentComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]} ,
     { path: 'sections/:sectionId/:sectionName',      component: UserCourseContentListComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]} 
-  ]}
- 
- 
- 
+  ]},
+  { path: ':userId/courses/:courseId/:courseName/contents',      component: UserCourseContentComponent , data:{menus:"viewcourse"}, 
+  canActivate:[AuthGuard],
+    children:[
+      {path: ':sectionId/:sectionName',      component: UserCourseContentListComponent , data:{menus:"viewcourse"} }
+    ]}
   
   ];
 

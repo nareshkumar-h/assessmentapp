@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name = 'KnowledgeTracker';
+
+  name = 'ProjectTracker';
   headerColor = '#2b3643';
   siteInfo:any;
 
@@ -16,6 +17,9 @@ export class AppComponent {
     this.user = this.getLoggedInUser();    
     this.isLoggedIn = this.user !=null;    
   }
+
+  selectedUser:any;
+
   ngOnInit(): void {
     let sites = {"theme1": {
       "bg1Color" : "#f2f2f2",

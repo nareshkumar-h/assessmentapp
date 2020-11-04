@@ -1,4 +1,4 @@
-<kt-page title="Add Question" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+<kt-page title="Add Question">    
     <div class="row">
         <div class="col-9">
             <div class="card card-custom">
@@ -21,7 +21,8 @@
                             </tr>
                             <tr>
                                 <th></th>
-                               <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                               <td>
+                                   <button type="submit" class="btn btn-success">Submit</button> &nbsp;                                   
                                 <button type="reset" (click)="cancel()" class="btn btn-danger">Cancel</button>
                             </td>
                             </tr>
@@ -32,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <!-- <div class="col-3">
             <div class="card card-custom" >
                 <div class="card-header card-blue">
                     Import Questions
@@ -59,6 +60,6 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </kt-page>

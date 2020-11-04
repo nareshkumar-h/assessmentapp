@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidenavModule, ThemeModule, CardModule } from 'projects/theme/src/public-api';
 import { NavbarModule } from 'angular-bootstrap-md';
 import { MaterialModule } from '../../material.module';
+import { MentorListComponent } from './mentor-list/mentor-list.component';
 
 
 
@@ -34,8 +35,8 @@ import { MaterialModule } from '../../material.module';
     UpdateAcademicsComponent,
     UserFeaturesComponent,
     GithubComponent,
-    SonarcloudComponent
-    
+    SonarcloudComponent,
+    MentorListComponent
     ],
   imports: [
     CommonModule, UserRoutingModule,FormsModule, HttpClientModule,MaterialModule,

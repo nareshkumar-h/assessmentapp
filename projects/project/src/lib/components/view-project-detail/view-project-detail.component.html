@@ -28,7 +28,10 @@
                                     <td class="hidden-xs">{{project.startDate}}</td>				
                                     <td class="hidden-xs">{{project.completionDate}}</td>														
                                     <td class="hidden-xs"><span class="badge badge-primary">{{project.status}}</span></td>				
-                                    <td class="hidden-xs"><a routerLink="../../projects/{{project.createdBy}}"> <i class="fa fa-user" aria-hidden="true"></i> {{project.createdBy}} </a> </td>
+                                    <td class="hidden-xs">
+                                        <!-- <a routerLink="../../projects/{{project.createdBy}}"> <i class="fa fa-user" aria-hidden="true"></i> {{project.createdBy}} </a>  -->
+                                        <i class="fa fa-user" aria-hidden="true"></i> &nbsp;{{project.createdBy}}
+                                    </td>
                                     <!-- <td>{{project.project.reviewerId}}</td> -->
                                     
                                     <td class="hidden-xs">
