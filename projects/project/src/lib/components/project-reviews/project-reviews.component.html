@@ -1,1 +1,96 @@
-<p>project-reviews works!</p>
+<kt-sidebar showSidebar="true">
+    <div class="nav-item">
+
+        <a class="nav-link" routerLink="../">
+            <i class="fa fa-arrow-left"> &nbsp;&nbsp; </i>
+            <span class="title">Back</span>
+        </a>
+      <a class="nav-link">
+            <i class=""> &nbsp;&nbsp; </i>
+            <span class="title">Pending</span>
+       </a>
+      
+    </div>
+
+</kt-sidebar>
+<kt-page title="Projects Reviews" showSidebar="true">
+
+   
+    <div class="row" *ngIf="reportData">
+        <div class="col-3" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+    <ng-container *ngIf="reviews else loading">
+        
+        
+    <div class="row">
+        <div class="col-12">
+            
+            <div class="mat-elevation-z8">
+                
+                <table mat-table matSort (matSortChange)="sortData($event)"  matSortStart="desc" [dataSource]="dataSource" style="width: 100%;">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef width="5%"> Sno </th>
+                        <td mat-cell *matCellDef="let obj;let i=index"> {{i+1}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="projectName">
+                        <th mat-header-cell *matHeaderCellDef width="20%"> Feature Name </th>
+                        <td mat-cell *matCellDef="let obj">  {{obj.name}} ( {{obj.project.name}} )</td>
+                    </ng-container>
+                    <ng-container matColumnDef="featureName">
+                        <th mat-header-cell *matHeaderCellDef width="30%" mat-sort-header> Description</th>
+                        <td mat-cell *matCellDef="let obj">
+                            
+                            <div [innerHTML]="obj.description"></div>
+                            </td>
+                    </ng-container>                   
+                    <ng-container matColumnDef="priority">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Priority</th>
+                        <td mat-cell *matCellDef="let obj">
+                            {{obj.priority}}
+                            </td>
+                    </ng-container>
+                    <ng-container matColumnDef="createdBy">
+                        <th mat-header-cell *matHeaderCellDef width="10%" > Developed By </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.createdBy}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="requestedDate">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Requested Date</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            {{obj.modifiedDate | moment}}
+                             </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Status</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            {{obj.status}}
+                             </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Actions</th>
+                        <td mat-cell *matCellDef="let obj">
+                            <a routerLink="{{obj.id}}" mat-raised-button color="primary"
+                                class="btn btn-success btn-sm text-white">
+                                View </a> &nbsp;
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                    <tr mat-row *matRowDef="let row;columns: displayedColumns"></tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br /><br />
+    </div>
+    </ng-container>
+</kt-page>

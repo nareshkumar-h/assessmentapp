@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProjectComponent } from './project.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ViewProjectComponent } from './components/view-project/view-project.component';
@@ -37,6 +37,18 @@ import { ViewProjectActivityComponent } from './components/view-project-activity
 import { FeatureTasksComponent } from './feature-tasks/feature-tasks.component';
 import { AddFeatureTaskComponent } from './add-feature-task/add-feature-task.component';
 import { MaterialModule } from 'projects/theme/src/lib/material.module';
+import { EditFeatureTaskComponent } from './components/edit-feature-task/edit-feature-task.component';
+import { ViewProjectReviewRatingComponent } from './components/view-project-review-rating/view-project-review-rating.component';
+import { ReviewFeatureComponent } from './components/review-feature/review-feature.component';
+import { ViewProjectRatingComponent } from './components/view-project-rating/view-project-rating.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { ViewUserStoryComponent } from './components/view-user-story/view-user-story.component';
+import { ReviewRatingFormComponent } from './components/review-rating-form/review-rating-form.component';
+import { UserRatingReportComponent } from './components/user-rating-report/user-rating-report.component';
+import { UserFeatureRatingReportComponent } from './components/user-feature-rating-report/user-feature-rating-report.component';
+import { ViewUserRatingReportComponent } from './components/view-user-rating-report/view-user-rating-report.component';
+import { ProjectSkillsComponent } from './components/project-skills/project-skills.component';
+import { EditUserFeatureRatingReportComponent } from './components/edit-user-feature-rating-report/edit-user-feature-rating-report.component';
 
 
 
@@ -52,20 +64,21 @@ import { MaterialModule } from 'projects/theme/src/lib/material.module';
       ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, ProjectRepositoryListComponent,
     RatingIconComponent,TravisBadgeComponent, 
     RepoEventsComponent, EventTypeBadgeComponent,ViewFilesCommittedComponent,
-     AddRepositoryComponent,  ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent
+     AddRepositoryComponent,  ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent, UserRatingReportComponent, UserFeatureRatingReportComponent, ViewUserRatingReportComponent, ProjectSkillsComponent, EditUserFeatureRatingReportComponent
   ],
   imports: [
     CommonModule,HttpClientModule,FormsModule, ProjectRoutingModule, ThemeModule,
     SidenavModule, MaterialModule
   ],
-  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent],
+  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent,EditFeatureTaskComponent],
   exports: [ProjectComponent,ProjectDashboardComponent,
     ProjectListComponent, ViewProjectComponent, MyProjectListComponent, 
     AddProjectComponent, ProjectFeatureListComponent, ProjectPlanComponent, ProjectTasksComponent, 
     ProjectActivitiesComponent, ProjectActivityListComponent, ViewProjectFeatureComponent, AddProjectFeatureComponent, ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, ProjectRepositoryListComponent,
     RatingIconComponent,TravisBadgeComponent, RepoEventsComponent, EventTypeBadgeComponent,
-    ViewFilesCommittedComponent, AddRepositoryComponent
-  ]
+    ViewFilesCommittedComponent, AddRepositoryComponent,ViewProjectRatingComponent,UserRatingReportComponent,EditUserFeatureRatingReportComponent
+  ],
+  schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProjectModule {
   static forRoot(config: Config): ModuleWithProviders<ProjectModule> {    

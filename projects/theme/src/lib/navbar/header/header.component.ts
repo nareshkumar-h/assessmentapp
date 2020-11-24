@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SwitchUserComponent } from '../../components/switch-user/switch-user.component';
 
 @Component({
   selector: 'kt-header',
@@ -7,20 +9,25 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router) { 
+  constructor(private router:Router, public dialog: MatDialog) { 
     //console.log('HeaderComponent constructor', this.user);
     
   }
 
+  @Input()
+  users:any;
+
   isMentor = false;
   selectedUser: any;
+  searchUser:string;
+  loggedInUsername:any;
   ngOnInit(): void {
 
     //console.log("Menus:" , this.menus);
     //console.log("BgColor", this.bgColor);
     this.bgColor = this.bgColor || "#2b3643";
-    this.selectedUser = localStorage.getItem("SELECTED_USER");
-    console.log(this.user);
+    this.loggedInUsername = JSON.parse(localStorage.getItem("LOGGED_IN_USER")).username;
+    this.selectedUser = localStorage.getItem("SELECTED_USER");    
     this.isMentor = this.user ? this.user.roles.indexOf("T") != -1: false;
     
   }
@@ -29,14 +36,32 @@ export class HeaderComponent implements OnInit {
 
   switchUser(selectedUser){
     console.log(selectedUser);
+    console.log("search user", this.searchUser);
     this.selectedUser = selectedUser;
-    
-    let cfm = confirm("Do you want to switch user - " + this.selectedUser + " ?");
-    if(cfm){
-      localStorage.setItem("SELECTED_USER", this.selectedUser);
-      window.location.reload();
-    } 
+    if (selectedUser){
+      let cfm = confirm("Do you want to switch user - " + this.selectedUser + " ?");
+      if(cfm){
+        localStorage.setItem("SELECTED_USER", this.selectedUser);
+        //window.location.reload();
+        this.router.navigate(['home']);
+      } 
+    }
+    else{
+      this.clearUser();
+    }
   }
+
+  clearUser(){
+    console.log(this.loggedInUsername);
+    localStorage.setItem("SELECTED_USER", this.loggedInUsername);
+    window.location.reload();
+  }
+
+  isExists(user){
+    console.log("user", user);
+    return this.users.indexOf(user) != -1;
+  }
+  
 
   clearSwitchUser(){
     var selectedUsername = prompt("Enter username");
@@ -47,7 +72,20 @@ export class HeaderComponent implements OnInit {
         localStorage.setItem("SELECTED_USER", selectedUsername);
         window.location.reload();
       }
+      else{
+        localStorage.setItem("SELECTED_USER", this.loggedInUsername);
+        window.location.reload();
+      }
     
+  }
+
+  switchUserDialog(userId){
+    const dialogRef = this.dialog.open(SwitchUserComponent,
+      {width: '800px', height:'fit-content', data: {userId: userId}});
+    
+    dialogRef.afterClosed().subscribe(result => {
+      //this.refresh();
+    });
   }
 
   @Input()

@@ -1,13 +1,15 @@
-<div class="row" >
+<div class="row" *ngIf="feature">
     <div class="col">
-        <div class="card card-custom">
+        <div class="card card-custom gutter-b">
             <div class="card-header card-blue">
                 <div class="card-title text-white">
-                    Tasks
+                    {{title}} ( {{projectTasks.length}} )
                 </div>
                 <div class="tools pull-right">
-                    <button mat-button (click)="addTask()" class="btn btn btn-sm text-white">
-                       <i class="fa fa-plus "></i></button>  
+                    <!-- <button  *ngIf="taskType!='BUG'" (click)="addTaskDialog('TASK')" class="btn btn-success btn-sm text-white">
+                       <i class="fa fa-plus" aria-hidden="true"></i> Task</button>   &nbsp; -->
+                       <button *ngIf="taskType=='BUG'" (click)="addTaskDialog('BUG')" class="btn btn-danger btn-sm text-white">
+                        <i class="fa fa-plus" aria-hidden="true"></i>  Testing</button>   &nbsp;
                 </div>
             </div>
             <div class="card-body">
@@ -15,34 +17,61 @@
                     <thead>
                         <tr>
                             <th>#</th>    
-                            <th>Task Type</th>
-                            <th width="40%">Task Name</th>
+                            <th>Category</th>
+                            <th width="30%">Task Name</th>
                             <th>Estimation(Hrs)</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <!-- <th>Start Date</th>-->
+                            <!-- <th>Completion Date</th>  -->
                             <th>Status</th>
                             <th>Sprint</th> 
-                            <th>Developed By</th>                                                               
+                            <th>Assigned To</th>  
+                            <th>Created By</th>                                                             
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let i=index;let t of projectTasks">
-                            <td>{{i+1}}</td>             
-                            <td> <span class="badge badge-primary">Feature</span> </td>                   
-                            <td>{{t.name}}</td>
+                            <!-- <td>{{i+1}}</td>    -->
+                            <td *ngIf="t.status!='COMPLETED'">
+                                <input  type="checkbox" #topicCheckbox [checked]="t.status=='COMPLETED'" name="topic"
+                                (change)="updateTaskStatus(t, topicCheckbox.checked)" /> 
+                            </td>
+                            <td *ngIf="t.status=='COMPLETED'">
+                                <i  class="fa fa-check" aria-hidden="true" *ngIf="t.status=='COMPLETED'"></i>
+ 
+                            </td>          
+                            <td> <span class="badge badge-primary">{{t.category}}</span> </td>                   
+                            <td>
+                               
+                                {{t.name}}</td>
                             <td>{{t.estimation}}</td>
-                            <td>{{t.startDate}}</td>
-                            <td>{{t.completionDate}}</td>
+                            <!-- <td>{{t.startDate}}</td>-->
+                            <!-- <td>{{t.completionDate}}</td> -->
                             <td>{{t.status}}</td>
                             <td>{{t.sprintNo}}</td>
                             <td>{{t.assignedTo}}</td>
+                            <td>{{t.createdBy}}</td>
                             <td>
-                                <button *ngIf="t.status=='ASSIGNED'" (click)="updateStatus(t.id,'STARTED')" class="btn btn-info" > Start</button> &nbsp;
+                                <button *ngIf="t.status !='COMPLETED'" (click)="editTaskDialog(t)" class="btn btn-info btn-sm">                                    
+                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                </button>  &nbsp;
+
+                                <button *ngIf="t.status=='PENDING'" (click)="updateStatus(t.id,'IN_PROGRESS')" class="btn btn-info btn-sm" > Start</button> &nbsp;
                                 
-                                <button *ngIf="t.status=='IN_PROGRESS'" (click)="updateStatus(t.id,'COMPLETED')" class="btn btn-success" > Completed</button>
+                                <button *ngIf="t.status=='IN_PROGRESS'" (click)="updateStatus(t.id,'COMPLETED')" class="btn btn-success btn-sm" > 
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button> &nbsp;
                                 &nbsp;
-                                <button  (click)="deleteTask(t.id)" class="btn btn-danger btn-sm" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button *ngIf="isMentor && t.status=='COMPLETED'" (click)="updateStatus(t.id,'ACCEPTED')" class="btn btn-success btn-sm" > 
+                                    
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button> &nbsp;
+                                    <button *ngIf="isMentor && t.status=='COMPLETED'" (click)="updateStatus(t.id,'IN_PROGRESS')" class="btn btn-danger btn-sm" > 
+                                        Reject                                        
+                                        </button> &nbsp;
+                                &nbsp;
+                                <!-- <button *ngIf="t.category !='BUG'" (click)="deleteTask(t.id)" class="btn btn-danger btn-sm" ><i class="fa fa-trash " aria-hidden="true"></i></button>  -->
+                                
                             </td>
                         </tr>
                     </tbody>

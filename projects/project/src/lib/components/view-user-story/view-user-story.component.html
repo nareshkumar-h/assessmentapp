@@ -1,0 +1,25 @@
+
+<div class="card card-custom gutter-b">
+    <div class="card-header card-blue">
+        <div class="card-title text-white">
+            {{projectName}} - {{feature.name}}
+        </div>          
+        <div class="tools pull-right">
+            <button *ngIf="isMentor" class="btn btn-sm text-white" (click)="mode='edit'"> <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>    &nbsp;               
+        </div>                            
+    </div>
+    <div class="card-body">
+         <p class="feature-description" *ngIf="mode=='edit'">            
+            <textarea rows="5" cols="100" [(ngModel)]="feature.description" name="description"></textarea>
+            <br/>
+            <button type="button" (click)="updateDescription()" class="btn btn-success">Update</button> &nbsp;
+            <button type="button" (click)="mode='view'" class="btn btn-danger">Cancel</button>
+        </p> 
+
+        <p  *ngIf="mode!='edit'" class="feature-description" [innerHTML]="feature.description">
+
+        </p>                                          
+    </div>     
+                                 
+</div>
+

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { SiteService } from '../../../site.service';
+import { SiteService } from '../../site.service';
+
 import { EmployeeService } from '../employee.service';
 
 

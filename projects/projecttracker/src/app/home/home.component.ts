@@ -14,9 +14,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.isLoggedIn()){
-      this.router.navigate(['projects']);
+      if(this.authService.hasRoleAccess('T')){
+        this.router.navigate(['projects/all']);
+      }
+      else{
+        this.router.navigate(['projects']);
+      }
     }
     else{
+      
       this.router.navigate(['auth/login'],{queryParams:{"redirectUrl":"projects"}});
     }
   }

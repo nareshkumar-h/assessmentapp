@@ -11,7 +11,8 @@ import { MaterialModule } from 'projects/theme/src/lib/material.module';
 import { ThemeModule } from 'projects/theme/src/public-api';
 import { ProjectdashboardComponent } from './projectdashboard/projectdashboard.component';
 import { HomeComponent } from './home/home.component';
-import { UsersModule } from 'projects/frontend/src/app/components/users/users.module';
+import { UsersModule } from 'projects/users/src/public-api';
+
 
 @NgModule({
   declarations: [
@@ -20,11 +21,11 @@ import { UsersModule } from 'projects/frontend/src/app/components/users/users.mo
     HomeComponent
   ],
   imports: [
-    BrowserModule,
-    AuthModule.forRoot({API_ENDPOINT:environment.API_URL,USER_TYPE:'U', ORG_ID:environment.ORG_ID}),
+    BrowserModule,    
     ThemeModule, MaterialModule, NavbarModule,   
     ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    UsersModule,
+    UsersModule.forRoot({API_ENDPOINT:environment.API_URL}),
+    AuthModule.forRoot({API_ENDPOINT:environment.API_URL,USER_TYPE:'U', ORG_ID:environment.ORG_ID}),
     AppRoutingModule
   ],
   providers: [],

@@ -3,6 +3,7 @@ import { ProjectService } from '../../project.service';
 import { ActivatedRoute } from '@angular/router';
 
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-project-sprints',
@@ -17,7 +18,7 @@ export class ProjectSprintsComponent implements OnInit {
   breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
    {"name":"Projects",link:""}];
 
-  constructor(private projectService: ProjectService, private route: ActivatedRoute) {
+  constructor(private toastr:ToastrService, private projectService: ProjectService, private route: ActivatedRoute) {
     this.route.parent.params.subscribe(params => {
       this.projectId = params['projectId'];
     });
@@ -26,6 +27,7 @@ export class ProjectSprintsComponent implements OnInit {
   ngOnInit(): void {
     this.findOne();
     this.list();
+    this.loadSprintTasks();
   }
 
   projectTasks: any;
@@ -38,11 +40,48 @@ export class ProjectSprintsComponent implements OnInit {
     });
   }
 
+  projectSprints;
   list() {
     this.projectService.listSprints(this.projectId).subscribe(res => {
-      this.projectTasks = <{}>res;
-      this.createReport(this.projectTasks);
+      this.projectSprints = res;
+      //this.createReport(this.projectTasks);
     });
+  }
+
+  loadSprintTasks() {
+    this.projectService.listSprintTasks(this.projectId).subscribe(res => {
+      this.projectTasks = <{}>res;
+      this.createReport(this.projectTasks);      
+    });
+  }
+
+  getSprintTasks(sprintNo){
+    let sprint =""+ sprintNo;
+    return this.projectTasks[sprintNo];
+  }
+
+  today = new Date();
+
+  getColor(topic) {
+    let color = "";
+    if ( topic.status =='PENDING' ){
+      color ='red';
+    }
+    else if ( topic.status =='IN_PROGRESS' ){
+      color ='lightorange';
+    }
+    
+    return color;
+  }
+
+  updateStatus(task,checked){
+    let status = checked ? "COMPLETED":"PENDING";
+    console.log(status);
+    this.projectService.updateTaskStatus(task.projectFeature.id,task.id,status).subscribe(res=>{
+      this.toastr.success("Task Status Updated");
+      task.status=status;
+      
+    })
   }
 
 
@@ -80,5 +119,18 @@ export class ProjectSprintsComponent implements OnInit {
     this.reportData.push({"label":"Percentage(%)", "value": percentage});
   }
 
+  getFeatureStats(data){
+
+    let resultData = _.groupBy(data, obj=>obj.projectFeature.name);
+    let resultMap = {};
+    for(let key of Object.keys(resultData)){
+      let value = resultData[key];
+      console.log(JSON.stringify(value));
+      resultMap[key] = _.countBy(value, obj=>obj.status);
+    }
+    console.log(JSON.stringify(resultMap))
+    return resultMap;
+    
+  }
 
 }

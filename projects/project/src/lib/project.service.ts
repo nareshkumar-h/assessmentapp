@@ -18,7 +18,7 @@ export class ProjectService {
   
   getHeaders(){    
     let headers = new HttpHeaders();
-    headers = headers.set('org', this.authService.getLoggedInOrg());
+    //headers = headers.set('org', this.authService.getLoggedInOrg());
     return headers;
   }
 
@@ -26,14 +26,45 @@ export class ProjectService {
   
 
   list(){
-    let username = this.authService.getLoggedInUsername();
-    let url = `${this.apiUrl}v1/projects?userId=${username}`;
+    let url = `${this.apiUrl}v1/projects`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
-  findMyProjects(userId){
-    let url = `${this.apiUrl}v1/userprojects/users/${userId}`;
+  listUserRatings(){
+    let url = `${this.apiUrl}v1/ratings/userratings`;
+    return this.http.get(url);
+  }
+
+  
+  listUserRatingsForUser(userId){
+    let url = `${this.apiUrl}v1/ratings/userratings/${userId}`;
+    return this.http.get(url);
+  }
+
+  listUserFeatureRatingsForUser(userId){
+    let url = `${this.apiUrl}v1/ratings/userratings/users/${userId}`;
+    return this.http.get(url);
+  }
+
+  listReviewRatings(){
+    let url = `${this.apiUrl}v1/projectreviews`;
     return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  getFeatureReviewRating(featureId){
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/review`;
+    return this.http.get(url,{headers:this.getHeaders()});
+  }
+
+  updateFeatureReviewRating(featureId, ratingData){
+    ratingData["reviewedBy"] = this.authService.getLoggedInUsername();
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/review`;
+    return this.http.patch(url,ratingData,{headers:this.getHeaders()});
+  }
+
+  findMyProjects(userId){
+    let url = `${this.apiUrl}v1/projects?userId=${userId}`;
+    return this.http.get(url);
   }
 
   findOne(id){
@@ -51,6 +82,21 @@ export class ProjectService {
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
+  createRepo(repo){
+    let url = `${this.apiUrl}v1/projectrepositories`;
+    return this.http.post(url,repo, {headers:this.getHeaders()});
+  }
+
+  deleteRepo(id){
+    let url = `${this.apiUrl}v1/projectrepositories/${id}?status=false`;
+    return this.http.patch(url,null, {headers:this.getHeaders()});
+  }
+
+  addRepoAccess(repoId, username){
+    let url = `${this.apiUrl}v1/projectrepositories/${repoId}/users?username=${username}`;
+    return this.http.put(url,null, {headers:this.getHeaders()});
+  }
+
   addActivity(projectId,activity){
     let url = `${this.apiUrl}v1/projects/${projectId}/activities`;
     return this.http.post(url,activity, {headers:this.getHeaders()});
@@ -60,8 +106,8 @@ export class ProjectService {
     return this.http.delete(url,{headers:this.getHeaders()});
   }
 
-  deleteFeature(projectId,featureId){
-    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}`;
+  deleteFeature(featureId){
+    let url = `${this.apiUrl}v1/projectsfeatures/${featureId}`;
     return this.http.delete(url,{headers:this.getHeaders()});
   }
 
@@ -69,9 +115,14 @@ export class ProjectService {
     let url = `${this.apiUrl}v1/projects/${projectId}/activities/${activityId}/updatestatus/${status}`;
     return this.http.patch(url,{headers:this.getHeaders()});
   }
-  updateFeatureStatus(projectId,featureId,status){
-    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}/updatestatus/${status}`;
+  updateFeatureStatus(featureId,status){
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/updatestatus/${status}`;
     return this.http.patch(url,{headers:this.getHeaders()});
+  }
+
+  updateTask(projectId,featureId,task){
+    let url = `${this.apiUrl}v1/projects/${projectId}/tasks/${task.id}`;
+    return this.http.put(url,task,{headers:this.getHeaders()});
   }
 
   listTasks(projectId){
@@ -79,37 +130,47 @@ export class ProjectService {
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
-  listFeatureTasks(projectId,featureId){
-    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}/tasks`;
+  listTasksByStatus(projectId){
+    let url = `${this.apiUrl}v1/projects/${projectId}/tasks?display=STATUS`;
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  listFeatureTasks(featureId){
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/tasks`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
 
   
   listSprints(projectId){
+    let url = `${this.apiUrl}v1/projects/${projectId}/sprints`;
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  listSprintTasks(projectId){
     let url = `${this.apiUrl}v1/projects/${projectId}/tasks?display=sprint`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
   
   
-  findByFeatureId(projectId,featureId){
-    let url = `${this.apiUrl}v1/projects/${projectId}/features/${featureId}`;
+  findByFeatureId(featureId){
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
-  updateFeature(projectId, feature){
-    let url = `${this.apiUrl}v1/projects/${projectId}/features/${feature.id}`;
+  updateFeature(feature){
+    let url = `${this.apiUrl}v1/projectfeatures/${feature.id}`;
     return this.http.patch(url, feature, {headers:this.getHeaders()});
   }
 
-  updateTaskStatus(projectId,taskId,status){
-    let url = `${this.apiUrl}v1/projects/${projectId}/tasks/${taskId}/updatestatus/${status}`;
+  updateTaskStatus(featureId,taskId,status){
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/tasks/${taskId}/updatestatus/${status}`;
     return this.http.post(url, null, {headers:this.getHeaders()});
   }
 
-  deleteTask(projectId,taskId){
-    let url = `${this.apiUrl}v1/projects/${projectId}/tasks/${taskId}`;
+  deleteTask(featureId,taskId){
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/tasks/${taskId}`;
     return this.http.delete(url, {headers:this.getHeaders()});
   }
   
@@ -133,10 +194,10 @@ export class ProjectService {
     return this.http.post(url, feature, {headers:this.getHeaders()});
   }
 
-  addTask(projectId, moduleId, task){    
+  addTask(featureId, task){    
     let createdBy = this.authService.getLoggedInUsername();    
     task["createdBy"] = createdBy;
-    let url = `${this.apiUrl}v1/projects/${projectId}/modules/${moduleId}/tasks`;
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/tasks`;
     return this.http.post(url, task, {headers:this.getHeaders()});
   }
 
@@ -149,7 +210,23 @@ export class ProjectService {
 
   listRepositories(){
     let userId = this.authService.getLoggedInUsername();
-    let url = `${this.apiUrl}v1/projectrepositories?created_by=${userId}`;
+    let url = `${this.apiUrl}v1/projectrepositories?created_by=${userId}`;    
+    return this.http.get(url,  {headers:this.getHeaders()});
+  }
+
+  
+
+  listProjectRepositories(projectId){
+    
+    let url = `${this.apiUrl}v1/projectrepositories?projectId=${projectId}`;
+    
+    return this.http.get(url,  {headers:this.getHeaders()});
+  }
+
+  
+  listReviews(status){
+    let userId = this.authService.getLoggedInUsername();
+    let url = `${this.apiUrl}v1/projectfeatures/search?status=${status}`;
     return this.http.get(url,  {headers:this.getHeaders()});
   }
 }

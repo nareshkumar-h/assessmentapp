@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from 'projects/security/src/public-api';
-import { SiteService } from '../../site.service';
+import { SiteService } from 'projects/users/src/lib/site.service';
+
 
 @Component({
   selector: 'app-site-theme',

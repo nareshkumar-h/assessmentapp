@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  name = 'ProjectTracker';
+  name = 'KnowledgeTracker';
   headerColor = '#2b3643';
   siteInfo:any;
 

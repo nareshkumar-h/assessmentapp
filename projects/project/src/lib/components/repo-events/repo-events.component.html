@@ -1,19 +1,46 @@
-<kt-page title="Repository Events ( Repository - {{projectRepoUrl}})" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+<div>
+    <div class="page-title">Repository Events ( Repository - {{projectRepoUrl}}) </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <div class="card card-custom">
                 <div class="card-header card-blue">
-                    Events                    
+                    Events
                 </div>
-                <div class="card-body" >
+                <div class="card-body">
+
+                    <mat-accordion>
+                        <mat-expansion-panel hideToggle *ngFor="let i=index;let p of events">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <app-event-type-badge [type]="p.type"></app-event-type-badge>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <app-event-type-badge [type]="p.type"></app-event-type-badge>
+                            </mat-panel-description>
+                            <span *ngIf="p.type=='PullRequestEvent'||p.type=='PullRequestReviewEvent'">
+                                <a href="{{p?.payload?.pull_request?.html_url}}" target='_blank'>View</a> 
+                                {{p.payload.action}}
+                            </span>
+                          </mat-expansion-panel-header>
+                          <p>  <ul>
+                            <li *ngFor="let c of p.payload.commits">
+                                <a (click)="getFiles(c.url,c.message, p.created_at)" 
+                                    >{{c.message}}
+                                </a>
+                            </li>
+                        </ul></p>
+                        </mat-expansion-panel>
+                        
+                      </mat-accordion>
+
                     <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <!-- <th>Name </th> -->
                                 <th>Event Type</th>
-                                <th>Message</th>                            
+                                <th>Message</th>
                                 <th>Developer</th>
                                 <th>Created At</th>
                                 <!-- <th>Action</th> -->
@@ -26,27 +53,36 @@
                                     <a routerLink="../../myprojects/{{p.createdBy}}/{{p.id}}"
                                         class="text-dark btn">{{p.repo.name}}</a>
                                 </td> -->
-                                <td><app-event-type-badge [type] = "p.type"></app-event-type-badge></td>
-                                        <td>
-                                            <ul>
-                                            <li *ngFor="let c of p.payload.commits">
-                                                <a (click)="getFiles(c.url,c.message, p.created_at)" data-toggle="modal"
-                                                data-target="#exampleModal">{{c.message}}
+                                <td>
+                                    
+                                    <app-event-type-badge [type]="p.type"></app-event-type-badge>
+                                    <span *ngIf="p.type=='PullRequestEvent'||p.type=='PullRequestReviewEvent'">
+                                        <a href="{{p?.payload?.pull_request?.html_url}}" target='_blank'>View</a> 
+                                        {{p.payload.action}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let c of p.payload.commits">
+                                            <a (click)="getFiles(c.url,c.message, p.created_at)" data-toggle="modal"
+                                                >{{c.message}}
                                             </a>
-                                        </li> 
-                                        </ul> 
-                                        </td>
-                                        <td>
-                                            <ul>
-                                            <li *ngFor="let c of p.payload.commits">
-                                                <a (click)="getFiles(c.url,c.message, p.created_at)" data-toggle="modal"
-                                                data-target="#exampleModal">{{c.author.name}}
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let c of p.payload.commits">
+                                            <a (click)="getFiles(c.url,c.message, p.created_at)" data-toggle="modal"
+                                                >{{c.author.name}}
                                             </a>
-                                        </li></ul> </td>
-                                        
-                                        <!-- <td>{{p.created_at | moment}}</td> -->
-                                        <td>{{p.created_at}}</td>
-                                
+                                        </li>
+                                    </ul>
+                                </td>
+
+                                <!-- <td>{{p.created_at | moment}}</td> -->
+                                <td>{{p.created_at | moment}}</td>
+
                                 <!-- <td><a routerLink="../../myprojects/{{p.createdBy}}/{{p.id}}"
                                         class="btn btn-info btn-sm">View</a>
                                 </td> -->
@@ -59,8 +95,9 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="message && createdAt && url">
-            <app-view-files-committed  [message]="message" [createdAt]="createdAt" [url]="url"></app-view-files-committed>
+        <div class="col-6" *ngIf="message && createdAt && url">
+            <app-view-files-committed [message]="message" [createdAt]="createdAt" [url]="url">
+            </app-view-files-committed>
         </div>
     </div>
-</kt-page>
+</div>

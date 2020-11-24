@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'projects/auth/src/public-api';
@@ -13,6 +13,7 @@ export class MyProjectListComponent implements OnInit {
   breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
    {"name":"Projects"}];
 
+  @Input()
   userId:string;
   private loggedInUserId:string;
   isLoggedInUser:boolean;
@@ -44,7 +45,7 @@ export class MyProjectListComponent implements OnInit {
 
   
   reportData:any = [];
-  widgetColors= [ "purple-plum","blue-madison","green-haze","red-intense","blue-madison","red-intense"];
+  widgetColors= [ "purple-plum","blue-madison","red-intense","green-haze","blue-madison","red-intense"];
 
   createReport(data){
     
@@ -56,9 +57,10 @@ export class MyProjectListComponent implements OnInit {
     let users = data.reduce ( function(sum,obj){  return sum+obj.noOfParticipants},0);
     
     this.reportData.push({"label": "Projects", "value": total  }); 
-    this.reportData.push({"label": "Completed", "value": completed  });
+    this.reportData.push({"label": "Pending", "value": scheduled  });    
     this.reportData.push({"label": "In Progress", "value": inProgress  });
-    this.reportData.push({"label": "Assigned", "value": scheduled  });
+    this.reportData.push({"label": "Completed", "value": completed  });
+    
     
 
   }
@@ -78,7 +80,7 @@ export class MyProjectListComponent implements OnInit {
     this.menus.push( {title: "My Projects",  path:["../projects"], icontype:"fas fa-user", access: true});
     this.menus.push( {title: "All Projects",  path:[ "../projects/all"], icontype:"fas fa-tools", access: true});    
     this.menus.push( {title: "Add Project",  path:[ "addproject"], icontype:"fas fa-plus", access: true});    
-    
+    this.menus.push( {title: "Reviews",  path:[ "reviews"], icontype:"fas fa-search", access: true});          
     
   }
 

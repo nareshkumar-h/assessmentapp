@@ -1,1 +1,65 @@
-<p>add-feature-task works!</p>
+<mat-dialog-content class="mat-typography">    
+    <div class="row">
+        <div class="col-12">            
+            <h3 class="text-center"><strong>Add Task </strong></h3>
+            <form class="form" (submit)="save()"  #f="ngForm">
+                <table class="table table-borderless w-100 d-block d-md-table table-sm" >
+                    <tbody>
+                      
+                        <tr>
+                            <th width="30%">Category</th>
+                            <td width="70%" >
+                                
+                                <select class="form-control"  [(ngModel)]="task.category" 
+                                    name="category" required (change)="changeAssignTo()" >
+                                        <option disabled>--SELECT--</option>
+                                         <option *ngFor="let c of taskCategories" [value]="c.name">{{c.description}}</option>
+                                    
+                                </select>
+                                </td>
+                        </tr>
+                        <tr *ngIf="taskType!='BUG'">
+                            <th width="30%">Name</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="task.name"
+                                    placeholder="" name="name" required  autocomplete="off" /></td>
+                        </tr>
+                        <tr *ngIf="taskType=='BUG'">
+                            <th width="30%">Comments</th>
+                            <td width="70%"><textarea  class="form-control" type="text" [(ngModel)]="task.name"
+                                    placeholder="" name="name" required  rows="3" cols="50">
+                                </textarea></td>
+                        </tr>
+                        <tr *ngIf="taskType!='BUG'">
+                            <th width="30%">SprintNo</th>
+                            <td width="70%"><input class="form-control" type="number" [(ngModel)]="task.sprintNo"
+                                    placeholder="Enter Sprint No" name="sprintNo" required  autocomplete="off" /></td>
+                        </tr>
+                        <tr *ngIf="taskType!='BUG'">
+                            <th width="30%">Estimation(Hrs)</th>
+                            <td width="70%"><input class="form-control" type="number" [(ngModel)]="task.estimation" min="1" max="8"
+                                    placeholder="" name="estimation" required  autocomplete="off" /></td>
+                        </tr>
+                        
+                        <tr>
+                            <th width="30%">Assigned To</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="task.assignedTo" 
+                                    placeholder="" name="assignedTo" required  /></td>
+                        </tr>
+                       
+                        <tr>
+                            <th>
+                                <button type="button" (click)="cancel()" class="pull-left btn btn-danger">Close</button>
+                            </th>
+                            <td><button type="submit" [disabled]="f.invalid" class="btn btn-block btn-success">Submit</button> &nbsp;
+                                
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+               
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

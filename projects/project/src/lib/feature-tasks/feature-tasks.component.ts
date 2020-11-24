@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'projects/auth/src/public-api';
 import { AddFeatureTaskComponent } from '../add-feature-task/add-feature-task.component';
+import { EditFeatureTaskComponent } from '../components/edit-feature-task/edit-feature-task.component';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -13,14 +15,22 @@ import { ProjectService } from '../project.service';
 export class FeatureTasksComponent implements OnInit {
 
   @Input()
-  featureId:number;
+  feature:any;
+
+  @Input()
+  taskType:any;
+
+  @Input()
+  title:string;
 
   projectId;
+  isMentor:boolean;
 
-  constructor(private dialog:MatDialog,private projectService:ProjectService, private toastr:ToastrService, private router:Router, private route:ActivatedRoute) { 
+  constructor(private dialog:MatDialog,private authService:AuthService, private projectService:ProjectService, private toastr:ToastrService, private router:Router, private route:ActivatedRoute) { 
     this.route.parent.params.subscribe(params=>{
       this.projectId = params["projectId"];
     })
+    this.isMentor =  this.authService.hasRoleAccess("T");
   }
 
   ngOnInit(): void {
@@ -30,21 +40,33 @@ export class FeatureTasksComponent implements OnInit {
   projectTasks:any=[];
 
   listTasks(){
-    this.projectService.listFeatureTasks(this.projectId, this.featureId).subscribe(res=>{
+    this.projectService.listFeatureTasks( this.feature.id).subscribe(res=>{
       console.log(res);
-      this.projectTasks = res;
+      let tasks:any = res;
+      if (this.taskType == 'BUG'){
+        this.projectTasks = tasks.filter(obj=> obj.category =='BUG' || obj.category =='Testing');
+      }
+      else{
+        this.projectTasks = tasks.filter(obj=> obj.category !='BUG' && obj.category !='Testing');
+      }
     });
   }
 
   addTask(){
     let taskName = prompt("Enter task name");
     if(taskName && taskName.length>0){
-      let task = { name: taskName , description:"", estimation:1, featureId : this.featureId};
-      this.projectService.addTask(this.projectId, this.featureId, task).subscribe(res=>{
+      let task = { name: taskName , description:"", estimation:1, featureId : this.feature.id};
+      this.projectService.addTask(this.feature.id, task).subscribe(res=>{
         this.toastr.success("Successfully Added Task");
         this.listTasks();
       });
     }
+  }
+
+  updateTaskStatus(task,checked){
+    let status = checked ? "COMPLETED":"PENDING";
+    console.log(status);
+    this.updateStatus(task.id,status);
   }
 
   updateStatus(taskId,status){
@@ -56,21 +78,33 @@ export class FeatureTasksComponent implements OnInit {
 
   
   
-  openDialog(module){
-    console.log(this.dialog);
-    const dialogRef = this.dialog.open(AddFeatureTaskComponent, {data: { moduleObj :module} });
-    console.log(dialogRef);
+  
+
+  addTaskDialog(taskType){
+    
+    let modalData = {projectId: this.projectId, feature: this.feature, taskType: taskType};
+    console.log(modalData)
+    const dialogRef = this.dialog.open(AddFeatureTaskComponent,
+      {width: '800px', height:'fit-content', data:  modalData});
+    
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.listTasks();
     });
   }
 
+  editTaskDialog(task){
+    const dialogRef = this.dialog.open(EditFeatureTaskComponent,
+      {width: '800px', height:'fit-content', data: {projectId: this.projectId, feature: this.feature, task:task}});
+    
+    dialogRef.afterClosed().subscribe(result => {
+      this.listTasks();
+    });
+  }
 
   deleteTask(taskId,status){
     let cfm=confirm("Do you want to delete ?");
     if(cfm){
-      this.projectService.deleteTask(this.projectId,taskId).subscribe(res=>{
+      this.projectService.deleteTask(this.feature.id,taskId).subscribe(res=>{
         this.toastr.success("Task Deleted");
         this.listTasks();
       })

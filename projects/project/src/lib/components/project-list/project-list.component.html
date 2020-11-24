@@ -1,13 +1,12 @@
 <kt-sidebar [menus]="menus" showSidebar="true"></kt-sidebar>
 <kt-page title="Projects"  showSidebar="true">
 
-    <!-- <div class="row" *ngIf="reportData">
-            <div class="col-md-1" style="width: 20%;
-    flex: 0 0 20%;max-width: 20%;"
-        *ngFor="let r of reportData;let i=index;">            
-            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
-        </div>
-    </div> -->
+    <div class="row" *ngIf="reportData">
+        <div class="col-3"
+    *ngFor="let r of reportData;let i=index;">            
+        <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+    </div>
+</div> 
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
     </ng-template>
@@ -23,24 +22,34 @@
                     
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Project Name </th>
-                        <td mat-cell *matCellDef="let obj"> {{obj.name}} </td>
+                        <td mat-cell *matCellDef="let obj"> {{obj.name}}
+                        <small *ngIf="obj.flag">
+                            <i class="fa fa-flag" *ngIf="obj.flag=='R'" aria-hidden="true" style="color:'red'"></i>
+                            <i class="fa fa-flag" *ngIf="obj.flag=='G'" aria-hidden="true" style="color:'green'"></i>
+                        </small>    
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="createdBy">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Developed By </th>
-                        <td mat-cell *matCellDef="let obj"> {{obj.createdBy}} </td>
+                        <td mat-cell *matCellDef="let obj"> 
+                            <a routerLink="../../reports/projects/{{obj.createdBy}}"> {{obj.createdBy}}
+                            </a> &nbsp;
+                        </td>
                     </ng-container>
-                    <ng-container matColumnDef="startDate">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date</th>
-                        <td mat-cell *matCellDef="let obj"> {{obj.startDate}} </td>
+                    <ng-container matColumnDef="noOfFeatures">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Features </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.noOfFeatures}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="completionDate">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Completion Date</th>
-                        <td mat-cell *matCellDef="let obj"> {{obj.completionDate}} </td>
+                    <ng-container matColumnDef="days">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Days</th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.days}} </td>
                     </ng-container>
+<!--                   
                     <ng-container matColumnDef="status">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
                         <td mat-cell *matCellDef="let obj"> {{obj.status}} </td>
-                    </ng-container>
+                    </ng-container> -->
+
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
                         <td mat-cell *matCellDef="let obj">
@@ -51,8 +60,14 @@
                             &nbsp;
                             <!-- disabled: p.project.locked-->
 
-                            <a routerLink="../{{obj.id}}/tasks"  mat-raised-button color="primary" class="btn btn-secondary btn-sm text-white"> Tasks
+                            <a routerLink="../{{obj.id}}/tasks/ALL"  mat-raised-button color="primary" class="btn btn-secondary btn-sm text-white"> Tasks
                             </a> &nbsp;
+                            <a routerLink="../{{obj.id}}/tasks/ISSUES"  class="btn btn-danger btn-sm text-white"> Issues
+                            </a> &nbsp;
+                            
+                            <a *ngIf="obj.testUrl" href="{{obj.testUrl}}" target="_blank"  class="btn btn-success text-white">
+                               Test </a> &nbsp;
+
                          </td>
                     </ng-container>
                    
@@ -61,6 +76,7 @@
                 </table>
             </div>
         </div>
-
+        <br/>
+        <br/><br/>
     </div>
 </kt-page>

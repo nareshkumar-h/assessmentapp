@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListUsersComponent } from './list-users/list-users.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ProfileComponent } from './profile/profile.component';
-import { UpdateAcademicsComponent } from './update-academics/update-academics.component';
-import { UserFeaturesComponent } from './user-features/user-features.component';
-import { GithubComponent } from './github/github.component';
-import { SonarcloudComponent } from './sonarcloud/sonarcloud.component';
-import { AddUserComponent } from './add-user/add-user.component';
-import { ListEmployeesComponent } from './list-employees/list-employees.component';
-import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { ViewUserComponent } from './view-user/view-user.component';
-import { MentorListComponent } from './mentor-list/mentor-list.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { GithubComponent } from './components/github/github.component';
+import { ListEmployeesComponent } from './components/list-employees/list-employees.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
+import { MentorListComponent } from './components/mentor-list/mentor-list.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SonarcloudComponent } from './components/sonarcloud/sonarcloud.component';
+import { UpdateAcademicsComponent } from './components/update-academics/update-academics.component';
+import { UserFeaturesComponent } from './components/user-features/user-features.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
+
 
 
 const routes: Routes = [

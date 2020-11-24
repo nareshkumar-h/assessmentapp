@@ -3,33 +3,40 @@
         <div class="col-6">
             <div class="card card-custom">
                 <div class="card-header card-blue">
-                   <div class="card-title text-white"> Add Repository</div>
+                   <div class="card-title text-white"> Add Repository - {{projectDetail?.name}}</div>
                 </div>
                 <div class="card-body">
-                    <form id="createRepoForm" #rForm="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="createRepo()">
+                    <form id="createRepoForm" #rForm="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="createRepo(rForm)">
                         <div class="form-group">
                           <label for="name">Project Name:</label>              
-                          <input type="text" class="form-control" placeholder="Enter Project Name" id="projectName" [(ngModel)]="project.name" name="projectName" required autofocus>
+                          <input type="text" class="form-control" placeholder="Enter Project Name" id="projectName" [(ngModel)]="project.name" name="projectName" required autofocus autocomplete="off" readonly>
                         </div>
-                        
-                        <div class="form-group">
-                          <label for="name">Username:</label>
-                          <input type="text" class="form-control" placeholder="Enter Username" id="username" [(ngModel)]="project.username" name="username" value="${LOGGED_IN_USER.username}" required>
-                        </div>            
-                        
+
                         <div class="form-group">
                           <label for="name">Project Type:</label>
-                          <select class="form-control" name="projectType" [(ngModel)]="project.projectType" required >
+                          <select class="form-control" name="projectType" (change)="onChange()" [(ngModel)]="project.projectType" required >
                           <option value="1">Database</option>
                           <option value="2">Core Java</option>
-                          <option value="3">Web</option>
+                          <option value="3">Web(HTML/JS/Bootstrap)</option>
                           <option value="4">SpringBoot</option>
-                          <option value="5">JavaScript</option>
+                          <!-- <option value="5">JavaScript</option> -->
+                          <option value="6">Angular</option>
+                          <option value="7">NodeJS</option>
                           </select>
                           
                         </div>
+
+                        
+                        <div class="form-group">
+                          <label for="name">Repository Name:</label>              
+                          <input type="text" class="form-control" placeholder="Enter Project Name" id="projectName" [(ngModel)]="project.repositoryName" name="Repository Name" required autofocus autocomplete="off" >
+                        </div>
                         
                         
+                        <div class="form-group">
+                          <label for="name">Developers:</label>
+                          <input type="text" class="form-control" placeholder="Enter Username" id="username" [(ngModel)]="project.username" name="username" required autocomplete="off">
+                        </div>     
                         
                         <button type="submit" [disabled] = "rForm.invalid" class="btn btn-primary">Submit</button> &nbsp;
                         
@@ -38,5 +45,61 @@
                 </div>
             </div>
         </div>
+        
+        <div class="col-6">
+          <div class="card card-custom">
+              <div class="card-header card-blue">
+                 <div class="card-title text-white"> Link Repository - {{projectDetail?.name}}</div>
+              </div>
+              <div class="card-body">
+                 
+                 <div class="form-group">
+                  <label for="name">Project Type:</label>
+                  <select class="form-control" name="projectType"  (change)="onChange()"  [(ngModel)]="project.projectType" required >
+                  <option value="Database">Database</option>
+                  <option value="2">Core Java</option>
+                  <option value="3">Web(HTML/JS/Bootstrap)</option>
+                  <option value="4">SpringBoot</option>
+                  <!-- <option value="5">JavaScript</option> -->
+                  <option value="6">Angular</option>
+                  <option value="7">NodeJS</option>
+                  </select>
+                  
+                </div>
+
+
+                  <form id="createRepoForm2" #rForm1="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="linkRepository(rForm1)">
+                      
+                    <div class="form-group">
+                      <label for="name">Repository Name:</label>              
+                      <input type="text" class="form-control" placeholder="Enter Repository Name" id="projectName" [(ngModel)]="project.repositoryName" name="repositoryName" required autofocus autocomplete="off" >
+                    </div>
+
+                      <div class="form-group">
+                        <label for="name">Developers:</label>
+                        <input type="text" class="form-control" placeholder="Enter Username" id="username" [(ngModel)]="project.username" name="username" required autocomplete="off">
+                      </div>            
+                      
+                   
+                  
+                      
+                      
+                      
+                      <button type="submit" [disabled] = "rForm1.invalid" class="btn btn-primary">Submit</button> &nbsp;
+                      
+                      <a routerLink="../repositories" class="btn btn-danger">Cancel</a>
+                    </form>     
+              </div>
+             
+          </div>
+      </div>
     </div>
+      <div class="row">
+        <div class="col alert alert-primary" role="alert" *ngIf="repositoryUrl">
+          <strong>Your Github Link</strong> <br/>
+          <strong><a href="{{repositoryUrl}}" target="_blank" >{{repositoryUrl}}</a></strong>
+        </div>
+      </div>
+     
+    
 </kt-page>

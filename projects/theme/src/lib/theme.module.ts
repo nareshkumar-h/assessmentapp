@@ -23,6 +23,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { LoadingBarComponent } from './components/loading-bar/loading-bar.component';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { SwitchUserComponent } from './components/switch-user/switch-user.component';
 
 
 
@@ -40,9 +41,10 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,FormsModule,RouterModule,HttpClientModule, 
     ToastrModule.forRoot(),
     DeviceDetectorModule,
-    MaterialModule,
-    BrowserModule
+    MaterialModule,    
+    BrowserModule    
   ],
+  entryComponents: [SwitchUserComponent],
   exports: [ThemeComponent, AuthLayoutComponent,HomeLayoutComponent, PageBarComponent,
     DashboardWidgetComponent,MomentPipe,MyChartComponent,  ProgressSpinnerComponent,
   PageComponent  , ProgressBarComponent,LoadingBarComponent, NavbarModule, SidenavModule,ChartsModule,MaterialModule,CardModule,

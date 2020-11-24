@@ -20,12 +20,15 @@ export class ProjectFeatureListComponent implements OnInit {
   projectId: string;
   userId:string;
   isLoggedInUser:boolean;
+  isMentor:boolean;
 
   constructor(public dialog: MatDialog,private projectService: ProjectService, private authService:AuthService,private route: ActivatedRoute,
     private toastr: ToastrService) {
+      this.isMentor =  this.authService.hasRoleAccess("T");
     this.route.parent.params.subscribe(params => {
       
       this.projectId = params['projectId'];
+      
     });
   }
 
@@ -77,7 +80,7 @@ export class ProjectFeatureListComponent implements OnInit {
     
     let pendingTasks = tasks.filter(obj=>obj.status=="PENDING").length;
     let inprogressTasks = tasks.filter(obj=>obj.status=="INPROGRESS").length;
-    let reviewTasks = tasks.filter(obj=>obj.status=="UNDER_REVIEW").length;
+    let reviewTasks = tasks.filter(obj=>obj.status=="TESTING").length;
     let completedTasks = tasks.filter(obj=>obj.status=="COMPLETED").length;
 
     var count = 0;
@@ -89,7 +92,7 @@ export class ProjectFeatureListComponent implements OnInit {
     this.reportData.push({"label":"Features", "value":tasks.length});
     this.reportData.push({"label":"PENDING", "value":pendingTasks});    
     this.reportData.push({"label":"INPROGRESS", "value":inprogressTasks});
-    this.reportData.push({"label":"UNDERREVIEW", "value":reviewTasks});
+    this.reportData.push({"label":"TESTING", "value":reviewTasks});
     this.reportData.push({"label":"COMPLETED", "value":completedTasks});
   }
 

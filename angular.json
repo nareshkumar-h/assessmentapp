@@ -704,11 +704,15 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/projecttracker/src/assets/theme2.css",
-              "projects/projecttracker/src/styles.css"
+              "projects/projecttracker/src/styles.css",
+              "node_modules/highlight.js/styles/idea.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js",
+              "node_modules/highlight.js/lib/highlight.js"
+              
             ]
           },
           "configurations": {
@@ -799,6 +803,46 @@
             "production": {
               "devServerTarget": "projecttracker:serve:production"
             }
+          }
+        }
+      }
+    },
+    "users": {
+      "projectType": "library",
+      "root": "projects/users",
+      "sourceRoot": "projects/users/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/users/tsconfig.lib.json",
+            "project": "projects/users/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/users/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/users/src/test.ts",
+            "tsConfig": "projects/users/tsconfig.spec.json",
+            "karmaConfig": "projects/users/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/users/tsconfig.lib.json",
+              "projects/users/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

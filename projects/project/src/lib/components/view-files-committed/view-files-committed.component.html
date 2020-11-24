@@ -1,37 +1,19 @@
-<div class="modal " id="exampleModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">List of Files <small>( Commit Message: {{message}} , Updated :  {{createdAt}}   )</small> </h5>
-                    <!-- {{createdAt | moment}} -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" *ngIf="files">
+<mat-dialog-content class="mat-typography">
 
-                
+    <div class="row">
+        <div class="col-12">
+            <h2 mat-dialog-title class="text-center"> List of Files <small>( Commit Message: {{message}} , Updated :
+                    {{createdAt}} )</small> </h2>
 
-                <!-- <table class="table table-bordered">
-                <thead>
-                    <tr><th>Sha</th><th>Total</th> <th>Additions </th><th>Deletions</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>{{files.sha}}</td>
-                        <td>{{files.stats.total}}</td>
-                        <td>{{files.stats.additions}}</td>
-                        <td>{{files.stats.deletions}}</td>
-                        
-                        </tr>
-                </tbody>        
-            </table> -->
-                <div *ngFor="let r of files | keyvalue">                        
+            <div *ngIf="files">
+                <div *ngFor="let r of files | keyvalue">
                     <div class="card card-custom">
-                        <div class="card-header card-blue" [ngClass]="{'card-green':r.key=='added','card-red':r.key=='removed','card-orange':r.key=='modified','card-blue':r.key=='renamed'}">
+                        <div class="card-header card-blue"
+                            [ngClass]="{'card-green':r.key=='added','card-red':r.key=='removed','card-orange':r.key=='modified','card-blue':r.key=='renamed'}">
                             {{r.key}}
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered" >
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -55,7 +37,79 @@
                             </table>
                         </div>
                     </div>
-              
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="add()">Install</button>
+      </mat-dialog-actions> -->
+
+
+<div class="modal " id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">List of Files <small>( Commit Message: {{message}} , Updated : {{createdAt}}
+                        )</small> </h5>
+                <!-- {{createdAt | moment}} -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="files">
+
+
+
+                <!-- <table class="table table-bordered">
+                <thead>
+                    <tr><th>Sha</th><th>Total</th> <th>Additions </th><th>Deletions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>{{files.sha}}</td>
+                        <td>{{files.stats.total}}</td>
+                        <td>{{files.stats.additions}}</td>
+                        <td>{{files.stats.deletions}}</td>
+                        
+                        </tr>
+                </tbody>        
+            </table> -->
+                <div *ngFor="let r of files | keyvalue">
+                    <div class="card card-custom">
+                        <div class="card-header card-blue"
+                            [ngClass]="{'card-green':r.key=='added','card-red':r.key=='removed','card-orange':r.key=='modified','card-blue':r.key=='renamed'}">
+                            {{r.key}}
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th width="60%">FileName</th>
+                                        <th>Status</th>
+                                        <th>Additions </th>
+                                        <th>Deletions</th>
+                                        <th>Changes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let i=index;let f of r.value">
+                                        <td>{{i+1}}</td>
+                                        <td>{{f.filename}}</td>
+                                        <td>{{f.status}}</td>
+                                        <td>{{f.additions}}</td>
+                                        <td>{{f.deletions}}</td>
+                                        <td>{{f.changes}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

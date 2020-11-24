@@ -17,6 +17,12 @@ import { ViewProjectDetailComponent } from './components/view-project-detail/vie
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ViewProjectActivityComponent } from './components/view-project-activity/view-project-activity.component';
 import { AuthGuard } from 'projects/projecttracker/src/app/auth.guard';
+import { ReviewFeatureComponent } from './components/review-feature/review-feature.component';
+import { ViewProjectRatingComponent } from './components/view-project-rating/view-project-rating.component';
+import { UserRatingReportComponent } from './components/user-rating-report/user-rating-report.component';
+import { UserFeatureRatingReportComponent } from './components/user-feature-rating-report/user-feature-rating-report.component';
+import { ViewUserRatingReportComponent } from './components/view-user-rating-report/view-user-rating-report.component';
+import { ProjectSkillsComponent } from './components/project-skills/project-skills.component';
 
 const routes: Routes = [
   //{ path: ':userId/myprojects',      component: MyProjectListComponent },
@@ -24,7 +30,8 @@ const routes: Routes = [
   //{ path: 'projects',      component: ProjectListComponent },
   //{ path: ':userId/addproject',      component: AddProjectComponent },
   //{ path: ':userId/projects/:projectId/view',      component: ViewProjectComponent },
-  
+  { path: 'reports/projects', component: UserRatingReportComponent},
+  { path: 'reports/projects/:userId', component: ViewUserRatingReportComponent},
   { path: 'projects/all',      component: ProjectListComponent, canActivate:[AuthGuard] },
   { path: 'projects',      component: MyProjectListComponent ,canActivate:[AuthGuard]},
   { path: 'projects/addproject',      component: AddProjectComponent ,canActivate:[AuthGuard]},
@@ -43,18 +50,25 @@ const routes: Routes = [
       
   // ]
   // },
+  { path: 'projects/reviews',      component: ProjectReviewsComponent },
+  { path: 'projects/reviews/:featureId',      component: ReviewFeatureComponent },
+  { path: 'projects/ratings',      component: ViewProjectRatingComponent },
   { path: 'projects/:projectId',      component: ViewProjectComponent, canActivate:[AuthGuard],
   children: [
     { path: 'view',      component: ViewProjectDetailComponent },
     { path: 'features',      component: ProjectFeatureListComponent },
+    { path: 'skills',      component: ProjectSkillsComponent },
     // { path: 'addfeature/:moduleId',      component: AddProjectFeatureComponent },
     { path: 'features/:featureId',      component: ViewProjectFeatureComponent },
     { path: 'plan',      component: ProjectActivityListComponent },   
     { path: 'plan/:activityId',      component: ViewProjectActivityComponent },   
-    { path: 'tasks',      component: ProjectTasksComponent },
+    { path: 'tasks/:category',      component: ProjectTasksComponent },
     { path: 'sprints',      component: ProjectSprintsComponent },
     { path: 'repositories',      component: ProjectRepositoryListComponent },
     { path: 'addrepository',      component: AddRepositoryComponent },
+    { path: 'features/:featureId/review',      component: ReviewFeatureComponent },
+    { path: 'reviews',      component: ProjectReviewsComponent },
+    { path: 'repoevents/:account/:repoName',      component: RepoEventsComponent },
     { path: '', component: ViewProjectDetailComponent },
   ]},
   // { path: 'projects', component: ProjectListComponent , data: {showSidebar:false}},    
@@ -68,7 +82,7 @@ const routes: Routes = [
   //     { path: ':userId/projects/:projectId/sprints',      component: ProjectSprintsComponent },
   //     { path: ':userId/projects/:projectId/repositories',      component: ProjectRepositoryListComponent },
   //     { path: ':userId/projects/:projectId/addrepository',      component: AddRepositoryComponent },
-  //     { path: ':userId/projects/:projectId/repoevents/:account/:repoName',      component: RepoEventsComponent },
+       
     
 ];
 

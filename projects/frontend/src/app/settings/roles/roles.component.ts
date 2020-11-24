@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
-import { SiteService } from '../../site.service';
+import { SiteService } from 'projects/users/src/lib/site.service';
+
 
 @Component({
   selector: 'app-roles',

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { SecurityService } from 'projects/security/src/public-api';
-import { SiteService } from '../../site.service';
+import { SiteService } from 'projects/users/src/lib/site.service';
+
 
 @Component({
   selector: 'app-domain',

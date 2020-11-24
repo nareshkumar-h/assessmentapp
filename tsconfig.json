@@ -43,6 +43,10 @@
       "content": [
         "dist/content/content",
         "dist/content"
+      ],
+      "users": [
+        "dist/users/users",
+        "dist/users"
       ]
     }
   }

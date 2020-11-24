@@ -1,0 +1,116 @@
+<kt-page title="Project Review Ratings" >
+    <div class="row" *ngIf="reportData">
+        <div class="col-3" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+    
+    <ng-container *ngIf="projects else loading">
+
+        <div class="row">
+            <div class="col-1"> 
+            Ratings : 
+            </div>
+            <div class="col-2">                
+                <app-rating-icon [rating]="1"></app-rating-icon> 1&2 -Need to Improve                 &nbsp;
+            </div>
+            <div class="col-2">
+                <app-rating-icon [rating]="3"></app-rating-icon> 3- Average&nbsp;
+            </div>
+            <div class="col-2">
+                <app-rating-icon [rating]="4"></app-rating-icon> 4 - Good&nbsp;
+            </div>
+            <div class="col-2">
+                <app-rating-icon [rating]="5"></app-rating-icon> 5 - Consistent &nbsp;                
+            </div>
+        </div>
+        <br/>
+        <br/>
+    <div class="row">
+        <div class="col-12">
+            <div class="mat-elevation-z8">
+                
+                <table mat-table matSort (matSortChange)="sortData($event)"  matSortStart="desc" [dataSource]="dataSource" style="width: 100%;">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Sno </th>
+                        <td mat-cell *matCellDef="let row;let i=index"> {{i+1}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef > Project Name </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.project.name}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="createdBy">
+                        <th mat-header-cell *matHeaderCellDef width="10%" > Developed By </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.project.createdBy}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="count">
+                        <th mat-header-cell *matHeaderCellDef > No of Features </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.count}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="functionality">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Functionality</th>
+                        <td mat-cell *matCellDef="let obj">
+                            <input type="number" value="{{obj.functionality}}" *ngIf="isMentor"> 
+                            <app-rating-icon [rating]="obj.functionality"></app-rating-icon> </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="design">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Design</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            <app-rating-icon [rating]="obj.design"></app-rating-icon>
+                             </td>
+                    </ng-container>
+                    <ng-container matColumnDef="bestPractices">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Best Practices</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            <app-rating-icon [rating]="obj.bestPractices"></app-rating-icon>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="timeline">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Timeline</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            <app-rating-icon [rating]="obj.timeline"></app-rating-icon>
+                        </td>
+                    </ng-container>  
+                    <!-- <ng-container matColumnDef="documentation">
+                        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header> Documentation</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            <app-rating-icon [rating]="obj.documentation"></app-rating-icon>
+                        </td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="complexity">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Complexity</th>
+                        <td mat-cell *matCellDef="let obj"> 
+                            <app-rating-icon [rating]="obj.complexity"></app-rating-icon> 
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Actions</th>
+                        <td mat-cell *matCellDef="let obj">
+                            <a routerLink="../{{obj.project.id}}/features" mat-raised-button color="primary"
+                                class="btn btn-success btn-sm text-white">
+                                View </a> &nbsp;
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                    <tr mat-row *matRowDef="let row;columns: displayedColumns"></tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br /><br />
+    </div>
+	
+
+    </ng-container>
+
+</kt-page>

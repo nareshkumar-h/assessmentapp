@@ -18,10 +18,10 @@
     <div *ngIf="modules && projectFeatures else loading">
     <div class="row" *ngFor="let i=index;let m of modules">
         <div class="col">
-            <div class="card card-custom">
+            <div class="card card-custom gutter-b">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">
-                    Feature #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}} Topics )
+                    Module #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}} Features )
                 </div>
                     <div class="tools pull-right">
                          <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
@@ -40,28 +40,38 @@
                         <thead>
                             <tr>
                                 <th>#</th>    
-                                <th width="40%">Feature Name</th>
+                                <th width="20%">Feature Name</th>
+                                <th width="50%">Description</th>
                                 <th>Priority</th>
-                                <th>Created By</th>
-                                <th>Created Date</th>
+                                <!-- <th>Created By</th>
+                                <th>Created Date</th> -->
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let j=index;let t of projectFeatures[m.name]">
+                            <ng-container *ngFor="let j=index;let t of projectFeatures[m.name]">
+                            <tr  class="{{t.status}}">
                                 <td>{{j+1}}</td>                                
                                 <td>{{t.name}}
                                 </td>
+                                <td [innerHTML]="t.description"></td>
                                 <td>{{t.priority}}</td>
-                                <td>{{t.createdBy}}</td>
-                                <td>{{t.createdDate}}</td>
-                                <td>{{t.status}}</td>
+                                <!-- <td>{{t.createdBy}}</td>
+                                <td>{{t.createdDate}}</td> -->
+                                <td *ngIf="t.status=='TESTING'">
+                                    <a class="btn btn-info btn-sm" routerLink="../../reviews/{{t.id}}">Test</a>
+                                </td>
+                                <td *ngIf="t.status!='TESTING'">
+                                    {{t.status}}
+                                </td>
                                 <td>
                                     <button routerLink="{{t.id}}" class="btn btn-info btn-sm"> View</button> &nbsp;
+                                    <button *ngIf="isMentor" routerLink="../../reviews/{{t.id}}" class="btn btn-info btn-sm"> Rating</button> &nbsp;
                                     <!--  -->
                                 </td>
                             </tr>
+                        </ng-container>
                         </tbody>
                     </table>
     

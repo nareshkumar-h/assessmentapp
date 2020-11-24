@@ -1,0 +1,83 @@
+
+<kt-page title="Projects">
+
+    <div class="row" *ngIf="reportData">
+        <div class="col-3" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+    <div class="row">
+        <div class="col">
+            Note:
+            <div class="alert alert-info" role="alert">
+                <strong>Ratings: 1 to 5</strong> and &nbsp; <strong>0 refers - Yet To Rate</strong>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" *ngIf="ratings else loading">
+        <div class="col-12">
+            <div class="mat-elevation-z8">
+                <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="dataSource" style="width: 100%;">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Sno </th>
+                        <td mat-cell *matCellDef="let row;let i=index"> {{i+1}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="noOfFeatures">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> No of Features </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.noOfFeatures}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="design">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Design </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.design}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="functionality">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Functionality </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.functionality}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="complexity">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Complexity </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.complexity}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="timeline">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Timeline </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.timeline}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="bestPractices">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Best Practices </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.bestPractices}} </td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="documentation">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Documentation </th>
+                        <td mat-cell *matCellDef="let obj"> {{obj.documentation}} </td>
+                    </ng-container> -->
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef > Actions</th>
+                        <td mat-cell *matCellDef="let obj">
+                            <a routerLink="{{obj.username}}" mat-raised-button color="primary"
+                                class="btn btn-success btn-sm text-white">
+                                View </a> &nbsp;
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                    <tr mat-row *matRowDef="let row;columns: displayedColumns"></tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br /><br />
+    </div>
+</kt-page>

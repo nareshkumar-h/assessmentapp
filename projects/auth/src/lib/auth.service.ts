@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Config, AUTH_CONFIG } from './config';
-import { of } from 'rxjs';
 import { SecurityService } from 'projects/security/src/public-api';
 
 @Injectable({
@@ -59,7 +58,7 @@ export class AuthService {
     else{
       url = this.apiUrl + "v1/auth/register";
     }
-    return this.http.post(url, user, {headers: this.getHeaders()});    
+    return this.http.post(url, user);    
   }
 
 
@@ -74,6 +73,15 @@ export class AuthService {
     let username = null;
     if (user){
       username = user.username;
+    }
+    return username;
+  }
+
+  getLoggedInGithubUsername(){
+    let user = this.getUser();
+    let username = null;
+    if (user){
+      username = user.githubUsername;
     }
     return username;
   }
@@ -104,6 +112,17 @@ export class AuthService {
     return false;
   }
 
+  hasRoleAccess(roles){
+    let user = this.getUser();
+    let allowed = false;
+    for(let role of roles){
+      if(user.roles.indexOf(role) !=-1){
+        allowed = true;
+        break;
+      }
+    }
+    return allowed;
+  }
   
   hasRole(user,roles){
     let allowed = false;

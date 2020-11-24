@@ -49,7 +49,7 @@
                                         aria-hidden="true"></i></button>
                                 <button (click)="update(t)" class="btn btn-success btn-sm"
                                     *ngIf="mode=='edit' && selectedTopic == t.code">Save</button> &nbsp;
-                                <button (click)="cancel()" class="btn btn-danger btn-sm"
+                                <button type="button" (click)="cancel()" class="btn btn-danger btn-sm"
                                     *ngIf="mode=='edit' && selectedTopic == t.code">Cancel</button>
                             </td>
                         </tr>

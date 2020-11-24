@@ -14,13 +14,14 @@ import { UsercourseModule } from 'projects/usercourse/src/public-api';
 import { AuthModule } from 'projects/auth/src/public-api';
 import { CourseModule } from 'projects/course/src/public-api';
 import { BatchesModule } from './components/batches/batches.module';
-import { UsersModule } from './components/users/users.module';
+
 import { TrainingModule } from './components/trainer/training.module';
 import { SettingsModule } from './settings/settings.module';
 import { MaterialModule } from 'projects/theme/src/lib/material.module';
 import { TaskDashboardComponent } from './components/task-dashboard/task-dashboard.component';
 import { ContentModule } from 'projects/content/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { UsersModule } from 'projects/users/src/public-api';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
     ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
     DeviceDetectorModule ,
     BatchesModule,
-    UsersModule,
+    UsersModule.forRoot({API_ENDPOINT:environment.API_URL}),
     TrainingModule,    
     SettingsModule,    
     ContentModule,

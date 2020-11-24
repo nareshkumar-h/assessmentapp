@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL :"http://localhost:8080/api/",
+  API_URL :"https://api.knowledgetracker.in:8443/api/",
   ORG_ID: "spinsoft"
 };
 

@@ -29,31 +29,42 @@
                             <tr>
                                 <th>Sno</th>
                                 <th>Project Name</th>
-                                <th class="hidden-xs">Start Date</th>
-                                <th class="hidden-xs">End Date</th>																		
-                                <th class="hidden-xs">Status</th>
+                                <!-- <th class="hidden-xs">Start Date</th>
+                                <th class="hidden-xs">End Date</th>																		 -->
+                                <th>Days</th>
+                                <th>Features</th>
+                                <!-- <th class="hidden-xs">Status</th> -->
                                 <th class="hidden-xs">Developed By</th>									
                                 <!-- <th>Reviewer</th> -->
-                                <th class="hidden-xs">Locked</th>
+                                <!-- <th class="hidden-xs">Locked</th> -->
                                 <th colspan="2">Action</th>																
                             </tr>
                         </thead>
                         <tbody *ngIf="projects">
                             <tr *ngFor="let p of projects;let i=index">
                                 <td width="5%">  {{i+1}}</td>									
-                                <td> {{p.project.name}} </td>									
-                                <td class="hidden-xs">{{p.startDate}}</td>				
-                                <td class="hidden-xs">{{p.completionDate}}</td>														
-                                <td class="hidden-xs"><span class="badge badge-primary">{{p.status}}</span></td>				
-                                <td class="hidden-xs"><a routerLink="{{p.createdBy}}"> <i class="fa fa-user" aria-hidden="true"></i> {{p.createdBy}} </a> </td>
+                                <td> {{p.name}} 
+                                    <small *ngIf="p.flag">
+                                        <i class="fa fa-flag" *ngIf="p.flag=='R'" aria-hidden="true" style="color:'red'"></i>
+                                        <i class="fa fa-flag" *ngIf="p.flag=='G'" aria-hidden="true" style="color:'green'"></i>
+                                    </small>    
+                                </td>									
+                                <!-- <td class="hidden-xs">{{p.startDate}}</td>				
+                                <td class="hidden-xs">{{p.completionDate}}</td>	 -->
+                                <td>{{p.days}}</td>	
+                                <td>{{p.noOfFeatures}}</td>												
+                                <!-- <td class="hidden-xs"><span class="badge badge-primary">{{p.status}}</span></td>				 -->
+                                <!-- <td class="hidden-xs"><a routerLink="{{p.createdBy}}"> <i class="fa fa-user" aria-hidden="true"></i> {{p.createdBy}} </a> </td> -->
+                                <td> <i class="fa fa-user" aria-hidden="true"></i>  {{p.createdBy}}</td>
                                 <!-- <td>{{p.project.reviewerId}}</td> -->
                                 
-                                <td class="hidden-xs">
-                                    <i class='fa' [class] = "{'fa-lock':p.project.locked,'fa-unlock': !p.project.locked}" aria-hidden='true'></i>
-                                </td>
+                                <!-- <td class="hidden-xs">
+                                    <i class='fa' [class] = "{'fa-lock':p.locked,'fa-unlock': !p.locked}" aria-hidden='true'></i>
+                                </td> -->
                                 <td>
-                                    <button class="btn btn-info btn-sm" routerLink="{{p.project.id}}/features">View</button>
-                                   
+                                    <button class="btn btn-info" routerLink="{{p.id}}/features">View</button> &nbsp;
+                                    <a *ngIf="p.testUrl" href="{{p.testUrl}}" target="_blank"  class="btn btn-success text-white">
+                                        Test </a> &nbsp;
                                  </td>
                                 <!--
                                 <td>

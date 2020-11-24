@@ -21,15 +21,28 @@ export class GithubService {
     return this.http.get(url);
   }
 
-
-  createRepo(repoUrl){
-    let token = localStorage.getItem("ACCESS_TOKEN");
-    let url ="https://api.github.com/user/repos";
-    let formData = { "name" : repoUrl, "private": false};
+  getHeaders(){
+    let token = "b2a531c63044f86b6d66308202bedc83e26ce090";//localStorage.getItem("ACCESS_TOKEN");
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', "Bearer " + token);
+    return headers;
+  }
 
-    return this.http.post(url, formData, {headers:headers});
+  createRepo(repoUrl){
+   
+    let url ="https://api.github.com/user/repos";
+    let formData = { "name" : repoUrl, "private": false};
+    
+
+    return this.http.post(url, formData, {headers:this.getHeaders()});
+  }
+
+  addAccess(repoUrl,username){    
+    // //repos/:owner/:repo/collaborators/:username
+      let url =`https://api.github.com/repos/${repoUrl}/collaborators/${username}`;
+      let formData = { };
+  
+      return this.http.put(url, formData, {headers:this.getHeaders()});
   }
 
 
@@ -43,4 +56,6 @@ export class GithubService {
    let url = `https://api.github.com/gists/${id}`;
    return this.http.get(url);
   }
+
+
 }

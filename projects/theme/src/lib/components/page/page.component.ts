@@ -10,9 +10,9 @@ export class PageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.title  , this.showSidebar, this.breadcrumbItems);
+    
     this.showSidebar = this.showSidebar;
-    console.log(this.showSidebar);
+    
   }
 
   @Input()

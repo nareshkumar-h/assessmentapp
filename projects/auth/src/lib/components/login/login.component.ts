@@ -59,10 +59,11 @@ export class LoginComponent implements OnInit {
   }
 
   redirectToHomepage(USER:any){  
-    console.log("RedirectUrl:" + this.redirectUrl);  
+    console.log("RedirectUrl:" + this.redirectUrl); 
+    
     if(this.redirectUrl){   
-      window.location.href=this.redirectUrl;       
-      //this.router.navigate([this.redirectUrl]);
+      window.location.href=this.redirectUrl?this.redirectUrl:"/";       
+     // this.router.navigate([this.redirectUrl]);
       //this.router.navigateByUrl(this.redirectUrl);
     }
 

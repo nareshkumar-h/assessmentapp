@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'projects/auth/src/public-api';
 
 import { of } from 'rxjs';
-import { environment } from '../environments/environment';
+import { API_URL, Config } from './config';
+import { SecurityService } from 'projects/security/src/public-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SiteService {
 
-  
-  apiUrl:string;
-  constructor(private http:HttpClient, private authService: AuthService) { 
-    this.apiUrl = environment.API_URL;
+  constructor(private http:HttpClient, private authService:AuthService, private securityService:SecurityService,
+  @Inject(API_URL)private apiUrl: string) { 
+    
   }
 
   

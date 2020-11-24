@@ -6,41 +6,60 @@
             <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
         </div>
     </div> 
-    
-    <div class="row" *ngFor="let i=index;let m of projectTasks | keyvalue">
+    <div *ngIf="projectSprints && projectTasks">
+    <div class="row" *ngFor="let i=index;let sprint of projectSprints">
         <div class="col">
             <div class="card card-custom">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">                        
-                        Sprint #{{i+1}} - {{m.key}} ( {{projectTasks[m.key].length}} Topics )
+                        Sprint #{{sprint.sprintNo}}  - Duration 7 Days ( {{sprint.startDate}} - {{sprint.endDate }} ) 
                     </div>
+                    <!-- <div class="tools pull-right" >
+                        <a (click)="loadSprintTasks(m)" class="btn btn btn-sm text-white"> Show</a>
+                    </div> -->
                 </div>
-                <div class="card-body">
+                <div class="card-body" *ngIf="projectTasks">
+                    
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>    
-                                <th>Task Type</th>
-                                <th width="40%">Task Name</th>
+                                <th width="40%">User Story</th>
+                                <!-- <th>Description</th> -->
+                                <!-- <th width="40%">Task Name</th> -->
                                 <th>Estimation(Hrs)</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
+                                <!-- <th>Start Date</th>
+                                <th>End Date</th> -->
                                 <th>Status</th>
-                                <th>Sprint</th> 
+                                <!-- <th>Sprint</th>  -->
                                 <th>Developed By</th>                                                               
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr *ngFor="let j=index;let t of m.value">
-                                <td>{{j+1}}</td>             
-                                <td> <span class="badge badge-primary">Feature</span> </td>                   
-                                <td>{{t.name}}</td>
+                        <tbody *ngIf="projectTasks[sprint.sprintNo]">
+                            <tr *ngFor="let j=index;let t of projectTasks[sprint.sprintNo]">
+                                
+                                <td>{{j+1}}</td>   
+                                
+                                <td>
+                                     <input *ngIf="t.status!='COMPLETED'" type="checkbox" #topicCheckbox [checked]="t.status=='COMPLETED'" name="topic"
+                                        (change)="updateStatus(t, topicCheckbox.checked)" /> 
+                                        
+                                        <i class="fa fa-check" aria-hidden="true" *ngIf="t.status=='COMPLETED'"></i>
+                                    &nbsp; &nbsp;<font [color]="getColor(t)"> {{t.projectFeature.name}} 
+                                        <span class="badge badge-primary"> {{t.name}}</span>
+                                         </font>
+                                
+                            </td>         
+                            <!-- <td [innerHTML]="t.projectFeature.description"></td> -->
+                                 
+                                                                
+                                <!-- <td>{{t.value | json}} <span class="badge badge-primary">{{t.category}}</span></td> -->
                                 <td>{{t.estimation}}</td>
-                                <td>{{t.startDate}}</td>
-                                <td>{{t.completionDate}}</td>
+                                <!-- <td>{{t.startDate}}</td>
+                                <td>{{t.completionDate}}</td> -->
                                 <td>{{t.status}}</td>
-                                <td>{{t.sprintNo}}</td>
+                                <!-- <td>{{t.sprintNo}}</td> -->
                                 <td>{{t.assignedTo}}</td>
                                 <td>
                                 </td>
@@ -51,5 +70,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </kt-page>

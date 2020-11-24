@@ -1,0 +1,55 @@
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center"><strong>Edit Task </strong></h3>
+            <form class="form" (submit)="save()">
+                <table class="table table-borderless w-100 d-block d-md-table table-sm">
+                    <tbody>
+                      
+                        <tr>
+                            <th width="30%">Category</th>
+                            <td>
+                                <input class="form-control" type="text" [(ngModel)]="task.category"
+                                    placeholder="" name="category" readonly required  />
+<!-- 
+                                <select class="form-control"  [(ngModel)]="task.category"  
+                                    name="category" required >
+                                    <option *ngFor="let c of categories" [value]="c.id" [selected]="category==c.id">{{c.name}}</option>                                    
+                                </select> -->
+                                </td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Name</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="task.name"
+                                    placeholder="" name="name" required  /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Sprint No</th>
+                            <td width="70%"><input class="form-control" type="number" [(ngModel)]="task.sprintNo"
+                                    placeholder="" name="sprintNo" required  /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Estimation</th>
+                            <td width="70%"><input class="form-control" type="number" [(ngModel)]="task.estimation" min="1" max="8"
+                                    placeholder="" name="estimation" required  /></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Assigned To</th>
+                            <td width="70%"><input class="form-control" type="text" [(ngModel)]="task.assignedTo" 
+                                    placeholder="" name="assignedTo" required  /></td>
+                        </tr>
+                       
+                        <tr>
+                            <th></th>
+                            <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="button" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

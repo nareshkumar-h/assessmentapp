@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'projects/users/src/lib/components/user.service';
 
 @Component({
   selector: 'pt-root',
@@ -13,12 +14,14 @@ export class AppComponent {
 
   user:any;
 
-  constructor(){
+  constructor(private userService:UserService){
     this.user = this.getLoggedInUser();    
     this.isLoggedIn = this.user !=null;    
   }
 
   selectedUser:any;
+
+  users;
 
   ngOnInit(): void {
     let sites = {"theme1": {
@@ -34,6 +37,7 @@ export class AppComponent {
     }
     };
     sessionStorage.setItem("SITE_INFO" , JSON.stringify(sites["theme1"]));
+    this.loadUsernames();
   }
 
   getLoggedInUser(){
@@ -48,7 +52,15 @@ export class AppComponent {
 
   getHeaderMenus(){
     this.headerMenus = [];
-   // this.headerMenus.push({name: "Projects",  link:["projects/all"], icon:"fas fa-book-open",  access: true});
+    //this.headerMenus.push({name: "Projects",  link:["projects/all"], icon:"fas fa-book-open",  access: true});
     return this.headerMenus;
   }
+
+  loadUsernames(){
+    this.userService.listUsers().subscribe(res=>{      
+      this.users = res;
+    });
+  }
+
+
 }

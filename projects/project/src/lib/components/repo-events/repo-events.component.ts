@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'projects/auth/src/public-api';import { GithubService } from '../../github.service';
 ;
@@ -12,26 +12,30 @@ export class RepoEventsComponent implements OnInit {
 
   breadcrumbItems:any=[];
 
+  @Input()
   githubUrl:string;
+  @Input()
   repoName:string;
   projectRepoUrl:string;
   isLoggedIn:boolean;
 
-  branch:string = "master";
+  branch:string = "main";
+  panelOpenState = false;
 
   constructor(private githubService: GithubService,private route: ActivatedRoute, public authService:AuthService) {
     this.route.params.subscribe( (params)=>{
       
       this.githubUrl = params['account'];
       this.repoName = params['repoName'];
-      this.projectRepoUrl = this.githubUrl + "/" + this.repoName;
-     console.log('View Project:' + this.projectRepoUrl);
-     this.isLoggedIn = authService.isLoggedIn();
+      
     });
    }
 
  
    ngOnInit(): void {
+    this.projectRepoUrl = this.githubUrl + "/" + this.repoName;
+    console.log('View Project:' + this.projectRepoUrl);
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.list();
   }
 

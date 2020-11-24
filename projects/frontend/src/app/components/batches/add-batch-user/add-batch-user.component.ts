@@ -4,8 +4,9 @@ import { BatchService } from '../batch.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../users/user.service';
+
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserService } from 'projects/users/src/lib/components/user.service';
 
 
 @Component({

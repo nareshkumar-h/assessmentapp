@@ -22,7 +22,7 @@ export class MentorListComponent implements OnInit {
   dataSource:any;
 
   loadMentors(){
-    this.userService.getMentors(this.authService.getLoggedInUsername()).subscribe(res=>{
+    this.userService.getMentors(this.authService.getSelectedUser()).subscribe(res=>{
       let mentors:any = res;
       this.dataSource = new MatTableDataSource<any>(mentors);
     });

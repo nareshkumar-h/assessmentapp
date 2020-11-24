@@ -4,7 +4,7 @@
 </div>
 
 <div *ngIf="isLoggedIn">
-  <kt-header [navbrand]="name" [user]="user" [bgColor]="headerColor" [menus]="getHeaderMenus()"></kt-header>
+  <kt-header [navbrand]="name" [user]="user" [users]="users" [bgColor]="headerColor" [menus]="getHeaderMenus()"></kt-header>
   <div class="wrapper">
 
     <router-outlet></router-outlet> 

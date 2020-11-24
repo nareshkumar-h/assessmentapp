@@ -1,0 +1,73 @@
+<form (keydown.enter)="$event.preventDefault();updateReview()" (keydown.shift.enter)="$event.preventDefault();updateReview()" (ngSubmit)="updateReview()">
+    <fieldset>
+        <legend>Feedback Rating:</legend>
+    <table>
+        <tbody>
+            <tr>
+                <th width="50%">Functionality</th>
+                <td>
+                    <input type="number" class="form-control" datalist="rating"  min="1" max="5" class="" name="functionality" [(ngModel)]="reviewRating.functionality" autofocus autocomplete="off" [readonly]="readonly">                    
+                </td>
+            </tr>
+            <tr>
+                <th width="30%">Design</th>
+                <td>
+                    <input type="number" datalist="rating"  min="1" max="5" class="" name="design" [(ngModel)]="reviewRating.design" autocomplete="off" [readonly]="readonly">
+                </td>
+            </tr>
+            <tr>
+
+            </tr>
+                <tr>
+                <th width="30%" >Complexity</th>
+                <td>
+                    <input type="number" datalist="rating"  min="1" max="5" class="" name="complexity" [(ngModel)]="reviewRating.complexity" autocomplete="off" [readonly]="readonly">
+                </td>
+            </tr>
+            <tr>
+                <th width="30%">Best Practices</th>
+                <td>
+                    <input type="number" datalist="rating"  min="1" max="5" class="" name="bestPractices" [(ngModel)]="reviewRating.bestPractices" autocomplete="off" [readonly]="readonly"> 
+                </td>
+            </tr>
+            <tr>
+                <th width="30%">Timeline</th>
+                    
+                <td>
+                    <input type="number" datalist="rating"  min="1" max="5" class="" name="timeline" [(ngModel)]="reviewRating.timeline" autocomplete="off" [readonly]="readonly">
+                </td>
+            </tr>
+            <!-- <tr>
+                <th width="30%">Documentation</th>
+                <td>
+                    <input type="number" datalist="rating"  min="1" max="5" class="" name="documentation" [(ngModel)]="reviewRating.documentation" autocomplete="off" [readonly]="readonly">
+                </td>
+            </tr>      -->
+            <tr>
+                <th width="30%">Comments</th>
+            </tr>
+            <tr>
+                <td colspan="2" >
+                    <textarea   name="comments" [readonly] = "readonly" cols="50" rows="5" ></textarea>
+                    
+                </td>
+            </tr>      
+            <tr>
+                <td colspan="2"><button *ngIf="!readonly" class="btn btn-success btn-block" [disabled]="readonly">Update</button></td>
+                
+            </tr>
+           
+        </tbody>
+    </table>
+    </fieldset>
+
+
+    <datalist id="rating">                        
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </datalist>
+</form>
+

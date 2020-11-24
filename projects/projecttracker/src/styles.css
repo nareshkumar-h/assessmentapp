@@ -10,3 +10,16 @@
 @import "~highlight.js/styles/idea.css";
 
 
+.mat-header-cell {
+    font-size: 20px;
+    font-weight: 500px;
+}
+
+.mat-cell {
+    font-size: 20px;
+}
+
+
+.feature-description {    
+    font-size: 20px;
+}
