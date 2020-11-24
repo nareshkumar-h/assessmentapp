@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL :"https://api.learn2build.in:8443/api/",
+  API_URL :"https://learn2build.in/api/",
   ORG_ID: "spinsoft"
 };
 
