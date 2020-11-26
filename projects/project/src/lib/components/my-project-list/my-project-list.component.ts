@@ -80,7 +80,7 @@ export class MyProjectListComponent implements OnInit {
     this.menus.push( {title: "My Projects",  path:["../projects"], icontype:"fas fa-user", access: true});
     this.menus.push( {title: "All Projects",  path:[ "../projects/all"], icontype:"fas fa-tools", access: true});    
     this.menus.push( {title: "Add Project",  path:[ "addproject"], icontype:"fas fa-plus", access: true});    
-    this.menus.push( {title: "Reviews",  path:[ "reviews"], icontype:"fas fa-search", access: true});          
+    this.menus.push( {title: "Reviews",  path:[ "reviews"], icontype:"fas fa-search", access: this.authService.hasRoleAccess('T')});          
     
   }
 

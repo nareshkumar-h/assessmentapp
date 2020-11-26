@@ -51,9 +51,10 @@
                                 Developer: {{feature.createdBy}}
                             </div>
                         </div>
-                        <div class="card-body" *ngIf="project">
-
-                            <a target="_blank" href="{{project.projectTestUrl}}">{{project.projectTestUrl}}</a>
+                        <div class="card-body" *ngIf="project">                            
+                            <ng-container *ngFor="let url of getUrl(project.projectTestUrl)">
+                            <a target="_blank" href="{{url}}">{{url}}</a> <br/><br/>
+                        </ng-container>
                             <br />
                         </div>
                     </div>

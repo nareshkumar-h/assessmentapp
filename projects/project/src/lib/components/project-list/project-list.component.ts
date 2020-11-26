@@ -60,6 +60,13 @@ export class ProjectListComponent implements OnInit {
   
   menus:any;
 
+  getUrl(url){
+    let projectUrls = url!=null?url.split(","):[];
+    
+    
+    return projectUrls;
+  }
+
   loadMenus(){
     this.menus = [];
     this.menus.push( {title: "Home",  path:["../"], icontype:"fas fa-home", access: true});

@@ -44,6 +44,14 @@ export class ReviewFeatureComponent implements OnInit {
     this.findOne();
   }
 
+  getUrl(url){
+    
+    let projectUrls = url!=null?url.split(","):[];
+    
+    
+    return projectUrls;
+  }
+
   project;
   features:any;
 

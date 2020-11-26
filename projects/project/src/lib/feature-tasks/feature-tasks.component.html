@@ -32,12 +32,12 @@
                     <tbody>
                         <tr *ngFor="let i=index;let t of projectTasks">
                             <!-- <td>{{i+1}}</td>    -->
-                            <td *ngIf="t.status!='COMPLETED'">
+                            <td *ngIf="t.status=='PENDING'">
                                 <input  type="checkbox" #topicCheckbox [checked]="t.status=='COMPLETED'" name="topic"
                                 (change)="updateTaskStatus(t, topicCheckbox.checked)" /> 
                             </td>
-                            <td *ngIf="t.status=='COMPLETED'">
-                                <i  class="fa fa-check" aria-hidden="true" *ngIf="t.status=='COMPLETED'"></i>
+                            <td *ngIf="t.status=='COMPLETED' || t.status=='ACCEPTED'">
+                                <i  class="fa fa-check" aria-hidden="true" ></i>
  
                             </td>          
                             <td> <span class="badge badge-primary">{{t.category}}</span> </td>                   
