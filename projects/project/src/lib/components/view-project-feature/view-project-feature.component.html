@@ -89,7 +89,8 @@
             </div>
         </div>
     </div>
+    <lib-feature-skills [feature]="feature" [isEditable]="isReviewer"></lib-feature-skills>
     <lib-feature-tasks [feature]="feature" taskType="TASK" title="User Story" *ngIf="feature"></lib-feature-tasks>
-    <lib-feature-tasks [feature]="feature" taskType="BUG" title="Issues" *ngIf="feature"></lib-feature-tasks>
+    <lib-list-issues [feature]="feature" taskType="BUG" title="Issues" *ngIf="feature"></lib-list-issues>
     
 </kt-page>

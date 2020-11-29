@@ -115,12 +115,14 @@ export class AuthService {
   hasRoleAccess(roles){
     let user = this.getUser();
     let allowed = false;
+    if(user!=null){
     for(let role of roles){
       if(user.roles.indexOf(role) !=-1){
         allowed = true;
         break;
       }
     }
+  }
     return allowed;
   }
   
@@ -143,7 +145,7 @@ export class AuthService {
 
   getSelectedUser(){
     let user = this.securityService.get("SELECTED_USER");
-    return user?user:this.getUser().username;
+    return user ?user:this.getUser()?.username;
   }
 
   isLoggedIn():boolean{

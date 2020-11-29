@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'projects/auth/src/public-api';
 import { AddFeatureTaskComponent } from '../add-feature-task/add-feature-task.component';
+import { AddTaskIssueComponent } from '../components/add-task-issue/add-task-issue.component';
 import { EditFeatureTaskComponent } from '../components/edit-feature-task/edit-feature-task.component';
 import { ProjectService } from '../project.service';
 
@@ -77,7 +78,17 @@ export class FeatureTasksComponent implements OnInit {
   }
 
   
-  
+  createIssueDialog(task){
+
+    let modalData = {projectId: this.projectId, feature: this.feature, task: task};
+    console.log(modalData)
+    const dialogRef = this.dialog.open(AddTaskIssueComponent,
+      {width: '100%', height:'fit-content', data:  modalData});
+    
+    dialogRef.afterClosed().subscribe(result => {
+      this.listTasks();
+    });
+  }
   
 
   addTaskDialog(taskType){

@@ -96,7 +96,7 @@ export class ProjectTasksComponent implements OnInit {
       tasks = alltasks.filter(obj => obj.category != 'BUG');
     }
     let totalHours = tasks.reduce( function(sum, obj){  return sum+obj.estimation;},0);
-    let completedTasks = tasks.filter( t => t.status =='COMPLETED');
+    let completedTasks = tasks.filter( t => t.status =='COMPLETED' || t.status=='ACCEPTED');
     let pendingTasks = tasks.length - completedTasks.length;
     let completedHours = completedTasks.reduce( function(sum, obj){  return sum+obj.estimation},0);
     let percentage = 0;

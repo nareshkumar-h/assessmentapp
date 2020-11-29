@@ -1,0 +1,56 @@
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center"><strong> Create Issue - {{taskName}} </strong>
+               ( <span class="badge badge-primary">Sprint {{task?.sprintNo}}</span>,
+               <span class="badge badge-success">{{task?.assignedTo}}</span>)
+            </h3>
+            
+            <form class="form" (submit)="save()" #f="ngForm">
+                
+                   
+                    
+                <table class="table table-borderless w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <tr>
+                             <th class="">Issue Type</th>
+                                    <td class="col-6">
+        
+                                        <select class="form-control"  [(ngModel)]="task.issueType"  
+                                            name="issueType" required >
+                                            <option *ngFor="let c of issueTypes" [value]="c.id" [selected]="task.issueType==c.id">{{c.name}}</option>                                    
+                                        </select> 
+                                        </td>
+                        </tr>
+                        <tr>
+                            <th class="col-2">Name</th>
+                            
+                            <td class="col-3"><input class="form-control" type="text"  [(ngModel)]="task.name"
+                                    placeholder="" name="name" required  autofocus  autocomplete="off"/></td>
+                                   
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>
+                                <textarea [(ngModel)]="task.description" name="description" rows="3" cols="100" placeholder="Description">{{task.description}}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Estimation</th>
+                            <td ><input class="form-control sm-col-3" type="number" [(ngModel)]="task.estimation" 
+                                    placeholder="" name="estimation" required  /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button type="submit" [disabled]="f.invalid" class="btn btn-success">Submit</button> &nbsp;
+                                <button type="button" (click)="cancel()" class="btn btn-danger">Cancel</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+    </div>
+</mat-dialog-content>

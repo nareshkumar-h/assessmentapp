@@ -1,0 +1,39 @@
+<kt-page title="Project Feedback" showSidebar="true">
+
+    <div *ngIf="data">
+        <div class="row" *ngFor="let obj of data | keyvalue">
+            <div class="col">
+                <div class="card card-custom">
+                    <div class="card-header card-blue">
+                        <div class="card-title text-white">
+                            {{obj.key | uppercase}}
+                        </div>
+                    </div>
+                    <div class="card-body">                        
+                        <ul *ngIf="obj.value">
+                            <li *ngFor="let d of obj.value">
+                                {{d}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!data">
+        <div class="row" >
+            <div class="col">
+                <div class="card card-custom">
+                    <div class="card-header card-blue">
+                        <div class="card-title text-white">
+                            Feedback
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        Yet to Prepare                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</kt-page>

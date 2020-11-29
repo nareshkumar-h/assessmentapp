@@ -1,11 +1,12 @@
-<kt-page title="Project Repositories" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+<lib-repository-sidebar showSidebar="true"></lib-repository-sidebar>
+<kt-page title="Project Repositories" showSidebar="true">
 
     <div class="row">
         <div class="col">
             <div class="card card-custom">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">
-                        Repositories
+                        Repositories <small *ngIf="githubUsername">Github Username: {{githubUsername}}</small>
                     </div>
                     <div class="tools pull-right" *ngIf="githubUsername">
                         <a routerLink="../addrepository" class="btn btn btn-sm text-white"><i
@@ -64,11 +65,14 @@
                                         type="button">Request Git Access</button>
                                     &nbsp;
 
-                                    <button class="btn btn-danger" *ngIf="githubUsername" (click)="deleteRepo(r.id)"
+                                   
+                                    <button type="button" routerLink="{{r.account}}/{{r.repoName}}" class="btn btn-info">View
+                                        </button> &nbsp;
+                                        &nbsp;
+                                        
+                                        <button class="btn btn-danger" *ngIf="isMentor" (click)="deleteRepo(r.id)"
                                         type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     &nbsp;
-                                    <button type="button" (click)="showEvents(r)"
-                                        class="btn btn-info">Show Events</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -81,8 +85,4 @@
         </div>
     </div>
 
-    <div *ngIf="selectedRepository">
-
-        <app-repo-events [githubUrl]="selectedRepository.account" [repoName]="selectedRepository.repoName" ></app-repo-events>
-    </div>
 </kt-page>

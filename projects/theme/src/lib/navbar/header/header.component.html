@@ -3,7 +3,7 @@
   <!-- <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color:cadetblue"> -->
   <nav class="navbar navbar-expand-md fixed-top navbar-dark" [style.background-color]="bgColor">
     <!--#2b3643-->
-    <a class="navbar-brand" href="#">{{navbrand}}</a>
+    <a class="navbar-brand" href="">{{navbrand}}</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,3 +87,11 @@
     </div>
   </nav>
 </header>
+
+
+<script>
+  let navigator = navigator.userAgent;
+  if(navigator != null && navigator.indexOf("Mobile") !=-1){
+    document.querySelector(".navbar-brand").style.display = "none";
+  }
+</script>

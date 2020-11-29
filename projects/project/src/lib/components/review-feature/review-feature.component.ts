@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +8,7 @@ import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'projects/auth/src/public-api';
 import { ProjectService } from '../../project.service';
+import { AddSkillComponent } from '../add-skill/add-skill.component';
 
 @Component({
   selector: 'lib-review-feature',
@@ -24,7 +26,7 @@ export class ReviewFeatureComponent implements OnInit {
    {"name":"Projects"}];
 
 
-  constructor(private projectService:ProjectService, private authService:AuthService, private route:ActivatedRoute, private toastr:ToastrService) { 
+  constructor(private dialog:MatDialog, private projectService:ProjectService, private authService:AuthService, private route:ActivatedRoute, private toastr:ToastrService) { 
     this.userId = this.authService.getLoggedInUsername();
 
     this.isMentor =  this.authService.hasRoleAccess("T");
@@ -169,5 +171,22 @@ export class ReviewFeatureComponent implements OnInit {
       this.back();
     });
   }
+
+  
+  
+  addSkillModal(module,feature){
+    const dialogRef = this.dialog.open(AddSkillComponent,
+      {width: '100%', height:'fit-content', data: {featureId: feature.id, tags: feature.tags}});
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        
+      }
+      
+      //this.features.tags.push(result);
+    });
+  }
+
+
  
 }

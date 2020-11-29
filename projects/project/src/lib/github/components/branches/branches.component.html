@@ -1,0 +1,41 @@
+
+        <div class="card card-custom">
+            <div class="card-header card-blue">
+                <div class="card-title text-white">Branches<small> ( {{branches?.length}} )</small></div>
+            </div>
+            <div class="card-body">
+
+                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                    <thead>
+                        <tr>
+                            <th># </th>
+                            <th>Branch Name</th>
+                            <th>Protected</th>
+                            <th>Protection Enabled</th>                            
+                            <th>Required Status Checks</th>
+                            <th>Action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="branches">
+                        <tr *ngFor="let b of branches;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{b.name}}</td>
+                            
+                            <td>{{b.protected?"YES":"NO"}}</td>
+                            <td>{{b.protection.enabled?"YES":"NO"}}</td>
+                            <td>{{b.protection.required_status_checks.enforcement_level}}</td>
+                            <td><a href="{{b.commit.url}}" target="_blank">View</a></td>
+                            <!-- <td>
+                                {{b.protection_url}}
+                            </td> -->
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    
+
+            </div>
+        </div>

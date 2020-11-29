@@ -1,0 +1,133 @@
+<div class="row" *ngIf="feature">
+    <div class="col">
+        <div class="card card-custom gutter-b">
+            <div class="card-header card-blue">
+                <div class="card-title text-white">
+                    Issues ( {{projectTasks.length}} )
+                </div>
+                <div class="tools pull-right">
+                     <!-- <button  *ngIf="isMentor" (click)="addTaskDialog('BUG')" class="btn btn-success btn-sm text-white">
+                       <i class="fa fa-plus" aria-hidden="true"></i> </button>   &nbsp;  -->
+                </div>
+            </div>
+            <div class="card-body">
+
+
+
+                <table class="table">
+                    <thead >
+                        <tr>
+                            <th>#</th>    
+                            <th width="50%">Task Details</th>      
+                            <th>Assigned To</th>   
+                            <th>Reported Date</th>
+                            <th >Completion Date</th>    
+                              
+                            <th>Assigned By</th>   
+                              
+                                                   
+                                                                          
+                            <th width="30%">Action</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        <ng-container *ngFor="let t of projectTasks; let i=index;">
+                        <tr>
+                            <td>
+                            <!-- <td>{{i+1}}</td>    -->
+                            <span *ngIf="t.status=='PENDING' || t.status=='ASSIGNED'">
+                                <input  type="checkbox" #topicCheckbox [checked]="t.status=='COMPLETED'" name="topic"
+                                (change)="updateTaskStatus(t, topicCheckbox.checked)" /> 
+                            </span>
+                            <span *ngIf="t.status=='COMPLETED' || t.status=='ACCEPTED'">
+                                <i  class="fa fa-check" aria-hidden="true" ></i>
+ 
+                            </span>  
+                            </td>
+                                 
+                            <td>
+                               
+                                {{t.name}} 
+                                <br/>
+                                
+                                <span class="badge badge-info">Sprint {{t.sprintNo}}</span> &nbsp;
+                                <span class="badge badge-primary">{{t.category}}</span> &nbsp;
+                                <span class="badge badge-light">
+                                    <i class="fa fa-clock" aria-hidden="true"></i>
+                                    {{t.estimation}} Hrs</span>
+                                    
+                                    <span class="badge badge-success" *ngIf="t.status=='COMPLETED' || t.status=='ACCEPTED'">
+                                        <!-- <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{t.status}} -->
+                                    </span> 
+                                    <span class="badge badge-warning" *ngIf="t.status=='IN_PROGRESS'">                                        
+                                        {{t.status}} 
+                                    </span> 
+                                    <span class="badge badge-danger" *ngIf="t.status=='ASSIGNED' || t.status=='PENDING' || t.status=='REJECTED'">                                        
+                                        {{t.status}} 
+                                    </span> 
+                                    
+                                <span class="badge badge-danger" *ngIf="t.status=='PENDING'">
+                                Due: {{t.dueDate | moment}}
+                            </span> 
+                            
+                                <br/>
+                            
+                                <!-- <div [innerHTML]="t.description"></div>       -->
+                                
+                            </td>
+                            
+                            <td>
+                                <span class="badge badge-success">
+                                        
+                                    {{t.assignedTo | uppercase}}</span> &nbsp;
+                                </td>   
+                            
+                            <td>{{t.assignedDate}}</td>
+                            <td>{{t.completionDate}}</td>
+                            
+                            
+                          
+                            <td>
+                                <span class="badge badge-primary">{{t.createdBy | uppercase}}</span> &nbsp;
+                            </td>
+                            
+                            
+                            <td>
+                                <button *ngIf="isMentor || ( t.status =='PENDING' && t.status=='ASSIGNED')" (click)="editTaskDialog(t)" class="btn btn-info btn-sm">                                    
+                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                </button>  &nbsp;
+
+                                <button *ngIf="isMentor" (click)="deleteTask(t.id)" class="btn btn-danger btn-sm" ><i class="fa fa-trash " aria-hidden="true"></i></button>  
+                                &nbsp;
+
+                                <button *ngIf="t.status=='PENDING'" (click)="updateStatus(t.id,'IN_PROGRESS')" class="btn btn-info btn-sm" > Start</button> &nbsp;
+                                
+                                <button *ngIf="t.status=='IN_PROGRESS'" (click)="updateStatus(t.id,'COMPLETED')" class="btn btn-success btn-sm" > 
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button> &nbsp;
+                                &nbsp;
+                                <button *ngIf="t.status=='REJECTED'" (click)="updateStatus(t.id,'ASSIGNED')" class="btn btn-success btn-sm" > 
+                                    
+                                    Reopen
+                                    </button> &nbsp;
+                                <button *ngIf="isMentor && t.status=='COMPLETED'" (click)="updateStatus(t.id,'ACCEPTED')" class="btn btn-success btn-sm" > 
+                                    
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button> &nbsp;
+                                    <button *ngIf="t.status =='PENDING' || t.status=='ASSIGNED'" (click)="updateStatus(t.id,'REJECTED')" class="btn btn-danger btn-sm" > 
+                                        Reject                                        
+                                        </button> &nbsp;
+                                &nbsp;
+                                
+                                
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'projects/auth/src/public-api';
+import { ReportingService } from 'projects/frontend/src/app/reporting.service';
 import { UserService } from 'projects/users/src/lib/components/user.service';
 import { ProjectService } from '../../project.service';
 
@@ -15,18 +16,23 @@ import { ProjectService } from '../../project.service';
 export class ViewUserRatingReportComponent implements OnInit {
 
   
-  
+  isLoggedIn:boolean;
   userId:any;
   breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
    {"name":"Projects"}];
 
    isMentor:boolean = false;
 
-  constructor(private projectService:ProjectService, private authService:AuthService, private route:ActivatedRoute, private userService:UserService) { 
+  constructor(private projectService:ReportingService, private authService:AuthService, private route:ActivatedRoute, private userService:UserService) { 
+    
+    this.route.queryParams.subscribe(params=>{
+      this.userId = params["userId"];
+    })
     this.route.params.subscribe(params=>{
       this.userId = params["userId"];
     })
     this.isMentor = this.authService.hasRoleAccess('T');
+    this.isLoggedIn =  this.authService.isLoggedIn();
   }
 
   ngOnInit(): void {

@@ -12,15 +12,22 @@ export class ViewProjectDetailComponent implements OnInit {
   
   breadcrumbItems:any = [];
   projectId:number;
+  userId:number;
+
   constructor(private router:Router, private route:ActivatedRoute, private projectService:ProjectService) {
     this.route.parent.params.subscribe (params=>{
       this.projectId = params["projectId"];
+      this.userId = params["userId"];
     });
    }
 
 
   ngOnInit(): void {
-    this.findOne();
+    if(this.projectId != null){
+      this.findOne();
+    }
+    
+      
 
   }
 

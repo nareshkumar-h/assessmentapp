@@ -22,19 +22,34 @@ export class ProjectFeatureListComponent implements OnInit {
   isLoggedInUser:boolean;
   isMentor:boolean;
 
+  displayColumns =["technologies","priority","action"];
+
   constructor(public dialog: MatDialog,private projectService: ProjectService, private authService:AuthService,private route: ActivatedRoute,
     private toastr: ToastrService) {
       this.isMentor =  this.authService.hasRoleAccess("T");
     this.route.parent.params.subscribe(params => {
       
       this.projectId = params['projectId'];
+      this.userId =  params["userId"];
       
     });
+    this.route.queryParams.subscribe(params=>{
+
+      let fields = params["display"];
+      if (fields ){
+        let fieldName = fields.split(",");
+        this.displayColumns = [];
+        this.displayColumns.push(...fieldName);
+        console.log(JSON.stringify(this.displayColumns));
+      }
+    })
   }
 
   ngOnInit(): void {
-    this.findOne();
-    this.listModules();
+    if (this.projectId != null){
+      this.findOne();
+      this.listModules();
+    }
     this.listFeatures();
   }
 
@@ -57,10 +72,34 @@ export class ProjectFeatureListComponent implements OnInit {
   }
 
   listFeatures() {
-    this.projectService.listFeatures(this.projectId).subscribe(res => {
+    
+    this.getFeatures().subscribe(res => {
       this.projectFeatures = <{}>res;
+      if ( this.userId != null ){
+        let modules = Object.keys (this.projectFeatures);
+        console.log(modules)
+        let modulesMap = [];
+        for(let m of modules){
+          modulesMap.push({name:m});
+        }
+        this.modules = modulesMap;
+        
+      }
       this.createReport(this.projectFeatures);
     });
+  }
+
+  getFeatures(){
+    if (this.projectId != null){
+      return this.projectService.listFeatures(this.projectId);
+    }
+    else if (this.userId != null){
+      return this.projectService.listUserFeatures(this.userId);
+    }
+  }
+
+  isExists(tag){
+    return this.displayColumns.includes(tag);
   }
 
   getModuleId(moduleName){
@@ -80,8 +119,8 @@ export class ProjectFeatureListComponent implements OnInit {
     
     let pendingTasks = tasks.filter(obj=>obj.status=="PENDING").length;
     let inprogressTasks = tasks.filter(obj=>obj.status=="INPROGRESS").length;
-    let reviewTasks = tasks.filter(obj=>obj.status=="TESTING").length;
-    let completedTasks = tasks.filter(obj=>obj.status=="COMPLETED").length;
+    let reviewTasks = tasks.filter(obj=>obj.status=="TESTING").length;    
+    let completedTasks = tasks.filter(obj=>obj.status=="COMPLETED" || obj.status=="ACCEPTED").length;//correct
 
     var count = 0;
     for (let moduleName in this.projectFeatures) {

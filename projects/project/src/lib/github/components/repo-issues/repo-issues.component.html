@@ -1,0 +1,66 @@
+<kt-page showSidebar="true">
+    <div class="row" *ngIf="reportData">
+        <div class="col-3" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom gutter-b">
+                <div class="card-header card-blue">
+                    <div class="card-title text-white">
+                        Issues ( {{issues.length}} )
+                    </div>
+                    <div class="tools pull-right">
+                        <!-- <button  *ngIf="isMentor" (click)="addTaskDialog('BUG')" class="btn btn-success btn-sm text-white">
+                       <i class="fa fa-plus" aria-hidden="true"></i> </button>   &nbsp;  -->
+                    </div>
+                </div>
+                <div class="card-body">
+
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th width="20%">Title</th>
+                                <th width="30%">Description</th>
+                                <th>Status</th>
+                                <th>Reported Date</th>
+                                <th>Completion Date</th>
+                                <th>Closed Date</th>
+                                <th>Assigned By</th>
+
+
+
+                                <th width="30%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let t of issues; let i=index;">
+                                <tr>
+
+                                    <td>{{i+1}}</td>
+                                      
+                                    <td>{{t.title}}</td>
+                                    <td>{{t.body}}</td>
+                                    <td>{{t.state}}</td>
+                                    <td>{{t.created_at | moment}}</td>
+                                    <td>{{t.updated_at | moment}}</td>
+                                    <td>{{t.closed_at | moment}}</td>
+                                    <td>
+                                        
+                                        <a href="{{t.url}}" target="_blank" rel="noopener noreferrer">View</a>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</kt-page>

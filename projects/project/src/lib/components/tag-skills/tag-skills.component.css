@@ -1,0 +1,23 @@
+.example-chip-list {
+    width: 100%;
+  }
+  .mat-chip {
+    font-size: 12px;
+  }
+
+
+  .mat-chip.mat-standard-chip.mat-chip-selected.mat-green {
+    background-color: #44b6ae;
+    color: #fff;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-orange {
+  background-color: orange;
+  color: #fff;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-red {
+  background-color: orange;
+  color: #fff;
+}
+/*#44b6ae*/

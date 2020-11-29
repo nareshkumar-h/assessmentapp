@@ -1,0 +1,69 @@
+<kt-page title="Pull Request" showSidebar="true" >
+
+    
+    <div class="row" *ngIf="reportData">
+        <div class="col-3"
+    *ngFor="let r of reportData;let i=index;">            
+        <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+    </div>
+</div> 
+<div class="row">
+    <div class="col">
+        <div class="page-title"></div>
+        <div class="card card-custom">
+            <div class="card-header card-blue">
+                <div class="card-title text-white">
+                    Pull Requests <small *ngIf="prList">( {{prList.length}} )</small>
+                </div>
+            </div>
+            <div class="card-body">
+
+                Status: 
+                <ng-container *ngFor="let s of states">
+                    <input type="radio" name="state" [(ngModel)]="state" value="{{s}}" (change)="showPRs(state)"> {{s |uppercase}} &nbsp;
+            </ng-container>
+
+                <!-- <select name="state" [(ngModel)]="state" required (change)="showPRs(state)">
+                        <option *ngFor="let s of states" [value]="s" >{{s}}</option>
+                        </select> -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>PR No</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Requested By</th>
+                            <th>Status</th>
+                            <th>Link</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Closed At</th>
+                            <th>Merged At</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of prList;let i=index;">
+                            <td>{{p.number}}</td>
+                            <td>{{p.title}}</td>
+                            <td>{{p.body}}</td>
+                            <td><img src="{{p.user.avatar_url}}" width="30px"
+                                    height="30px" />{{p.user.login}}</td>
+                            <td>{{p.state}}</td>
+                            <td><a href="{{p.html_url}}" target="_blank">View</a></td>
+                            <td>{{p.created_at | moment}}</td>
+                            <td>{{p.updated_at | moment}}</td>
+                            <td>{{p.closed_at | moment}}</td>
+                            <td>{{p.merged_at| moment}}</td>
+                            
+                            <!-- <td><button type="button">View</button></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</kt-page>

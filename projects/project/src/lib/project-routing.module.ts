@@ -19,9 +19,6 @@ import { ViewProjectActivityComponent } from './components/view-project-activity
 import { AuthGuard } from 'projects/projecttracker/src/app/auth.guard';
 import { ReviewFeatureComponent } from './components/review-feature/review-feature.component';
 import { ViewProjectRatingComponent } from './components/view-project-rating/view-project-rating.component';
-import { UserRatingReportComponent } from './components/user-rating-report/user-rating-report.component';
-import { UserFeatureRatingReportComponent } from './components/user-feature-rating-report/user-feature-rating-report.component';
-import { ViewUserRatingReportComponent } from './components/view-user-rating-report/view-user-rating-report.component';
 import { ProjectSkillsComponent } from './components/project-skills/project-skills.component';
 
 const routes: Routes = [
@@ -30,8 +27,7 @@ const routes: Routes = [
   //{ path: 'projects',      component: ProjectListComponent },
   //{ path: ':userId/addproject',      component: AddProjectComponent },
   //{ path: ':userId/projects/:projectId/view',      component: ViewProjectComponent },
-  { path: 'reports/projects', component: UserRatingReportComponent},
-  { path: 'reports/projects/:userId', component: ViewUserRatingReportComponent},
+  
   { path: 'projects/all',      component: ProjectListComponent, canActivate:[AuthGuard] },
   { path: 'projects',      component: MyProjectListComponent ,canActivate:[AuthGuard]},
   { path: 'projects/addproject',      component: AddProjectComponent ,canActivate:[AuthGuard]},
@@ -57,7 +53,7 @@ const routes: Routes = [
   children: [
     { path: 'view',      component: ViewProjectDetailComponent },
     { path: 'features',      component: ProjectFeatureListComponent },
-    { path: 'skills',      component: ProjectSkillsComponent },
+    { path: 'competency',      component: ProjectSkillsComponent },
     // { path: 'addfeature/:moduleId',      component: AddProjectFeatureComponent },
     { path: 'features/:featureId',      component: ViewProjectFeatureComponent },
     { path: 'plan',      component: ProjectActivityListComponent },   

@@ -10,5 +10,6 @@
       "jasminewd2",
       "node"
     ]
-  }
+  },
+  "paths": { "http": ["node_modules/@types/node"] }
 }

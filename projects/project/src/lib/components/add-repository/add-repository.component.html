@@ -1,9 +1,9 @@
-<kt-page title="Add Repository" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
+<kt-page title="Add Repository" showSidebar="true" >
     <div class="row">
         <div class="col-6">
             <div class="card card-custom">
                 <div class="card-header card-blue">
-                   <div class="card-title text-white"> Add Repository - {{projectDetail?.name}}</div>
+                   <div class="card-title text-white"> Create Repository - {{projectDetail?.name}}</div>
                 </div>
                 <div class="card-body">
                     <form id="createRepoForm" #rForm="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="createRepo(rForm)">

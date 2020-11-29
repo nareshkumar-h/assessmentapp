@@ -1,0 +1,43 @@
+        <div class="card card-custom">
+            <div class="card-header card-blue">
+                <div class="card-title text-white">Developers</div>
+                <div class="tools pull-right">
+                    <!-- <a routerLink="addrepository" class="btn btn btn-sm text-white"><i
+                            class="fa fa-plus "></i></a> -->
+                            <a (click)="addUser()" class="btn btn btn-sm text-white"><i
+                                class="fa fa-plus "></i></a>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Name </th>
+                            <th>Admin</th>
+                            <th>Push Access</th>
+                            <th>Pull Access</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="users">
+                        <tr *ngFor="let u of users;let i=index">
+                            <td>
+                                <img src="{{u.avatar_url}}" width="30px" height="30px">
+                                {{u.login}} 
+                            </td>
+                            <td>
+                                {{u.permissions.admin?"Y":""}}
+                            </td>
+                            <td>
+                                {{u.permissions.push?"Y":"N"}}
+                            </td>
+                            <td>
+                                {{u.permissions.pull?"Y":"N"}}
+                            </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    
+
+            </div>
+        </div>

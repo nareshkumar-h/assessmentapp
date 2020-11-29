@@ -1,0 +1,59 @@
+<div class="sidebar">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-center" (click)="home('reports')">{{userId | uppercase}}</a>
+      </nav>
+    
+
+    <ul class="nav sidebar-menu">
+
+        <li class="nav-item">
+            <a class="nav-link" (click)="home('reports')">
+                <i class="fas fa-home"> &nbsp;&nbsp; </i>
+                <span class="title">Home</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLinkActive="nav-link-active" (click)="navigatePath('features')">
+                <i class="fas fa-laptop-code"> &nbsp;&nbsp; </i>
+                <span class="title">Projects Features </span>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  routerLink="ratings">
+                <i class="fas fa-star"> &nbsp;&nbsp; </i>
+                <span class="title">Ratings </span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigatePath('technologies')" > <!--routerLink="technologies"-->
+                <i class="fas fa-tools"> &nbsp;&nbsp; </i>
+                <span class="title">Technologies </span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="feedback"  > <!--routerLink="technologies"-->
+                <i class="fas fa-clipboard"> &nbsp;&nbsp; </i>
+                <span class="title">Feedback </span>
+            </a>
+        </li>
+        
+        <!-- <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigatePath('technologies')" > 
+                <i class="fas fa-tools"> &nbsp;&nbsp; </i>
+                <span class="title"> Releases </span>
+            </a>
+        </li> -->
+
+
+        <!-- <li class="nav-item">
+            <a class="nav-link" routerLinkActive="nav-link-active" (click)="navigate('reports/projects/userId')">
+                <i class="fas fa-laptop-code"> &nbsp;&nbsp; </i>
+                <span class="title">Skills </span>
+            </a>
+        </li> -->
+
+    </ul>
+
+</div>

@@ -45,9 +45,9 @@ export class AddProjectComponent implements OnInit {
     this.menus = [];
     this.menus.push( {title: "Home",  path:["../"], icontype:"fas fa-home", access: true});
     
-    this.menus.push( {title: "My Projects",  path:["../"], icontype:"fas fa-user", access: true});
-    this.menus.push( {title: "All Projects",  path:[ "../all"], icontype:"fas fa-tools", access: true});    
-    this.menus.push( {title: "Add Project",  path:[ "../addproject"], icontype:"fas fa-plus", access: true});      
+    this.menus.push( {title: "My Projects",  path:["../"], icontype:"fas fa-user", access: this.authService.hasRoleAccess(["U"])});
+    this.menus.push( {title: "All Projects",  path:[ "../all"], icontype:"fas fa-tools", access: this.authService.hasRoleAccess(["U","T","HR"])});    
+    this.menus.push( {title: "Add Project",  path:[ "../addproject"], icontype:"fas fa-plus", access: this.authService.hasRoleAccess(["U"])});      
   }
 
 }

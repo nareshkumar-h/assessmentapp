@@ -110,4 +110,6 @@ export class HeaderComponent implements OnInit {
 
   @Input()
   bgColor:any;
+
+  
 }

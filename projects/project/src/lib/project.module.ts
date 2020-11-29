@@ -14,7 +14,7 @@ import { AddProjectFeatureComponent } from './components/add-project-feature/add
 import { ProjectSidebarComponent } from './components/project-sidebar/project-sidebar.component';
 import { ProjectReviewsComponent } from './components/project-reviews/project-reviews.component';
 import { ProjectSprintsComponent } from './components/project-sprints/project-sprints.component';
-import { ProjectRepositoryListComponent } from './components/project-repository-list/project-repository-list.component';
+
 import { RatingIconComponent } from './components/rating-icon/rating-icon.component';
 import { TravisBadgeComponent } from './components/travis-badge/travis-badge.component';
 import { RepoEventsComponent } from './components/repo-events/repo-events.component';
@@ -44,11 +44,20 @@ import { ViewProjectRatingComponent } from './components/view-project-rating/vie
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { ViewUserStoryComponent } from './components/view-user-story/view-user-story.component';
 import { ReviewRatingFormComponent } from './components/review-rating-form/review-rating-form.component';
-import { UserRatingReportComponent } from './components/user-rating-report/user-rating-report.component';
-import { UserFeatureRatingReportComponent } from './components/user-feature-rating-report/user-feature-rating-report.component';
-import { ViewUserRatingReportComponent } from './components/view-user-rating-report/view-user-rating-report.component';
+
+
+
 import { ProjectSkillsComponent } from './components/project-skills/project-skills.component';
-import { EditUserFeatureRatingReportComponent } from './components/edit-user-feature-rating-report/edit-user-feature-rating-report.component';
+
+import { EditFeatureTagsComponent } from './components/edit-feature-tags/edit-feature-tags.component';
+import { AddTaskIssueComponent } from './components/add-task-issue/add-task-issue.component';
+import { ListIssuesComponent } from './components/list-issues/list-issues.component';
+import { TagSkillsComponent } from './components/tag-skills/tag-skills.component';
+import { FeatureSkillsComponent } from './components/feature-skills/feature-skills.component';
+import { TaskStatusComponent } from './components/task-status/task-status.component';
+import { AddSkillComponent } from './components/add-skill/add-skill.component';
+import { ProjectMainSidebarComponent } from './components/project-main-sidebar/project-main-sidebar.component';
+import { ProjectFeedbackComponent } from './components/project-feedback/project-feedback.component';
 
 
 
@@ -61,22 +70,22 @@ import { EditUserFeatureRatingReportComponent } from './components/edit-user-fea
     ProjectPlanComponent, ProjectTasksComponent,
      ProjectActivitiesComponent, ProjectActivityListComponent, 
      ViewProjectFeatureComponent, AddProjectFeatureComponent,
-      ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, ProjectRepositoryListComponent,
+      ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent,
     RatingIconComponent,TravisBadgeComponent, 
     RepoEventsComponent, EventTypeBadgeComponent,ViewFilesCommittedComponent,
-     AddRepositoryComponent,  ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent, UserRatingReportComponent, UserFeatureRatingReportComponent, ViewUserRatingReportComponent, ProjectSkillsComponent, EditUserFeatureRatingReportComponent
+       ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent,  ProjectSkillsComponent, EditFeatureTagsComponent, AddTaskIssueComponent, ListIssuesComponent, TagSkillsComponent, FeatureSkillsComponent, TaskStatusComponent, AddSkillComponent, ProjectMainSidebarComponent, ProjectFeedbackComponent
   ],
   imports: [
     CommonModule,HttpClientModule,FormsModule, ProjectRoutingModule, ThemeModule,
     SidenavModule, MaterialModule
   ],
-  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent,EditFeatureTaskComponent],
+  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent,EditFeatureTaskComponent,AddTaskIssueComponent],
   exports: [ProjectComponent,ProjectDashboardComponent,
     ProjectListComponent, ViewProjectComponent, MyProjectListComponent, 
     AddProjectComponent, ProjectFeatureListComponent, ProjectPlanComponent, ProjectTasksComponent, 
-    ProjectActivitiesComponent, ProjectActivityListComponent, ViewProjectFeatureComponent, AddProjectFeatureComponent, ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, ProjectRepositoryListComponent,
+    ProjectActivitiesComponent, ProjectActivityListComponent, ViewProjectFeatureComponent, AddProjectFeatureComponent, ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, AddSkillComponent,
     RatingIconComponent,TravisBadgeComponent, RepoEventsComponent, EventTypeBadgeComponent,
-    ViewFilesCommittedComponent, AddRepositoryComponent,ViewProjectRatingComponent,UserRatingReportComponent,EditUserFeatureRatingReportComponent
+    ViewFilesCommittedComponent, ViewProjectRatingComponent,ProjectSkillsComponent,TagSkillsComponent
   ],
   schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
 })

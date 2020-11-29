@@ -74,7 +74,7 @@ export class AddFeatureTaskComponent implements OnInit {
       console.log(res);
       this.toastr.success("Success");
       if(this.task.category == "BUG"){
-        this.updateFeatureStatus(this.feature.id);
+       // this.updateFeatureStatus(this.feature.id);
       }
       else{
         this.dialog.closeAll();
@@ -84,14 +84,7 @@ export class AddFeatureTaskComponent implements OnInit {
     });
   }
 
-  updateFeatureStatus(featureId){
-    let status="INPROGRESS";
-    this.projectService.updateFeatureStatus(featureId, status).subscribe(res=>{
-      this.toastr.success("Feature moved to " + status);
-      //this.ngOnInit();
-      this.dialog.closeAll();
-    });
-  }
+  
   
   cancel(){
     this.dialog.closeAll();

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'projects/auth/src/public-api';
 import { UserService } from 'projects/users/src/lib/components/user.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class AppComponent {
 
   user:any;
 
-  constructor(private userService:UserService){
+  constructor(private userService:UserService, private authService:AuthService){
     this.user = this.getLoggedInUser();    
     this.isLoggedIn = this.user !=null;    
   }
@@ -37,7 +38,11 @@ export class AppComponent {
     }
     };
     sessionStorage.setItem("SITE_INFO" , JSON.stringify(sites["theme1"]));
-    this.loadUsernames();
+    
+    if(this.authService.hasRoleAccess("T")){
+      this.loadUsernames();
+    }
+    
   }
 
   getLoggedInUser(){

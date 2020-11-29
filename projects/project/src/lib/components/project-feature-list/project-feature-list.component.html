@@ -1,107 +1,121 @@
-<kt-page title="Project Features - {{project?.name}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">    
-    
+<kt-page title="Project Features  {{project?.name}}" showSidebar="true">
+    <!-- [breadcrumbItems]="breadcrumbItems"     -->
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
     </ng-template>
 
-        <div class="navbar nav float-right" *ngIf="isLoggedInUser">
-            <div class="nav-item"><button class="btn btn-info m-2" (click)="addModule()">Add Module</button></div>
-            
-        </div>
-        <br/>
+    <div class="navbar nav float-right" *ngIf="isLoggedInUser">
+        <div class="nav-item"><button class="btn btn-info m-2" (click)="addModule()">Add Module</button></div>
+
+    </div>
+    <br />
     <div class="row" *ngIf="reportData">
-        <div class="col-2"
-        *ngFor="let r of reportData;let i=index;"> 
+        <div class="col-2" *ngFor="let r of reportData;let i=index;">
             <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
         </div>
-    </div> 
+    </div>
     <div *ngIf="modules && projectFeatures else loading">
-    <div class="row" *ngFor="let i=index;let m of modules">
-        <div class="col">
-            <div class="card card-custom gutter-b">
-                <div class="card-header card-blue">
-                    <div class="card-title text-white">
-                    Module #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}} Features )
-                </div>
-                    <div class="tools pull-right">
-                         <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
-                            <i class="fa fa-plus "></i></button>  
+        <div class="row" *ngFor="let i=index;let m of modules">
+            <div class="col">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        <div class="card-title text-white">
+                            Module #{{i+1}} - {{m.name}} ( {{projectFeatures[m.name]?projectFeatures[m.name].length:0}}
+                            Features )
+                        </div>
+                        <div class="tools pull-right">
+                            <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)"
+                                class="btn btn btn-sm text-white">
+                                <i class="fa fa-plus "></i></button>
 
-                            
-                        <!--    <button *ngIf="isLoggedInUser" type="button" class="btn btn btn-sm text-white" data-toggle="modal" data-target="#addModule">
+
+                            <!--    <button *ngIf="isLoggedInUser" type="button" class="btn btn btn-sm text-white" data-toggle="modal" data-target="#addModule">
                                 <i class="fa fa-plus "></i>
                               </button>
                               -->
-                        <!-- <a routerLink="../addfeature/{{m.name}}" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></a> -->
-                    </div> 
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>    
-                                <th width="20%">Feature Name</th>
-                                <th width="50%">Description</th>
-                                <th>Priority</th>
-                                <!-- <th>Created By</th>
+                            <!-- <a routerLink="../addfeature/{{m.name}}" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></a> -->
+                        </div>
+                    </div>
+                    <div class="card-body">                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="20%">Feature Name</th>
+                                    <th  *ngIf="isExists('description')">Description</th>
+                                    <th  *ngIf="isExists('technologies')">Technologies</th>
+                                    <th *ngIf="isExists('priority')">Priority</th>
+                                    <!-- <th>Created By</th>
                                 <th>Created Date</th> -->
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngFor="let j=index;let t of projectFeatures[m.name]">
-                            <tr  class="{{t.status}}">
-                                <td>{{j+1}}</td>                                
-                                <td>{{t.name}}
-                                </td>
-                                <td [innerHTML]="t.description"></td>
-                                <td>{{t.priority}}</td>
-                                <!-- <td>{{t.createdBy}}</td>
+                                    <th *ngIf="isExists('status')">Status</th>
+                                    <th *ngIf="isExists('action')">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <ng-container *ngFor="let j=index;let t of projectFeatures[m.name]">
+                                    <tr class="{{t.status}}">
+                                        <td>{{j+1}}</td>
+                                        <td>{{t.name}} 
+                                        </td>
+                                        <td *ngIf="isExists('description')">
+                                            <div [innerHTML]="t.description"></div>
+                                        </td>
+                                        <td *ngIf="isExists('technologies')">
+                                            <lib-tag-skills *ngIf="t.tags" [isEditable]="false" [featureId]="t.id"
+                                                [tags]="t.tags">
+                                            </lib-tag-skills>
+                                        </td>
+
+                                        <td *ngIf="isExists('priority')">{{t.priority}}</td>
+                                        <!-- <td>{{t.createdBy}}</td>
                                 <td>{{t.createdDate}}</td> -->
-                                <td *ngIf="t.status=='TESTING'">
-                                    <a class="btn btn-info btn-sm" routerLink="../../reviews/{{t.id}}">Test</a>
-                                </td>
-                                <td *ngIf="t.status!='TESTING'">
-                                    {{t.status}}
-                                </td>
-                                <td>
-                                    <button routerLink="{{t.id}}" class="btn btn-info btn-sm"> View</button> &nbsp;
-                                    <button *ngIf="isMentor" routerLink="../../reviews/{{t.id}}" class="btn btn-info btn-sm"> Rating</button> &nbsp;
-                                    <!--  -->
-                                </td>
-                            </tr>
-                        </ng-container>
-                        </tbody>
-                    </table>
-    
+                                        <td *ngIf="isExists('status')">
+
+                                                    
+                                                    
+                                                 {{t.status}} &nbsp;<a class="btn btn-info btn-sm" *ngIf="t.status=='TESTING'" routerLink="../../reviews/{{t.id}}">Test</a> &nbsp;
+                                              
+                                        </td>
+                                        <td *ngIf="isExists('action')">
+                                            <button routerLink="{{t.id}}" class="btn btn-info btn-sm"> View</button>
+                                            &nbsp;
+                                            <button *ngIf="isMentor" routerLink="../../reviews/{{t.id}}"
+                                                class="btn btn-info btn-sm"> Rating</button> &nbsp;
+                                            <!--  -->
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="addModule" tabindex="-1" role="dialog" aria-labelledby="addModule" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <!-- Modal -->
+    <div class="modal fade" id="addModule" tabindex="-1" role="dialog" aria-labelledby="addModule" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
 
 
 </kt-page>

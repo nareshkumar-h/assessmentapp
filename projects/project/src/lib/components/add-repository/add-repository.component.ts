@@ -57,6 +57,24 @@ export class AddRepositoryComponent implements OnInit {
      let repo = { projectId: this.projectDetail.id, account: response.owner.login, repoName:response.name,category:this.project.projectType,visibility:response.private?"PRIVATE":"PUBLIC", user:this.project.username};
      this.registerRepository(repo);
      f.reset();
+   },err=>{
+     console.log(err);
+    if (err.error )
+    {
+      if( err.error.errors.length>0){
+       let errors = err.error.errors;
+       for(let e of errors){
+        this.toastr.error("Error", e.message);
+       }
+      
+      }else{
+        this.toastr.error("Error", "Unable to create repository");
+      }
+
+    }
+    else{
+      this.toastr.error("Error", "Unable to create repository");
+    }
    });
 
 
@@ -78,6 +96,7 @@ export class AddRepositoryComponent implements OnInit {
    
    this.projectService.createRepo(repo).subscribe(res=>{
      this.toastr.success("Successfully linked repository");
+     this.router.navigate(["repositories"])
    })
  }
 

@@ -17,7 +17,7 @@ export class MentorListComponent implements OnInit {
   }
 
   
-  displayedColumns: string[] = ['id','mentorEmail','status','active'];
+  displayedColumns: string[] = ['id','mentorEmail','status'];
 
   dataSource:any;
 

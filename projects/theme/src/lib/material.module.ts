@@ -21,7 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule, MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -31,6 +31,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 
 @NgModule( {
@@ -70,6 +71,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ],
     exports: [
         MatButtonModule,
+        MatAutocompleteModule,
         MatToolbarModule,
         MatIconModule,
         MatSidenavModule,
@@ -94,7 +96,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatExpansionModule
     ],
     providers: [
-        MatDatepickerModule
+        MatDatepickerModule,
+        {
+            provide: MAT_CHIPS_DEFAULT_OPTIONS,
+            useValue: {
+              separatorKeyCodes: [ENTER, COMMA]
+            }
+          }
     ]
 } )
 export class MaterialModule {}

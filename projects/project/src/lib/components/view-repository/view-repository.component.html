@@ -1,0 +1,59 @@
+
+<div class="sidebar">
+    <!-- <app-brand></app-brand> -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-center" routerLink="reports">{{repoName}}</a>
+      </nav>
+
+      
+	<ul class="nav sidebar-menu">
+	
+		<li class="nav-item">
+            <a class="nav-link" (click)="navigate('reports')">
+                <i class="fas fa-home"> &nbsp;&nbsp; </i>
+                <span class="title">Home</span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="../repositories">
+                <i class="fas fa-laptop-code"> &nbsp;&nbsp; </i>
+                <span class="title">Repositories </span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="branches">
+                <i class="fas fa-leaf"> &nbsp;&nbsp; </i>
+                <span class="title">Branches </span>
+            </a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="pr">
+                <i class="fas fa-laptop-code"> &nbsp;&nbsp; </i>
+                <span class="title">Pull Request </span>
+            </a>
+        </li>
+        <!-- <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="users">
+                <i class="fas fa-users"> &nbsp;&nbsp; </i>
+                <span class="title">Users </span>
+            </a>
+        </li> -->
+       
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="events">
+                <i class="fas fa-times-rectangle"> &nbsp;&nbsp; </i>
+                <span class="title">Events </span>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="issues">
+                <i class="fas fa-bug"> &nbsp;&nbsp; </i>
+                <span class="title">Issues </span>
+            </a>
+        </li> 
+       
+	</ul>
+
+</div>
+<router-outlet></router-outlet>

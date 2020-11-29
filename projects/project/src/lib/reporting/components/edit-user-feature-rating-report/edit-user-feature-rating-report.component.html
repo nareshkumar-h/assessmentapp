@@ -1,0 +1,55 @@
+<div class="page-title"> Features </div>
+<div class="row" *ngIf="reportData">
+    <div class="col-3" *ngFor="let r of reportData;let i=index;">
+        <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+    </div>
+</div>
+<ng-template #loading>
+    <kt-loading-bar></kt-loading-bar>
+</ng-template>
+<div class="row" *ngIf="ratings else loading">
+    <div class="col-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Functionality</th>
+                    <th>Design</th>
+                    <th>Best Practices</th>
+                    <th>Complexity</th>
+                    <th>Timeline</th>
+                    <!-- <th>Documentation</th> -->
+                    <th>Last Updated Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr *ngFor="let f of ratings">
+                    <td width="20%">{{f.featureName}} 
+                        <ng-container *ngFor="let tag of f.tags">
+                            <span class="badge badge-primary">{{tag}}</span> &nbsp;
+                        </ng-container>
+                    </td>
+                    <td width="10%">
+                        <input class="form-control input-xs" type="number" [(ngModel)]="f.functionality" ></td>
+                    <td  width="10%">
+                        <input class="form-control input-xs-2" type="number" min="0" max="5" [(ngModel)]="f.design" (keyup.enter)="updateRating(f)"></td>
+                    <td  width="10%"><input class="form-control input-xs" type="number"  min="0" max="5" [(ngModel)]="f.bestPractices" (keyup.enter)="updateRating(f)"></td>
+                    <td  width="10%"> <input class="form-control input-xs" type="number"  min="0" max="5" [(ngModel)]="f.complexity" (keyup.enter)="updateRating(f)"></td>
+                    <td width="10%"><input class="form-control input-xs" type="number"  min="0" max="5" [(ngModel)]="f.timeline" (keyup.enter)="updateRating(f)"></td>
+                    <!-- <td  width="10%"><input class="form-control input-xs" type="number"  min="0" max="5" [(ngModel)]="f.documentation" (keyup.enter)="updateRating(f)"></td> -->
+                    <td width="10%">{{f.lastModifiedDate | moment}}</td>
+                    <td>{{f.status}}</td>
+                    <td>
+                        <button (click)="updateRating(f)" >Update</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<br />
+<br /><br />

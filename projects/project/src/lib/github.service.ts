@@ -12,8 +12,8 @@ export class GithubService {
   }
 
 
-  getRepoEvents(repoName){
-    var url = `${this.apiUrl}v1/github/${repoName}/events`;    
+  getRepoEvents(account,repoName){
+    var url = `${this.apiUrl}v1/github/${account}/${repoName}/events`;    
     return this.http.get(url);
   }
 
@@ -31,10 +31,39 @@ export class GithubService {
   createRepo(repoUrl){
    
     let url ="https://api.github.com/user/repos";
-    let formData = { "name" : repoUrl, "private": false};
+    let formData = { "name" : repoUrl, "private": false, auto_init: true, has_issues:true,has_projects:true};
     
 
     return this.http.post(url, formData, {headers:this.getHeaders()});
+  }
+
+  getRepository(account,repoName){
+   
+    let url =`https://api.github.com/repos/${account}/${repoName}`;
+
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  
+  getBranches(account,repoName){
+   
+    let url =`https://api.github.com/repos/${account}/${repoName}/branches`;
+
+    return this.http.get(url, {headers:this.getHeaders()});
+
+  }
+   
+  getIssues(account,repoName){
+   
+    let url =`https://api.github.com/repos/${account}/${repoName}/issues`;
+
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+  getRepositoryUsers(account,repoName){
+   
+    let url =`https://api.github.com/repos/${account}/${repoName}/collaborators`;
+
+    return this.http.get(url, {headers:this.getHeaders()});
   }
 
   addAccess(repoUrl,username){    
@@ -54,6 +83,13 @@ export class GithubService {
   getGistFile(id){
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
    let url = `https://api.github.com/gists/${id}`;
+   return this.http.get(url);
+  }
+
+  
+  getPRs(owner,repoName,state){
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+   let url = `https://api.github.com/repos/${owner}/${repoName}/pulls?state=${state}`;
    return this.http.get(url);
   }
 

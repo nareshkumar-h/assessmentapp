@@ -1,3 +1,5 @@
+<kt-page showSidebar="true">
+
 <div>
     <div class="page-title">Repository Events ( Repository - {{projectRepoUrl}}) </div>
 
@@ -32,8 +34,15 @@
                                     
                                     <app-event-type-badge [type]="p.type"></app-event-type-badge>
                                     <span *ngIf="p.type=='PullRequestEvent'||p.type=='PullRequestReviewEvent'">
-                                        <a href="{{p?.payload?.pull_request?.html_url}}" target='_blank'>View</a> 
-                                        {{p.payload.action}}
+                                        
+                                        <span *ngIf="p.payload.action=='opened'"><i class="fa fa-unlock" aria-hidden="true"> &nbsp;
+                                            <!-- <span class="badge badge-danger m-2">{{p.payload.action}}</span> -->
+                                            <a *ngIf="p.payload?.action=='opened'" href="{{p?.payload?.pull_request?.html_url}}" target='_blank'>View</a>  &nbsp;&nbsp;    
+                                        </i></span>
+                                        <span *ngIf="p.payload.action=='closed'">
+                                            <span class="badge badge-success m-2">{{p.payload.action}}</span></span>
+                                        
+                                        
                                     </span>
                                 </td>
                                 <td>
@@ -70,9 +79,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-6" *ngIf="message && createdAt && url">
+        <!-- <div class="col-6" *ngIf="message && createdAt && url">
             <app-view-files-committed [message]="message" [createdAt]="createdAt" [url]="url">
             </app-view-files-committed>
-        </div>
+        </div> -->
     </div>
 </div>
+</kt-page>

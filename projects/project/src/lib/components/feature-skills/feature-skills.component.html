@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card card-custom gutter-b">
+            <div class="card-header card-blue">
+                
+                <div class="card-title text-white">Technologies</div>
+            
+            <div class="tools pull-right">
+                <button type="button" (click)="addSkillModal(feature)" class="btn btn text-white">
+                    <i class="fa fa-plus "></i> &nbsp;Add Skill
+                </button> 
+                <button type="button"  *ngIf="!isEditable" (click)="isEditable=true" class="btn btn text-white">
+                    <i class="fas fa-pencil-alt"></i> &nbsp;Edit Skill
+                </button> 
+                <button type="button" *ngIf="isEditable" (click)="isEditable=false" class="btn btn text-white">
+                    <i class="fa fa-check "></i> &nbsp;Done
+                </button> 
+            </div>
+        </div>
+
+
+            <div class="card-body" *ngIf="feature">
+
+                <div>
+                    <lib-tag-skills *ngIf="feature.tags" [isEditable]="isEditable" [feature]="feature" [featureId]="feature.id"
+                        [tags]="feature.tags">
+                    </lib-tag-skills>
+
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>

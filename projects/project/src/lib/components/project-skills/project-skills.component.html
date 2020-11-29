@@ -1,5 +1,4 @@
-<kt-page title="Project Tasks - {{project?.name}} - {{taskType}}" showSidebar="true"
-    [breadcrumbItems]="breadcrumbItems">
+<kt-page title="Project Competencies" showSidebar="true" >
 
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
@@ -12,97 +11,63 @@
     </div>
  
     <div class="row">
-        <div class="col" *ngIf="reportMap">
-            <kt-chart chartType="bar" chartTitle="Technical Skills Report"
+        <div class="col-6" *ngIf="reportMap">
+            <kt-chart chartType="bar" chartTitle="Technologies"
             [chartData]="reportMap" height="100" width="100%"></kt-chart>
 
         </div>
     </div>
     
-    
-
-    <div *ngIf="projectTasks else loading;">
-
-        <ng-container *ngIf="taskType=='ISSUES'">
-
-            <div class="row" *ngFor="let i=index;let m of projectTasks | keyvalue">
-                <div class="col">
-                    <div class="card card-custom gutter-b">
-                        <div class="card-header card-blue">
-                            <div class="card-title text-white">
-                                <a class="text-white"> Tasks: {{m.key}} ( {{projectTasks[m.key].length}}
-                                    )</a>
-                            </div>
+    <div *ngIf="features">
+        <div class="row" *ngFor="let i=index;let m of features | keyvalue">
+            <div class="col">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        <div class="card-title text-white">
+                            <a class="text-white"> Module - {{m.key}}
+                                </a>
                         </div>
-                        <div class="card-body">
-                            <ul>
-                                <li *ngFor="let task of m.value">
-                                    {{task.projectFeature.name}}
-                                -  <a routerLink="../../features/{{task.projectFeature.id}}">
-                                {{task.name}} </a>- {{task.createdDate}}
-                                <span class="badge badge-primary">{{task.status}}</span>                                
-                                </li>
-                            </ul>
+                        <div class="tools pull-right">
                             
                         </div>
+
+                    </div>
+                    <div class="card-body">
+                        
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>Sno</th>
+                                <th>Feature Name</th>
+                                <th>Technologies/Skills</th>
+                                <th *ngIf="isMentor" width="10%">Action</th>
+                            </thead>
+                            <tbody>                         
+                            <tr *ngFor="let f of m.value;let i=index">
+                                
+                                <td width="5%">
+                                    {{i+1}}
+                                    </td>
+                                <td width="30%">{{f.name}}
+                                    
+                                    <lib-task-status [status] = "f.status"></lib-task-status>
+                                </td>                                                          
+                                <td>
+                                     <lib-tag-skills *ngIf="f.tags"  [isEditable]="isMentor" [featureId]="f.id" [tags]="f.tags" ></lib-tag-skills> 
+                                     
+                                </td>
+                                <td *ngIf="isMentor">
+                                    <button type="button"  (click)="addSkillModal(m,f)" class="btn btn-primary">
+                                        Add Skill</button>  
+                                </td>
+                                
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
+    </div> 
 
-        </ng-container>
-        <ng-container *ngIf="taskType!='ISSUES'">
-
-            <div class="row" *ngFor="let i=index;let m of projectTasks | keyvalue">
-                <div class="col">
-                    <div class="card card-custom gutter-b">
-                        <div class="card-header card-blue">
-                            <div class="card-title text-white">
-                                <a class="text-white">  {{m.key}} ( {{projectTasks[m.key].length}}
-                                    )</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th width="20%">Feature Name</th>
-                                        <th width="40%">Task Name</th>
-                                        <th>Estimation(Hrs)</th>
-                                        <!-- <th>Start Date</th>
-                                        <th>Completion Date</th> -->
-                                        <!-- <th>Status</th> -->
-                                        <th>Sprint</th>
-                                        <th>Assigned To</th>
-                                        <!-- <th>Created By</th>
-                                        <th>Action</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let j=index;let t of m.value">
-                                        <td>{{j+1}}</td>
-                                        <td><a routerLink="../../features/{{t.projectFeature.id}}">{{t.projectFeature.name}}
-                                            </a></td>
-                                        <td>{{t.name}} <span class="badge badge-primary">{{t.category}}
-
-                                            </span></td>
-                                        <td>{{t.estimation}}</td>
-                                        <!-- <td>{{t.startDate}}</td>
-                                        <td>{{t.completionDate}}</td> -->
-                                        <!-- <td>{{t.status}}</td> -->
-                                        <td>{{t.sprintNo}}</td>
-                                        <td>{{t.assignedTo}}</td>
-                                        <!-- <td>{{t.createdBy}}</td> -->
-                                       
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-
-    </div>
+    
 </kt-page>

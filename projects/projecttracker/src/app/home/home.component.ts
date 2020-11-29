@@ -14,8 +14,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.isLoggedIn()){
-      if(this.authService.hasRoleAccess('T')){
+      if(this.authService.hasRoleAccess(['T'])){
         this.router.navigate(['projects/all']);
+      }
+      else if(this.authService.hasRoleAccess(['HR'])){
+        this.router.navigate(['reports']);
       }
       else{
         this.router.navigate(['projects']);

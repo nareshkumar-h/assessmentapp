@@ -14,7 +14,7 @@ export class ProjectRepositoryListComponent implements OnInit {
 
   breadcrumbItems:any;
   projectId;
-
+  isMentor:boolean;
   githubUsername:string;
   constructor(private projectService:ProjectService,private route:ActivatedRoute, private githubService:GithubService,private toastr:ToastrService, private authService:AuthService) { 
 
@@ -22,11 +22,18 @@ export class ProjectRepositoryListComponent implements OnInit {
       this.projectId = params["projectId"];
     });
     this.githubUsername = this.authService.getLoggedInGithubUsername();
+    this.isMentor = this.authService.hasRoleAccess("T");
   }
 
   ngOnInit(): void {
 
-    this.list();
+    if(this.projectId != null){
+      this.list();
+    }
+    else{
+      this.listMyRepositories();
+    }
+    
   }
 
   repositories:any;
@@ -36,15 +43,37 @@ export class ProjectRepositoryListComponent implements OnInit {
       this.repositories = res;
       if(this.repositories !=null && this.repositories.length >0){
         this.selectedRepository = this.repositories[0];
+        this.view = "PR";        
       }
     });
   }
+
+  listMyRepositories(){
+    let username = this.authService.getSelectedUser();
+    this.projectService.listMyRepositories(username).subscribe(res=>{
+      this.repositories = res;
+      if(this.repositories !=null && this.repositories.length >0){
+        this.selectedRepository = this.repositories[0];
+        this.view = "PR";        
+      }
+    });
+  }
+
+
 
   addAccess(id){
 
     let username = this.authService.getLoggedInUsername();
     this.projectService.addRepoAccess(id,username).subscribe(res=>{
       this.toastr.success("Successfully Repo Linked");
+    },err=>{
+      if (err.errors.length>0){
+        this.toastr.error(err.errors[0].message);
+      }
+      else{
+        this.toastr.error("Error", "Unable to create repository");
+      }
+      
     })
   }
 
@@ -70,8 +99,11 @@ export class ProjectRepositoryListComponent implements OnInit {
   }
 
   showEvents(repository){
+    this.view='events';
     this.selectedRepository = repository;
   }
+
+  view = "events";
 
 
 }

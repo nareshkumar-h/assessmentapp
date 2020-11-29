@@ -30,17 +30,6 @@ export class ProjectService {
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
-  listUserRatings(){
-    let url = `${this.apiUrl}v1/ratings/userratings`;
-    return this.http.get(url);
-  }
-
-  
-  listUserRatingsForUser(userId){
-    let url = `${this.apiUrl}v1/ratings/userratings/${userId}`;
-    return this.http.get(url);
-  }
-
   listUserFeatureRatingsForUser(userId){
     let url = `${this.apiUrl}v1/ratings/userratings/users/${userId}`;
     return this.http.get(url);
@@ -75,6 +64,12 @@ export class ProjectService {
   listFeatures(projectId){
     let url = `${this.apiUrl}v1/projects/${projectId}/features`;
     return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+
+  listUserFeatures(userId){
+    let url = `${this.apiUrl}v1/projectfeatures/search?userId=${userId}`;    
+    return this.http.get(url);
   }
   
   listActivities(projectId){
@@ -132,6 +127,11 @@ export class ProjectService {
 
   listTasksByStatus(projectId){
     let url = `${this.apiUrl}v1/projects/${projectId}/tasks?display=STATUS`;
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  listTasksByUserId(userId){
+    let url = `${this.apiUrl}v1/projecttasks/search?userId=${userId}`;
     return this.http.get(url, {headers:this.getHeaders()});
   }
 
@@ -214,6 +214,10 @@ export class ProjectService {
     return this.http.get(url,  {headers:this.getHeaders()});
   }
 
+  listMyRepositories(userId){
+    let url = `${this.apiUrl}v1/projectrepositories?created_by=${userId}`;    
+    return this.http.get(url,  {headers:this.getHeaders()});
+  }
   
 
   listProjectRepositories(projectId){
@@ -228,5 +232,35 @@ export class ProjectService {
     let userId = this.authService.getLoggedInUsername();
     let url = `${this.apiUrl}v1/projectfeatures/search?status=${status}`;
     return this.http.get(url,  {headers:this.getHeaders()});
+  }
+
+  listCourses(){
+    let url = `${this.apiUrl}v1/courses`;
+    return this.http.get(url);
+  }
+
+  updateTag(featureId,tag){
+    
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/tags`;    
+    return this.http.patch(url,tag);
+  }
+
+  getTechnologies(){
+
+  
+  let technologies = [
+    { id: 1, name: 'HTML',  icon:'fab fa-html5',skills: ['Form'] },
+    { id: 2, name: 'JavaScript', icon:'fab fa-js',skills: ['DOM'] },
+    { id: 3, name: 'CSS', icon:'fab fa-css',skills: ['Form'] },
+    { id: 4, name: 'Bootstrap', icon:'fab fa-bootstrap',skills: ['Form'] },
+    { id: 5, name: 'Angular', icon:'fab fa-angular',skills: ['Form'] },
+    { id: 6, name: 'Node JS', icon:'fab fa-node-js',  category:"backend" ,skills: ['Form'] },
+    { id: 7, name: 'REST API',  category:"backend" , skills: ['Form'] },
+    { id: 8, name: 'SQL',icon:'fab fa-sql', category:"backend" ,skills: ['Form'] },
+    { id: 9, name: 'Agile/Scrum', skills: ['Form'] },
+    { id: 10, name: 'Cloud', icon:'fab fa-cloud',skills: ['Form'] },
+    { id: 11, name: 'Mock API', skills: ['Form'] },
+  ];
+  return technologies;
   }
 }

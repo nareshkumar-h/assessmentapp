@@ -15,79 +15,63 @@
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
     </ng-template>
-    <ng-container *ngIf="features else loading">
+    <ng-container *ngIf="feature else loading">
 
-        <!-- <div class="row">
-            <div class="col-1">
-                Ratings :
+        <div class="row">
+            <div class="col-8">
+                <app-view-user-story [projectName]="feature.project.name" [feature]="feature"></app-view-user-story>
             </div>
-            <div class="col-2">
-                <app-rating-icon [rating]="1"></app-rating-icon> 1&2 -Need to Improve &nbsp;
-            </div>
-            <div class="col-2">
-                <app-rating-icon [rating]="3"></app-rating-icon> 3- Average&nbsp;
-            </div>
-            <div class="col-2">
-                <app-rating-icon [rating]="4"></app-rating-icon> 4 - Good&nbsp;
-            </div>
-            <div class="col-2">
-                <app-rating-icon [rating]="5"></app-rating-icon> 5 - Consistent &nbsp;
-            </div>
-        </div>
-        <br />
-        <br /> -->
+            <div class="col-4">
 
-
-        <div *ngIf="feature">
-            <div class="row">
-                <div class="col-8">
-                    <app-view-user-story [projectName]="feature.project.name" [feature]="feature"></app-view-user-story>
-                </div>
-                <div class="col-4">
-
-                    <div class="card card-custom gutter-b">
-                        <div class="card-header card-blue">
-                            <div class="card-title text-white">
-                                Developer: {{feature.createdBy}}
-                            </div>
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        <div class="card-title text-white">
+                            Developer: {{feature.createdBy}}
                         </div>
-                        <div class="card-body" *ngIf="project">                            
-                            <ng-container *ngFor="let url of getUrl(project.projectTestUrl)">
-                            <a target="_blank" href="{{url}}">{{url}}</a> <br/><br/>
+                    </div>
+                    <div class="card-body" *ngIf="project">
+                        <ng-container *ngFor="let url of getUrl(project.projectTestUrl)">
+                            <a target="_blank" href="{{url}}">{{url}}</a> <br /><br />
                         </ng-container>
-                            <br />
-                        </div>
+                        <br />
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-8">
-                    <lib-feature-tasks [feature]="feature" taskType="TASK" title="Tasks"></lib-feature-tasks>
-                    <lib-feature-tasks [feature]="feature" taskType="BUG" title="Testing"></lib-feature-tasks>
-                </div>
+        </div>
+        <div class="row">
+             <lib-feature-skills [feature]="feature" [featureId]="feature.id" ></lib-feature-skills> 
+        </div>
+        <div class="row">
+            <div class="col">
+                <lib-feature-tasks [feature]="feature" taskType="TASK" title="Tasks"></lib-feature-tasks>
+                <lib-list-issues [feature]="feature" taskType="BUG" title="Testing"></lib-list-issues>
             </div>
-            <div class="row">
-                <div class="col-8">
-                    <div class="card card-custom gutter-b">
-                        <div class="card-header card-blue">
-                            <div class="card-title text-white">
-                                Review Status - {{feature.status}}
-                            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        <div class="card-title text-white">
+                            Review Status - {{feature.status}}
                         </div>
-                        <div class="card-body" *ngIf="project">
+                    </div>
+                    <div class="card-body" *ngIf="project">
 
+                        <div>
 
-                            <button *ngIf="feature.status=='TESTING'" [disabled]="!isMentor"
-                                (click)="updateFeatureStatus('COMPLETED')" class="btn btn-success">Mark as
-                                Completed</button>
+                            <div>
+                                <button [disabled]="!isMentor " (click)="updateFeatureStatus('COMPLETED')"
+                                    class="btn btn-success">Mark as
+                                    Completed</button> &nbsp;
 
-                            <button *ngIf="feature.status=='COMPLETED'" [disabled]="!isMentor"
-                                (click)="updateFeatureStatus('ACCEPTED')" class="btn btn-success">Accept</button>
+                                <button *ngIf="feature.status=='COMPLETED'" [disabled]="!isMentor"
+                                    (click)="updateFeatureStatus('ACCEPTED')" class="btn btn-success">Accept</button>
 
-                            &nbsp;
-                            <button *ngIf="feature.status=='TESTING'" [disabled]="!isMentor"
-                                (click)="updateFeatureStatus('INPROGRESS')" class="btn btn-danger">Reject</button>
+                                &nbsp;
+                                <button *ngIf="feature.status=='TESTING'" [disabled]="!isMentor"
+                                    (click)="updateFeatureStatus('INPROGRESS')" class="btn btn-danger">Reject</button>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +90,6 @@
                 </div>
             </div>
         </div>
-
     </ng-container>
 
 </kt-page>
