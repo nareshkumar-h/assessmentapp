@@ -28,7 +28,7 @@
                     <tbody>
                         <ng-container *ngFor="let t of projectTasks; let i=index;">
                         <tr>
-                            <!-- <td>{{i+1}}</td>    -->
+                            <!-- <td>{{i+1}}{{t | json}}</td>     -->
                             <td *ngIf="t.status=='PENDING' || t.status=='ASSIGNED'">
                                 <input  type="checkbox" #topicCheckbox [checked]="t.status=='COMPLETED'" name="topic"
                                 (change)="updateTaskStatus(t, topicCheckbox.checked)" /> 

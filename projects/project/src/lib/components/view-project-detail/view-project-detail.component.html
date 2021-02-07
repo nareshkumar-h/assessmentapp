@@ -17,6 +17,7 @@
                                     <th class="hidden-xs">Developed By</th>									
                                     <!-- <th>Reviewer</th> -->
                                     <th class="hidden-xs">Locked</th>
+                                    <th>Repository</th>
                                     <th colspan="2">Action</th>																
                                 </tr>
                             </thead>
@@ -38,6 +39,18 @@
                                         <i class='fa' [class] = "{'fa-lock':project.locked,'fa-unlock': !project.locked}" aria-hidden='true'></i>
                                     </td>
                                     <td>
+                                        <!-- <button class="btn btn-info" *ngIf="project.projectBoardId==null" (click)="createRepo(project)">Create Project Board</button> &nbsp; -->
+                                        <button class="btn btn-info" *ngIf="project.repoEnabled==0" (click)="createRepo(project)">Create Repo</button> &nbsp;
+
+                                        <ng-template *ngIf="project.repoEnabled==1">
+                                            {{project.githubUrl}}
+                                        </ng-template> 
+                                    </td>
+
+                                    <td>
+                                        
+                                      
+
                                         <button (click)="navigate('view')"><i class="fas fa-pencil-alt    "></i></button>
                                      </td>
                                     

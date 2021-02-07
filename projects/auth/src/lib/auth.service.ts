@@ -68,6 +68,10 @@ export class AuthService {
     return this.http.get(url);    
   }
 
+  isMentor(){
+    return this.hasRoleAccess('T');
+  }
+
   getLoggedInUsername(){
     let user = this.getUser();
     let username = null;
@@ -115,7 +119,8 @@ export class AuthService {
   hasRoleAccess(roles){
     let user = this.getUser();
     let allowed = false;
-    if(user!=null){
+    if(user!=null && roles != null && roles.length>0){
+      
     for(let role of roles){
       if(user.roles.indexOf(role) !=-1){
         allowed = true;

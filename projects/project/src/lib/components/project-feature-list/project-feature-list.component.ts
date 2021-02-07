@@ -22,7 +22,7 @@ export class ProjectFeatureListComponent implements OnInit {
   isLoggedInUser:boolean;
   isMentor:boolean;
 
-  displayColumns =["technologies","priority","action"];
+  displayColumns =["technologies","priority","action","status"];
 
   constructor(public dialog: MatDialog,private projectService: ProjectService, private authService:AuthService,private route: ActivatedRoute,
     private toastr: ToastrService) {

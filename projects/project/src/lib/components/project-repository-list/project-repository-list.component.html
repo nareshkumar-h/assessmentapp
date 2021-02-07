@@ -6,10 +6,10 @@
             <div class="card card-custom">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">
-                        Repositories <small *ngIf="githubUsername">Github Username: {{githubUsername}}</small>
+                        Repositories
                     </div>
                     <div class="tools pull-right" *ngIf="githubUsername">
-                        <a routerLink="../addrepository" class="btn btn btn-sm text-white"><i
+                        <a routerLink="addrepository" class="btn btn btn-sm text-white"><i
                                 class="fa fa-plus "></i></a>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                                     <app-rating-icon [rating]="r.ratings"></app-rating-icon>
                                 </td>
                                 <td>
-                                    <app-travis-badge *ngIf="r.travisId !=0" repo="{{r.account}}/{{r.repoName}}">
-                                    </app-travis-badge>
+                                    <!-- <app-travis-badge *ngIf="r.travisId !=0" repo="{{r.account}}/{{r.repoName}}">
+                                    </app-travis-badge> -->
                                 </td>
 
                                 <td>

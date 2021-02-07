@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { GithubReportComponent } from '../components/github-report/github-report.component';
 import { MyProjectListComponent } from '../components/my-project-list/my-project-list.component';
 import { ProjectFeatureListComponent } from '../components/project-feature-list/project-feature-list.component';
 import { ProjectReportFeedbackComponent } from '../components/project-report-feedback/project-report-feedback.component';
 import { ProjectSkillsComponent } from '../components/project-skills/project-skills.component';
+import { UserGithubReportComponent } from '../components/user-github-report/user-github-report.component';
 import { ViewProjectDetailComponent } from '../components/view-project-detail/view-project-detail.component';
 import { ReportingComponent } from './components/reporting/reporting.component';
 import { UserRatingReportComponent } from './components/user-rating-report/user-rating-report.component';
@@ -16,6 +18,7 @@ const routes: Routes = [
     component: ReportingComponent,
     children: [
       { path: 'projects', component: UserRatingReportComponent },      
+      { path: 'repositories', component: GithubReportComponent },
       {
         path: ':userId',
         component: UserReportingComponent,
@@ -26,6 +29,7 @@ const routes: Routes = [
           { path: 'ratings', component: ViewUserRatingReportComponent },
           { path: 'technologies', component: ProjectSkillsComponent },
           { path: 'feedback', component: ProjectReportFeedbackComponent },
+          { path: 'repositories', component: UserGithubReportComponent },
           {
             path: 'projectfeatures/:userId',
             component: ViewUserRatingReportComponent,

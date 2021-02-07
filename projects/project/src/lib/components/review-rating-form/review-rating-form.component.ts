@@ -35,12 +35,12 @@ export class ReviewRatingFormComponent implements OnInit {
   findOne() {
     this.projectService
       .getFeatureReviewRating(this.featureId)
-      .subscribe((res) => {
-        console.log(res);
-        let data:any =res;
-        if (data && data.length >0) {
-          this.reviewRating = res[0];
+      .subscribe(res => {
+        let data:any = res;
+        if(res != null){
+          this.reviewRating = data;
         }
+       
       });
   }
 

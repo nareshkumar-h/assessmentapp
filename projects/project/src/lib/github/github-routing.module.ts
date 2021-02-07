@@ -8,11 +8,13 @@ import { ViewProjectDetailComponent } from '../components/view-project-detail/vi
 import { ViewRepositoryComponent } from '../components/view-repository/view-repository.component';
 import { BranchesComponent } from './components/branches/branches.component';
 import { RepoIssuesComponent } from './components/repo-issues/repo-issues.component';
+import { RepositoryListComponent } from './components/repository-list/repository-list.component';
 import { ViewCollaboratorsComponent } from './components/view-collaborators/view-collaborators.component';
 import { ViewRepositoryDetailComponent } from './components/view-repository-detail/view-repository-detail.component';
 
 const routes: Routes = [
   { path: 'repositories', component: ProjectRepositoryListComponent },
+  { path: 'repositories/all', component: RepositoryListComponent },
   { path: 'repositories/addrepository', component: AddRepositoryComponent },
   
   {

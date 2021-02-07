@@ -19,6 +19,7 @@ export class ReportingSidebarComponent implements OnInit {
   }
 
   navigate(path){
+    console.log(path);
     this.router.navigateByUrl(path);
   }
 

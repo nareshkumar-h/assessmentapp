@@ -10,8 +10,7 @@ export class GithubService {
   constructor(private http:HttpClient, @Inject(API_URL)private apiUrl: string) { 
     
   }
-
-
+  
   getRepoEvents(account,repoName){
     var url = `${this.apiUrl}v1/github/${account}/${repoName}/events`;    
     return this.http.get(url);
@@ -32,8 +31,6 @@ export class GithubService {
    
     let url ="https://api.github.com/user/repos";
     let formData = { "name" : repoUrl, "private": false, auto_init: true, has_issues:true,has_projects:true};
-    
-
     return this.http.post(url, formData, {headers:this.getHeaders()});
   }
 
@@ -43,6 +40,30 @@ export class GithubService {
 
     return this.http.get(url, {headers:this.getHeaders()});
   }
+
+  getGitRepositories(account,pageNo=1){
+   
+    //    let url =`https://api.github.com/users/repos`;
+       let url =`https://api.github.com/users/${account}/repos?page=${pageNo}`;
+       
+        return this.http.get(url, {headers:this.getHeaders()});
+      }
+
+  getRepositories(account){
+   
+//    let url =`https://api.github.com/users/repos`;
+   // let url =`https://api.github.com/repos/${account}/repositories`;
+   let url = this.apiUrl + "v1/projectrepositories";
+
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  getRepositoryStats(account, repoName,username){
+    let url =`https://api.github.com/repos/${account}/${repoName}/stats/participation`;
+    console.log(url);
+    return this.http.get(url, {headers:this.getHeaders()});
+  }
+
 
   
   getBranches(account,repoName){

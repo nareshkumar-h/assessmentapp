@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'projects/auth/src/public-api';
+import { AddRepositoryComponent } from '../add-repository/add-repository.component';
 
 @Component({
   selector: 'app-my-project-list',
@@ -90,4 +91,9 @@ export class MyProjectListComponent implements OnInit {
     
   }
 
+  
+  
+  createRepo(p){
+    this.router.navigateByUrl("/repositories/addrepository?projectId="+ p.id+"&name="+p.name);
+  }
 }

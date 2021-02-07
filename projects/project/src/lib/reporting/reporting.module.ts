@@ -20,6 +20,8 @@ import { UserReportSidebarComponent } from './components/user-report-sidebar/use
 import { UserReportingComponent } from './components/user-reporting/user-reporting.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProjectReportFeedbackComponent } from '../components/project-report-feedback/project-report-feedback.component';
+import { GithubReportComponent } from '../components/github-report/github-report.component';
+import { UserGithubReportComponent } from '../components/user-github-report/user-github-report.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { ProjectReportFeedbackComponent } from '../components/project-report-fee
     ReportingComponent,
     UserReportSidebarComponent,
     UserReportingComponent,
-    ProjectReportFeedbackComponent
+    ProjectReportFeedbackComponent,
+    GithubReportComponent,
+    UserGithubReportComponent
   ],
   imports: [
     BrowserModule,

@@ -42,7 +42,7 @@ export class ReviewFeatureComponent implements OnInit {
   ngOnInit(): void {
     
     this.loadMenus();
-    this.list();
+    //this.list();
     this.findOne();
   }
 
@@ -59,26 +59,19 @@ export class ReviewFeatureComponent implements OnInit {
 
   feature:any;
 
-  findProjectDetail(){
-    this.projectService.findOne(this.feature.project.id).subscribe(res=>{
+  findProjectDetail(projectId){
+    this.projectService.findOne(projectId).subscribe(res=>{
       this.project = res;
     });
   }
   reportData:any=[];
   widgetColors= [ "red-intense","purple-plum","blue-madison","green-haze"];
 
-  list(){
-    this.projectService.getFeatureReviewRating(this.featureId).subscribe (res=>{      
-      this.features = res;
-
-      //this.createReport(this.features);
-    });
-  }
 
   findOne(){
     this.projectService.findByFeatureId(this.featureId).subscribe(res=>{
       this.feature = res;
-      this.findProjectDetail();
+      this.findProjectDetail(this.feature.projectId);
     })
   }
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { AuthService } from 'projects/auth/src/public-api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GithubService } from '../../github.service';
 import { ProjectService } from '../../project.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-repository',
@@ -15,40 +16,57 @@ export class AddRepositoryComponent implements OnInit {
 
   projectId:number;
   breadcrumbItems:any;
-  constructor(private authService:AuthService, private projectService:ProjectService, private route:ActivatedRoute, private githubService:GithubService, private router:Router, private toastr:ToastrService) {
-    this.route.parent.params.subscribe (params=>{
-      this.projectId = params["projectId"];
-    });
+  selectedUser:string;
+  constructor(private authService:AuthService, private github: GithubService, private projectService:ProjectService, private route:ActivatedRoute, private githubService:GithubService, private router:Router, private toastr:ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: any, private dialog:MatDialog,) {
+      console.log(data);
+      this.projectDetail = data['project'];
+      console.log(this.projectDetail);
+    this.selectedUser = this.authService.getSelectedUser();
+    this.project.name = this.projectDetail?.name;
+    this.project.username = this.projectDetail?.createdBy;
+    this.project.repositoryName= this.projectDetail?.projectPrefix + "-";
   }
 
   projectDetail:any;
 
-  findOne(){
-    this.projectService.findOne(this.projectId).subscribe (res=>{
-      this.projectDetail = res;
-      this.project.name = this.projectDetail.name;
-      this.project.username = this.projectDetail.createdBy;
-    });
-  }
-
 
  ngOnInit(): void {
-   this.findOne();
+   //this.listGitRepos();
  }
 
+ repositories=[];
+ listGitRepos(){
+   let account = "sf-fresher-batch-2020";
+   
+   this.githubService.getGitRepositories(account,1).subscribe(res=>{
+     let data:any =res;
+      this.repositories.push(...data);
+   })
+   this.githubService.getGitRepositories(account,2).subscribe(res=>{
+    let data:any =res;
+      this.repositories.push(...data);
+ })
+
+ }
+
+ @Input()
+ repositoryName:string;
+
  onChange(){
-   this.project.repositoryName = this.getProjectRepoUrl();
+   this.repositoryName = this.getProjectRepoUrl();
  }
 
  project:any = { name: null, projectType: 0, repositoryName:null, username: this.authService.getLoggedInUsername()};
 
- createRepo(f:NgForm){
+ accountName = "sf-fresher-batch-2020";
+ createRepo(){
    console.log(this.project);
   // let projectRepoUrl = this.getProjectRepoUrl();
    //alert("Create Repo" + projectRepoUrl);
 
    this.repositoryUrl = null;
-   this.githubService.createRepo(this.project.repositoryName).subscribe( res=>{
+   this.githubService.createRepo(this.repositoryName).subscribe( res=>{
      console.log(res);
      localStorage.setItem("RESPONSE", JSON.stringify(res));
      this.toastr.success("Repository Created Successfully");
@@ -56,7 +74,7 @@ export class AddRepositoryComponent implements OnInit {
      let response:any = res;
      let repo = { projectId: this.projectDetail.id, account: response.owner.login, repoName:response.name,category:this.project.projectType,visibility:response.private?"PRIVATE":"PUBLIC", user:this.project.username};
      this.registerRepository(repo);
-     f.reset();
+     
    },err=>{
      console.log(err);
     if (err.error )
@@ -81,15 +99,24 @@ export class AddRepositoryComponent implements OnInit {
  }
 
  repositoryUrl:string;
- accountName:string = "sf-fresher-batch-2020";
+ 
  repoName:string;
  
- linkRepository(f:NgForm){
+ linkRepository(){
   
   let visibility = "PUBLIC";
-  let repo = { projectId: this.projectDetail.id, account: this.accountName, repoName:this.project.repositoryName,category:this.project.projectType,visibility:visibility, user:this.project.username};
+  let repo = { projectId: this.projectDetail.id, account: this.accountName, repoName:this.repositoryName,category:this.project.projectType,visibility:visibility, user:this.project.createdBy};
   this.registerRepository(repo);
-  f.reset();
+  
+ }
+
+ addRepoAccess(accountName,repoName){
+  
+  let visibility = "PUBLIC";
+  let repo = { projectId: this.projectDetail.id, account: accountName, repoName:repoName,
+    category:this.project.projectType,visibility:visibility, user:this.project.createdBy};
+  this.registerRepository(repo);
+  
  }
 
  registerRepository(repo){
@@ -100,6 +127,10 @@ export class AddRepositoryComponent implements OnInit {
    })
  }
 
+ addCollaborator(repo){
+   
+ }
+
  projectNames = [];
 
  getProjectNames(){
@@ -108,8 +139,9 @@ export class AddRepositoryComponent implements OnInit {
 
  getProjectRepoUrl():string {
 
+    
    let choice = parseInt(this.project.projectType);
-   let projectName = this.projectDetail.projectPrefix;
+   let projectName = this.projectDetail!=null ? this.projectDetail.projectPrefix: "yourproject";
    var projectUrl = null;
    let username = this.project.username;
    

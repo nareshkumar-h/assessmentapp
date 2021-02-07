@@ -25,6 +25,7 @@ export class FeatureTasksComponent implements OnInit {
   title:string;
 
   projectId;
+  featureId;
   isMentor:boolean;
 
   constructor(private dialog:MatDialog,private authService:AuthService, private projectService:ProjectService, private toastr:ToastrService, private router:Router, private route:ActivatedRoute) { 

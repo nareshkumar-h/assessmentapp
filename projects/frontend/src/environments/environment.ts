@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL :"http://api.learn2build.in:8080/api/",
+  //API_URL :"http://api.learn2build.in:8080/api/",
+  API_URL: "http://knowledgetracker-api.herokuapp.com/api/",
   ORG_ID: "spinsoft"
 };
 

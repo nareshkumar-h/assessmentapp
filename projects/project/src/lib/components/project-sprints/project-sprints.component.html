@@ -6,13 +6,16 @@
             <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
         </div>
     </div> 
-    <div *ngIf="projectSprints && projectTasks">
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+    <div *ngIf="projectSprints && projectTasks else loading">
     <div class="row" *ngFor="let i=index;let sprint of projectSprints">
         <div class="col">
             <div class="card card-custom">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">                        
-                        Sprint #{{sprint.sprintNo}}  - Duration 7 Days ( {{sprint.startDate}} - {{sprint.endDate }} ) 
+                        Sprint #{{sprint.sprintNo}}  - Duration 7 Days ( {{sprint.startDate | date}} - {{sprint.endDate | date }} ) 
                     </div>
                     <!-- <div class="tools pull-right" >
                         <a (click)="loadSprintTasks(m)" class="btn btn btn-sm text-white"> Show</a>
@@ -46,7 +49,7 @@
                                         (change)="updateStatus(t, topicCheckbox.checked)" /> 
                                         
                                         <i class="fa fa-check" aria-hidden="true" *ngIf="t.status=='COMPLETED'"></i>
-                                    &nbsp; &nbsp;<font [color]="getColor(t)"> {{t.projectFeature.name}} 
+                                    &nbsp; &nbsp;<font [color]="getColor(t)"> {{t.featureName}} 
                                         <span class="badge badge-primary"> {{t.name}}</span>
                                          </font>
                                 

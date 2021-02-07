@@ -20,12 +20,13 @@ import { ViewRepositoryDetailComponent } from './components/view-repository-deta
 import { ViewCollaboratorsComponent } from './components/view-collaborators/view-collaborators.component';
 import { BranchesComponent } from './components/branches/branches.component';
 import { RepoIssuesComponent } from './components/repo-issues/repo-issues.component';
+import { RepositoryListComponent } from './components/repository-list/repository-list.component';
 
 
 @NgModule({
   declarations: [
-    ProjectRepositoryListComponent,AddRepositoryComponent,
-    PullRequestListComponent, ViewRepositoryComponent, RepositorySidebarComponent, ViewRepositorySidebarComponent, ViewRepositoryDetailComponent, ViewCollaboratorsComponent, BranchesComponent, RepoIssuesComponent
+    ProjectRepositoryListComponent,
+    PullRequestListComponent, ViewRepositoryComponent, RepositorySidebarComponent, ViewRepositorySidebarComponent, ViewRepositoryDetailComponent, ViewCollaboratorsComponent, BranchesComponent, RepoIssuesComponent, RepositoryListComponent
   ],
   imports: [
     CommonModule,    
@@ -37,7 +38,7 @@ import { RepoIssuesComponent } from './components/repo-issues/repo-issues.compon
     GithubRoutingModule,
     ProjectModule
   ],
-  exports:[ProjectRepositoryListComponent,AddRepositoryComponent],
+  exports:[ProjectRepositoryListComponent],
   schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GithubModule { 

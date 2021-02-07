@@ -22,7 +22,7 @@ export class ViewRepositoryComponent implements OnInit {
   repoName:string;
 
   ngOnInit(): void {
-    //this.findOne();
+    this.findOne();
   }
 
   repo;
@@ -34,7 +34,13 @@ export class ViewRepositoryComponent implements OnInit {
     })
   }
   navigate(path){
-
+    if(path ==''){
+      this.router.navigateByUrl(`repositories/${this.account}/${this.repoName}`);
+    }
+    else{
+      this.router.navigateByUrl(path);
+    }
+    
   }
 
 }

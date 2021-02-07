@@ -34,7 +34,7 @@ import { UsersModule } from 'projects/users/src/public-api';
     CourseModule.forRoot({API_ENDPOINT:environment.API_URL}),
     UsercourseModule.forRoot({API_ENDPOINT:environment.API_URL}),
     ThemeModule, MaterialModule, NavbarModule,   
-    ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
+    //ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
     DeviceDetectorModule ,
     BatchesModule,
     UsersModule.forRoot({API_ENDPOINT:environment.API_URL}),

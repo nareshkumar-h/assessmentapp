@@ -57,7 +57,7 @@ export class AddTaskIssueComponent implements OnInit {
       console.log(res);
       this.toastr.success("Success");
       if ( this.task.issueType == 1 || this.task.issueType == 2){
-        this.updateFeatureStatus(this.feature.id);
+        //this.updateFeatureStatus(this.feature.id);
       }
       this.dialog.closeAll();
 

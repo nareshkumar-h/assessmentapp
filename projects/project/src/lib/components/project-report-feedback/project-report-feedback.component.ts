@@ -24,6 +24,10 @@ export class ProjectReportFeedbackComponent implements OnInit {
     }
   }
 
+  getMarkDownData(){
+    return "";
+  }
+
   getData(){
     
     let url  = `https://sfy-fresher-batch-2020.s3.ap-south-1.amazonaws.com/${this.userId}.json`

@@ -58,6 +58,7 @@ import { TaskStatusComponent } from './components/task-status/task-status.compon
 import { AddSkillComponent } from './components/add-skill/add-skill.component';
 import { ProjectMainSidebarComponent } from './components/project-main-sidebar/project-main-sidebar.component';
 import { ProjectFeedbackComponent } from './components/project-feedback/project-feedback.component';
+import { TechnologyBadgeComponent } from './components/technology-badge/technology-badge.component';
 
 
 
@@ -73,13 +74,13 @@ import { ProjectFeedbackComponent } from './components/project-feedback/project-
       ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent,
     RatingIconComponent,TravisBadgeComponent, 
     RepoEventsComponent, EventTypeBadgeComponent,ViewFilesCommittedComponent,
-       ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent,  ProjectSkillsComponent, EditFeatureTagsComponent, AddTaskIssueComponent, ListIssuesComponent, TagSkillsComponent, FeatureSkillsComponent, TaskStatusComponent, AddSkillComponent, ProjectMainSidebarComponent, ProjectFeedbackComponent
+       ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent,  ProjectSkillsComponent, EditFeatureTagsComponent, AddTaskIssueComponent, ListIssuesComponent, TagSkillsComponent, FeatureSkillsComponent, TaskStatusComponent, AddSkillComponent, ProjectMainSidebarComponent, ProjectFeedbackComponent, TechnologyBadgeComponent
   ],
   imports: [
     CommonModule,HttpClientModule,FormsModule, ProjectRoutingModule, ThemeModule,
     SidenavModule, MaterialModule
   ],
-  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent,EditFeatureTaskComponent,AddTaskIssueComponent],
+  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent,EditFeatureTaskComponent,AddTaskIssueComponent,AddRepositoryComponent],
   exports: [ProjectComponent,ProjectDashboardComponent,
     ProjectListComponent, ViewProjectComponent, MyProjectListComponent, 
     AddProjectComponent, ProjectFeatureListComponent, ProjectPlanComponent, ProjectTasksComponent, 

@@ -41,7 +41,7 @@ export class ProjectService {
   }
 
   getFeatureReviewRating(featureId){
-    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/review`;
+    let url = `${this.apiUrl}v1/projectfeatures/${featureId}/rating`;
     return this.http.get(url,{headers:this.getHeaders()});
   }
 
@@ -75,6 +75,11 @@ export class ProjectService {
   listActivities(projectId){
     let url = `${this.apiUrl}v1/projects/${projectId}/activities`;
     return this.http.get(url, {headers:this.getHeaders()});
+  }
+
+  createProjectRepo(projectId){
+    let url = `${this.apiUrl}v1/projects/${projectId}/repositories`;
+    return this.http.post(url,null, {headers:this.getHeaders()});
   }
 
   createRepo(repo){
@@ -249,7 +254,7 @@ export class ProjectService {
 
   
   let technologies = [
-    { id: 1, name: 'HTML',  icon:'fab fa-html5',skills: ['Form'] },
+    { id: 1, name: 'HTML',  icon:'fab fa-html5',skills: ['Form'], badgeFileName:"html5.svg", badgeUrl:"https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" },
     { id: 2, name: 'JavaScript', icon:'fab fa-js',skills: ['DOM'] },
     { id: 3, name: 'CSS', icon:'fab fa-css',skills: ['Form'] },
     { id: 4, name: 'Bootstrap', icon:'fab fa-bootstrap',skills: ['Form'] },

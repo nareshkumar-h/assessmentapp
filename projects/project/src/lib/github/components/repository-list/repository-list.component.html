@@ -1,0 +1,88 @@
+<lib-repository-sidebar showSidebar="true"></lib-repository-sidebar>
+<kt-page title="Project Repositories" showSidebar="true">
+
+    <div class="row">
+        <div class="col">
+            <div class="card card-custom">
+                <div class="card-header card-blue">
+                    <div class="card-title text-white">
+                        Repositories
+                    </div>
+                    <!-- <div class="tools pull-right" *ngIf="githubUsername">
+                        <a routerLink="addrepository" class="btn btn btn-sm text-white"><i
+                                class="fa fa-plus "></i></a>
+                    </div> -->
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Repository </th>
+                                <th>Visibility</th>
+                                <!-- <th>Category</th> -->
+                                <th>CreatedDate</th>
+                                <th>Last Pushed Date</th>
+                                <!-- <th>Active</th> -->
+                                <th>Freezed</th>
+                                <th>Rating</th>
+                                <th>Build</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="repositories">
+                            <tr *ngFor="let i=index;let r of repositories">
+                                <td>{{i+1}}</td>
+                                <td><a href="https://github.com/{{r.account}}/{{r.repoName}}" *ngIf="r.repoName"
+                                        target="_blank" class="btn-sm"> {{r.account}}/{{r.repoName}} <i
+                                            class="fab fa-github" aria-hidden="true"></i>
+                                    </a></td>
+                                <td>{{r.visibility}}</td>
+                                <!-- <td>{{r.category}}</td> -->
+                                <td>{{r.createdDate}}</td>
+                                <!-- <td>{{r.lastPushedDate | moment}}</td> -->
+                                <td>{{r.lastPushedDate}}</td>
+                                <!-- <td>{{r.active}}</td> -->
+
+                                <td> <i *ngIf="r.freezed" class='fas fa-lock' aria-hidden='true'></i>
+
+                                    <i *ngIf="!r.freezed" class='fas fa-unlock' aria-hidden='true'></i>
+
+                                </td>
+                                <td>
+                                    <app-rating-icon [rating]="r.ratings"></app-rating-icon>
+                                </td>
+                                <td>
+                                    <!-- <app-travis-badge *ngIf="r.travisId !=0" repo="{{r.account}}/{{r.repoName}}">
+                                    </app-travis-badge> -->
+                                </td>
+
+                                <td>
+                                    <!-- <button class="btn btn-success" (click)="addAccess(r.id)" type="button">Request Access</button>
+                                    &nbsp; -->
+
+                                    <button class="btn btn-success" *ngIf="githubUsername" (click)="addRepoAccess(r)"
+                                        type="button">Request Git Access</button>
+                                    &nbsp;
+
+                                   
+                                    <button type="button" routerLink="{{r.account}}/{{r.repoName}}" class="btn btn-info">View
+                                        </button> &nbsp;
+                                        &nbsp;
+                                        
+                                        <button class="btn btn-danger" *ngIf="isMentor" (click)="deleteRepo(r.id)"
+                                        type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" *ngIf="repositories">
+                    Results : {{repositories.length}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</kt-page>

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectService } from '../../project.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'projects/auth/src/public-api';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import * as dayjs from 'dayjs';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -17,9 +17,13 @@ export class ProjectListComponent implements OnInit {
   breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
    {"name":"Projects"}];
 
+   loggedInUser;
+   isMentor:boolean;
 
-  constructor(private projectService:ProjectService, private authService:AuthService, private route:ActivatedRoute) { 
+  constructor(private router:Router,private projectService:ProjectService, private authService:AuthService, private route:ActivatedRoute) { 
     this.userId = this.authService.getLoggedInUsername();
+    this.loggedInUser = this.authService.getUser();
+    this.isMentor = this.authService.hasRoleAccess("T");
   }
 
   ngOnInit(): void {
@@ -36,7 +40,7 @@ export class ProjectListComponent implements OnInit {
     this.projectService.list().subscribe (res=>{
       this.projects = res;
       this.dataSource = new MatTableDataSource<any>(this.projects);
-      this.createReport(this.projects);
+      //this.createReport(this.projects);
     });
   }
 
@@ -60,6 +64,12 @@ export class ProjectListComponent implements OnInit {
   
   menus:any;
 
+  getDays(obj){
+    let sd = dayjs(obj.startDate);
+    let days  = dayjs().diff(sd,'day');
+    return days;
+  }
+
   getUrl(url){
     let projectUrls = url!=null?url.split(","):[];
     
@@ -75,7 +85,7 @@ export class ProjectListComponent implements OnInit {
     this.menus.push( {title: "All Projects",  path:[ "../all"], icontype:"fas fa-tools", access:this.authService.hasRoleAccess(["U","T","HR"])});    
     this.menus.push( {title: "Add Project",  path:[ "../addproject"], icontype:"fas fa-plus", access: this.authService.hasRoleAccess(["U"])});      
     //this.menus.push( {title: "Ratings",  path:[ "../ratings"], icontype:"fas fa-plus", access: true});      
-    this.menus.push( {title: "Reviews",  path:[ "../reviews"], icontype:"fas fa-search", access: this.authService.hasRoleAccess(["T"])});      
+    this.menus.push( {title: "Reviews",  path:[ "../projects/reviews"], icontype:"fas fa-search", access: this.authService.hasRoleAccess(["T"])});      
   }
 
   
@@ -95,5 +105,9 @@ export class ProjectListComponent implements OnInit {
     
     
 
+  }
+
+  createRepo(p){
+    this.router.navigateByUrl("/repositories/addrepository?projectId="+ p.id+"&name="+p.name+"&prefix="+p.projectPrefix);
   }
 }

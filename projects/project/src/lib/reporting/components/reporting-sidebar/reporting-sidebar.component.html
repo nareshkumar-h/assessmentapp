@@ -1,22 +1,22 @@
 <div class="sidebar">
     <!-- <app-brand></app-brand> -->
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand text-center" routerLink="repositories">Repositories</a>
+        <a class="navbar-brand text-center" (click)="navigate('reports')">Reports</a>
       </nav>
 
       
 	<ul class="nav sidebar-menu">
 	
 		<li class="nav-item">
-            <a class="nav-link" (click)="navigate('repositories')">
-                <i class="fas fa-home"> &nbsp;&nbsp; </i>
-                <span class="title">Home</span>
+            <a class="nav-link" (click)="navigate('reports')">
+                <i class="fas fa-laptop"> &nbsp;&nbsp; </i>
+                <span class="title">Projects</span>
             </a>
         </li>
         
         <li class="nav-item">
-			<a class="nav-link" routerLinkActive="nav-link-active" routerLink="../repositories">
-                <i class="fas fa-git-square"> &nbsp;&nbsp; </i>
+			<a class="nav-link" routerLinkActive="nav-link-active" (click)="navigate('reports/repositories')">
+                <i class="fas fa-code"> &nbsp;&nbsp; </i>
                 <span class="title">Repositories </span>
             </a>
         </li>

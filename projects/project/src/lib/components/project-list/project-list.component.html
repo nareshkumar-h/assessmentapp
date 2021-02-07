@@ -65,7 +65,7 @@
                             <a routerLink="../{{obj.id}}/tasks/ISSUES"  class="btn btn-danger btn-sm text-white"> Issues
                             </a> &nbsp;
                             
-                            <ng-container *ngFor="let url of getUrl(obj.testUrl)">
+                            <ng-container *ngFor="let url of getUrl(obj.projectTestUrl)">
                             <a *ngIf="url" href="{{url}}" target="_blank"  class="btn btn-success text-white">
                                Test </a> &nbsp;
                             </ng-container>

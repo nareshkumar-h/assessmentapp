@@ -1,0 +1,19 @@
+<kt-page showSidebar="true">
+    <div class="page-title">Github Stats </div>
+
+    <div class="row" *ngIf="users">
+        <div class="col-3" *ngFor="let u of users">
+            
+            <div>
+                <img
+                    src="https://github-readme-stats.vercel.app/api?username={{u.githubUsername}}&count_private=true&show_icons=true&&hide=stars,rank&hide_rank=true&custom_title={{u.name}}" />
+
+                    <!-- <img
+                    src="https://github-readme-stats.nareshkumar-h.vercel.app/api?username={{u.githubUsername}}&count_private=true&show_icons=true&hide_rank=true&disable_animations=true" /> -->
+            </div>
+        </div>
+        <!-- <div class="col-4" *ngIf="u.githubUsername">
+            <img src="https://github-readme-stats.nareshkumar-h.vercel.app/api/top-langs/?username={{u.githubUsername}}&hide=TeX"/>
+        </div> -->
+    </div>
+</kt-page>

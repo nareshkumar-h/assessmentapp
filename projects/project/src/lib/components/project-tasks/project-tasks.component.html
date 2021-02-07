@@ -27,8 +27,8 @@
                         <div class="card-body">
                             <ul>
                                 <li *ngFor="let task of m.value">
-                                    {{task.projectFeature.name}}
-                                -  <a routerLink="../../features/{{task.projectFeature.id}}">
+                                    {{task.featureName}} 
+                                -  <a routerLink="../../features/{{task.projectFeature?.id}}">
                                 {{task.name}} </a>- {{task.createdDate}}
                                 <span class="badge badge-primary">{{task.status}}</span>                                
                                 </li>
@@ -71,7 +71,7 @@
                                 <tbody>
                                     <tr *ngFor="let j=index;let t of m.value">
                                         <td>{{j+1}}</td>
-                                        <td><a routerLink="../../features/{{t.projectFeature.id}}">{{t.projectFeature.name}}
+                                        <td><a routerLink="../../features/{{t.featureId}}">{{t.featureName}}
                                             </a></td>
                                         <td>{{t.name}} <span class="badge badge-primary">{{t.category}}
 

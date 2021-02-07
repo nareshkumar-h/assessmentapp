@@ -1,105 +1,50 @@
-<kt-page title="Add Repository" showSidebar="true" >
-    <div class="row">
-        <div class="col-6">
-            <div class="card card-custom">
-                <div class="card-header card-blue">
-                   <div class="card-title text-white"> Create Repository - {{projectDetail?.name}}</div>
-                </div>
-                <div class="card-body">
-                    <form id="createRepoForm" #rForm="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="createRepo(rForm)">
-                        <div class="form-group">
-                          <label for="name">Project Name:</label>              
-                          <input type="text" class="form-control" placeholder="Enter Project Name" id="projectName" [(ngModel)]="project.name" name="projectName" required autofocus autocomplete="off" readonly>
-                        </div>
-
-                        <div class="form-group">
-                          <label for="name">Project Type:</label>
-                          <select class="form-control" name="projectType" (change)="onChange()" [(ngModel)]="project.projectType" required >
-                          <option value="1">Database</option>
-                          <option value="2">Core Java</option>
-                          <option value="3">Web(HTML/JS/Bootstrap)</option>
-                          <option value="4">SpringBoot</option>
-                          <!-- <option value="5">JavaScript</option> -->
-                          <option value="6">Angular</option>
-                          <option value="7">NodeJS</option>
-                          </select>
-                          
-                        </div>
-
-                        
-                        <div class="form-group">
-                          <label for="name">Repository Name:</label>              
-                          <input type="text" class="form-control" placeholder="Enter Project Name" id="projectName" [(ngModel)]="project.repositoryName" name="Repository Name" required autofocus autocomplete="off" >
-                        </div>
-                        
-                        
-                        <div class="form-group">
-                          <label for="name">Developers:</label>
-                          <input type="text" class="form-control" placeholder="Enter Username" id="username" [(ngModel)]="project.username" name="username" required autocomplete="off">
-                        </div>     
-                        
-                        <button type="submit" [disabled] = "rForm.invalid" class="btn btn-primary">Submit</button> &nbsp;
-                        
-                        <a routerLink="../repositories" class="btn btn-danger">Cancel</a>
-                      </form>     
-                </div>
-            </div>
+<!-- <mat-dialog-content class="mat-typography" > 
+  <div class="row">
+    <div class="col-6">
+      <div class="card card-custom">
+        <div class="card-header card-blue">
+          <div class="card-title text-white"> Create Repository - {{projectDetail?.name}}</div>
         </div>
-        
-        <div class="col-6">
-          <div class="card card-custom">
-              <div class="card-header card-blue">
-                 <div class="card-title text-white"> Link Repository - {{projectDetail?.name}}</div>
-              </div>
-              <div class="card-body">
-                 
-                 <div class="form-group">
-                  <label for="name">Project Type:</label>
-                  <select class="form-control" name="projectType"  (change)="onChange()"  [(ngModel)]="project.projectType" required >
-                  <option value="Database">Database</option>
-                  <option value="2">Core Java</option>
-                  <option value="3">Web(HTML/JS/Bootstrap)</option>
-                  <option value="4">SpringBoot</option>
-                  <!-- <option value="5">JavaScript</option> -->
-                  <option value="6">Angular</option>
-                  <option value="7">NodeJS</option>
-                  </select>
-                  
-                </div>
-
-
-                  <form id="createRepoForm2" #rForm1="ngForm" class="form-horizontal" action="createProject" method="POST" (submit)="linkRepository(rForm1)">
-                      
-                    <div class="form-group">
-                      <label for="name">Repository Name:</label>              
-                      <input type="text" class="form-control" placeholder="Enter Repository Name" id="projectName" [(ngModel)]="project.repositoryName" name="repositoryName" required autofocus autocomplete="off" >
-                    </div>
-
-                      <div class="form-group">
-                        <label for="name">Developers:</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" id="username" [(ngModel)]="project.username" name="username" required autocomplete="off">
-                      </div>            
-                      
-                   
-                  
-                      
-                      
-                      
-                      <button type="submit" [disabled] = "rForm1.invalid" class="btn btn-primary">Submit</button> &nbsp;
-                      
-                      <a routerLink="../repositories" class="btn btn-danger">Cancel</a>
-                    </form>     
-              </div>
-             
+        <div class="card-body">
+          <div class="row">
+            <div class="col alert alert-primary" role="alert" *ngIf="repositoryUrl">
+              <strong>Your Github Link</strong> <br />
+              <strong><a href="{{repositoryUrl}}" target="_blank">{{repositoryUrl}}</a></strong>
+            </div>
           </div>
+          <form id="createRepoForm" class="form-horizontal" action="createProject" method="POST">
+
+            <div class="form-group">
+
+              <label for="name">Github Repository:</label><br />
+              <div class=" input-group">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text">{{accountName}} / </span>
+                </div>
+                <input type="text" class="form-control" name="repositoryName" 
+                  [(ngModel)]="repositoryName" placeholder="Repository Name" autofocus required>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Developers:</label>
+              <input type="text" class="form-control" placeholder="Enter Username" id="username"
+                [(ngModel)]="project.username" name="username" required autocomplete="off">
+            </div>
+
+
+
+            <button type="button" class="btn btn-primary" (submit)="createRepo()">Create
+              Repo</button> &nbsp;
+            <button type="button" class="btn btn-info" (submit)="linkRepository()">Link Repo</button> &nbsp;
+
+            <a routerLink="../" class="btn btn-danger">Cancel</a>
+          </form>
+        </div>
       </div>
     </div>
-      <div class="row">
-        <div class="col alert alert-primary" role="alert" *ngIf="repositoryUrl">
-          <strong>Your Github Link</strong> <br/>
-          <strong><a href="{{repositoryUrl}}" target="_blank" >{{repositoryUrl}}</a></strong>
-        </div>
-      </div>
-     
-    
-</kt-page>
+  </div>
+
+ </mat-dialog-content> -->

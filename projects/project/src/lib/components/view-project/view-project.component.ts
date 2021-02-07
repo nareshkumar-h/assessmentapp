@@ -51,9 +51,9 @@ export class ViewProjectComponent implements OnInit {
     this.menus.push( {title: "Issues",  path:["../"+ this.projectId + "/tasks/ISSUES"], icontype:"fas fa-bug",  access: true});
     this.menus.push( {title: "Sprint",  path:["../"+ this.projectId + "/sprints"], icontype:"fas fa-clock",  access: true});
     this.menus.push( {title: "Competency",  path:["../"+ this.projectId + "/competency"], icontype:"fas fa-laptop",  access: true});
+    this.menus.push( {title: "Repositories",  path:["../../repositories"], icontype:"fas fa-code-branch",  access: true});
     
-    
-    this.menus.push( {title: "Repositories",  path:["../"+ this.projectId + "/repositories"], icontype:"fas fa-code-branch",  access: true});
+    //this.menus.push( {title: "Repositories",  path:["../"+ this.projectId + "/repositories"], icontype:"fas fa-code-branch",  access: true});
   }  
 
 

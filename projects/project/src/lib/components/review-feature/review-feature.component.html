@@ -18,8 +18,8 @@
     <ng-container *ngIf="feature else loading">
 
         <div class="row">
-            <div class="col-8">
-                <app-view-user-story [projectName]="feature.project.name" [feature]="feature"></app-view-user-story>
+            <div class="col-8" *ngIf="project&&feature">
+                <app-view-user-story [projectName]="project.name" [feature]="feature"></app-view-user-story>
             </div>
             <div class="col-4">
 
@@ -29,7 +29,7 @@
                             Developer: {{feature.createdBy}}
                         </div>
                     </div>
-                    <div class="card-body" *ngIf="project">
+                    <div class="card-body" *ngIf="project">                        
                         <ng-container *ngFor="let url of getUrl(project.projectTestUrl)">
                             <a target="_blank" href="{{url}}">{{url}}</a> <br /><br />
                         </ng-container>
@@ -39,7 +39,9 @@
             </div>
         </div>
         <div class="row">
+            <div class="col">
              <lib-feature-skills [feature]="feature" [featureId]="feature.id" ></lib-feature-skills> 
+            </div>
         </div>
         <div class="row">
             <div class="col">
