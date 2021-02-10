@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { API, CourseClient, UserClient } from '@ks-sdk-client/rest';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,13 +15,6 @@ export class AppComponent {
   constructor() {
     this.user = this.getLoggedInUser();
     this.isLoggedIn = this.user != null;
-    const courseClient = new CourseClient();
-    const userClient = new UserClient();
-    UserClient.list().then((response) => {
-      console.log(response);
-    });
-    console.log(userClient);
-    console.log('APP constructor', API(), courseClient.listCourses());
   }
 
   selectedUser: any;
@@ -47,7 +39,7 @@ export class AppComponent {
   }
 
   getLoggedInUser() {
-    return JSON.parse(localStorage.getItem('LOGGED_IN_USER'));
+    return JSON.parse(sessionStorage.getItem('LOGGED_IN_USER'));
   }
 
   isLoggedIn: boolean = true;

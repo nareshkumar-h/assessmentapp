@@ -8,7 +8,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
 import { DeviceDetectorModule } from 'ngx-device-detector';
-import { ProjectModule } from 'projects/project/src/public-api';
 import { environment } from '../environments/environment';
 import { UsercourseModule } from 'projects/usercourse/src/public-api';
 import { AuthModule } from 'projects/auth/src/public-api';
@@ -25,31 +24,40 @@ import { UsersModule } from 'projects/users/src/public-api';
 
 @NgModule({
   declarations: [
-    AppComponent,HomeComponent, DashboardComponent,TaskDashboardComponent
+    AppComponent,
+    HomeComponent,
+    DashboardComponent,
+    TaskDashboardComponent,
   ],
   imports: [
     BrowserModule,
-    AuthModule.forRoot({API_ENDPOINT:environment.API_URL,USER_TYPE:'U', ORG_ID:environment.ORG_ID}),
+    AuthModule.forRoot({
+      API_ENDPOINT: environment.ENV,
+      USER_TYPE: 'U',
+      ORG_ID: environment.ORG_ID,
+    }),
     //UserCourseWrapperModule,
-    CourseModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    UsercourseModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    ThemeModule, MaterialModule, NavbarModule,   
-    ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    DeviceDetectorModule ,
+    CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    UsercourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    ThemeModule,
+    MaterialModule,
+    NavbarModule,
+    //ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
+    DeviceDetectorModule,
     BatchesModule,
-    UsersModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    TrainingModule,    
-    SettingsModule,    
+    UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    TrainingModule,
+    SettingsModule,
     ContentModule,
     HighlightModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
-        lineNumbers:true,
-         coreLibraryLoader: () => import('highlight.js/lib/core'),
+        lineNumbers: true,
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
         //coreLibraryLoader: () => import('highlight.js/lib/highlight'),
         lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
         languages: {
@@ -57,11 +65,11 @@ import { UsersModule } from 'projects/users/src/public-api';
           java: () => import('highlight.js/lib/languages/java'),
           typescript: () => import('highlight.js/lib/languages/typescript'),
           scss: () => import('highlight.js/lib/languages/scss'),
-        }
-      }
-    }
+        },
+      },
+    },
   ],
-  schemas:[NO_ERRORS_SCHEMA],
-  bootstrap: [AppComponent]
+  schemas: [NO_ERRORS_SCHEMA],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

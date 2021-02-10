@@ -1,5 +1,5 @@
 <!-- <lib-repository-sidebar showSidebar="true"></lib-repository-sidebar> -->
-<kt-page title="Project Repositories" showSidebar="true">
+<div title="Project Repositories" showSidebar="true">
 
     <div class="row">
         <div class="col">
@@ -9,8 +9,7 @@
                         Repositories
                     </div>
                     <div class="tools pull-right" *ngIf="githubUsername">
-                        <a routerLink="addrepository" class="btn btn btn-sm text-white"><i
-                                class="fa fa-plus "></i></a>
+                        <a routerLink="addrepository" class="btn btn btn-sm text-white"><i class="fa fa-plus "></i></a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -65,12 +64,13 @@
                                         type="button">Request Git Access</button>
                                     &nbsp;
 
-                                   
-                                    <button type="button" routerLink="{{r.account}}/{{r.repoName}}" class="btn btn-info">View
-                                        </button> &nbsp;
-                                        &nbsp;
-                                        
-                                        <button class="btn btn-danger" *ngIf="isMentor" (click)="deleteRepo(r.id)"
+
+                                    <button type="button" routerLink="{{r.account}}/{{r.repoName}}"
+                                        class="btn btn-info">View
+                                    </button> &nbsp;
+                                    &nbsp;
+
+                                    <button class="btn btn-danger" *ngIf="isMentor" (click)="deleteRepo(r.id)"
                                         type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     &nbsp;
                                 </td>
@@ -85,4 +85,4 @@
         </div>
     </div>
 
-</kt-page>
+</div>
