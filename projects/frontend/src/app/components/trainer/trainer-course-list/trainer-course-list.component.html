@@ -9,7 +9,10 @@
         </div>
     </div>
      -->
-<div class="row" *ngIf="trainerCourses">
+     <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+<div class="row" *ngIf="trainerCourses;else loading">
         <div class="col-12" *ngFor="let tc of trainerCourses | keyvalue" >
             <div class="card card-custom" >
                 <div class="card-header card-blue">
@@ -43,7 +46,7 @@
                                 <td>{{c.pending_topics}}</td>
                                 <td>{{c.status}}</td>
                                 <td>
-                                    <a routerLink="../../batches/{{tc.key}}/courses/{{c.course_id}}/overview" class="btn btn-info btn-sm">View</a> &nbsp; 
+                                    <a routerLink="../../batches/{{tc.key}}/courses/{{c.course_id}}/topics" class="btn btn-info btn-sm">View</a> &nbsp; 
                                     
                                     
                                 </td>

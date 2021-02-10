@@ -4,104 +4,100 @@ import { ActivatedRoute } from '@angular/router';
 import { AssignBatchCourseComponent } from '../assign-batch-course/assign-batch-course.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EditBatchCourseComponent } from '../edit-batch-course/edit-batch-course.component';
+import { KtClientService } from '../../../kt-client.service';
 
 @Component({
   selector: 'app-batch-course-list',
   templateUrl: './batch-course-list.component.html',
-  styleUrls: ['./batch-course-list.component.css']
+  styleUrls: ['./batch-course-list.component.css'],
 })
 export class BatchCourseListComponent implements OnInit {
+  batchId: string;
 
-  batchId:string;
+  breadcrumbItems: any = [
+    { icon: 'home', name: 'Home', link: '/' },
+    { name: 'Batches', link: '../../' },
+  ];
 
-  
-  breadcrumbItems:any  = [ {"icon":"home", "name":"Home","link":"/"},
-  {"name":"Batches", "link":"../../"}];
-  
-  constructor(public dialog: MatDialog,private batchService:BatchService, private route:ActivatedRoute) {
-    this.route.parent.params.subscribe ( params=>{
-      this.batchId = params["id"];
-      this.breadcrumbItems.push({name:this.batchId});
-    })
-   }
+  constructor(
+    public dialog: MatDialog,
+    private ktClient: KtClientService,
+    private route: ActivatedRoute
+  ) {
+    this.route.parent.params.subscribe((params) => {
+      this.batchId = params['id'];
+      this.breadcrumbItems.push({ name: this.batchId });
+    });
+  }
 
   ngOnInit(): void {
     this.list();
   }
 
-  
-  reportData:any = [];
-  widgetColors= [ "purple-plum","green-haze","green-haze","red-intense","blue-madison"];
+  reportData: any = [];
+  widgetColors = [
+    'purple-plum',
+    'green-haze',
+    'green-haze',
+    'red-intense',
+    'blue-madison',
+  ];
 
-  createReport(courses){
-    this.reportData=[];
-    let i =0;
-    let total = 0;
-    let completed = 0;
-    let pending = 0;
-    for(let c of courses){
-      completed += c.completed_topics;
-      pending+=c.pending_topics;
-      total+=c.pending_topics + c.completed_topics;
-    }
-    let percentage = 0;
-    if (total>0) {
-      percentage= Math.round ( 100*completed/total);
-    }
-    this.reportData.push({"label":"Courses", "value":courses.length});
-    this.reportData.push({"label": "Topics", "value": total});
-    this.reportData.push({"label": "Completed", "value": completed });
-    this.reportData.push({"label": "Pending", "value": pending});
-    this.reportData.push({"label": "Percentage", "value": percentage + "%" });
-
-
-    
-
+  createReport(courses) {
+    this.ktClient
+      .getBatchClient()
+      .getBatchCourseListReport(courses)
+      .then((res) => {
+        this.reportData = res;
+      });
   }
 
-  batchCourses:any;
+  batchCourses: any;
 
-  list(){
-    this.batchService.listCourses(this.batchId).subscribe (res=>{
-      this.batchCourses = res;
-      this.createReport(this.batchCourses);
-    });
+  list() {
+    this.ktClient
+      .getBatchClient()
+      .getBatchCourses(this.batchId)
+      .then((res) => {
+        this.batchCourses = res;
+        this.createReport(this.batchCourses);
+      });
   }
 
+  mode: string;
 
-  mode:string;
-
-  updateMode(mode){
+  updateMode(mode) {
     this.mode = mode;
   }
 
-
-  assignCourseDialog(){
-
+  assignCourseDialog() {
     let courseIds = [];
-    for(let c of this.batchCourses){      
+    for (let c of this.batchCourses) {
       courseIds.push(c.course_id);
     }
 
-    
-    const dialogRef = this.dialog.open(AssignBatchCourseComponent,{width: '800px', data: {batchId:this.batchId, assignedCourses:courseIds}});
-    
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(AssignBatchCourseComponent, {
+      width: '800px',
+      data: { batchId: this.batchId, assignedCourses: courseIds },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
       this.list();
     });
   }
 
-  editCourseDialog(batchCourse){
-
+  editCourseDialog(batchCourse) {
     let courseIds = [];
-    for(let c of this.batchCourses){      
+    for (let c of this.batchCourses) {
       courseIds.push(c.course_id);
     }
 
-    
-    const dialogRef = this.dialog.open(EditBatchCourseComponent,{width: '800px', data: {batchId:this.batchId, course:batchCourse}});
-    
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(EditBatchCourseComponent, {
+      width: '800px',
+      data: { batchId: this.batchId, course: batchCourse },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
       this.list();
     });
   }

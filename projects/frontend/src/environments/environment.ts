@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  API_URL :"http://localhost:8080/api/",
-  PROJECT_API_URL: "http://knowledgetracker-api.herokuapp.com/api/",
+  API_URL: 'http://localhost:8080/api/',
+  PROJECT_API_URL: 'http://knowledgetracker-api.herokuapp.com/api/',
   //API_URL:"https://knowledgetracker-java-api.herokuapp.com/api/",
-  ORG_ID: "spinsoft"
+  ORG_ID: 'spinsoft',
+  ENV: 'DEV',
 };
 
 /*

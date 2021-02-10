@@ -1,4 +1,7 @@
 <kt-page title="Batch Users - {{batchId}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+     </ng-template>
 <!--     
     <div class="row">
         <div class="col-1 dropdown dropdown-inline ml-auto">
@@ -23,7 +26,7 @@
     <br/>
 
     <div class="row">
-        <div class="col" *ngIf="users">
+        <div class="col" *ngIf="users;else loading">
             <div class="card card-custom">
                 <div class="card-header card-blue">
                     Users ( {{users.length}} )
