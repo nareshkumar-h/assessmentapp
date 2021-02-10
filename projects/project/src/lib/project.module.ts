@@ -1,4 +1,9 @@
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  ModuleWithProviders,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { ProjectComponent } from './project.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ViewProjectComponent } from './components/view-project/view-project.component';
@@ -24,9 +29,13 @@ import { AddRepositoryComponent } from './components/add-repository/add-reposito
 import { ProjectDashboardComponent } from './components/project-dashboard/project-dashboard.component';
 import { ProjectRoutingModule } from './project-routing.module';
 import { CommonModule } from '@angular/common';
-import {  HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { PageComponent, SidenavModule, ThemeModule } from 'projects/theme/src/public-api';
+import {
+  PageComponent,
+  SidenavModule,
+  ThemeModule,
+} from 'projects/theme/src/public-api';
 import { ViewProjectDetailComponent } from './components/view-project-detail/view-project-detail.component';
 import { Config, API_URL } from './config';
 import { ProjectService } from './project.service';
@@ -45,8 +54,6 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { ViewUserStoryComponent } from './components/view-user-story/view-user-story.component';
 import { ReviewRatingFormComponent } from './components/review-rating-form/review-rating-form.component';
 
-
-
 import { ProjectSkillsComponent } from './components/project-skills/project-skills.component';
 
 import { EditFeatureTagsComponent } from './components/edit-feature-tags/edit-feature-tags.component';
@@ -59,46 +66,111 @@ import { AddSkillComponent } from './components/add-skill/add-skill.component';
 import { ProjectMainSidebarComponent } from './components/project-main-sidebar/project-main-sidebar.component';
 import { ProjectFeedbackComponent } from './components/project-feedback/project-feedback.component';
 import { TechnologyBadgeComponent } from './components/technology-badge/technology-badge.component';
-import { RepositorySidebarComponent } from './github/components/repository-sidebar/repository-sidebar.component';
-import { ProjectRepositoryListComponent } from './components/project-repository-list/project-repository-list.component';
-
-
 
 @NgModule({
-  declarations: [ProjectComponent, ProjectDashboardComponent,
-    ProjectListComponent, 
-    ViewProjectComponent, 
-    MyProjectListComponent, 
-    AddProjectComponent, ProjectFeatureListComponent, 
-    ProjectPlanComponent, ProjectTasksComponent,
-     ProjectActivitiesComponent, ProjectActivityListComponent, 
-     ViewProjectFeatureComponent, AddProjectFeatureComponent,
-      ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent,
-    RatingIconComponent,TravisBadgeComponent, 
-    RepoEventsComponent, EventTypeBadgeComponent,ViewFilesCommittedComponent,
-       ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent,  ProjectSkillsComponent, EditFeatureTagsComponent, AddTaskIssueComponent, ListIssuesComponent, TagSkillsComponent, FeatureSkillsComponent, TaskStatusComponent, AddSkillComponent, ProjectMainSidebarComponent, ProjectFeedbackComponent, TechnologyBadgeComponent,RepositorySidebarComponent, ProjectRepositoryListComponent
+  declarations: [
+    ProjectComponent,
+    ProjectDashboardComponent,
+    ProjectListComponent,
+    ViewProjectComponent,
+    MyProjectListComponent,
+    AddProjectComponent,
+    ProjectFeatureListComponent,
+    ProjectPlanComponent,
+    ProjectTasksComponent,
+    ProjectActivitiesComponent,
+    ProjectActivityListComponent,
+    ViewProjectFeatureComponent,
+    AddProjectFeatureComponent,
+    ProjectSidebarComponent,
+    ProjectReviewsComponent,
+    ProjectSprintsComponent,
+    RatingIconComponent,
+    TravisBadgeComponent,
+    RepoEventsComponent,
+    EventTypeBadgeComponent,
+    ViewFilesCommittedComponent,
+    ViewProjectDetailComponent,
+    AddProjectActivityComponent,
+    AddProjectSprintComponent,
+    ViewProjectActivityComponent,
+    FeatureTasksComponent,
+    AddFeatureTaskComponent,
+    EditFeatureTaskComponent,
+    ViewProjectReviewRatingComponent,
+    ReviewFeatureComponent,
+    StarRatingComponent,
+    ViewUserStoryComponent,
+    ReviewRatingFormComponent,
+    ViewProjectRatingComponent,
+    ProjectSkillsComponent,
+    EditFeatureTagsComponent,
+    AddTaskIssueComponent,
+    ListIssuesComponent,
+    TagSkillsComponent,
+    FeatureSkillsComponent,
+    TaskStatusComponent,
+    AddSkillComponent,
+    ProjectMainSidebarComponent,
+    ProjectFeedbackComponent,
+    TechnologyBadgeComponent,
   ],
   imports: [
-    CommonModule,HttpClientModule,FormsModule, ProjectRoutingModule, ThemeModule,
-    SidenavModule, MaterialModule
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ProjectRoutingModule,
+    ThemeModule,
+    SidenavModule,
+    MaterialModule,
   ],
-  entryComponents: [AddProjectFeatureComponent,AddProjectActivityComponent,AddProjectSprintComponent, AddFeatureTaskComponent,EditFeatureTaskComponent,AddTaskIssueComponent,AddRepositoryComponent],
-  exports: [ProjectComponent,ProjectDashboardComponent,
-    ProjectListComponent, ViewProjectComponent, MyProjectListComponent, 
-    AddProjectComponent, ProjectFeatureListComponent, ProjectPlanComponent, ProjectTasksComponent, 
-    ProjectActivitiesComponent, ProjectActivityListComponent, ViewProjectFeatureComponent, AddProjectFeatureComponent, ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, AddSkillComponent,
-    RatingIconComponent,TravisBadgeComponent, RepoEventsComponent, EventTypeBadgeComponent,
-    ViewFilesCommittedComponent, ViewProjectRatingComponent,ProjectSkillsComponent,TagSkillsComponent,RepositorySidebarComponent, ProjectRepositoryListComponent
+  entryComponents: [
+    AddProjectFeatureComponent,
+    AddProjectActivityComponent,
+    AddProjectSprintComponent,
+    AddFeatureTaskComponent,
+    EditFeatureTaskComponent,
+    AddTaskIssueComponent,
+    AddRepositoryComponent,
   ],
-  schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
+  exports: [
+    ProjectComponent,
+    ProjectDashboardComponent,
+    ProjectListComponent,
+    ViewProjectComponent,
+    MyProjectListComponent,
+    AddProjectComponent,
+    ProjectFeatureListComponent,
+    ProjectPlanComponent,
+    ProjectTasksComponent,
+    ProjectActivitiesComponent,
+    ProjectActivityListComponent,
+    ViewProjectFeatureComponent,
+    AddProjectFeatureComponent,
+    ProjectSidebarComponent,
+    ProjectReviewsComponent,
+    ProjectSprintsComponent,
+    AddSkillComponent,
+    RatingIconComponent,
+    TravisBadgeComponent,
+    RepoEventsComponent,
+    EventTypeBadgeComponent,
+    ViewFilesCommittedComponent,
+    ViewProjectRatingComponent,
+    ProjectSkillsComponent,
+    TagSkillsComponent,
+  ],
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProjectModule {
-  static forRoot(config: Config): ModuleWithProviders<ProjectModule> {    
+  static forRoot(config: Config): ModuleWithProviders<ProjectModule> {
     return {
       ngModule: ProjectModule,
-      providers: [ ProjectService,GithubService,
-        {provide: API_URL, useValue: config.API_ENDPOINT} // If I hard code `useValue: {API_ENDPOINT: 'FooBar'}`, instead of using `config` it works... weird.
+      providers: [
+        ProjectService,
+        GithubService,
+        { provide: API_URL, useValue: config.API_ENDPOINT }, // If I hard code `useValue: {API_ENDPOINT: 'FooBar'}`, instead of using `config` it works... weird.
       ],
     };
   }
- }
+}
