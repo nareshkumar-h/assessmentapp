@@ -26,7 +26,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { CommonModule } from '@angular/common';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { SidenavModule, ThemeModule } from 'projects/theme/src/public-api';
+import { PageComponent, SidenavModule, ThemeModule } from 'projects/theme/src/public-api';
 import { ViewProjectDetailComponent } from './components/view-project-detail/view-project-detail.component';
 import { Config, API_URL } from './config';
 import { ProjectService } from './project.service';
@@ -59,6 +59,8 @@ import { AddSkillComponent } from './components/add-skill/add-skill.component';
 import { ProjectMainSidebarComponent } from './components/project-main-sidebar/project-main-sidebar.component';
 import { ProjectFeedbackComponent } from './components/project-feedback/project-feedback.component';
 import { TechnologyBadgeComponent } from './components/technology-badge/technology-badge.component';
+import { RepositorySidebarComponent } from './github/components/repository-sidebar/repository-sidebar.component';
+import { ProjectRepositoryListComponent } from './components/project-repository-list/project-repository-list.component';
 
 
 
@@ -74,7 +76,7 @@ import { TechnologyBadgeComponent } from './components/technology-badge/technolo
       ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent,
     RatingIconComponent,TravisBadgeComponent, 
     RepoEventsComponent, EventTypeBadgeComponent,ViewFilesCommittedComponent,
-       ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent,  ProjectSkillsComponent, EditFeatureTagsComponent, AddTaskIssueComponent, ListIssuesComponent, TagSkillsComponent, FeatureSkillsComponent, TaskStatusComponent, AddSkillComponent, ProjectMainSidebarComponent, ProjectFeedbackComponent, TechnologyBadgeComponent
+       ViewProjectDetailComponent, AddProjectActivityComponent, AddProjectSprintComponent, ViewProjectActivityComponent, FeatureTasksComponent, AddFeatureTaskComponent, EditFeatureTaskComponent, ViewProjectReviewRatingComponent, ReviewFeatureComponent, StarRatingComponent, ViewUserStoryComponent, ReviewRatingFormComponent, ViewProjectRatingComponent,  ProjectSkillsComponent, EditFeatureTagsComponent, AddTaskIssueComponent, ListIssuesComponent, TagSkillsComponent, FeatureSkillsComponent, TaskStatusComponent, AddSkillComponent, ProjectMainSidebarComponent, ProjectFeedbackComponent, TechnologyBadgeComponent,RepositorySidebarComponent, ProjectRepositoryListComponent
   ],
   imports: [
     CommonModule,HttpClientModule,FormsModule, ProjectRoutingModule, ThemeModule,
@@ -86,7 +88,7 @@ import { TechnologyBadgeComponent } from './components/technology-badge/technolo
     AddProjectComponent, ProjectFeatureListComponent, ProjectPlanComponent, ProjectTasksComponent, 
     ProjectActivitiesComponent, ProjectActivityListComponent, ViewProjectFeatureComponent, AddProjectFeatureComponent, ProjectSidebarComponent, ProjectReviewsComponent, ProjectSprintsComponent, AddSkillComponent,
     RatingIconComponent,TravisBadgeComponent, RepoEventsComponent, EventTypeBadgeComponent,
-    ViewFilesCommittedComponent, ViewProjectRatingComponent,ProjectSkillsComponent,TagSkillsComponent
+    ViewFilesCommittedComponent, ViewProjectRatingComponent,ProjectSkillsComponent,TagSkillsComponent,RepositorySidebarComponent, ProjectRepositoryListComponent
   ],
   schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA]
 })
