@@ -4,25 +4,25 @@ import { AuthService } from 'projects/auth/src/public-api';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CourseContentService {
+  apiUrl: string;
 
-  apiUrl:string;
-
-  constructor(private http:HttpClient, private authService: AuthService) { 
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.apiUrl = environment.API_URL;
   }
 
-  getHeaders(){    
+  getHeaders() {
     let headers = new HttpHeaders();
-  //  headers = headers.set('org', this.authService.getLoggedInOrg());
+    headers = headers
+      .set('org', this.authService.getLoggedInOrg())
+      .set('Authorization', 'Bearer ' + this.authService.getToken());
     return headers;
   }
 
-  getUserCourseLectures(userId,courseId){
+  getUserCourseLectures(userId, courseId) {
     let url = `${this.apiUrl}v1/courses/${courseId}/users/${userId}/contents`;
-    return this.http.get(url);
+    return this.http.get(url, { headers: this.getHeaders() });
   }
-  
 }

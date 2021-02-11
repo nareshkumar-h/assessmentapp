@@ -21,6 +21,8 @@ import { TaskDashboardComponent } from './components/task-dashboard/task-dashboa
 import { ContentModule } from 'projects/content/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { UsersModule } from 'projects/users/src/public-api';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { UsersModule } from 'projects/users/src/public-api';
     AppRoutingModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
