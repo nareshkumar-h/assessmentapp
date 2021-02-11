@@ -53,6 +53,7 @@ export class BatchCourseTopicsComponent implements OnInit {
   }
 
   listTopics() {
+    console.log(this.ktClient.getBatchClient());
     this.ktClient
       .getBatchClient()
       .getBatchCourseTopics(this.batchId, this.courseId)

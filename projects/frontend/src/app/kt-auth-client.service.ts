@@ -19,8 +19,8 @@ export class KtAuthClientService {
   ) {}
 
   getAuthClient() {
-    this.headers['org'] = this.config.ORG_ID;
-    this.headers['Authorization'] = `Bearer ${this.loggedInUser}`;
+    //this.headers['org'] = this.config.ORG_ID;
+
     return new AuthClient({
       headers: this.headers,
       environment: this.config.API_ENDPOINT,

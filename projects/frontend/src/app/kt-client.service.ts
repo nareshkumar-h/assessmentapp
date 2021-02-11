@@ -32,7 +32,7 @@ export class KtClientService {
   }
   getCourseClient() {
     this.headers['org'] = this.org;
-    this.headers['Authorization'] = `Bearer ${this.loggedInUser}`;
+    this.headers['Authorization'] = `Bearer ${this.authService.getToken()}`;
     return new CourseClient({
       headers: this.headers,
       environment: environment.ENV,
@@ -40,7 +40,7 @@ export class KtClientService {
   }
   getUserClient() {
     this.headers['org'] = this.org;
-    this.headers['Authorization'] = `Bearer ${this.loggedInUser}`;
+    this.headers['Authorization'] = `Bearer ${this.authService.getToken()}`;
     return new UserClient({
       headers: this.headers,
       environment: environment.ENV,
@@ -48,7 +48,7 @@ export class KtClientService {
   }
   getAuthClient() {
     this.headers['org'] = this.org;
-    this.headers['Authorization'] = `Bearer ${this.loggedInUser}`;
+    //this.headers['Authorization'] = `Bearer ${this.authService.getToken()}`;
     return new AuthClient({
       headers: this.headers,
       environment: environment.ENV,
