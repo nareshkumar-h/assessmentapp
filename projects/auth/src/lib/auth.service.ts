@@ -99,6 +99,10 @@ export class AuthService {
     return username;
   }
 
+  getToken() {
+    return localStorage.TOKEN;
+  }
+
   getLoggedInUserId() {
     let user = this.getUser();
     let username = null;

@@ -24,7 +24,7 @@ export class KtClientService {
 
   getBatchClient() {
     this.headers['org'] = this.org;
-    this.headers['Authorization'] = `Bearer ${this.loggedInUser}`;
+    this.headers['Authorization'] = `Bearer ${this.authService.getToken()}`;
     return new BatchClient({
       headers: this.headers,
       environment: environment.ENV,

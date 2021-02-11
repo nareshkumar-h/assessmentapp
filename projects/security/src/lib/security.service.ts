@@ -54,6 +54,7 @@ export class SecurityService {
   }
 
   storeLoggedInUser(user) {
+    localStorage.setItem('TOKEN', user?.token);
     this.set('LOGGED_IN_USER', JSON.stringify(user));
   }
 
