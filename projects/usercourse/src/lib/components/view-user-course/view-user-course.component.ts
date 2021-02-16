@@ -5,39 +5,43 @@ import { UserCourseService } from '../../usercourse.service';
 import { CourseClientService } from '../../course-client.service';
 @Component({
   selector: 'ct-view-user-course',
-  templateUrl: './view-user-course.component.html'
+  templateUrl: './view-user-course.component.html',
 })
 export class ViewUserCourseComponent implements OnInit {
-
   showSidebar = true;
   @Input()
   userId: string;
 
   @Input()
   courseId: string;
-  settings:string;
+  settings: string;
 
-  selectedCourse:any;
-  
-  breadcrumbItems:any  = [ {"icon":"home","name":" Courses", "link":"../../courses"}];
+  selectedCourse: any;
 
-  courseName:string;
+  breadcrumbItems: any = [
+    { icon: 'home', name: ' Courses', link: '../../courses' },
+  ];
+
+  courseName: string;
 
   enrolled = true;
 
-  constructor(private userCourseService: UserCourseService, private authService:AuthService,private courseClientService:CourseClientService, private route: ActivatedRoute) {
+  constructor(
+    private userCourseService: UserCourseService,
+    private authService: AuthService,
+    private courseClientService: CourseClientService,
+    private route: ActivatedRoute
+  ) {
     //this.userId = params["userId"];
     this.userId = this.authService.getLoggedInUsername();
-    this.route.params.subscribe(params => {
-      
-      this.courseId = params["courseId"];
-      this.courseName = params["courseName"];
-     // this.breadcrumbItems.push({ name: "Courses", link: "coursedashboard",sidelink:"USER_COURSE"});      
-      
+    this.route.params.subscribe((params) => {
+      this.courseId = params['courseId'];
+      this.courseName = params['courseName'];
+      // this.breadcrumbItems.push({ name: "Courses", link: "coursedashboard",sidelink:"USER_COURSE"});
     });
-    this.route.queryParams.subscribe( params=>{
-      let view = params["view"];
-      if(view=="enroll"){
+    this.route.queryParams.subscribe((params) => {
+      let view = params['view'];
+      if (view == 'enroll') {
         this.enrolled = false;
       }
     });
@@ -45,39 +49,34 @@ export class ViewUserCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.loadMenus();
-    let value = localStorage.getItem("COURSE_SETTINGS");
-    this.settings = value ? value : "A";
+    let value = localStorage.getItem('COURSE_SETTINGS');
+    this.settings = value ? value : 'A';
 
     this.findCourse();
     //this.loadUserCourseContents();
-    
   }
 
   topicData: any;
   courseTopics: any = {};
 
-  page:string = 'topics';
+  page: string = 'topics';
   course: any;
 
   modules: any;
 
-  userContents:any;
-  
+  userContents: any;
 
   findCourse() {
-    
-    this.courseClientService.listTopics(this.courseId).subscribe(res => {
+    this.courseClientService.listTopics(this.courseId).subscribe((res) => {
       let data = res;
-      let course:any = data;
+      let course: any = data;
       console.log(course);
       //this.loadSections(this.courseId);
-      
+
       this.breadcrumbItems.push({ name: course.title });
 
-      var modules = data["modules"];
-      
+      var modules = data['modules'];
 
       this.course = course;
       //console.log("Before Sorting:" , JSON.stringify(modules));
@@ -85,20 +84,22 @@ export class ViewUserCourseComponent implements OnInit {
       //this.loadModulesMenus(modules);
       //console.log("After Sorting:" , JSON.stringify(modules));
       this.modules = modules;
-      
+
       this.courseTopics = this.getCourseTopics(modules);
 
-     // this.listUserTopics(modules, this.courseTopics);
+      // this.listUserTopics(modules, this.courseTopics);
     });
   }
 
-  loadUserCourseContents(){
-    this.courseClientService.getUserCourseContents(this.userId, this.courseId).subscribe(res=>{
-      console.log(JSON.stringify(res));
-      
-      let courseData = res;
-      this.loadModulesMenus(courseData);
-    });
+  loadUserCourseContents() {
+    this.courseClientService
+      .getUserCourseContents(this.userId, this.courseId)
+      .subscribe((res) => {
+        console.log(JSON.stringify(res));
+
+        let courseData = res;
+        this.loadModulesMenus(courseData);
+      });
   }
 
   getCourseTopics(modules) {
@@ -110,8 +111,6 @@ export class ViewUserCourseComponent implements OnInit {
     return courseTopics;
   }
 
-
-
   modulePercentage = {};
 
   // listUserTopics(modules, courseTopics) {
@@ -120,20 +119,20 @@ export class ViewUserCourseComponent implements OnInit {
   //     for (let m of modules) {
   //       let moduleName = m.name;
   //       let topics = courseTopics[moduleName];
-        
+
   //       let moduleTopicCompleted = 0;
   //       let percentage = 0;
 
   //       var completed = 0;
   //       let total = topics.length;
   //       var newTopics = [];
-        
+
   //         for (let topic of topics) {
 
   //           const obj = <{}>data.find(t => t["topicId"] == topic["code"]);
-            
+
   //           if (obj) {
-  //             topic = { ...topic, ...obj}; 
+  //             topic = { ...topic, ...obj};
   //             if (obj["status"] == 'C') {
   //               completed++;
   //               moduleTopicCompleted++;
@@ -144,17 +143,16 @@ export class ViewUserCourseComponent implements OnInit {
   //             newTopics.push(topic);
 
   //             this.modulePercentage[moduleName] = Math.ceil(100 * moduleTopicCompleted / total);
-              
+
   //             this.courseTopics[moduleName] = newTopics;
   //           }
   //         }
-        
+
   //     }
 
   //     this.createReport(this.courseTopics);
   //   });
   // }
-
 
   // updateStatus(topic, checked) {
   //   console.log("Update Status:", topic, checked);
@@ -171,11 +169,11 @@ export class ViewUserCourseComponent implements OnInit {
   //   }
   // }
 
-  sections:any;
+  sections: any;
 
-  loadSections(courseId){
-    console.log("fetch sections:" + courseId);
-    this.courseClientService.getCourseSections(courseId).subscribe(res=>{
+  loadSections(courseId) {
+    console.log('fetch sections:' + courseId);
+    this.courseClientService.getCourseSections(courseId).subscribe((res) => {
       console.log(res);
       this.sections = res;
       //this.loadModulesMenus(this.sections);
@@ -183,9 +181,15 @@ export class ViewUserCourseComponent implements OnInit {
     });
   }
 
-
   reportData: any = [];
-  widgetColors = ["green-haze", "purple-plum", "green-haze", "red-intense", "blue-madison", "red-intense"];
+  widgetColors = [
+    'green-haze',
+    'purple-plum',
+    'green-haze',
+    'red-intense',
+    'blue-madison',
+    'red-intense',
+  ];
 
   // createReport(data) {
 
@@ -226,7 +230,7 @@ export class ViewUserCourseComponent implements OnInit {
   today = new Date();
 
   getColor(topic) {
-    let color = "";
+    let color = '';
 
     if (topic.status == 'P' && new Date(topic.plannedDate) < this.today) {
       color = 'red';
@@ -235,43 +239,78 @@ export class ViewUserCourseComponent implements OnInit {
     return color;
   }
 
-  
-	sortByDisplayOrder( a, b ) {
-		if ( a.display_order < b.display_order ){
-		  return -1;
-		}
-		if ( a.display_order > b.display_order ){
-		  return 1;
-		}
-		return 0;
+  sortByDisplayOrder(a, b) {
+    if (a.display_order < b.display_order) {
+      return -1;
+    }
+    if (a.display_order > b.display_order) {
+      return 1;
+    }
+    return 0;
   }
-  
+
   menus = [];
-  loadMenus(){
+  loadMenus() {
     this.menus = [];
-    if(this.enrolled){
-      this.menus.push( {title: "Back",  path:["../../"], icontype:"fas fa-arrow-left",  access: true});
+    if (this.enrolled) {
+      this.menus.push({
+        title: 'Back',
+        path: ['../../'],
+        icontype: 'fas fa-arrow-left',
+        access: true,
+      });
+    } else {
+      this.menus.push({
+        title: 'Back',
+        path: ['../../availablecourses'],
+        icontype: 'fas fa-arrow-left',
+        access: true,
+      });
     }
-    else{
-      this.menus.push( {title: "Back",  path:["../../availablecourses"], icontype:"fas fa-arrow-left",  access: true});
-    }
-    this.menus.push( {title: "Curriculum",  path:["../"+ this.courseName], icontype:"fas fa-book-open",  access: true});
-    this.menus.push( {title: "Topics",  path:["../" +this.courseName+"/topics"], icontype:"fas fa-leaf",  access: true});
-    
-    //this.menus.push( {title: "Contents",  path:["contents"], icontype:"fas fa-code",  access: this.enrolled});    
-    //this.menus.push( {title: "Questions",  path:["questions"], icontype:"fas fa-question",  access: this.enrolled});
-    //this.menus.push( {title: "Settings",  path:["settings"], icontype:"fas fa-gear",  access: true});
-  }  
+    this.menus.push({
+      title: 'Curriculum',
+      path: ['../' + this.courseName],
+      icontype: 'fas fa-book-open',
+      access: true,
+    });
+    this.menus.push({
+      title: 'Topics',
+      path: ['../' + this.courseName + '/topics'],
+      icontype: 'fas fa-leaf',
+      access: true,
+    });
 
-  loadModulesMenus(modules){
-    this.menus.push( {title: "Contents", icontype:"fas fa-leaf", path:["contents"], access: true});
-    for(let m of modules){
-      console.log(m);
-      let title = m.sectionName +"( " + m.total +" )";
-      this.menus.push( {title: title +"",  path:["sections", m.sectionId,m.sectionName], icontype:"", access: true});
-      
-    }
+    // this.menus.push({
+    //   title: 'Contents',
+    //   path: ['contents'],
+    //   icontype: 'fas fa-code',
+    //   access: this.enrolled,
+    // });
+    this.menus.push({
+      title: 'Questions',
+      path: ['questions'],
+      icontype: 'fas fa-question',
+      access: this.enrolled,
+    });
+    //this.menus.push( {title: "Settings",  path:["settings"], icontype:"fas fa-gear",  access: true});
   }
 
-
+  loadModulesMenus(modules) {
+    this.menus.push({
+      title: 'Contents',
+      icontype: 'fas fa-leaf',
+      path: ['contents'],
+      access: true,
+    });
+    for (let m of modules) {
+      console.log(m);
+      let title = m.sectionName + '( ' + m.total + ' )';
+      this.menus.push({
+        title: title + '',
+        path: ['sections', m.sectionId, m.sectionName],
+        icontype: '',
+        access: true,
+      });
+    }
+  }
 }
