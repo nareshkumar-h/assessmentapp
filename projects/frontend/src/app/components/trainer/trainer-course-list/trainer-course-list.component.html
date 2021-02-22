@@ -1,14 +1,13 @@
 <kt-sidebar [menus]="menus"></kt-sidebar>
 <kt-page title="Trainer Dashboard" showSidebar="true">
 
-    <!-- <div class="row" *ngIf="reportData">
-            <div class="col-md-1" style="width: 20%;
-    flex: 0 0 20%;max-width: 20%;"
-        *ngFor="let r of reportData;let i=index;">            
-            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]" ></kt-dashboard-widget>
+    <div class="row" *ngIf="reportData">
+        <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
         </div>
     </div>
-     -->
+
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
     </ng-template>

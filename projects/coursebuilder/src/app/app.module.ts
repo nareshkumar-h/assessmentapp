@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
-import { UsercourseModule } from 'projects/usercourse/src/public-api';
 import { AuthModule } from 'projects/auth/src/public-api';
 import { CourseModule } from 'projects/course/src/public-api';
 
@@ -19,19 +18,9 @@ import { UsersModule } from 'projects/users/src/public-api';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProjectModule } from 'projects/project/src/public-api';
-import { BatchesModule } from './components/batches/batches.module';
-import { TrainingModule } from './components/trainer/training.module';
-import { HomeComponent } from './components/home.component';
-import { TaskDashboardComponent } from './components/task-dashboard/task-dashboard.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    HomeComponent,
-    TaskDashboardComponent,
-  ],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AuthModule.forRoot({
@@ -41,15 +30,13 @@ import { TaskDashboardComponent } from './components/task-dashboard/task-dashboa
       REDIRECT_URI: environment.REDIRECT_URI,
     }),
 
-    //CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     ThemeModule,
     MaterialModule,
     NavbarModule,
     DeviceDetectorModule,
-    UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     ContentModule,
     HighlightModule,
-    BatchesModule,
     AppRoutingModule,
   ],
   providers: [
