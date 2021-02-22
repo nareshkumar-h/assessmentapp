@@ -70,7 +70,7 @@ export class BatchCourseTopicsComponent implements OnInit {
     topic.completionDate = checked ? new Date().toJSON().substr(0, 10) : null;
     this.ktClient
       .getBatchClient()
-      .updateBatchTopicStatus(topic.id, status)
+      .updateBatchTopicStatus(topic.id, this.courseId, status)
       .then((res) => {
         console.log(res);
         this.createReport(this.courseTopics);

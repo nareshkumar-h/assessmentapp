@@ -80,12 +80,12 @@ export class DashboardComponent implements OnInit {
       icontype: 'fas fa-home',
       access: true,
     });
-    this.menus.push({
-      title: 'Courses',
-      path: ['/learn/courses'],
-      icontype: 'fas fa-graduation-cap',
-      access: this.authService.hasRole(this.user, ['U']),
-    });
+    // this.menus.push({
+    //   title: 'Courses',
+    //   path: ['/learn/courses'],
+    //   icontype: 'fas fa-graduation-cap',
+    //   access: this.authService.hasRole(this.user, ['U']),
+    // });
     // this.menus.push({
     //   title: 'Projects',
     //   path: ['/' + this.userId + '/myprojects'],

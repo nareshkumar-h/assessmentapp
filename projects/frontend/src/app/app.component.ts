@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  name = 'KnowledgeTracker';
+  name = 'Training Portal';
   headerColor = '#2b3643';
   siteInfo: any;
 

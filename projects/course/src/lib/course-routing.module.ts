@@ -21,40 +21,134 @@ import { AddLectureComponent } from './components/add-lecture/add-lecture.compon
 import { AddCourseComponent } from './components/add-course/add-course.component';
 
 const routes: Routes = [
-  
-  { path: 'categories', component: CategoryListComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} , 
-  { path: 'courses', component: CourseListComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} , 
-  { path: 'addcourse', component: AddCourseComponent, data:{showSidebar:true, menus:"courses"}, canActivate:[AuthGuard]} , 
-  { path: 'courses/:id',      component: ViewCourseComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard],
+  {
+    path: 'categories',
+    component: CategoryListComponent,
+    data: { showSidebar: true, menus: 'courses' },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'courses',
+    component: CourseListComponent,
+    data: { showSidebar: true, menus: 'courses' },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'addcourse',
+    component: AddCourseComponent,
+    data: { showSidebar: true, menus: 'courses' },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'courses/:id',
+    component: ViewCourseComponent,
+    data: { menus: 'viewcourse' },
+    canActivate: [AuthGuard],
     children: [
-      { path: 'edit',      component: EditCourseComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},
-      { path: 'plan',      component: CoursePlanComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},
-      { path: 'access',      component: CourseAccessListComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},
-      { path: 'addmodule',      component: AddCourseModuleComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},       
-      { path: 'addsection',      component: AddSectionComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},       
-      { path: 'contents',      component: CourseContentListComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      { path: 'contents/preview',      component: CourseContentListComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      
-      { path: 'questions',      component: CourseQuestionsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      { path: 'questions/addquestion',      component: AddCourseQuestionComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},       
-      { path: 'sections/:sectionId/addlecture',      component: AddLectureComponent , data:{menus:"viewcourse"} , canActivate:[AuthGuard]},       
-      { path: 'lectures/:lectureId/:lectureName',      component: CourseContentListComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      { path: 'lectures/:lectureId/:lectureName/addcontent',      component: AddCourseContentComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      { path: 'modules/:moduleId/:moduleName/addtopic',      component: AddCourseTopicComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]}, 
-      { path: 'topics',      component: ViewCourseTopicsComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},
-      { path: 'curriculum',      component: ViewCourseCurriculumComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},
-      
-       { path: '',      component: CourseOverviewComponent , data:{menus:"viewcourse"}, canActivate:[AuthGuard]},
-      
-    ]
-},
-  
-  
-  
-  ];
+      {
+        path: 'edit',
+        component: EditCourseComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'plan',
+        component: CoursePlanComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'access',
+        component: CourseAccessListComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addmodule',
+        component: AddCourseModuleComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addsection',
+        component: AddSectionComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'contents',
+        component: CourseContentListComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'contents/preview',
+        component: CourseContentListComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: 'questions',
+        component: CourseQuestionsComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'questions/addquestion',
+        component: AddCourseQuestionComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'sections/:sectionId/addlecture',
+        component: AddLectureComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'lectures/:lectureId/:lectureName',
+        component: CourseContentListComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'lectures/:lectureId/:lectureName/addcontent',
+        component: AddCourseContentComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'modules/:moduleId/:moduleName/addtopic',
+        component: AddCourseTopicComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'topics',
+        component: ViewCourseTopicsComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'curriculum',
+        component: ViewCourseCurriculumComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: '',
+        component: CourseOverviewComponent,
+        data: { menus: 'viewcourse' },
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CourseRoutingModule { }
+export class CourseRoutingModule {}

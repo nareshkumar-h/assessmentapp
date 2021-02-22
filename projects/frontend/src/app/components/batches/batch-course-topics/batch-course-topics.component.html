@@ -1,65 +1,65 @@
 <kt-page title="Batch Course - {{course?course.title:''}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
     <div class="row" *ngIf="reportData">
-        <div class="col-2" *ngFor="let r of reportData;let z=index;">                
+        <div class="col-2" *ngFor="let r of reportData;let z=index;">
             <kt-dashboard-widget [reportData]="r" [class]="widgetColors[z]"></kt-dashboard-widget>
         </div>
     </div>
-    
+
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
     </ng-template>
-    
-    <div  *ngIf="courseTopics; else loading">   
-    <div class="row" *ngFor="let i=index;let ct of courseTopics | keyvalue">
-        <div class="col">
-            <div class="card card-custom">
-                <div class="card-header card-blue">
-                    Module #{{i+1}} - {{ct.key}} ( {{ct.value.length}} Topics )
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-    
-                                <th width="60%">Topic</th>
-                                <!-- <th>Status</th> -->
-                                <th>Duration(mins)</th>
-                                <th>PlannedDate</th>
-                                <th>Completion Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let j=index;let t of ct.value">
-                                <td>{{j+1}}</td>
-                                <td>
-                                    <input type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
-                                        (change)="updateStatus(t, topicCheckbox.checked)" />
-    
-                                    &nbsp; &nbsp;<font [color]="getColor(t)"> {{t.topicName}} </font>
-                                </td>
-                                <!--t.topicId-->
-                                <!--t.userTopicId-->
-                                <!--t.completed, t.core-->
-                                <!-- <td>{{t.status}}</td> -->
-                                <td>{{t.duration}}</td>
-                                <td>{{t.plannedDate}}</td>
-                                <td>{{t.completionDate}}</td>
-                                <td>
-                                    <!-- <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info"> Send</button>
+
+    <div *ngIf="courseTopics; else loading">
+        <div class="row" *ngFor="let i=index;let ct of courseTopics | keyvalue">
+            <div class="col">
+                <div class="card card-custom">
+                    <div class="card-header card-blue">
+                        Module #{{i+1}} - {{ct.key}} ( {{ct.value.length}} Topics )
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+
+                                    <th width="60%">Topic</th>
+                                    <!-- <th>Status</th> -->
+                                    <th>Duration(mins)</th>
+                                    <th>PlannedDate</th>
+                                    <th>Completion Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let j=index;let t of ct.value">
+                                    <td>{{j+1}}</td>
+                                    <td>
+                                        <input type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
+                                            (change)="updateStatus(t, topicCheckbox.checked)" />
+
+                                        &nbsp; &nbsp;<font [color]="getColor(t)"> {{t.topicName}} </font>
+                                    </td>
+                                    <!--t.topicId-->
+                                    <!--t.userTopicId-->
+                                    <!--t.completed, t.core-->
+                                    <!-- <td>{{t.status}}</td> -->
+                                    <td>{{t.duration}}</td>
+                                    <td>{{t.plannedDate}}</td>
+                                    <td>{{t.completionDate}}</td>
+                                    <td>
+                                        <!-- <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info"> Send</button>
                                     <button *ngIf="t.topicSentOn!=null" class="btn btn-success btn-sm"> 
                                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                         </button> -->
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-    
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    
-    </kt-page>
+
+</kt-page>

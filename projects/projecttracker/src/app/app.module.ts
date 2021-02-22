@@ -17,24 +17,26 @@ import { UsercourseModule } from 'projects/usercourse/src/public-api';
 import { ReportingModule } from 'projects/project/src/lib/reporting/reporting.module';
 import { GithubModule } from 'projects/project/src/lib/github/github.module';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProjectdashboardComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, ProjectdashboardComponent, HomeComponent],
   imports: [
-    BrowserModule,    
-    ThemeModule, MaterialModule, NavbarModule,     
-    ReportingModule.forRoot({API_ENDPOINT:environment.API_URL}),   
-    ProjectModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    GithubModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    UsersModule.forRoot({API_ENDPOINT:environment.API_URL}),
-    AuthModule.forRoot({API_ENDPOINT:environment.API_URL,USER_TYPE:'U', ORG_ID:environment.ORG_ID}),
-    AppRoutingModule
+    BrowserModule,
+    ThemeModule,
+    MaterialModule,
+    NavbarModule,
+    ReportingModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    ProjectModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    GithubModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),
+    AuthModule.forRoot({
+      API_ENDPOINT: environment.API_URL,
+      USER_TYPE: 'U',
+      ORG_ID: environment.ORG_ID,
+      REDIRECT_URI: '',
+    }),
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -9,6 +9,7 @@ export const environment = {
   //API_URL:"https://knowledgetracker-java-api.herokuapp.com/api/",
   ORG_ID: 'spinsoft',
   ENV: 'DEV',
+  REDIRECT_URI: '',
 };
 
 /*

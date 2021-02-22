@@ -68,7 +68,7 @@ export class BatchCoursePlanComponent implements OnInit {
     let status = checked ? 'C' : 'P';
     this.ktClient
       .getBatchClient()
-      .updateBatchTopicStatus(topic.id, status)
+      .updateBatchTopicStatus(topic.id, this.courseId, status)
       .then((res) => {
         console.log(res);
       });

@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.userType = this.config.USER_TYPE;
 
     this.siteInfo = this.authService.getSiteInfo();
+    this.redirectUrl = this.config.REDIRECT_URI;
   }
 
   showLeftbox: boolean = false;

@@ -1,4 +1,8 @@
-import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  NO_ERRORS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BatchCourseComponent } from './batch-course/batch-course.component';
 import { BatchCourseDashboardComponent } from './batch-course-dashboard/batch-course-dashboard.component';
@@ -19,7 +23,11 @@ import { BatchActivityComponent } from './batch-activity/batch-activity.componen
 import { EditBatchCourseComponent } from './edit-batch-course/edit-batch-course.component';
 import { BatchProjectListComponent } from './batch-project-list/batch-project-list.component';
 import { ViewBatchDetailComponent } from './view-batch-detail/view-batch-detail.component';
-import { SidenavModule, ThemeModule, CardModule } from 'projects/theme/src/public-api';
+import {
+  SidenavModule,
+  ThemeModule,
+  CardModule,
+} from 'projects/theme/src/public-api';
 import { SlackListComponent } from '../slack/slack-list/slack-list.component';
 import { ViewSlackComponent } from '../slack/view-slack/view-slack.component';
 import { AddSlackComponent } from '../slack/add-slack/add-slack.component';
@@ -34,11 +42,11 @@ import { environment } from 'projects/frontend/src/environments/environment';
 import { MaterialModule } from '../../material.module';
 import { SecurityModule } from 'projects/security/src/public-api';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { TrainerCourseListComponent } from '../trainer/trainer-course-list/trainer-course-list.component';
+import { TrainerDashboardComponent } from '../trainer-dashboard/trainer-dashboard.component';
 
 @NgModule({
   declarations: [
-
     BatchCourseComponent,
     BatchCourseDashboardComponent,
     ListBatchesComponent,
@@ -60,14 +68,34 @@ import { BrowserModule } from '@angular/platform-browser';
     AddSlackComponent,
     BatchCourseTopicsComponent,
     BatchCourseOverviewComponent,
-    BatchCourseContentComponent    
+    BatchCourseContentComponent,
+    TrainerCourseListComponent,
+    TrainerDashboardComponent,
   ],
   imports: [
-    BrowserModule,CommonModule, FormsModule, HttpClientModule, BatchesRoutingModule, ThemeModule,CardModule,SidenavModule,MaterialModule,
-    HighlightModule,PdfViewerModule,ClipboardModule,SecurityModule.forRoot(),
-    CourseModule.forRoot({API_ENDPOINT:environment.API_URL}),
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    BatchesRoutingModule,
+    ThemeModule,
+    CardModule,
+    SidenavModule,
+    MaterialModule,
+    HighlightModule,
+    PdfViewerModule,
+    ClipboardModule,
+    SecurityModule.forRoot(),
+    CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
   ],
-  entryComponents: [AddBatchComponent,AssignBatchCourseComponent,EditBatchComponent,AddBatchUserComponent,AssignBatchCourseComponent,EditBatchCourseComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  entryComponents: [
+    AddBatchComponent,
+    AssignBatchCourseComponent,
+    EditBatchComponent,
+    AddBatchUserComponent,
+    AssignBatchCourseComponent,
+    EditBatchCourseComponent,
+  ],
+  schemas: [NO_ERRORS_SCHEMA],
 })
-export class BatchesModule { }
+export class BatchesModule {}

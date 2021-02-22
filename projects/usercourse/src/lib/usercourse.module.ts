@@ -1,4 +1,9 @@
-import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders } from '@angular/core';
+import {
+  NgModule,
+  NO_ERRORS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ModuleWithProviders,
+} from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { UsercourseComponent } from './usercourse.component';
 import { CommonModule } from '@angular/common';
@@ -13,7 +18,11 @@ import { UserCourseTopicsComponent } from './components/user-course-topics/user-
 import { UserCourseService } from './usercourse.service';
 import { Config, API_URL } from './config';
 import { CourseClientService } from './course-client.service';
-import { CardModule, SidenavModule, ThemeModule } from 'projects/theme/src/public-api';
+import {
+  CardModule,
+  SidenavModule,
+  ThemeModule,
+} from 'projects/theme/src/public-api';
 import { UserCourseContentListComponent } from './components/user-course-content-list/user-course-content-list.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
@@ -38,24 +47,54 @@ FullCalendarModule.registerPlugins([
 ]);
 */
 @NgModule({
-  declarations: [UsercourseComponent,UserCourseListComponent,ViewUserCourseComponent,CourseSettingsComponent,
-  UserCourseQuestionsComponent,
-  UserCourseTopicsComponent,UserCourseContentListComponent, AvailableCourseListComponent, UserCourseDashboardComponent, CurriculumComponent, CourseCurriculumComponent, UserCourseContentComponent, CalendarComponent],
-  imports: [    
-    FullCalendarModule,CommonModule, FormsModule,HttpClientModule,
-    CardModule, SidenavModule,ThemeModule,UserCourseRoutingModule, MaterialModule,
-    ContentModule
+  declarations: [
+    UsercourseComponent,
+    UserCourseListComponent,
+    ViewUserCourseComponent,
+    CourseSettingsComponent,
+    UserCourseQuestionsComponent,
+    UserCourseTopicsComponent,
+    UserCourseContentListComponent,
+    AvailableCourseListComponent,
+    UserCourseDashboardComponent,
+    CurriculumComponent,
+    CourseCurriculumComponent,
+    UserCourseContentComponent,
+    CalendarComponent,
   ],
-  providers:[UserCourseService, AuthGuard],
-  exports: [UsercourseComponent,UserCourseListComponent,ViewUserCourseComponent,CourseSettingsComponent,
-    UserCourseQuestionsComponent,UserCourseContentListComponent,ThemeModule]  
+  imports: [
+    FullCalendarModule,
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    CardModule,
+    SidenavModule,
+    ThemeModule,
+    UserCourseRoutingModule,
+    MaterialModule,
+    ContentModule,
+  ],
+  providers: [UserCourseService, AuthGuard],
+  exports: [
+    UsercourseComponent,
+    UserCourseListComponent,
+    ViewUserCourseComponent,
+    CourseSettingsComponent,
+    UserCourseQuestionsComponent,
+    UserCourseContentListComponent,
+    ThemeModule,
+    UserCourseDashboardComponent,
+  ],
 })
-export class UsercourseModule { 
-  static forRoot(config: Config): ModuleWithProviders<UsercourseModule> {    
+export class UsercourseModule {
+  static forRoot(config: Config): ModuleWithProviders<UsercourseModule> {
     return {
       ngModule: UsercourseModule,
-      providers: [ UserCourseService, CourseClientService,AuthGuard,
-        {provide: API_URL, useValue: config.API_ENDPOINT} // If I hard code `useValue: {API_ENDPOINT: 'FooBar'}`, instead of using `config` it works... weird.
+      providers: [
+        UserCourseService,
+        CourseClientService,
+        AuthGuard,
+        { provide: API_URL, useValue: config.API_ENDPOINT }, // If I hard code `useValue: {API_ENDPOINT: 'FooBar'}`, instead of using `config` it works... weird.
       ],
     };
   }

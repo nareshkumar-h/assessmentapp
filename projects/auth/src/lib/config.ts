@@ -5,6 +5,7 @@ export class Config {
   ORG_ID?: string;
   USER_TYPE?: string;
   ENCRYPTION?: boolean = false;
+  REDIRECT_URI?: string;
 }
 
 export const AUTH_CONFIG = new InjectionToken<Config>('AUTH_CONFIG');

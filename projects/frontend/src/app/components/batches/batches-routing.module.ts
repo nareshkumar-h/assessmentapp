@@ -21,43 +21,55 @@ import { ViewSlackComponent } from '../slack/view-slack/view-slack.component';
 import { BatchCourseTopicsComponent } from './batch-course-topics/batch-course-topics.component';
 import { BatchCourseOverviewComponent } from './batch-course-overview/batch-course-overview.component';
 import { BatchCourseContentComponent } from './batch-course-content/batch-course-content.component';
+import { TrainerDashboardComponent } from '../trainer-dashboard/trainer-dashboard.component';
+import { TrainerCourseListComponent } from '../trainer/trainer-course-list/trainer-course-list.component';
 
 const routes: Routes = [
-  { path: 'batches', component: ListBatchesComponent , data: {showSidebar:true}},
-  { path: 'batches/addbatch',      component: AddBatchComponent },      
-  { path: 'batches/:id/courses/:courseId',      component: BatchCourseComponent ,
-  children:[      
-    { path: '',      component: BatchCourseOverviewComponent },
-    { path: 'overview',      component: BatchCourseOverviewComponent },
-    { path: 'topics',      component: BatchCourseTopicsComponent },
-    { path: 'plan',      component: BatchCoursePlanComponent }, 
-    { path: 'edit',      component: EditBatchCourseComponent },
-    { path: 'content',      component: BatchCourseContentComponent },
-  ]},
-  { path: 'batches/:id',      component: ViewBatchComponent ,
-  children:[      
-        { path: 'edit',      component: EditBatchComponent },
-        { path: 'users',      component: BatchUsersComponent },
-        { path: 'courses',      component: BatchCourseListComponent },
-        { path: 'assigncourse',      component: AssignBatchCourseComponent },
-       
-        { path: 'addslack',      component: AddSlackComponent },
-        { path: 'slack',      component: ViewSlackComponent },        
-        
-        
-        { path: 'addbatchuser',      component: AddBatchUserComponent },       
-        { path: 'activity',      component: BatchActivityComponent },
-        { path: 'projects',      component: BatchProjectListComponent },
-        { path: '',      component: ViewBatchDetailComponent }
-        
-  ]}
-        
-        
-      
+  {
+    path: 'batches',
+    component: ListBatchesComponent,
+    data: { showSidebar: true },
+  },
+  { path: 'batches/addbatch', component: AddBatchComponent },
+  {
+    path: 'batches/:id/courses/:courseId',
+    component: BatchCourseComponent,
+    children: [
+      { path: '', component: BatchCourseOverviewComponent },
+      { path: 'overview', component: BatchCourseOverviewComponent },
+      { path: 'topics', component: BatchCourseTopicsComponent },
+      { path: 'plan', component: BatchCoursePlanComponent },
+      { path: 'edit', component: EditBatchCourseComponent },
+      { path: 'content', component: BatchCourseContentComponent },
+    ],
+  },
+  {
+    path: 'batches/:id',
+    component: ViewBatchComponent,
+    children: [
+      { path: 'edit', component: EditBatchComponent },
+      { path: 'users', component: BatchUsersComponent },
+      { path: 'courses', component: BatchCourseListComponent },
+      { path: 'assigncourse', component: AssignBatchCourseComponent },
+
+      { path: 'addslack', component: AddSlackComponent },
+      { path: 'slack', component: ViewSlackComponent },
+
+      { path: 'addbatchuser', component: AddBatchUserComponent },
+      { path: 'activity', component: BatchActivityComponent },
+      { path: 'projects', component: BatchProjectListComponent },
+      { path: '', component: ViewBatchDetailComponent },
+    ],
+  },
+  {
+    path: 'training/:userId',
+    component: TrainerCourseListComponent,
+    data: { showSidebar: true },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class BatchesRoutingModule { }
+export class BatchesRoutingModule {}
