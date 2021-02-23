@@ -25,7 +25,8 @@ export class UserCourseDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.userId = this.authService.getLoggedInUsername();
+    //this.userId = this.authService.getLoggedInUsername();
+    this.userId = this.authService.getSelectedUser();
     this.loadMenus();
     this.route.params.subscribe((params) => {
       //this.userId = params['userId'];

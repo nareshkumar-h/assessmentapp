@@ -85,14 +85,19 @@ export class DashboardComponent implements OnInit {
     //   icontype: 'fas fa-cubes',
     //   access: this.authService.hasRole(this.user, ['U']),
     // });
-    //    this.menus.push( {title: "Tasks",  path:["/tasks"], icontype:"fas fa-tasks",  access: this.authService.hasRole(this.user,["T"])});
+    // this.menus.push({
+    //   title: 'Tasks',
+    //   path: ['/tasks'],
+    //   icontype: 'fas fa-tasks',
+    //   access: this.authService.hasRole(this.user, ['T', 'HR']),
+    // });
 
     //this.menus.push( {title: "Assessments",  path:["/"+ this.userId + "/assessments"], icontype:"fas fa-cubes",  access: true});
     this.menus.push({
       title: 'Interviews',
       path: ['/' + this.userId + '/interviews'],
       icontype: 'fas fa-cubes',
-      access: true,
+      access: this.authService.hasRole(this.user, ['U']),
     });
   }
 }

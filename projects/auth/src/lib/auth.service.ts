@@ -152,7 +152,7 @@ export class AuthService {
   }
 
   getSelectedUser() {
-    let user = this.securityService.get('SELECTED_USER');
+    let user = sessionStorage.getItem('SELECTED_USER');
     return user ? user : this.getUser()?.username;
   }
 

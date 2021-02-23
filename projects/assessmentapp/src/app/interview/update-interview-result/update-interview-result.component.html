@@ -1,0 +1,45 @@
+<div class="mat-typography">
+    <h3 class="page-title">Update Feedback - {{interview?.user?.username}}
+        <a (click)="delete(interview.id)" class="btn btn btn-sm text-dark pull-right"><i class="fas fa-trash"></i></a>
+    </h3>
+    <div class="row">
+        <div class="col ml-auto">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            <form>
+                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+                    <tbody>
+                        <tr>
+                            <th width="30%">Rating</th>
+                            <td width="70%">
+                                <input type="text" name="rating" required (key.enter)="save(interview)" />
+                                <!-- <select name="rating" required (change)="save(interview)">
+                                    <ng-template *ngFor="let r of ratings">
+                                        <option [value]="r">{{r}}</option>
+                                    </ng-template>
+                                </select> -->
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="save(interview)">Submit</button>
+                                &nbsp;
+
+                                <button (click)="cancel()" class="btn btn-info">Cancel</button>&nbsp;
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -10,6 +10,8 @@ export class AppComponent {
   siteInfo: any;
 
   user: any;
+
+  users = ['guru', 'dharani'];
   courses: any;
 
   constructor() {

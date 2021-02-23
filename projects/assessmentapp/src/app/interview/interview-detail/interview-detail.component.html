@@ -1,0 +1,102 @@
+<kt-sidebar [menus]="menus"></kt-sidebar>
+<kt-page title="Interview Report" showSidebar="true">
+    <div class="row d-none d-lg-flex" *ngIf="reportData">
+        <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12"  -->
+        <div class="col-md-1" style="width: 20%;
+    flex: 0 0 20%;max-width: 20%;" *ngFor="let r of reportData;let i=index;">
+            <kt-dashboard-widget [reportData]="r" [class]="widgetColors[i]"></kt-dashboard-widget>
+        </div>
+    </div>
+    <ng-template #loading>
+        <kt-loading-bar></kt-loading-bar>
+    </ng-template>
+    <section *ngIf="interview">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        Interview Detail
+
+                        <!-- <div class="tools pull-right">
+                        <a routerLink="../addbatchcourse" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div> -->
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th width="20%">Title</th>
+                                    <th>Interview Date</th>
+                                    <th>Mode</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{interview.company.name}}</td>
+                                    <td>{{interview.title}}</td>
+                                    <td>{{interview.interviewDate}}</td>
+                                    <td>{{interview.mode}}</td>
+                                    <td>{{interview.status}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section *ngIf="interviews;else loading">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-custom gutter-b">
+                    <div class="card-header card-blue">
+                        Candidates
+
+                        <!-- <div class="tools pull-right">
+                        <a routerLink="../addbatchcourse" class="btn btn btn-sm"><i class="fa fa-plus "></i></a>
+                    </div> -->
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User</th>
+                                    <th>Timing</th>
+                                    <th>Interviewer</th>
+                                    <th>Status</th>
+                                    <th>Rating</th>
+                                    <th>Comments</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let i=index;let c of interviews">
+                                    <td>{{i+1}}</td>
+                                    <td>{{c.user.username}}</td>
+                                    <td>{{c.interviewTime}}</td>
+                                    <td>{{c.interviewer.username}}</td>
+                                    <td>{{c.status}}</td>
+                                    <td>{{c.rating}}</td>
+                                    <td>{{c.comments}}</td>
+                                    <td>
+                                        <button type="button" [disabled]="c.interviewer.username!=userId"
+                                            (click)="updateRating(c)" class="btn btn-primary">Update
+                                            Rating</button>
+                                        <!-- <button type="button" mat-button (click)="openDialog(c)"
+                                            class="btn btn-success">Update
+                                            Result</button> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</kt-page>

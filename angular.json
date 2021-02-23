@@ -1051,6 +1051,124 @@
           }
         }
       }
+    },
+    "assessmentapp": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/assessmentapp",
+      "sourceRoot": "projects/assessmentapp/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/assessmentapp",
+            "index": "projects/assessmentapp/src/index.html",
+            "main": "projects/assessmentapp/src/main.ts",
+            "polyfills": "projects/assessmentapp/src/polyfills.ts",
+            "tsConfig": "projects/assessmentapp/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/assessmentapp/src/favicon.ico",
+              "projects/assessmentapp/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "projects/assessmentapp/src/assets/theme2.css",
+              "projects/assessmentapp/src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/assessmentapp/src/environments/environment.ts",
+                  "with": "projects/assessmentapp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "assessmentapp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "assessmentapp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "assessmentapp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/assessmentapp/src/test.ts",
+            "polyfills": "projects/assessmentapp/src/polyfills.ts",
+            "tsConfig": "projects/assessmentapp/tsconfig.spec.json",
+            "karmaConfig": "projects/assessmentapp/karma.conf.js",
+            "assets": [
+              "projects/assessmentapp/src/favicon.ico",
+              "projects/assessmentapp/src/assets"
+            ],
+            "styles": ["projects/assessmentapp/src/styles.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/assessmentapp/tsconfig.app.json",
+              "projects/assessmentapp/tsconfig.spec.json",
+              "projects/assessmentapp/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/assessmentapp/e2e/protractor.conf.js",
+            "devServerTarget": "assessmentapp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "assessmentapp:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "cli": {

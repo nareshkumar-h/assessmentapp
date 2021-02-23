@@ -29,4 +29,22 @@ export class InterviewService {
     let url = environment.API_URL + `v1/userinterviews/users/${userId}`;
     return this.http.get(url, { headers: this.getHeaders() });
   }
+
+  getInterviews(userId) {
+    let url = environment.API_URL + `v1/interviews`;
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
+
+  getInterview(id) {
+    console.log('Interview Id', id);
+    let url = environment.API_URL + `v1/interviews/${id}`;
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
+
+  getUserInterviewByInterviewId(interviewId) {
+    console.log('Interview Id', interviewId);
+    let url =
+      environment.API_URL + `v1/userinterviews/interviews/${interviewId}`;
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
 }

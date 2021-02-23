@@ -1,0 +1,21 @@
+<div *ngIf="!isLoggedIn">
+  <!-- <kt-header [navbrand]="name" [user]="user" [menus]="getHeaderMenus()" [bgColor]="headerColor"></kt-header> -->
+  <kt-auth-layout></kt-auth-layout>
+</div>
+
+<div *ngIf="isLoggedIn">
+  <kt-header [navbrand]="name" [users]="users" [user]="user" [bgColor]="headerColor" [menus]="getHeaderMenus()">
+  </kt-header>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  <!--<app-home></app-home>   -->
+
+  <!-- <router-outlet name="sidebar"></router-outlet> -->
+
+</div>
+
+
+<!-- <router-outlet name="sidebar" *ngIf="showSidebar"></router-outlet>  -->
+
+<!-- <app-aside-left *ngIf="showSidebar"> </app-aside-left> -->

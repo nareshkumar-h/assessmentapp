@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
       if (cfm) {
         sessionStorage.setItem('SELECTED_USER', this.selectedUser);
         //window.location.reload();
-        this.router.navigate(['home']);
+        this.router.navigate(['/']);
       }
     } else {
       this.clearUser();

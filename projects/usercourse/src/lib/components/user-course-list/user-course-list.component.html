@@ -1,5 +1,5 @@
 <kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar>
-<kt-page title="My Courses" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
+<kt-page title="My Courses - {{userId | uppercase}}" showSidebar="true" [breadcrumbItems]="breadcrumbItems">
 
     <ng-template #loading>
         <kt-loading-bar></kt-loading-bar>
@@ -7,20 +7,20 @@
 
     <div *ngIf="userCourses else loading">
         <div class="card card-custom gutter-b" *ngFor="let uc of userCourses| keyvalue">
-            
+
             <div class="card-header"><a class="card-title card-blue text-center">{{uc.key}}</a></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-4" *ngFor="let c of uc.value; let i=index">
-                        <a class="card card-custom gutter-b course_title" [style.background-color]="getCardColor(c.percentage)" 
-                        (click)="goTo(c)">
+                        <a class="card card-custom gutter-b course_title"
+                            [style.background-color]="getCardColor(c.percentage)" (click)="goTo(c)">
                             <!-- <div class="card-header text-white" style="background-color: cadetblue;" >{{c.course_name}}
                     <span class="badge badge-dark pull-right">{{getPercentage(c)}} % </span>                        
                 </div>      -->
 
-                                <!-- <img class="card-img-top"  src="assets/img/courses.jpg" alt="" width="200px"> -->
-                                <!-- <div class="course_title text-dark"> <p>{{c.course_name}}</p></div> -->
-                            
+                            <!-- <img class="card-img-top"  src="assets/img/courses.jpg" alt="" width="200px"> -->
+                            <!-- <div class="course_title text-dark"> <p>{{c.course_name}}</p></div> -->
+
                             <div class="card-body">
                                 <div class="card-title">
                                     <a (click)="goTo(c)" class="course_title">{{c.course_name}}
@@ -44,10 +44,10 @@
                        <img src="assets/img/naresh.png" width="30px" height="30px" class="rounded">
                         Naresh Kumar H</p>                         -->
                             </div>
-                        
+
                             <!-- <div class="card-footer">
                 </div> -->
-            </a>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,12 @@ import { ProjectModule } from 'projects/project/src/public-api';
 import { MyInterviewsComponent } from './components/my-interviews/my-interviews.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, DashboardComponent, MyInterviewsComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    DashboardComponent,
+    MyInterviewsComponent,
+  ],
   imports: [
     BrowserModule,
     AuthModule.forRoot({

@@ -1,6 +1,5 @@
 <kt-sidebar [menus]="menus" *ngIf="showSidebar"></kt-sidebar>
-<kt-page title="Course Dashboard  {{category?'- '+ category :''}} " showSidebar="true"
-    [breadcrumbItems]="breadcrumbItems">
+<kt-page title="Course Dashboard - {{userId | uppercase}} " showSidebar="true" [breadcrumbItems]="breadcrumbItems">
     <div class="row d-none d-lg-flex" *ngIf="reportData">
         <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12"  -->
         <div class="col-md-1" style="width: 20%;

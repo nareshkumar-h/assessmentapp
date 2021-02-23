@@ -28,7 +28,7 @@ export class MyInterviewsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.userId = this.authService.getLoggedInUsername();
+    this.userId = this.authService.getSelectedUser();
     this.loadMenus();
     this.route.params.subscribe((params) => {
       //this.userId = params['userId'];
@@ -44,6 +44,7 @@ export class MyInterviewsComponent implements OnInit {
 
   userCourses: any;
   interviews: any = {};
+  menus: any;
 
   listInterviews() {
     this.interviewService.getMyInterviews(this.userId).subscribe((res) => {
@@ -76,15 +77,24 @@ export class MyInterviewsComponent implements OnInit {
   createReport(data) {
     //console.log(JSON.stringify(data));
     this.reportData = [];
-    let result = _.groupBy(data, (obj) => obj['status']);
+    let result = _.groupBy(data, (obj) => obj['rating']);
 
     this.reportData.push({ label: 'ALL', value: data.length });
-    this.reportData.push({ label: 'V.GOOD', value: result['VGOOD'].length });
-    this.reportData.push({ label: 'GOOD', value: result['GOOD'].length });
-    this.reportData.push({ label: 'AVERAGE', value: result['AVERAGE'].length });
+    this.reportData.push({
+      label: 'V.GOOD',
+      value: result['VGOOD'] ? result['VGOOD'].length : 0,
+    });
+    this.reportData.push({
+      label: 'GOOD',
+      value: result['VGOOD'] ? result['VGOOD'].length : 0,
+    });
+    this.reportData.push({
+      label: 'AVERAGE',
+      value: result['AVERAGE'] ? result['AVERAGE'].length : 0,
+    });
     this.reportData.push({
       label: 'NOT SATISFIED',
-      value: result['NOT SATISIFIED'].length,
+      value: result['REJECTED'] ? result['REJECTED'].length : 0,
     });
   }
 
@@ -116,8 +126,6 @@ export class MyInterviewsComponent implements OnInit {
       { outlets: { primary: routeLink, sidebar: sidebarPath } },
     ]);
   }
-
-  menus: any;
 
   loadMenus() {
     this.menus = [];

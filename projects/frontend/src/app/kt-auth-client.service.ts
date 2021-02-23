@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { AuthClient } from '@ks-sdk-client/rest';
 import { AUTH_CONFIG, Config } from 'projects/auth/src/lib/config';
 import { SecurityService } from 'projects/security/src/public-api';
+
 @Injectable({
   providedIn: 'root',
 })
