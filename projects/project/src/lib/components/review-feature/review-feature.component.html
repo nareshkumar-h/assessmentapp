@@ -26,10 +26,10 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header card-blue">
                         <div class="card-title text-white">
-                            Developer: {{feature.createdBy}}
+                            Developer: {{feature.assignedTo}}
                         </div>
                     </div>
-                    <div class="card-body" *ngIf="project">                        
+                    <div class="card-body" *ngIf="project">
                         <ng-container *ngFor="let url of getUrl(project.projectTestUrl)">
                             <a target="_blank" href="{{url}}">{{url}}</a> <br /><br />
                         </ng-container>
@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div class="col">
-             <lib-feature-skills [feature]="feature" [featureId]="feature.id" ></lib-feature-skills> 
+                <lib-feature-skills [feature]="feature" [featureId]="feature.id"></lib-feature-skills>
             </div>
         </div>
         <div class="row">
