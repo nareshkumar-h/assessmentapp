@@ -147,4 +147,12 @@ export class LoginComponent implements OnInit {
     console.log(url);
     this.router.navigate([url]);
   }
+
+  loginWithGithub() {
+    alert('Login with github app');
+    let clientId = 'fc639608910c9aceda7b';
+    let redirect_uri = 'http://localhost:4200/auth/githublogin';
+    let url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirect_uri}`;
+    window.location.href = url;
+  }
 }
