@@ -18,7 +18,7 @@ export class AppComponent {
     private userService: UserService,
     private authService: AuthService
   ) {
-    this.user = this.getLoggedInUser();
+    this.user = this.authService.getUser();
     this.isLoggedIn = this.user != null;
   }
 
@@ -47,10 +47,6 @@ export class AppComponent {
     if (this.authService.hasRoleAccess('T')) {
       this.loadUsernames();
     }
-  }
-
-  getLoggedInUser() {
-    return JSON.parse(sessionStorage.getItem('LOGGED_IN_USER'));
   }
 
   isLoggedIn: boolean = true;

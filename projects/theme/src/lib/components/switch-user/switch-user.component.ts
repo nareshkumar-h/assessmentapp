@@ -20,15 +20,14 @@ export class SwitchUserComponent implements OnInit {
 
   switchUser() {
     console.log('Switch UserId:', this.userId);
-    sessionStorage.setItem('SELECTED_USER', this.userId);
+    localStorage.setItem('SELECTED_USER', this.userId);
     this.dialog.closeAll();
     this.toastr.success('Switched to ' + this.userId);
   }
 
   clear() {
-    let username = JSON.parse(sessionStorage.getItem('LOGGED_IN_USER'))
-      .username;
-    sessionStorage.setItem('SELECTED_USER', username);
+    let username = JSON.parse(localStorage.getItem('LOGGED_IN_USER')).username;
+    localStorage.setItem('SELECTED_USER', username);
     this.toastr.success('Switched to ' + username);
     this.dialog.closeAll();
   }
