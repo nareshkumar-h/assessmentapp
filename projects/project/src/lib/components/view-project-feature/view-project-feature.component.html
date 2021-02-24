@@ -1,12 +1,12 @@
-<kt-page title="Project- {{project?.name}}" [showSidebar]="showSidebar" >    
+<kt-page title="Project Feature" [showSidebar]="showSidebar">
     <div class="row">
         <div class="col">
             <div class="card card-custom gutter-b">
                 <div class="card-header card-blue">
                     <div class="card-title text-white">
-                        Feature 
+                        Feature
                     </div>
-                        <!-- <div class="tools pull-right">
+                    <!-- <div class="tools pull-right">
                              <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
                                 <i class="fa fa-plus "></i></button>  
                      </div>        -->
@@ -20,37 +20,47 @@
                                 <th>Priority</th>
                                 <th>Assigned To</th>
                                 <th>Created By</th>
-                                <th>Created Date</th>  
-                                <th>Status</th>                              
+                                <th>Created Date</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngIf="feature">                                
-                                <td>{{feature.name}}</td>                                
+                            <tr *ngIf="feature">
+                                <td>{{feature.name}}</td>
                                 <td> <span class="badge badge-primary">{{feature.projectModule.name}}</span></td>
                                 <td><span class="badge badge-primary">{{feature.priority}}</span> </td>
                                 <td> <i class="fa fa-user-circle-o " aria-hidden="true"></i> {{feature.assignedTo}}</td>
                                 <td> <i class="fa fa-user-circle-o " aria-hidden="true"></i> {{feature.createdBy}}</td>
-                                <td>{{feature.createdDate}}</td>                                                          
+                                <td>{{feature.createdDate}}</td>
                                 <td>{{feature.status}}</td>
-                                <td>               
-                                    <button *ngIf="isLoggedInUser && mode!='edit'" class="btn btn-info btn-sm" (click)="mode='edit'"> <i class="fas fa-pencil-alt" aria-hidden="true"></i></button>    &nbsp;               
-                                    <button *ngIf="isLoggedInUser && mode=='edit'" class="btn btn-danger btn-sm"  (click)="deleteFeature(feature.id)"><i class="fa fa-trash" aria-hidden="true"></i></button> &nbsp;
+                                <td>
+                                    <button *ngIf="isLoggedInUser && mode!='edit'" class="btn btn-info btn-sm"
+                                        (click)="mode='edit'"> <i class="fas fa-pencil-alt"
+                                            aria-hidden="true"></i></button> &nbsp;
+                                    <button *ngIf="isLoggedInUser && mode=='edit'" class="btn btn-danger btn-sm"
+                                        (click)="deleteFeature(feature.id)"><i class="fa fa-trash"
+                                            aria-hidden="true"></i></button> &nbsp;
 
-                                    
-                                     <button *ngIf="isLoggedInUser && feature.status=='INPROGRESS'" (click)="updateFeatureStatus(feature.id,'TESTING')" class="btn btn-success btn-sm">Send for Testing
-                                        </button>
-                                    <button *ngIf="isLoggedInUser && feature.status=='PENDING'" (click)="updateFeatureStatus(feature.id,'INPROGRESS')" class="btn btn-success btn-sm">Start
-                                    </button> 
-                                    <button *ngIf="isLoggedInUser && feature.status=='COMPLETED'" (click)="updateFeatureStatus(feature.id,'INPROGRESS')" class="btn btn-success btn-sm">Reopen
+
+                                    <button *ngIf="isLoggedInUser && feature.status=='INPROGRESS'"
+                                        (click)="updateFeatureStatus(feature.id,'TESTING')"
+                                        class="btn btn-success btn-sm">Send for Testing
+                                    </button>
+                                    <button *ngIf="isLoggedInUser && feature.status=='PENDING'"
+                                        (click)="updateFeatureStatus(feature.id,'INPROGRESS')"
+                                        class="btn btn-success btn-sm">Start
+                                    </button>
+                                    <button *ngIf="isLoggedInUser && feature.status=='COMPLETED'"
+                                        (click)="updateFeatureStatus(feature.id,'INPROGRESS')"
+                                        class="btn btn-success btn-sm">Reopen
                                     </button> &nbsp;
-                                    <a  *ngIf="feature.status!=='PENDING'" routerLink="../../../reviews/{{feature.id}}"
-                                     class="btn btn-success btn-sm">Test
+                                    <a *ngIf="feature.status!=='PENDING'" routerLink="../../../reviews/{{feature.id}}"
+                                        class="btn btn-success btn-sm">Test
                                     </a> &nbsp;
                                     <a *ngIf="feature.status=='APPROVED'" routerLink="../../../reviews/{{feature.id}}"
-                                    class="btn btn-success btn-sm">Rating
-                                   </a> &nbsp;
+                                        class="btn btn-success btn-sm">Rating
+                                    </a> &nbsp;
                                 </td>
                             </tr>
                         </tbody>
@@ -66,21 +76,26 @@
                     Description
                 </div>
                 <div class="card-body">
-                    <table class="">                        
+                    <table class="">
                         <tbody>
                             <tr *ngIf="feature">
 
                                 <td *ngIf="mode=='edit'">
                                     <p class="feature-description">
-                                    <textarea rows="5" cols="130" [(ngModel)]="feature.description" name="description"></textarea>
-                                </p>
-                                </td>                              
-                                <td  *ngIf="mode!='edit'" > <p class="feature-description" [innerHTML]="feature.description">
+                                        <textarea rows="5" cols="130" [(ngModel)]="feature.description"
+                                            name="description"></textarea>
+                                    </p>
+                                </td>
+                                <td *ngIf="mode!='edit'">
+                                    <p class="feature-description" [innerHTML]="feature.description">
 
-                                </p> </td>                            
-                                <td class="text-center">                                                   
-                                    <button *ngIf="mode=='edit'" class="btn btn-success btn-sm" (click)="update(feature)"> Save</button>    &nbsp;                                                   
-                                    <button *ngIf="mode=='edit'" class="btn btn-danger btn-sm" (click)="mode=''"> Cancel</button>  &nbsp;                                                   
+                                    </p>
+                                </td>
+                                <td class="text-center">
+                                    <button *ngIf="mode=='edit'" class="btn btn-success btn-sm"
+                                        (click)="update(feature)"> Save</button> &nbsp;
+                                    <button *ngIf="mode=='edit'" class="btn btn-danger btn-sm" (click)="mode=''">
+                                        Cancel</button> &nbsp;
                                 </td>
                             </tr>
                         </tbody>
@@ -92,5 +107,5 @@
     <lib-feature-skills [feature]="feature" [isEditable]="isReviewer"></lib-feature-skills>
     <lib-feature-tasks [feature]="feature" taskType="TASK" title="User Story" *ngIf="feature"></lib-feature-tasks>
     <lib-list-issues [feature]="feature" taskType="BUG" title="Issues" *ngIf="feature"></lib-list-issues>
-    
+
 </kt-page>
