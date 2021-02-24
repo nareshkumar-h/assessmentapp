@@ -24,7 +24,8 @@ export class GithubSignComponent implements OnInit {
   }
 
   getToken() {
-    let url = 'https://github.com/login/oauth/access_token';
+    let url =
+      'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token';
     let data = {
       code: this.code,
       client_id: 'fc639608910c9aceda7b',
