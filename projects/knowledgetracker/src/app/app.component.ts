@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'projects/auth/src/public-api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,8 +15,8 @@ export class AppComponent {
   users = ['guru', 'dharani'];
   courses: any;
 
-  constructor() {
-    this.user = this.getLoggedInUser();
+  constructor(public authService: AuthService) {
+    this.user = this.authService.getUser();
     this.isLoggedIn = this.user != null;
   }
 
@@ -38,10 +39,6 @@ export class AppComponent {
       },
     };
     sessionStorage.setItem('SITE_INFO', JSON.stringify(sites['theme1']));
-  }
-
-  getLoggedInUser() {
-    return JSON.parse(sessionStorage.getItem('LOGGED_IN_USER'));
   }
 
   isLoggedIn: boolean = true;

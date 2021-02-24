@@ -12,10 +12,10 @@ import { ThemeModule } from 'projects/theme/src/public-api';
 import { ProjectdashboardComponent } from './projectdashboard/projectdashboard.component';
 import { HomeComponent } from './home/home.component';
 import { UsersModule } from 'projects/users/src/public-api';
-import { CourseModule } from 'projects/course/src/public-api';
-import { UsercourseModule } from 'projects/usercourse/src/public-api';
 import { ReportingModule } from 'projects/project/src/lib/reporting/reporting.module';
 import { GithubModule } from 'projects/project/src/lib/github/github.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ProjectdashboardComponent, HomeComponent],
@@ -36,7 +36,13 @@ import { GithubModule } from 'projects/project/src/lib/github/github.module';
     }),
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

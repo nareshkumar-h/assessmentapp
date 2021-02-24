@@ -8,7 +8,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseRoutingModule } from './course-routing.module';
-import { ThemeModule, CardModule, SidenavModule, NavbarModule } from 'projects/theme/src/public-api';
+import {
+  ThemeModule,
+  CardModule,
+  SidenavModule,
+  NavbarModule,
+} from 'projects/theme/src/public-api';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { AddCourseModuleComponent } from './components/add-course-module/add-course-module.component';
@@ -40,11 +45,20 @@ import { MaterialModule } from 'projects/theme/src/lib/material.module';
 // import { KTThemeModule } from 'src/app/kttheme.module';
 //import { ContentModule } from 'projects/content/src/public-api';
 
-
 @NgModule({
-  declarations: [CourseComponent, AddCourseComponent, ViewCourseComponent, CourseTopicsComponent, CourseListComponent,
-    EditCourseComponent, AddCourseModuleComponent, AddCourseTopicComponent, CoursePlanComponent,
-    CourseQuestionsComponent, AddCourseQuestionComponent, CourseContentListComponent,
+  declarations: [
+    CourseComponent,
+    AddCourseComponent,
+    ViewCourseComponent,
+    CourseTopicsComponent,
+    CourseListComponent,
+    EditCourseComponent,
+    AddCourseModuleComponent,
+    AddCourseTopicComponent,
+    CoursePlanComponent,
+    CourseQuestionsComponent,
+    AddCourseQuestionComponent,
+    CourseContentListComponent,
     AddCourseContentComponent,
     ViewCourseTopicsComponent,
     CategoryListComponent,
@@ -55,25 +69,60 @@ import { MaterialModule } from 'projects/theme/src/lib/material.module';
     EditCourseContentComponent,
     ViewCourseCurriculumComponent,
     AddSectionComponent,
-    AddLectureComponent,AddCourseComponent],
-  imports: [
-    ThemeModule,  SecurityModule.forRoot({ SECURE_KEY: "123", ENCODING_TYPE: "des" }),
-    CommonModule, FormsModule, ReactiveFormsModule,HttpClientModule, CourseRoutingModule, 
-    ContentModule, TextFieldModule, AngularEditorModule,DragDropModule,MaterialModule
+    AddLectureComponent,
+    AddCourseComponent,
   ],
-  providers:[CourseService, AuthGuard],
+  imports: [
+    ThemeModule,
+    SecurityModule.forRoot(),
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CourseRoutingModule,
+    ContentModule,
+    TextFieldModule,
+    AngularEditorModule,
+    DragDropModule,
+    MaterialModule,
+  ],
+  providers: [CourseService, AuthGuard],
   schemas: [NO_ERRORS_SCHEMA],
-  entryComponents: [AddCourseComponent, EditCourseComponent, AddCourseTopicComponent, AddCategoryComponent, EditCategoryComponent, AddCourseContentComponent, EditCourseContentComponent],
-  exports: [CourseComponent, AddCourseComponent, ViewCourseComponent, CourseTopicsComponent, CourseListComponent, EditCourseComponent,
-    CoursePlanComponent, CourseQuestionsComponent, AddCourseQuestionComponent,
-    CourseContentListComponent, AddCourseContentComponent,AddCategoryComponent,EditCategoryComponent, CategoryListComponent,ThemeModule]
+  entryComponents: [
+    AddCourseComponent,
+    EditCourseComponent,
+    AddCourseTopicComponent,
+    AddCategoryComponent,
+    EditCategoryComponent,
+    AddCourseContentComponent,
+    EditCourseContentComponent,
+  ],
+  exports: [
+    CourseComponent,
+    AddCourseComponent,
+    ViewCourseComponent,
+    CourseTopicsComponent,
+    CourseListComponent,
+    EditCourseComponent,
+    CoursePlanComponent,
+    CourseQuestionsComponent,
+    AddCourseQuestionComponent,
+    CourseContentListComponent,
+    AddCourseContentComponent,
+    AddCategoryComponent,
+    EditCategoryComponent,
+    CategoryListComponent,
+    ThemeModule,
+  ],
 })
 export class CourseModule {
   static forRoot(config: Config): ModuleWithProviders<CourseModule> {
     return {
       ngModule: CourseModule,
-      providers: [CourseService,AuthGuard,
-        { provide: COURSE_CONFIG, useValue: config } // If I hard code `useValue: {API_ENDPOINT: 'FooBar'}`, instead of using `config` it works... weird.
+      providers: [
+        CourseService,
+        AuthGuard,
+        { provide: COURSE_CONFIG, useValue: config }, // If I hard code `useValue: {API_ENDPOINT: 'FooBar'}`, instead of using `config` it works... weird.
       ],
     };
   }

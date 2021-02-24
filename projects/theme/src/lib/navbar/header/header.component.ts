@@ -24,9 +24,9 @@ export class HeaderComponent implements OnInit {
     //console.log("BgColor", this.bgColor);
     this.bgColor = this.bgColor || '#2b3643';
     this.loggedInUsername = JSON.parse(
-      sessionStorage.getItem('LOGGED_IN_USER')
+      localStorage.getItem('LOGGED_IN_USER')
     ).username;
-    this.selectedUser = sessionStorage.getItem('SELECTED_USER');
+    this.selectedUser = this.getSelectedUser();
     this.isMentor = this.user ? this.user.roles.indexOf('T') != -1 : false;
   }
 
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
         'Do you want to switch user - ' + this.selectedUser + ' ?'
       );
       if (cfm) {
-        sessionStorage.setItem('SELECTED_USER', this.selectedUser);
+        this.setSelectedUser(this.selectedUser);
         //window.location.reload();
         this.router.navigate(['/']);
       }
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
 
   clearUser() {
     console.log(this.loggedInUsername);
-    sessionStorage.setItem('SELECTED_USER', this.loggedInUsername);
+    this.setSelectedUser(this.loggedInUsername);
     window.location.reload();
   }
 
@@ -64,10 +64,10 @@ export class HeaderComponent implements OnInit {
 
     if (selectedUsername && selectedUsername.length > 0) {
       this.selectedUser = selectedUsername;
-      sessionStorage.setItem('SELECTED_USER', selectedUsername);
+      this.setSelectedUser(selectedUsername);
       window.location.reload();
     } else {
-      sessionStorage.setItem('SELECTED_USER', this.loggedInUsername);
+      this.setSelectedUser(this.loggedInUsername);
       window.location.reload();
     }
   }
@@ -106,4 +106,12 @@ export class HeaderComponent implements OnInit {
 
   @Input()
   bgColor: any;
+
+  setSelectedUser(username) {
+    localStorage.setItem('SELECTED_USER', username);
+  }
+
+  getSelectedUser() {
+    return localStorage.getItem('SELECTED_USER');
+  }
 }

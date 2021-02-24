@@ -24,7 +24,6 @@ export class AuthService {
     this.apiUrl = config.API_ENDPOINT;
     this.role = config.USER_TYPE;
     this.orgId = config.ORG_ID;
-    this.securityService.setEncryption(this.config.ENCRYPTION);
   }
 
   getHeaders() {
@@ -146,13 +145,13 @@ export class AuthService {
   }
 
   getUser(): any {
-    let user = this.securityService.get('LOGGED_IN_USER');
+    let user = JSON.parse(localStorage.getItem('LOGGED_IN_USER'));
 
     return user ? JSON.parse(user) : null;
   }
 
   getSelectedUser() {
-    let user = sessionStorage.getItem('SELECTED_USER');
+    let user = localStorage.getItem('SELECTED_USER');
     return user ? user : this.getUser()?.username;
   }
 
@@ -187,21 +186,22 @@ export class AuthService {
   }
 
   storeUser(res) {
-    let username = res['login'];
-    let user = {
-      id: res['id'],
-      username: res['login'],
-      githubUsername: res['login'],
-      name: res['name'],
-      email: res['email'],
-      type: res['type'],
-      created_at: res['created_at'],
-      gravatar_id: res['gravatar_id'],
-      avatar_url: res['avatar_url'],
-      role: 'U',
-      mode: 'github',
-    };
-
+    localStorage.setItem('LOGGED_IN_USER', JSON.stringify(res));
+    // let username = res['login'];
+    // let user = {
+    //   id: res['id'],
+    //   username: res['login'],
+    //   githubUsername: res['login'],
+    //   name: res['name'],
+    //   email: res['email'],
+    //   type: res['type'],
+    //   created_at: res['created_at'],
+    //   gravatar_id: res['gravatar_id'],
+    //   avatar_url: res['avatar_url'],
+    //   role: 'U',
+    //   mode: 'github',
+    // };
+    /*
     this.findOne(username).subscribe((data) => {
       if (data) {
         user['username'] = data['username'];
@@ -210,5 +210,10 @@ export class AuthService {
       }
       this.securityService.set('LOGGED_IN_USER', JSON.stringify(user));
     });
+    */
+  }
+
+  setSelectedUser(username) {
+    localStorage.setItem('SELECTED_USER', username);
   }
 }

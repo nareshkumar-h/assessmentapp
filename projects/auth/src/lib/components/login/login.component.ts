@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit {
     @Inject(AUTH_CONFIG) private config: Config,
     private secureService: SecurityService
   ) {
-    this.secureService.setEncryption(this.config.ENCRYPTION);
-
     this.userType = this.config.USER_TYPE;
 
     this.siteInfo = this.authService.getSiteInfo();
@@ -124,8 +122,8 @@ export class LoginComponent implements OnInit {
             this.toastr.success('Login Success', '', { timeOut: 1000 });
             let responseUser = res;
             responseUser.organization = this.config.ORG_ID;
-            this.secureService.storeLoggedInUser(responseUser);
-            sessionStorage.setItem('SELECTED_USER', responseUser['username']);
+            this.authService.storeUser(responseUser);
+            localStorage.setItem('SELECTED_USER', responseUser['username']);
             this.redirectToHomepage(responseUser);
           },
           (err) => {
@@ -146,13 +144,5 @@ export class LoginComponent implements OnInit {
   navigate(url) {
     console.log(url);
     this.router.navigate([url]);
-  }
-
-  loginWithGithub() {
-    alert('Login with github app');
-    let clientId = 'fc639608910c9aceda7b';
-    let redirect_uri = 'http://localhost:4200/auth/githublogin';
-    let url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirect_uri}`;
-    window.location.href = url;
   }
 }

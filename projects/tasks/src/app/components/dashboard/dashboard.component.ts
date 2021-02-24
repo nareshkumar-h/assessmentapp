@@ -24,9 +24,8 @@ export class DashboardComponent implements OnInit {
   }
 
   checkLoggedIn() {
-    let user = JSON.parse(sessionStorage.getItem('LOGGED_IN_USER'));
-    console.log(user);
-    if (!user) {
+    console.log(this.user);
+    if (!this.user) {
       console.log('redirect to login page');
       this.router.navigate(['auth/login'], {
         queryParams: { redirectUrl: 'dashboard' },

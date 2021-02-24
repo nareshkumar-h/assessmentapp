@@ -1,6 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import * as SecureLS from 'secure-ls';
-import { Config, SECURE_CONFIG } from './config';
 import { PermissionsService } from './permissions.service';
 import { RoleService } from './role.service';
 
@@ -8,58 +6,16 @@ import { RoleService } from './role.service';
   providedIn: 'root',
 })
 export class SecurityService {
-  ls: any;
-  encryption: boolean = false;
-  constructor(
-    @Inject(SECURE_CONFIG) private config: Config,
-    private roleService: RoleService
-  ) {
-    this.encryption = config.ENCRYPTION;
-    //    console.log(this.encryption);
-    if (this.encryption) {
-      this.ls = new SecureLS({
-        encodingType: this.config.ENCODING_TYPE,
-        isCompression: false,
-        encryptionSecret: this.config.SECURE_KEY,
-      });
-    }
-  }
-
-  setEncryption(enable) {
-    this.encryption = enable;
-    if (enable) {
-      this.ls = new SecureLS({
-        encodingType: this.config.ENCODING_TYPE,
-        isCompression: false,
-        encryptionSecret: this.config.SECURE_KEY,
-      });
-    }
-  }
-
-  set(key, value) {
-    if (this.encryption) {
-      this.ls.set(key, value);
-    } else {
-      sessionStorage.setItem(key, value);
-    }
-  }
-
-  get(key) {
-    return this.encryption ? this.ls.get(key) : sessionStorage.getItem(key);
-  }
+  constructor(private roleService: RoleService) {}
 
   getLoggedInUser() {
-    var user = this.get('LOGGED_IN_USER');
+    var user = JSON.parse(localStorage.getItem('LOGGED_IN_USER'));
     return user ? JSON.parse(user) : null;
   }
 
   storeLoggedInUser(user) {
     localStorage.setItem('TOKEN', user?.token);
-    this.set('LOGGED_IN_USER', JSON.stringify(user));
-  }
-
-  storeUser(key, value) {
-    this.set(key, value);
+    localStorage.setItem('LOGGED_IN_USER', JSON.stringify(user));
   }
 
   clear() {

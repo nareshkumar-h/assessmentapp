@@ -57,7 +57,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InterviewModule,
   ],
   entryComponents: [MatDialogModule],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
