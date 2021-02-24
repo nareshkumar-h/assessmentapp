@@ -29,7 +29,7 @@ export class GithubSignComponent implements OnInit {
       code: this.code,
       client_id: 'fc639608910c9aceda7b',
       client_secret: 'd095ed0ee750d1eaf8c6e122eefb8153596bbf01',
-      redirect_uri: 'http://localhost:4200/auth/githublogin',
+      redirect_uri: 'https://projects.learn2build.in/auth/githublogin',
     };
     this.httpClient.post(url, data).subscribe((res) => {
       console.log(res);
@@ -40,7 +40,7 @@ export class GithubSignComponent implements OnInit {
   loginWithGithub() {
     alert('Login with github app');
     let clientId = 'fc639608910c9aceda7b';
-    let redirect_uri = 'http://localhost:4200/auth/githublogin';
+    let redirect_uri = 'https://projects.learn2build.in/auth/githublogin';
     let url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirect_uri}`;
     window.location.href = url;
   }
