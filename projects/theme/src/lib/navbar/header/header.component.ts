@@ -92,7 +92,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     console.log('logout');
-    sessionStorage.clear();
+    localStorage.clear();
     sessionStorage.clear();
     window.location.href = '/auth/login';
     //this.router.navigate(['auth/login']);
