@@ -47,11 +47,13 @@ const routes: Routes = [
     path: ':userId/coursedashboard',
     component: UserCourseDashboardComponent,
     data: { showSidebar: true, menus: 'courses', protected: false },
+    canActivate: [AuthGuard],
   },
   {
     path: ':userId/courses',
     component: UserCourseListComponent,
     data: { showSidebar: true, menus: 'courses' },
+    canActivate: [AuthGuard],
   },
   {
     path: ':userId/availablecourses',
