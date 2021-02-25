@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   checkLogin() {
     if (this.secureService.isAuthenticated()) {
       console.log('Already loggedin..redirecting to homepage');
-      let user = this.secureService.getLoggedInUser();
+      let user = this.authService.getUser();
       this.redirectToHomepage(user);
     }
   }
@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
             let responseUser = res;
             responseUser.organization = this.config.ORG_ID;
             this.authService.storeUser(responseUser);
-            localStorage.setItem('SELECTED_USER', responseUser['username']);
+
             this.redirectToHomepage(responseUser);
           },
           (err) => {

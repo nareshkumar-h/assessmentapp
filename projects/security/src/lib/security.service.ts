@@ -10,7 +10,7 @@ export class SecurityService {
 
   getLoggedInUser() {
     var user = JSON.parse(localStorage.getItem('LOGGED_IN_USER'));
-    return user ? JSON.parse(user) : null;
+    return user;
   }
 
   storeLoggedInUser(user) {

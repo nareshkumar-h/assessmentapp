@@ -184,8 +184,9 @@ export class AuthService {
     return this.http.post(url, account);
   }
 
-  storeUser(res) {
-    localStorage.setItem('LOGGED_IN_USER', JSON.stringify(res));
+  storeUser(user) {
+    localStorage.setItem('LOGGED_IN_USER', JSON.stringify(user));
+    localStorage.setItem('SELECTED_USER', user['username']);
     // let username = res['login'];
     // let user = {
     //   id: res['id'],
