@@ -14,7 +14,9 @@ export class SecurityService {
   }
 
   storeLoggedInUser(user) {
-    localStorage.setItem('TOKEN', user?.token);
+    if (user.token) {
+      localStorage.setItem('TOKEN', user.token);
+    }
     localStorage.setItem('LOGGED_IN_USER', JSON.stringify(user));
   }
 
