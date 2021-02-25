@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'projects/auth/src/public-api';
 
 @Component({
   selector: 'lib-switch-user',
@@ -9,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SwitchUserComponent implements OnInit {
   constructor(
+    private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,
     private toastr: ToastrService
@@ -26,8 +28,7 @@ export class SwitchUserComponent implements OnInit {
   }
 
   clear() {
-    let username = JSON.parse(localStorage.getItem('LOGGED_IN_USER')).username;
-    localStorage.setItem('SELECTED_USER', username);
+    let username = this.authService.getSelectedUser();
     this.toastr.success('Switched to ' + username);
     this.dialog.closeAll();
   }

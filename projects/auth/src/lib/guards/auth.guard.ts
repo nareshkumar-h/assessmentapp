@@ -8,12 +8,14 @@ import {
 } from '@angular/router';
 import { SecurityService } from 'projects/security/src/public-api';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(
+    private authService: AuthService,
     private securityService: SecurityService,
     private router: Router
   ) {}
@@ -25,8 +27,8 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let isAuthenticated = this.securityService.isAuthenticated();
-    // console.log(isAuthenticated);
+    let isAuthenticated = this.authService.isLoggedIn();
+    console.log('Auth Guard:', isAuthenticated);
     let url: string = state.url;
     let pathname = window.location.href;
     if (!isAuthenticated) {
