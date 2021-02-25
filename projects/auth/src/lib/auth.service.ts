@@ -146,8 +146,7 @@ export class AuthService {
 
   getUser(): any {
     let user = JSON.parse(localStorage.getItem('LOGGED_IN_USER'));
-
-    return user ? JSON.parse(user) : null;
+    return user;
   }
 
   getSelectedUser() {

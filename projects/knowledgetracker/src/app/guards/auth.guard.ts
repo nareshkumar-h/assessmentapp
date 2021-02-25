@@ -5,6 +5,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
   Router,
+  ActivatedRoute,
 } from '@angular/router';
 import { SecurityService } from 'projects/security/src/public-api';
 import { Observable } from 'rxjs';
@@ -15,7 +16,9 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   constructor(
     private securityService: SecurityService,
-    private router: Router
+    private router: Router,
+
+    private route: ActivatedRoute
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -27,8 +30,9 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     let isAuthenticated = this.securityService.isAuthenticated();
     //console.log(isAuthenticated);
+    console.log(this.route);
     let url: string = state.url;
-
+    console.log(url);
     if (!isAuthenticated) {
       this.router.navigate(['auth/login']);
     }
