@@ -41,6 +41,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SecurityModule } from 'projects/security/src/public-api';
 import { ContentModule } from 'projects/content/src/public-api';
 import { MaterialModule } from 'projects/theme/src/lib/material.module';
+import { AuthGuard } from 'projects/auth/src/public-api';
 // import { KTThemeModule } from 'src/app/kttheme.module';
 //import { ContentModule } from 'projects/content/src/public-api';
 

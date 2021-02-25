@@ -18,6 +18,7 @@ import { ViewCourseCurriculumComponent } from './components/view-course-curricul
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { AddLectureComponent } from './components/add-lecture/add-lecture.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
+import { AuthGuard } from 'projects/auth/src/public-api';
 
 const routes: Routes = [
   {
