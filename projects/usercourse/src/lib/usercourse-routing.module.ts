@@ -9,9 +9,10 @@ import { UserCourseContentListComponent } from './components/user-course-content
 import { AvailableCourseListComponent } from './components/available-course-list/available-course-list.component';
 import { UserCourseDashboardComponent } from './components/user-course-dashboard/user-course-dashboard.component';
 import { CourseCurriculumComponent } from './components/course-curriculum/course-curriculum.component';
-import { AuthGuard } from './guards/auth.guard';
+
 import { UserCourseContentComponent } from './components/user-course-content/user-course-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { AuthGuard } from 'projects/auth/src/public-api';
 
 const routes: Routes = [
   {

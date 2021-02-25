@@ -9,6 +9,7 @@ import { VerifyAccountComponent } from './components/verify-account/verify-accou
 import { SendActivationMailComponent } from './components/send-activation-mail/send-activation-mail.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 import { GithubSignComponent } from './components/github-sign/github-sign.component';
+import { MentorLoginComponent } from './components/mentor-login/mentor-login.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       { path: 'login', component: LoginComponent },
+      { path: 'mentorlogin', component: MentorLoginComponent },
       { path: 'githublogin', component: GithubSignComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'forgotPassword', component: ForgotPasswordComponent },

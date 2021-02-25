@@ -17,9 +17,10 @@ import { VerifyAccountComponent } from './components/verify-account/verify-accou
 import { SendActivationMailComponent } from './components/send-activation-mail/send-activation-mail.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 import { GithubSignComponent } from './components/github-sign/github-sign.component';
+import { MentorLoginComponent } from './components/mentor-login/mentor-login.component';
 
 @NgModule({
-  declarations: [AuthComponent,LoginComponent, RegisterComponent, ActivateAccountComponent,ForgotPasswordComponent, VerifyAccountComponent, SendActivationMailComponent, SetPasswordComponent, GithubSignComponent],
+  declarations: [AuthComponent,LoginComponent, RegisterComponent, ActivateAccountComponent,ForgotPasswordComponent, VerifyAccountComponent, SendActivationMailComponent, SetPasswordComponent, GithubSignComponent, MentorLoginComponent],
   imports: [
     CommonModule,FormsModule, ReactiveFormsModule, HttpClientModule, 
     SecurityModule.forRoot(),

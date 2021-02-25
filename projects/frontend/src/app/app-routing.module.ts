@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthGuard } from './guards/auth.guard';
 import { TaskDashboardComponent } from './components/task-dashboard/task-dashboard.component';
 import { TrainerCourseListComponent } from './components/trainer/trainer-course-list/trainer-course-list.component';
+import { AuthGuard } from 'projects/auth/src/public-api';
 
 const routes: Routes = [
   {

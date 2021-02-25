@@ -34,7 +34,6 @@ import { CourseOverviewComponent } from './components/course-overview/course-ove
 import { EditCourseContentComponent } from './components/edit-course-content/edit-course-content.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { AuthGuard } from './guards/auth.guard';
 import { ViewCourseCurriculumComponent } from './components/view-course-curriculum/view-course-curriculum.component';
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { AddLectureComponent } from './components/add-lecture/add-lecture.component';

@@ -31,11 +31,11 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { UserCourseDashboardComponent } from './components/user-course-dashboard/user-course-dashboard.component';
 import { CurriculumComponent } from './components/curriculum/curriculum.component';
 import { CourseCurriculumComponent } from './components/course-curriculum/course-curriculum.component';
-import { AuthGuard } from './guards/auth.guard';
 import { UserCourseContentComponent } from './components/user-course-content/user-course-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ContentModule } from 'projects/content/src/public-api';
 import { MaterialModule } from 'projects/theme/src/lib/material.module';
+import { AuthGuard } from 'projects/auth/src/public-api';
 
 //import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
 //import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
