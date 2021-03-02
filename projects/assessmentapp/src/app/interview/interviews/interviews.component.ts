@@ -36,7 +36,7 @@ export class InterviewsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('UserId', this.userId);
-    this.listInterviews();
+    // this.listInterviews();
   }
 
   userCourses: any;
