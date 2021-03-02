@@ -27,7 +27,6 @@ export class JwtInterceptor implements HttpInterceptor {
     //console.log("JwtInterceptor basicauth ::===>" + JSON.stringify(localStorage.getItem('basicauth')));
 
     let token = localStorage.getItem('TOKEN');
-    console.log(token);
     if (token) {
       request = request.clone({
         setHeaders: {

@@ -14,11 +14,7 @@ import { AuthService } from '../auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private securityService: SecurityService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -28,7 +24,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     let isAuthenticated = this.authService.isLoggedIn();
-    console.log('Auth Guard:', isAuthenticated);
+    //console.log('Auth Guard:', isAuthenticated);
     let url: string = state.url;
     let pathname = window.location.href;
     if (!isAuthenticated) {

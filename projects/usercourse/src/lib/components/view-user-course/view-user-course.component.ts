@@ -45,7 +45,7 @@ export class ViewUserCourseComponent implements OnInit {
         this.enrolled = false;
       }
     });
-    console.log(this.selectedCourse);
+    //console.log(this.selectedCourse);
   }
 
   ngOnInit(): void {

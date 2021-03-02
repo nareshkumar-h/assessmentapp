@@ -129,11 +129,12 @@ export class UserCourseTopicsComponent implements OnInit {
   topicReviewStatus(topic, status) {
     console.log('Update Review Status:', topic, status);
 
-    topic.completionDate = status == 'C' ? null : null;
+    //topic.completionDate = status == 'C' ? null : null;
 
     this.userCourseService
       .updateTopicReviewStatus(topic.userTopicId, status)
       .subscribe((res) => {
+        topic.reviewStatus = status;
         this.toastr.success('Success');
       });
   }

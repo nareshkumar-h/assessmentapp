@@ -37,7 +37,6 @@ export class UserCourseDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('UserId', this.userId);
     this.listCourses();
   }
 
@@ -66,7 +65,6 @@ export class UserCourseDashboardComponent implements OnInit {
   }
 
   display(categories, usercourses: any) {
-    //console.log(categories);
     this.userCourses = [];
     for (let category of categories) {
       let data = usercourses.filter((c) => c.category == category);
@@ -111,6 +109,7 @@ export class UserCourseDashboardComponent implements OnInit {
   }
 
   categories = [
+    'Fundamentals',
     'Java',
     'Database',
     'Web',
