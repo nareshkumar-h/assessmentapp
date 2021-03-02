@@ -31,7 +31,6 @@ export class InterviewsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       //this.userId = params['userId'];
       //console.log("category-" + this.category);
-      this.listInterviews();
     });
   }
 

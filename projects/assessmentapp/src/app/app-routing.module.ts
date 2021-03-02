@@ -23,11 +23,11 @@ const routes: Routes = [
     component: InterviewsComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: InterviewListComponent },
       {
         path: ':id',
         component: InterviewDetailComponent,
       },
+      { path: '', component: InterviewListComponent },
     ],
   },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

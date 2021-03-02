@@ -142,7 +142,7 @@ export class InterviewDetailComponent implements OnInit {
     ]);
   }
 
-  menus: any;
+  menus: any = [];
 
   loadMenus() {
     this.menus = [];
