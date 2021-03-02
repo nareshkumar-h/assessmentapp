@@ -52,12 +52,12 @@ export class DashboardComponent implements OnInit {
         image: 'courses.jpg',
         active: this.authService.hasRole(this.user, ['U']),
       },
-      // {
-      //   name: 'Projects',
-      //   link: '../projects',
-      //   image: 'project.png',
-      //   active: this.authService.hasRole(this.user, ['U']),
-      // },
+      {
+        name: 'Projects',
+        link: '../' + this.userId + '/projects',
+        image: 'project.png',
+        active: this.authService.hasRole(this.user, ['U']),
+      },
     ];
     this.features = featureList.filter((obj) => obj.active == true);
     return this.features;
@@ -79,12 +79,12 @@ export class DashboardComponent implements OnInit {
       icontype: 'fas fa-graduation-cap',
       access: this.authService.hasRole(this.user, ['U']),
     });
-    // this.menus.push({
-    //   title: 'Projects',
-    //   path: ['/' + this.userId + '/myprojects'],
-    //   icontype: 'fas fa-cubes',
-    //   access: this.authService.hasRole(this.user, ['U']),
-    // });
+    this.menus.push({
+      title: 'Projects',
+      path: ['/' + this.userId + '/projects'],
+      icontype: 'fas fa-cubes',
+      access: this.authService.hasRole(this.user, ['U']),
+    });
     // this.menus.push({
     //   title: 'Tasks',
     //   path: ['/tasks'],

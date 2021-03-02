@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../project.service';
-import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { AddProjectFeatureComponent } from '../add-project-feature/add-project-feature.component';
-import { AuthService } from 'projects/auth/src/public-api';
+import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'projects/auth/src/public-api';
+import { ProjectService } from '../../project.service';
 
 @Component({
   selector: 'app-project-feature-list',
@@ -22,10 +21,10 @@ export class ProjectFeatureListComponent implements OnInit {
   userId: string;
   isLoggedInUser: boolean;
   isMentor: boolean;
-  showSidebar = false;
 
   displayColumns = ['technologies', 'priority', 'action', 'status'];
 
+  showSidebar = true;
   constructor(
     public dialog: MatDialog,
     private projectService: ProjectService,
@@ -33,12 +32,13 @@ export class ProjectFeatureListComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {
-    this.showSidebar = this.authService.isAuthorized();
+    //this.showSidebar = this.authService.isAuthorized();
     this.isMentor = this.authService.hasRoleAccess('T');
     this.route.parent.params.subscribe((params) => {
-      this.projectId = params['projectId'];
       this.userId = params['userId'];
+      this.projectId = params['id'];
     });
+    this.route.params.subscribe((params) => {});
     this.route.queryParams.subscribe((params) => {
       let fields = params['display'];
       if (fields) {
@@ -162,18 +162,4 @@ export class ProjectFeatureListComponent implements OnInit {
     this.listModules();
     this.listFeatures();
   }
-
-  addFeatureDialog(module) {
-    const dialogRef = this.dialog.open(AddProjectFeatureComponent, {
-      width: '800px',
-      height: 'fit-content',
-      data: { projectId: this.projectId, moduleObj: module },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      this.refresh();
-    });
-  }
-
-  menus = [];
 }
