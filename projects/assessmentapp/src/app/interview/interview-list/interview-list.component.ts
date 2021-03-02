@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 import { AuthService } from 'projects/auth/src/public-api';
-import { InterviewService } from 'projects/knowledgetracker/src/app/interview.service';
+import { InterviewService } from '../../interview.service';
 
 @Component({
   selector: 'app-interview-list',
