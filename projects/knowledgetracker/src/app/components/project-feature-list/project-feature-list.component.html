@@ -8,10 +8,10 @@
         </small>
         <br />
     </div>
-    <ul>
+    <ul *ngIf="project">
 
         <li>
-            Test Url: ( <a href="{{project.githubUrl}}" target="_blank">{{project.githubUrl }}</a> )
+            Code Url: ( <a href="{{project.githubUrl}}" target="_blank">{{project.githubUrl }}</a> )
         </li>
         <li class="ml-auto">
             Test Url: ( <a href="{{project.projectTestUrl}}" target="_blank">{{project.projectTestUrl }}</a> )
@@ -71,7 +71,7 @@
                                         <td>{{j+1}}</td>
                                         <td>{{t.name}}
                                         </td>
-                                        <td>
+                                        <td *ngIf="isExists('description')">
                                             <div [innerHTML]="t.description"></div>
                                         </td>
                                         <td *ngIf="isExists('technologies')">
@@ -86,9 +86,8 @@
                                         <td>{{t.modified_date | moment}}</td>
                                         <td>
 
-
-
-                                            {{t.status}} &nbsp;
+                                            <span [ngClass]="getBadgeColor(t.status)">{{t.status}}</span>
+                                            &nbsp;
 
 
                                         </td>

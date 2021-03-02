@@ -162,4 +162,18 @@ export class ProjectFeatureListComponent implements OnInit {
     this.listModules();
     this.listFeatures();
   }
+
+  getBadgeColor(status) {
+    let color = 'badge badge-primary';
+    switch (status) {
+      case 'TESTING':
+        color = 'badge badge-primary';
+        break;
+      case 'PENDING':
+        color = 'badge badge-secondary';
+        break;
+    }
+    console.log(color);
+    return color;
+  }
 }
