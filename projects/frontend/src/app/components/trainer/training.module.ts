@@ -7,11 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import {
-  SidenavModule,
-  ThemeModule,
-  CardModule,
-} from 'projects/theme/src/public-api';
+import { SidenavModule, ThemeModule, CardModule } from 'theme';
 import { TrainerCourseListComponent } from './trainer-course-list/trainer-course-list.component';
 import { TrainingRoutingModule } from './training-routing.module';
 import { AddBatchComponent } from '../batches/add-batch/add-batch.component';

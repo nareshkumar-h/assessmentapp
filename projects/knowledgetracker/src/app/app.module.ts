@@ -3,8 +3,8 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
+import { ThemeModule, NavbarModule } from 'theme';
+// import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
 import { UsercourseModule } from 'projects/usercourse/src/public-api';
@@ -22,9 +22,10 @@ import { MyInterviewsComponent } from './components/my-interviews/my-interviews.
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ViewProjectComponent } from './components/view-project/view-project.component';
 import { ProjectFeatureListComponent } from './components/project-feature-list/project-feature-list.component';
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
+
 import { ProjectDetailSidebarComponent } from './components/project-detail-sidebar/project-detail-sidebar.component';
 import { ProjectFeatureRatingListComponent } from './components/project-feature-rating-list/project-feature-rating-list.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -50,12 +51,11 @@ import { ProjectFeatureRatingListComponent } from './components/project-feature-
     CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     UsercourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     ThemeModule,
-    MaterialModule,
     NavbarModule,
     //ProjectModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     DeviceDetectorModule,
     UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),
-
+    ToastrModule.forRoot(),
     ContentModule,
     HighlightModule,
     AppRoutingModule,

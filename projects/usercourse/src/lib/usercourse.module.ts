@@ -18,11 +18,7 @@ import { UserCourseTopicsComponent } from './components/user-course-topics/user-
 import { UserCourseService } from './usercourse.service';
 import { Config, API_URL } from './config';
 import { CourseClientService } from './course-client.service';
-import {
-  CardModule,
-  SidenavModule,
-  ThemeModule,
-} from 'projects/theme/src/public-api';
+import { CardModule, SidenavModule, ThemeModule } from 'theme';
 import { UserCourseContentListComponent } from './components/user-course-content-list/user-course-content-list.component';
 
 import { HighlightModule } from 'ngx-highlightjs';
@@ -34,14 +30,14 @@ import { CourseCurriculumComponent } from './components/course-curriculum/course
 import { UserCourseContentComponent } from './components/user-course-content/user-course-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ContentModule } from 'projects/content/src/public-api';
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
+
 import { AuthGuard } from 'projects/auth/src/public-api';
 
 //import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
 //import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 //import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 /*
-FullCalendarModule.registerPlugins([ 
+FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin
 ]);
@@ -71,7 +67,7 @@ FullCalendarModule.registerPlugins([
     SidenavModule,
     ThemeModule,
     UserCourseRoutingModule,
-    MaterialModule,
+
     ContentModule,
   ],
   providers: [UserCourseService, AuthGuard],

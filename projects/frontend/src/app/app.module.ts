@@ -4,14 +4,12 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
+import { ThemeModule, NavbarModule } from 'theme';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
 import { UsercourseModule } from 'projects/usercourse/src/public-api';
 import { AuthModule } from 'projects/auth/src/public-api';
 import { CourseModule } from 'projects/course/src/public-api';
-
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
 
 import { ContentModule } from 'projects/content/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
@@ -43,7 +41,6 @@ import { TaskDashboardComponent } from './components/task-dashboard/task-dashboa
 
     //CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     ThemeModule,
-    MaterialModule,
     NavbarModule,
     DeviceDetectorModule,
     UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),

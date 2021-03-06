@@ -8,12 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseRoutingModule } from './course-routing.module';
-import {
-  ThemeModule,
-  CardModule,
-  SidenavModule,
-  NavbarModule,
-} from 'projects/theme/src/public-api';
+import { ThemeModule, CardModule, SidenavModule, NavbarModule } from 'theme';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { AddCourseModuleComponent } from './components/add-course-module/add-course-module.component';
@@ -40,7 +35,6 @@ import { AddLectureComponent } from './components/add-lecture/add-lecture.compon
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SecurityModule } from 'projects/security/src/public-api';
 import { ContentModule } from 'projects/content/src/public-api';
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
 import { AuthGuard } from 'projects/auth/src/public-api';
 // import { KTThemeModule } from 'src/app/kttheme.module';
 //import { ContentModule } from 'projects/content/src/public-api';
@@ -84,7 +78,6 @@ import { AuthGuard } from 'projects/auth/src/public-api';
     TextFieldModule,
     AngularEditorModule,
     DragDropModule,
-    MaterialModule,
   ],
   providers: [CourseService, AuthGuard],
   schemas: [NO_ERRORS_SCHEMA],

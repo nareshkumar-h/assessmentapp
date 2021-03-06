@@ -23,11 +23,7 @@ import { BatchActivityComponent } from './batch-activity/batch-activity.componen
 import { EditBatchCourseComponent } from './edit-batch-course/edit-batch-course.component';
 import { BatchProjectListComponent } from './batch-project-list/batch-project-list.component';
 import { ViewBatchDetailComponent } from './view-batch-detail/view-batch-detail.component';
-import {
-  SidenavModule,
-  ThemeModule,
-  CardModule,
-} from 'projects/theme/src/public-api';
+import { SidenavModule, ThemeModule, CardModule } from 'theme';
 import { SlackListComponent } from '../slack/slack-list/slack-list.component';
 import { ViewSlackComponent } from '../slack/view-slack/view-slack.component';
 import { AddSlackComponent } from '../slack/add-slack/add-slack.component';

@@ -31,11 +31,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {
-  PageComponent,
-  SidenavModule,
-  ThemeModule,
-} from 'projects/theme/src/public-api';
+import { SidenavModule, ThemeModule } from 'theme';
 import { ViewProjectDetailComponent } from './components/view-project-detail/view-project-detail.component';
 import { Config, API_URL } from './config';
 import { ProjectService } from './project.service';
@@ -45,7 +41,6 @@ import { AddProjectSprintComponent } from './components/add-project-sprint/add-p
 import { ViewProjectActivityComponent } from './components/view-project-activity/view-project-activity.component';
 import { FeatureTasksComponent } from './feature-tasks/feature-tasks.component';
 import { AddFeatureTaskComponent } from './add-feature-task/add-feature-task.component';
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
 import { EditFeatureTaskComponent } from './components/edit-feature-task/edit-feature-task.component';
 import { ViewProjectReviewRatingComponent } from './components/view-project-review-rating/view-project-review-rating.component';
 import { ReviewFeatureComponent } from './components/review-feature/review-feature.component';
@@ -122,7 +117,6 @@ import { TechnologyBadgeComponent } from './components/technology-badge/technolo
     ProjectRoutingModule,
     ThemeModule,
     SidenavModule,
-    MaterialModule,
   ],
   entryComponents: [
     AddProjectFeatureComponent,
