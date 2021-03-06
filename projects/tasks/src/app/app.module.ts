@@ -4,9 +4,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsModule } from 'projects/frontend/src/app/settings/settings.module';
-import { AuthModule } from 'projects/auth/src/public-api';
+import { AuthModule } from 'auth';
 import { NavbarModule, ThemeModule } from 'projects/theme/src/public-api';
-import { environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 import { MaterialModule } from 'projects/theme/src/lib/material.module';
 import { SecurityModule } from 'projects/security/src/public-api';
 import { HomeComponent } from './components/home/home.component';
@@ -23,21 +23,28 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    TaskListComponent
+    TaskListComponent,
   ],
   imports: [
-    BrowserModule,   
-    ThemeModule, MaterialModule, NavbarModule,  
+    BrowserModule,
+    ThemeModule,
+    MaterialModule,
+    NavbarModule,
     SettingsModule,
     SecurityModule,
     ContentModule,
-    AuthModule.forRoot({API_ENDPOINT:environment.API_URL,USER_TYPE:'U', ORG_ID:environment.ORG_ID}),    
+    AuthModule.forRoot({
+      API_ENDPOINT: environment.API_URL,
+      USER_TYPE: 'U',
+      ORG_ID: environment.ORG_ID,
+    }),
     HttpClientModule,
-    FormsModule,CommonModule,
-    AppRoutingModule
+    FormsModule,
+    CommonModule,
+    AppRoutingModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { InterviewService } from '../../interview.service';
 import * as _ from 'lodash';
 

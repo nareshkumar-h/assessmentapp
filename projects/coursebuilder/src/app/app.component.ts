@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

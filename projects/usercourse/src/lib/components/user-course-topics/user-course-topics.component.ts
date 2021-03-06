@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserCourseService } from '../../usercourse.service';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { CourseClientService } from '../../course-client.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserCourseReport } from '../../models/user-course-report';

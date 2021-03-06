@@ -3,19 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from 'projects/auth/src/public-api';
+import { AuthModule } from 'auth';
 import { environment } from '../environments/environment';
 import { NavbarModule } from 'angular-bootstrap-md';
 import { ProjectModule } from 'projects/project/src/public-api';
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
-import { ThemeModule } from 'projects/theme/src/public-api';
+import { ThemeModule, MaterialModule } from 'theme';
 import { ProjectdashboardComponent } from './projectdashboard/projectdashboard.component';
 import { HomeComponent } from './home/home.component';
 import { UsersModule } from 'projects/users/src/public-api';
 import { ReportingModule } from 'projects/project/src/lib/reporting/reporting.module';
 import { GithubModule } from 'projects/project/src/lib/github/github.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
+import { JwtInterceptor } from 'auth';
 
 @NgModule({
   declarations: [AppComponent, ProjectdashboardComponent, HomeComponent],

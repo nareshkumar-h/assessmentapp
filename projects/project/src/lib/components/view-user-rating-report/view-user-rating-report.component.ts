@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { ReportingService } from 'projects/frontend/src/app/reporting.service';
 import { UserService } from 'projects/users/src/lib/components/user.service';
 import { ProjectService } from '../../project.service';
@@ -11,28 +11,32 @@ import { ProjectService } from '../../project.service';
 @Component({
   selector: 'lib-view-user-rating-report',
   templateUrl: './view-user-rating-report.component.html',
-  styleUrls: ['./view-user-rating-report.component.css']
+  styleUrls: ['./view-user-rating-report.component.css'],
 })
 export class ViewUserRatingReportComponent implements OnInit {
+  isLoggedIn: boolean;
+  userId: any;
+  breadcrumbItems = [
+    { icon: 'home', name: 'Home', link: '/' },
+    { name: 'Projects' },
+  ];
 
-  
-  isLoggedIn:boolean;
-  userId:any;
-  breadcrumbItems  = [ {"icon":"home", "name":"Home","link":"/"},
-   {"name":"Projects"}];
+  isMentor: boolean = false;
 
-   isMentor:boolean = false;
-
-  constructor(private projectService:ReportingService, private authService:AuthService, private route:ActivatedRoute, private userService:UserService) { 
-    
-    this.route.queryParams.subscribe(params=>{
-      this.userId = params["userId"];
-    })
-    this.route.params.subscribe(params=>{
-      this.userId = params["userId"];
-    })
+  constructor(
+    private projectService: ReportingService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {
+    this.route.queryParams.subscribe((params) => {
+      this.userId = params['userId'];
+    });
+    this.route.params.subscribe((params) => {
+      this.userId = params['userId'];
+    });
     this.isMentor = this.authService.hasRoleAccess('T');
-    this.isLoggedIn =  this.authService.isLoggedIn();
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   ngOnInit(): void {
@@ -41,78 +45,107 @@ export class ViewUserRatingReportComponent implements OnInit {
     this.list();
   }
 
-  ratings:any;
-  projects:any;
+  ratings: any;
+  projects: any;
 
-  reportData:any=[];
-  widgetColors= [ "purple-plum","blue-madison","red-intense","green-haze","blue-madison","red-intense"];
+  reportData: any = [];
+  widgetColors = [
+    'purple-plum',
+    'blue-madison',
+    'red-intense',
+    'green-haze',
+    'blue-madison',
+    'red-intense',
+  ];
 
-  list(){
-    this.projectService.listUserRatingsForUser(this.userId).subscribe (res=>{
+  list() {
+    this.projectService.listUserRatingsForUser(this.userId).subscribe((res) => {
       console.log(res);
       this.ratings = res;
       this.dataSource = new MatTableDataSource<any>(this.ratings);
-     // this.createReport(this.projects);
+      // this.createReport(this.projects);
     });
   }
 
-  listMyProjects(){
-    this.projectService.findMyProjects(this.userId).subscribe(res=>{
+  listMyProjects() {
+    this.projectService.findMyProjects(this.userId).subscribe((res) => {
       this.projects = res;
-    })
+    });
   }
 
-  
-  displayedColumns: string[] = [ 'id','username','noOfFeatures','functionality','design','bestPractices','timeline','complexity'];
+  displayedColumns: string[] = [
+    'id',
+    'username',
+    'noOfFeatures',
+    'functionality',
+    'design',
+    'bestPractices',
+    'timeline',
+    'complexity',
+  ];
 
-  resultsLength:number ;
+  resultsLength: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
-  dataSource:any;
 
+  dataSource: any;
 
   ngAfterViewInit() {
     this.loadTableViewChild();
   }
   loadTableViewChild() {
-    if(this.ratings){
-      this.dataSource.paginator = this.paginator;  
-      this.dataSource.sort = this.sort;  
+    if (this.ratings) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
-  
-  menus:any;
 
-  loadMenus(){
+  menus: any;
+
+  loadMenus() {
     this.menus = [];
-    this.menus.push( {title: "Home",  path:["../"], icontype:"fas fa-home", access: true});
-    
-    this.menus.push( {title: "My Projects",  path:["../"], icontype:"fas fa-user", access: true});
-    this.menus.push( {title: "All Projects",  path:[ "../all"], icontype:"fas fa-tools", access:true});    
-    this.menus.push( {title: "Add Project",  path:[ "../addproject"], icontype:"fas fa-plus", access: true});      
-    //this.menus.push( {title: "Ratings",  path:[ "../ratings/" + thi], icontype:"fas fa-plus", access: true});      
-    //this.menus.push( {title: "Reviews",  path:[ "../reviews"], icontype:"fas fa-plus", access: true});      
+    this.menus.push({
+      title: 'Home',
+      path: ['../'],
+      icontype: 'fas fa-home',
+      access: true,
+    });
+
+    this.menus.push({
+      title: 'My Projects',
+      path: ['../'],
+      icontype: 'fas fa-user',
+      access: true,
+    });
+    this.menus.push({
+      title: 'All Projects',
+      path: ['../all'],
+      icontype: 'fas fa-tools',
+      access: true,
+    });
+    this.menus.push({
+      title: 'Add Project',
+      path: ['../addproject'],
+      icontype: 'fas fa-plus',
+      access: true,
+    });
+    //this.menus.push( {title: "Ratings",  path:[ "../ratings/" + thi], icontype:"fas fa-plus", access: true});
+    //this.menus.push( {title: "Reviews",  path:[ "../reviews"], icontype:"fas fa-plus", access: true});
   }
 
-  
-  createReport(data){
-    
-    this.reportData=[];
+  createReport(data) {
+    this.reportData = [];
     let total = data.length;
-    let completed = data.filter(b=>b.status=='COMPLETED').length;
-    let inProgress = data.filter(b=>b.status=='IN_PROGRESS').length;
-    let scheduled = data.filter(b=>b.status=='SCHEDULED').length;
-    let users = data.reduce ( function(sum,obj){  return sum+obj.noOfParticipants},0);
-    
-    this.reportData.push({"label": "Projects", "value": total  }); 
-    this.reportData.push({"label": "Pending", "value": scheduled  });    
-    this.reportData.push({"label": "In Progress", "value": inProgress  });
-    this.reportData.push({"label": "Completed", "value": completed  });
-    
-    
+    let completed = data.filter((b) => b.status == 'COMPLETED').length;
+    let inProgress = data.filter((b) => b.status == 'IN_PROGRESS').length;
+    let scheduled = data.filter((b) => b.status == 'SCHEDULED').length;
+    let users = data.reduce(function (sum, obj) {
+      return sum + obj.noOfParticipants;
+    }, 0);
 
+    this.reportData.push({ label: 'Projects', value: total });
+    this.reportData.push({ label: 'Pending', value: scheduled });
+    this.reportData.push({ label: 'In Progress', value: inProgress });
+    this.reportData.push({ label: 'Completed', value: completed });
   }
-
-
 }

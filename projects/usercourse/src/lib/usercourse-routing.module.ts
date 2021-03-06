@@ -12,7 +12,7 @@ import { CourseCurriculumComponent } from './components/course-curriculum/course
 
 import { UserCourseContentComponent } from './components/user-course-content/user-course-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { AuthGuard } from 'projects/auth/src/public-api';
+import { AuthGuard } from 'auth';
 
 const routes: Routes = [
   {

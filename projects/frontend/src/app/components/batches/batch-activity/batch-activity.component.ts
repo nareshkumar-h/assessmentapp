@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BatchService } from '../batch.service';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { KtClientService } from '../../../kt-client.service';
 
 @Component({

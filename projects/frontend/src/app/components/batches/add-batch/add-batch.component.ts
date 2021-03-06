@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { BatchClient } from '@ks-sdk-client/rest';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { KtClientService } from '../../../kt-client.service';
 
 @Component({

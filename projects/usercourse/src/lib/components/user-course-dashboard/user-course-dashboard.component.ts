@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserCourseService } from '../../usercourse.service';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

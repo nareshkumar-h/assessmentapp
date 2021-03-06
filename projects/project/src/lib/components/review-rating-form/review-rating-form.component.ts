@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { ProjectService } from '../../project.service';
 
 @Component({
@@ -29,23 +29,30 @@ export class ReviewRatingFormComponent implements OnInit {
 
   readonly;
 
-  reviewRating = {featureId:null, functionality:null, design:null, documentation:null, complexity:null,
-  bestPractices:null, timeline:null, comments: null};
+  reviewRating = {
+    featureId: null,
+    functionality: null,
+    design: null,
+    documentation: null,
+    complexity: null,
+    bestPractices: null,
+    timeline: null,
+    comments: null,
+  };
 
   findOne() {
     this.projectService
       .getFeatureReviewRating(this.featureId)
-      .subscribe(res => {
-        let data:any = res;
-        if(res != null){
+      .subscribe((res) => {
+        let data: any = res;
+        if (res != null) {
           this.reviewRating = data;
         }
-       
       });
   }
 
   updateReview() {
-    if(!this.readonly){
+    if (!this.readonly) {
       this.reviewRating['featureId'] = this.featureId;
       console.log('Update Review', this.reviewRating);
       this.projectService

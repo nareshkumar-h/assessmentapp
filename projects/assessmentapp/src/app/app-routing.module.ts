@@ -5,7 +5,7 @@ import { InterviewDetailComponent } from './interview/interview-detail/interview
 import { InterviewsComponent } from './interview/interviews/interviews.component';
 import { MyInterviewsComponent } from './interview/my-interviews/my-interviews.component';
 import { InterviewListComponent } from './interview/interview-list/interview-list.component';
-import { AuthGuard } from 'projects/auth/src/public-api';
+import { AuthGuard } from 'auth';
 
 const routes: Routes = [
   {

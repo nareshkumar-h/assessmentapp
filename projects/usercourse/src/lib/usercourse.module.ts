@@ -31,7 +31,7 @@ import { UserCourseContentComponent } from './components/user-course-content/use
 import { CalendarComponent } from './calendar/calendar.component';
 import { ContentModule } from 'projects/content/src/public-api';
 
-import { AuthGuard } from 'projects/auth/src/public-api';
+import { AuthGuard } from 'auth';
 
 //import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
 //import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin

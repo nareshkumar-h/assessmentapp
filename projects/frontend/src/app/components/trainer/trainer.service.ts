@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { environment } from 'projects/frontend/src/environments/environment';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TrainerService {
-
-  
-  apiUrl:string;
-  constructor(private http:HttpClient, private authService: AuthService ) { 
+  apiUrl: string;
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.apiUrl = environment.API_URL;
   }
 
-  
-  getHeaders(){    
+  getHeaders() {
     let headers = new HttpHeaders();
     headers = headers.set('org', this.authService.getLoggedInOrg());
     return headers;
   }
 
-  
-  listCourses(userId){
+  listCourses(userId) {
     let url = `${this.apiUrl}v1/batchcourses/trainers/${userId}`;
-    return this.http.get(url, {headers:this.getHeaders()});
+    return this.http.get(url, { headers: this.getHeaders() });
   }
 }

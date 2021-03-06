@@ -1,33 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 
 @Component({
   selector: 'pt-home',
   templateUrl: './home.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private authService:AuthService, private router:Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    if(this.authService.isLoggedIn()){
-      if(this.authService.hasRoleAccess(['T'])){
+    if (this.authService.isLoggedIn()) {
+      if (this.authService.hasRoleAccess(['T'])) {
         this.router.navigate(['projects/all']);
-      }
-      else if(this.authService.hasRoleAccess(['HR'])){
+      } else if (this.authService.hasRoleAccess(['HR'])) {
         this.router.navigate(['reports']);
-      }
-      else{
+      } else {
         this.router.navigate(['projects']);
       }
-    }
-    else{
-      
-      this.router.navigate(['auth/login'],{queryParams:{"redirectUrl":"projects"}});
+    } else {
+      this.router.navigate(['auth/login'], {
+        queryParams: { redirectUrl: 'projects' },
+      });
     }
   }
-
 }

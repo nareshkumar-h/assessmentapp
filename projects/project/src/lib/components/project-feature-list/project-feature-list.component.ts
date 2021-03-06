@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectFeatureComponent } from '../add-project-feature/add-project-feature.component';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import * as _ from 'lodash';
 
 @Component({

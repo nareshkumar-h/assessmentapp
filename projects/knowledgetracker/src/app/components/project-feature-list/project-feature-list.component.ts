@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { ProjectService } from '../../project.service';
 
 @Component({

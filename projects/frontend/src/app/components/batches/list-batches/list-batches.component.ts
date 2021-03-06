@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BatchService } from '../batch.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBatchComponent } from '../add-batch/add-batch.component';
 import { SecurityService } from 'projects/security/src/public-api';

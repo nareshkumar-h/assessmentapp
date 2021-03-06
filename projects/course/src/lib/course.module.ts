@@ -35,7 +35,7 @@ import { AddLectureComponent } from './components/add-lecture/add-lecture.compon
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SecurityModule } from 'projects/security/src/public-api';
 import { ContentModule } from 'projects/content/src/public-api';
-import { AuthGuard } from 'projects/auth/src/public-api';
+import { AuthGuard } from 'auth';
 // import { KTThemeModule } from 'src/app/kttheme.module';
 //import { ContentModule } from 'projects/content/src/public-api';
 

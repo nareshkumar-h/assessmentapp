@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../project.service';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

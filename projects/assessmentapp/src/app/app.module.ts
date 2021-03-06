@@ -11,12 +11,12 @@ import { ThemeModule, NavbarModule } from 'theme';
 //import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
-import { AuthGuard, AuthModule } from 'projects/auth/src/public-api';
+import { AuthGuard, AuthModule } from 'auth';
 
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
+import { MaterialModule } from 'theme';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
+import { JwtInterceptor } from 'auth';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InterviewModule } from './interview/interview.module';
 import { MatDialogModule } from '@angular/material/dialog';

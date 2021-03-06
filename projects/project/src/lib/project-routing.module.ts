@@ -20,7 +20,7 @@ import { ViewProjectActivityComponent } from './components/view-project-activity
 import { ReviewFeatureComponent } from './components/review-feature/review-feature.component';
 import { ViewProjectRatingComponent } from './components/view-project-rating/view-project-rating.component';
 import { ProjectSkillsComponent } from './components/project-skills/project-skills.component';
-import { AuthGuard } from 'projects/auth/src/public-api';
+import { AuthGuard } from 'auth';
 
 const routes: Routes = [
   //{ path: ':userId/myprojects',      component: MyProjectListComponent },

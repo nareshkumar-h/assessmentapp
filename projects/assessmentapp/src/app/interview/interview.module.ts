@@ -9,7 +9,7 @@ import { InterviewsComponent } from './interviews/interviews.component';
 import { InterviewListComponent } from './interview-list/interview-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from 'theme/lib/material.module'; //'projects/theme/src/lib/material.module';
+import { MaterialModule } from 'theme'; //'projects/theme/src/lib/material.module';
 import { CardModule, SidenavModule, ThemeModule } from 'theme'; //'projects/theme/src/public-api';
 
 import { UpdateInterviewResultComponent } from './update-interview-result/update-interview-result.component';

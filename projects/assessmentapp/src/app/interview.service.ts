@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { environment } from '../environments/environment';
 
 @Injectable({

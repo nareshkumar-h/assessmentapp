@@ -4,19 +4,19 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
+import { ThemeModule, NavbarModule } from 'theme';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
-import { AuthModule } from 'projects/auth/src/public-api';
+import { AuthModule } from 'auth';
 import { CourseModule } from 'projects/course/src/public-api';
 
-import { MaterialModule } from 'projects/theme/src/lib/material.module';
+import { MaterialModule } from 'theme';
 
 import { ContentModule } from 'projects/content/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { UsersModule } from 'projects/users/src/public-api';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
+import { JwtInterceptor } from 'auth';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({

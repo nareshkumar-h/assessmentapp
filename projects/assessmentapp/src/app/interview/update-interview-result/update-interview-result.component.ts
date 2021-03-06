@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 import { InterviewService } from '../../interview.service';
 
 @Component({

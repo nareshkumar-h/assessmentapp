@@ -8,14 +8,14 @@ import { ThemeModule, NavbarModule } from 'theme';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
 import { UsercourseModule } from 'projects/usercourse/src/public-api';
-import { AuthModule } from 'projects/auth/src/public-api';
+import { AuthModule } from 'auth';
 import { CourseModule } from 'projects/course/src/public-api';
 
 import { ContentModule } from 'projects/content/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { UsersModule } from 'projects/users/src/public-api';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from 'projects/auth/src/lib/jwt.interceptor';
+import { JwtInterceptor } from 'auth';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MyInterviewsComponent } from './components/my-interviews/my-interviews.component';

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { KtClientService } from '../../../kt-client.service';
-import { AuthService } from 'projects/auth/src/public-api';
+import { AuthService } from 'auth';
 
 @Component({
   selector: 'app-edit-batch',
