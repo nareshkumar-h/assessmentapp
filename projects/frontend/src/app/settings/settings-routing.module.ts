@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'account', pathMatch: 'full' },
-      { path: 'theme', component: SiteThemeComponent },
+      { path: '@nareshkumarh/kt-theme', component: SiteThemeComponent },
       { path: 'organization', component: OrganizationComponent },
       { path: 'account', component: DomainComponent },
       { path: 'mail', component: MailComponent },

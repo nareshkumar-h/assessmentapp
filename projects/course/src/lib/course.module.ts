@@ -8,7 +8,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseRoutingModule } from './course-routing.module';
-import { ThemeModule, CardModule, SidenavModule, NavbarModule } from 'theme';
+import {
+  ThemeModule,
+  CardModule,
+  SidenavModule,
+  NavbarModule,
+} from '@nareshkumarh/kt-theme';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { AddCourseModuleComponent } from './components/add-course-module/add-course-module.component';

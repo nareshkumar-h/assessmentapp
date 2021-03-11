@@ -57,12 +57,15 @@ export class AssignBatchCourseComponent implements OnInit {
   courses: any;
 
   listCourses() {
-    this.courseService.list().subscribe((res) => {
-      let data: any = res;
-      this.courses = data.filter(
-        (obj) => this.assignedCourses.indexOf(obj.code) == -1
-      );
-    });
+    this.ktClient
+      .getCourseClient()
+      .list()
+      .then((res) => {
+        let data: any = res;
+        this.courses = data.filter(
+          (obj) => this.assignedCourses.indexOf(obj.code) == -1
+        );
+      });
   }
 
   save(batchCourse) {

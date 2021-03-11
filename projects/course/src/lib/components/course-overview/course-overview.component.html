@@ -1,85 +1,85 @@
 <div class="row">
-    <div class="col">
-        <h3 class="page-title">{{course.title}}</h3>
-    </div>
+  <div class="col">
+    <h3 class="page-title">{{course?.title}}</h3>
+  </div>
 </div>
 <ng-template #loading>
-    <kt-loading-bar></kt-loading-bar>
+  <kt-loading-bar></kt-loading-bar>
 </ng-template>
 <div class="row" *ngIf="course; else loading">
-    <div class="col-4">
+  <div class="col-4">
 
-        <div class="card card-custom gutter-b">
-            <!-- <div class="card-header text-white" style="background-color: cadetblue;" >{{c.course_name}}
+    <div class="card card-custom gutter-b">
+      <!-- <div class="card-header text-white" style="background-color: cadetblue;" >{{c.course_name}}
                     <span class="badge badge-dark pull-right">{{getPercentage(c)}} % </span>                        
                 </div>      -->
-            <a routerLink="{{course.code}}" class="course_link">
-                <img class="card-img-top" [src]="course.imageUrl" alt="" width="200px">
-                <!-- <div class="course_title text-dark"> <p>{{c.course_name}}</p></div> -->
-            </a>
-            <div class="card-body">
+      <a routerLink="{{course.code}}" class="course_link">
+        <img class="card-img-top" [src]="course.imageUrl" alt="" width="200px">
+        <!-- <div class="course_title text-dark"> <p>{{c.course_name}}</p></div> -->
+      </a>
+      <div class="card-body">
 
-                <form #rForm="ngForm" (submit)="uploadFile()">
-                    <input type="file" (change)="onFileSelect($event)" name="file" required autofocus />
-                    <button type="submit" [disabled]="rForm.invalid">Upload</button>
-                </form>
-                <div class="card-title">
+        <form #rForm="ngForm" (submit)="uploadFile()">
+          <input type="file" (change)="onFileSelect($event)" name="file" required autofocus />
+          <button type="submit" [disabled]="rForm.invalid">Upload</button>
+        </form>
+        <div class="card-title">
 
 
-                </div>
-                <!-- <p class="author">
+        </div>
+        <!-- <p class="author">
                        <img src="assets/img/naresh.png" width="30px" height="30px" class="rounded">
                         Naresh Kumar H</p> -->
 
 
-            </div>
-            <div class="card-footer">
-            </div>
-        </div>
+      </div>
+      <div class="card-footer">
+      </div>
     </div>
-    <div class="col-8">
-        <div class="card card-custom">
-            <div class="card-header card-blue">
-                Course Objectives
-            </div>
-            <div class="card-body" *ngIf="course">
-                <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
-                    <thead>
-                        <tr>
-                            <th>Code </th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Created Date</th>
-                            <th>Active</th>
-                            <th>Organization</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="course">
+  </div>
+  <div class="col-8">
+    <div class="card card-custom">
+      <div class="card-header card-blue">
+        Course Objectives
+      </div>
+      <div class="card-body" *ngIf="course">
+        <table class="table table-responsive table-striped  w-100 d-block d-md-table table-sm">
+          <thead>
+            <tr>
+              <th>Code </th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Created Date</th>
+              <th>Active</th>
+              <th>Organization</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="course">
 
-                            <td>
-                                {{course.code}}
-                            </td>
-                            <td>{{course.title}}</td>
-                            <td>{{course.category}}</td>
-                            <td>{{course.createdDate}}</td>
-                            <td>{{course.active}}</td>
-                            <td>{{course.orgId}}</td>
-                            <td><span class="badge badge-primary">{{course.status}}</span></td>
-                            <td>
-                                <a (click)="editCourse(course)" class=""><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> &nbsp; 
-                                <button (click)="download()"> <i class="fas fa-download"></i></button> &nbsp;
-                                    <button (click)="publish()"> <i class="fas fa-cloud-upload-alt"></i></button> 
+              <td>
+                {{course.code}}
+              </td>
+              <td>{{course.title}}</td>
+              <td>{{course.category}}</td>
+              <td>{{course.createdDate}}</td>
+              <td>{{course.active}}</td>
+              <td>{{course.orgId}}</td>
+              <td><span class="badge badge-primary">{{course.status}}</span></td>
+              <td>
+                <a (click)="editCourse(course)" class=""><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> &nbsp;
+                <button (click)="download()"> <i class="fas fa-download"></i></button> &nbsp;
+                <button (click)="publish()"> <i class="fas fa-cloud-upload-alt"></i></button>
 
-                            </td>
+              </td>
 
-                        </tr>
+            </tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>

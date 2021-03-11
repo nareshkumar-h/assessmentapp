@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddCourseComponent } from '../add-course/add-course.component';
 import { CategoryService } from '../../category.service';
 import { AuthService } from 'auth';
+import { KtClientService } from 'projects/frontend/src/app/kt-client.service';
 
 @Component({
   selector: 'app-course-list',
@@ -28,7 +29,8 @@ export class CourseListComponent implements OnInit {
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private ktClient: KtClientService
   ) {
     this.loggedInUser = this.authService.getUser();
 
@@ -61,20 +63,24 @@ export class CourseListComponent implements OnInit {
   }
 
   list() {
-    this.courseService.list().subscribe((res) => {
-      this.courses = res;
-      this.courses.filter((c) => {
-        if (this.categories.indexOf(c.category) == -1)
-          this.categories.push(c.category);
+    //this.courseService.list()
+    this.ktClient
+      .getCourseClient()
+      .list()
+      .then((res) => {
+        this.courses = res;
+        this.courses.filter((c) => {
+          if (this.categories.indexOf(c.category) == -1)
+            this.categories.push(c.category);
+        });
+        this.categories.unshift('ALL');
+        for (let category of this.categories) {
+          this.courseMap[category] = this.courses.filter(
+            (c) => category == 'ALL' || c.category == category
+          );
+        }
+        this.createReport(this.courses, this.categories.length);
       });
-      this.categories.unshift('ALL');
-      for (let category of this.categories) {
-        this.courseMap[category] = this.courses.filter(
-          (c) => category == 'ALL' || c.category == category
-        );
-      }
-      this.createReport(this.courses, this.categories.length);
-    });
   }
 
   reportData: any = [];

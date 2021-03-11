@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReportingRoutingModule } from './reporting-routing.module';
-import { ThemeModule, MaterialModule } from 'theme';
+import { ThemeModule, MaterialModule } from '@nareshkumarh/kt-theme';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectModule, ProjectService } from '../../public-api';

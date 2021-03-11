@@ -4,59 +4,79 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { EditCourseComponent } from '../edit-course/edit-course.component';
+import { KtClientService } from 'projects/frontend/src/app/kt-client.service';
 
 @Component({
   selector: 'ct-view-course-topics',
   templateUrl: './view-course-topics.component.html',
-  styleUrls: ['./view-course-topics.component.css']
+  styleUrls: ['./view-course-topics.component.css'],
 })
 export class ViewCourseTopicsComponent implements OnInit {
-
-  
   @Input()
-  course:any;
+  course: any;
 
-  courseId:string;
+  courseId: string;
 
-  showSidebar=true;
+  showSidebar = true;
 
-  breadcrumbItems:any  = [ {"icon":"home", "name":"Home","link":"/"},
-   {"name":"Courses", "link":"../"}];
+  breadcrumbItems: any = [
+    { icon: 'home', name: 'Home', link: '/' },
+    { name: 'Courses', link: '../' },
+  ];
 
-
-  constructor(private courseService:CourseService, private router:Router, private route:ActivatedRoute,
-    private toastr: ToastrService, public dialog: MatDialog) { 
-
-    this.route.parent.params.subscribe ( params=>{
-      this.courseId = params["id"];
-      this.breadcrumbItems.push({"name": this.courseId});
+  constructor(
+    private courseService: CourseService,
+    private ktClient: KtClientService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    public dialog: MatDialog
+  ) {
+    this.route.parent.params.subscribe((params) => {
+      this.courseId = params['id'];
+      this.breadcrumbItems.push({ name: this.courseId });
     });
-
   }
 
   ngOnInit(): void {
-
     this.course = this.courseService.getCourse();
     this.loadMenus();
     this.courseId = this.course.code;
   }
 
+  menus: any;
 
-
-  menus:any;
-
-  loadMenus(){
+  loadMenus() {
     this.menus = [];
-    this.menus.push( {title: "Back",  path:["../"], icon:"fas fa-arrow-left", access: true});
-    this.menus.push( {title: "Curriculum",  path:["/courses",this.courseId], icon:"fas fa-book-open", access: true});
-    this.menus.push( {title: "Plan",  path:[ "plan"], icon:"fas fa-book-open", access: true});
-    this.menus.push( {title: "Questions",  path:["questions"], icon:"fas fa-question", access: true});
-    this.menus.push( {title: "Contents",  path:["contents"], icon:"fas fa-book-open", access: true});
- 
-    
+    this.menus.push({
+      title: 'Back',
+      path: ['../'],
+      icon: 'fas fa-arrow-left',
+      access: true,
+    });
+    this.menus.push({
+      title: 'Curriculum',
+      path: ['/courses', this.courseId],
+      icon: 'fas fa-book-open',
+      access: true,
+    });
+    this.menus.push({
+      title: 'Plan',
+      path: ['plan'],
+      icon: 'fas fa-book-open',
+      access: true,
+    });
+    this.menus.push({
+      title: 'Questions',
+      path: ['questions'],
+      icon: 'fas fa-question',
+      access: true,
+    });
+    this.menus.push({
+      title: 'Contents',
+      path: ['contents'],
+      icon: 'fas fa-book-open',
+      access: true,
+    });
   }
-
-
-
-
 }

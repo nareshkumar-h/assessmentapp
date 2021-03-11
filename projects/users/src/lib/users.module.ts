@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { SidenavModule, ThemeModule, CardModule, MaterialModule } from 'theme';
+import {
+  SidenavModule,
+  ThemeModule,
+  CardModule,
+  MaterialModule,
+} from '@nareshkumarh/kt-theme';
 
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { AddUserComponent } from './components/add-user/add-user.component';

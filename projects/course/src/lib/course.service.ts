@@ -37,10 +37,10 @@ export class CourseService {
     return headers;
   }
 
-  list() {
-    let url = `${this.apiUrl}v1/courses`;
-    return this.http.get(url, { headers: this.getHeaders() });
-  }
+  // list() {
+  //   let url = `${this.apiUrl}v1/courses`;
+  //   return this.http.get(url, { headers: this.getHeaders() });
+  // }
 
   findOne(id) {
     let url = `${this.apiUrl}v1/courses/${id}`;

@@ -31,7 +31,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { SidenavModule, ThemeModule } from 'theme';
+import { SidenavModule, ThemeModule } from '@nareshkumarh/kt-theme';
 import { ViewProjectDetailComponent } from './components/view-project-detail/view-project-detail.component';
 import { Config, API_URL } from './config';
 import { ProjectService } from './project.service';

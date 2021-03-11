@@ -7,7 +7,7 @@ import { AuthModule } from 'auth';
 import { environment } from '../environments/environment';
 import { NavbarModule } from 'angular-bootstrap-md';
 import { ProjectModule } from 'projects/project/src/public-api';
-import { ThemeModule, MaterialModule } from 'theme';
+import { ThemeModule, MaterialModule } from '@nareshkumarh/kt-theme';
 import { ProjectdashboardComponent } from './projectdashboard/projectdashboard.component';
 import { HomeComponent } from './home/home.component';
 import { UsersModule } from 'projects/users/src/public-api';

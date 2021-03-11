@@ -289,7 +289,7 @@ export class UserCourseTopicsComponent implements OnInit {
 
     if (
       topic.status == 'P' &&
-      new Date(topic.lectureDate.substr(1, 10)) < this.today
+      new Date(topic.lectureDate.substr(0, 10)) < this.today
     ) {
       color = 'red';
     }

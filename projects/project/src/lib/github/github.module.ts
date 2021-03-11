@@ -18,7 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ViewRepositoryComponent } from '../components/view-repository/view-repository.component';
 import { PullRequestListComponent } from '../components/pull-request-list/pull-request-list.component';
 
-import { ThemeModule, MaterialModule } from 'theme';
+import { ThemeModule, MaterialModule } from '@nareshkumarh/kt-theme';
 import { RepositorySidebarComponent } from './components/repository-sidebar/repository-sidebar.component';
 import { ViewRepositorySidebarComponent } from './components/view-repository-sidebar/view-repository-sidebar.component';
 import { ViewRepositoryDetailComponent } from './components/view-repository-detail/view-repository-detail.component';

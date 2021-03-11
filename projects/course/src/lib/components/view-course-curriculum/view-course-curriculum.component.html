@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col">
-        <h3 class="page-title">{{course.title}}</h3>
-    </div>
-    <div class="col">
-        <a routerLink="../addsection" class="m-2 btn btn-info pull-right">Add Section</a>
-    </div>
+  <div class="col">
+    <h3 class="page-title">{{course?.title}}</h3>
+  </div>
+  <div class="col">
+    <a routerLink="../addsection" class="m-2 btn btn-info pull-right">Add Section</a>
+  </div>
 </div>
 <!-- <div class="row">
         <div class="col">
@@ -84,47 +84,45 @@
   </div> -->
 
 <div cdkDropListGroup>
-<div class="row" *ngFor="let m of sections;let i=index">
-    <div class="col-12" >
-        <div class="card card-custom w100 gutter-b">
-            <div class="card-header card-blue">
-                {{m.title}}
+  <div class="row" *ngFor="let m of sections;let i=index">
+    <div class="col-12">
+      <div class="card card-custom w100 gutter-b">
+        <div class="card-header card-blue">
+          {{m.title}}
 
-                <div class="tools pull-right">
-                    <a *ngIf="mode!='E' && selectedModule!=i " routerLink="../sections/{{m.id}}/addlecture"
-                        class="text-white"><i class="fas fa-plus"></i>&nbsp;</a> &nbsp;
-                    <a *ngIf="mode!='E' && selectedModule!=i " (click)="mode='E';selectedModule=i" class="text-white"><i
-                            class="fas fa-pencil-alt"></i>&nbsp;</a> &nbsp;
-                    <a *ngIf="mode=='E' && selectedModule ==i" class="drag-icon text-white">
-                        <i class="fas fa-arrows-alt" ></i>&nbsp;
-                    </a> &nbsp;
-                    <a *ngIf="mode=='E' && selectedModule==i" (click)="openDialog(m)" class="text-white"><i
-                            class="fas fa-plus "></i> &nbsp;</a> &nbsp;
-                    <a *ngIf="!hasContents(m.title)" (click)="deleteModule(i,m)" class="text-white"><i
-                            class="fas fa-trash "></i>&nbsp;</a>&nbsp;
-                    <a *ngIf="mode=='E' && selectedModule==i" (click)="mode='';selectedModule=-1" class="text-white"><i
-                            class="fas fa-check "></i>&nbsp;</a>&nbsp;
-                </div>
+          <div class="tools pull-right">
+            <a *ngIf="mode!='E' && selectedModule!=i " routerLink="../sections/{{m.id}}/addlecture"
+              class="text-white"><i class="fas fa-plus"></i>&nbsp;</a> &nbsp;
+            <a *ngIf="mode!='E' && selectedModule!=i " (click)="mode='E';selectedModule=i" class="text-white"><i
+                class="fas fa-pencil-alt"></i>&nbsp;</a> &nbsp;
+            <a *ngIf="mode=='E' && selectedModule ==i" class="drag-icon text-white">
+              <i class="fas fa-arrows-alt"></i>&nbsp;
+            </a> &nbsp;
+            <a *ngIf="mode=='E' && selectedModule==i" (click)="openDialog(m)" class="text-white"><i
+                class="fas fa-plus "></i> &nbsp;</a> &nbsp;
+            <a *ngIf="!hasContents(m.title)" (click)="deleteModule(i,m)" class="text-white"><i
+                class="fas fa-trash "></i>&nbsp;</a>&nbsp;
+            <a *ngIf="mode=='E' && selectedModule==i" (click)="mode='';selectedModule=-1" class="text-white"><i
+                class="fas fa-check "></i>&nbsp;</a>&nbsp;
+          </div>
+        </div>
+        <div class="card-body">
+
+
+          <section class="example-list" cdkDropList id="{{m.title}}" [cdkDropListData]="contents[m.title]"
+            (cdkDropListDropped)="dropTopics($event,m.title)">
+
+            <div class="example-box" *ngFor="let t of contents[m.title]" cdkDrag>
+              <a routerLink="../lectures/{{t.id}}/{{t.title}}" class="text-dark">
+                {{t.title}}</a>
+
+              <div class="tools pull-right">
+                <a class="fas fa-trash text-dark" (click)="deleteLecture(t)"></a>
+              </div>
             </div>
-            <div class="card-body" >
 
 
-                <section class="example-list" cdkDropList  id="{{m.title}}" 
-                [cdkDropListData]="contents[m.title]" 
-               (cdkDropListDropped)="dropTopics($event,m.title)"
-                >
-                
-                    <div class="example-box" *ngFor="let t of contents[m.title]" cdkDrag>
-                        <a routerLink="../lectures/{{t.id}}/{{t.title}}" class="text-dark">
-                            {{t.title}}</a>
-
-                        <div class="tools pull-right">                            
-                            <a class="fas fa-trash text-dark" (click)="deleteLecture(t)"></a>
-                        </div>
-                    </div>
-                
-
-                    <!-- <div class="card card-custom example-box" draggable="true" *ngFor="let t of contents[m.title]" cdkDrag>
+            <!-- <div class="card card-custom example-box" draggable="true" *ngFor="let t of contents[m.title]" cdkDrag>
                         <div class="card-header" >
 
                             <a routerLink="../lectures/{{t.id}}/{{t.title}}" class="text-dark">
@@ -140,10 +138,10 @@
 
 
                     </div>  -->
-                </section>
+          </section>
 
-            </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>

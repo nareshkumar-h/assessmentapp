@@ -18,7 +18,7 @@ import { UserCourseTopicsComponent } from './components/user-course-topics/user-
 import { UserCourseService } from './usercourse.service';
 import { Config, API_URL } from './config';
 import { CourseClientService } from './course-client.service';
-import { CardModule, SidenavModule, ThemeModule } from 'theme';
+import { CardModule, SidenavModule, ThemeModule } from '@nareshkumarh/kt-theme';
 import { UserCourseContentListComponent } from './components/user-course-content-list/user-course-content-list.component';
 
 import { HighlightModule } from 'ngx-highlightjs';

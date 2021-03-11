@@ -7,13 +7,13 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ThemeModule, NavbarModule } from 'theme';
+import { ThemeModule, NavbarModule } from '@nareshkumarh/kt-theme';
 //import { ThemeModule, NavbarModule } from 'projects/theme/src/public-api';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
 import { AuthGuard, AuthModule } from 'auth';
 
-import { MaterialModule } from 'theme';
+import { MaterialModule } from '@nareshkumarh/kt-theme';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from 'auth';
