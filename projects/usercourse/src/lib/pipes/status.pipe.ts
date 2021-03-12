@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StatusPipe implements PipeTransform {
   transform(items: any[], status: string): any[] {
-    console.log(items, status);
+    //console.log(items, status);
     if (status == null || status == 'ALL') return items;
     if (status == 'P') {
       return items.filter((i) => !i.status || i.status == status);

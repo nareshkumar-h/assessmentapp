@@ -73,41 +73,20 @@ export class UserCourseTopicsComponent implements OnInit {
   }
 
   modules: any;
-  filteredModules: any;
 
   filterTopics() {
     //alert(this.selectedStatus);
-    const fTopics = (topic) => {
-      if (this.selectedStatus == 'ALL') {
-        return true;
-      }
-      if (
-        this.selectedStatus == 'P' &&
-        (!topic.status || topic.status == 'P')
-      ) {
-        return true;
-      }
-      if (this.selectedStatus == 'C' && topic.status == 'C') {
-        return true;
-      }
-      if (this.selectedStatus == 'ASSIGNED' && topic.lectureDate != null) {
-        return true;
-      }
-    };
-    this.filteredModules = [];
+    /*    this.filteredModules = [];
     if (this.selectedStatus == 'ALL') {
       this.filteredModules = this.modules;
     } else {
       for (let m of this.modules) {
-        let topics = m.topics.filter(fTopics);
-        console.log(m, topics);
-        if (topics.length > 0) {
-          let mObj = Object.assign({}, m);
-          mObj.topics = topics;
-          this.filteredModules.push(mObj);
-        }
+        let mObj = Object.assign({}, m);
+        let topics = m.topics.filter(this.fTopics);
+        mObj.topics = topics;
+        this.filteredModules.push(mObj);
       }
-    }
+    }*/
   }
 
   topicData: any;
@@ -238,23 +217,32 @@ export class UserCourseTopicsComponent implements OnInit {
       });
   }
 
-  updateStatus(topic, checked) {
+  updateStatus(topic, checked, index, moduleIndex) {
     console.log('Update Status:', topic, checked);
     let status = checked ? 'C' : 'P';
-
+    topic.status = status;
     topic.completionDate = status == 'C' ? null : null;
 
     if (topic.userTopicId) {
       this.userCourseService
         .updateTopicStatus(topic.userTopicId, status)
         .subscribe((res) => {
-          // console.log(res);
+          console.log(res);
           let percentageImproved = this.report.updateCount(status);
-          this.displayReport();
+
+          //this.modules[moduleIndex].topics[index].status = status;
+
+          let index1 = this.modules[moduleIndex].topics.findIndex(
+            (obj) => obj.code == topic.code
+          );
+          console.log(index1);
+          alert(index1);
+          //let topic = this.modules.topics[index].status = status;
           if (status == 'C') {
             topic.completionDate = new Date();
             this.toastr.success('Good Job !!!');
           }
+          this.displayReport();
         });
     } else {
       this.userCourseService
@@ -383,13 +371,23 @@ export class UserCourseTopicsComponent implements OnInit {
     });
   }
 
-  getTopics(m) {
-    let topics = m.topics;
-    if (this.userType == 'M') {
-      topics = topics; //topics.filter(obj=> obj.status =='P' || obj.status=='C');
-    } else if (this.userType == 'U') {
-      topics = topics; //.filter(obj=> obj.status =='C' || obj.status=='S');
+  fTopics = (topic) => {
+    if (this.selectedStatus == 'ALL') {
+      return true;
     }
+    if (this.selectedStatus == 'P' && (!topic.status || topic.status == 'P')) {
+      return true;
+    }
+    if (this.selectedStatus == 'C' && topic.status == 'C') {
+      return true;
+    }
+    if (this.selectedStatus == 'ASSIGNED' && topic.lectureDate != null) {
+      return true;
+    }
+  };
+
+  getTopics(m) {
+    let topics = m.topics.filter(this.fTopics);
     return topics;
   }
 }

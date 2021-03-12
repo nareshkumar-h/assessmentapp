@@ -23,8 +23,8 @@
   </p>
 
   <div>
-    <div class="row" *ngFor="let i=index;let m of filteredModules">
-      <div class="col">
+    <div class="row" *ngFor="let i=index;let m of modules">
+      <div class="col" *ngIf="getTopics(m).length>0">
         <mat-card color="primary" class="gutter-b" style="padding: 0px; border-radius: 10px;">
           <mat-card-header style="background-color: #578EBE;">
             <mat-card-title style="color:white">
@@ -47,7 +47,7 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let j=index;let t of m.topics">
+                <ng-container *ngFor="let j=index;let t of m.topics | status: selectedStatus">
                   <tr>
                     <td>
                       <i class=" fa fa-check" *ngIf="t.status=='C'" aria-hidden="true"></i>
@@ -55,7 +55,8 @@
                       <!--[disabled]="userType=='M' || userType=='U'"-->
                       <!-- <input *ngIf="t.status!='C'" type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
                         alt="{{t.code}}" (change)="updateStatus(t, topicCheckbox.checked)" /> -->
-                      <mat-checkbox *ngIf="t.status!='C'" (change)="updateStatus(t, $event.checked)">
+                      <mat-checkbox *ngIf="t.status!='C'" [(ngModel)]="t.checked"
+                        (change)="updateStatus(t, $event.checked,j,i)">
 
                       </mat-checkbox>
                     </td>
