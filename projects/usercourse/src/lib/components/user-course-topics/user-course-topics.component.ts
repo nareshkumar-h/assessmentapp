@@ -1,4 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ANALYZE_FOR_ENTRY_COMPONENTS,
+} from '@angular/core';
 import { UserCourseService } from '../../usercourse.service';
 import { AuthService } from 'auth';
 import { CourseClientService } from '../../course-client.service';
@@ -67,12 +72,48 @@ export class UserCourseTopicsComponent implements OnInit {
     this.findCourse();
   }
 
+  modules: any;
+  filteredModules: any;
+
+  filterTopics() {
+    //alert(this.selectedStatus);
+    const fTopics = (topic) => {
+      if (this.selectedStatus == 'ALL') {
+        return true;
+      }
+      if (
+        this.selectedStatus == 'P' &&
+        (!topic.status || topic.status == 'P')
+      ) {
+        return true;
+      }
+      if (this.selectedStatus == 'C' && topic.status == 'C') {
+        return true;
+      }
+      if (this.selectedStatus == 'ASSIGNED' && topic.lectureDate != null) {
+        return true;
+      }
+    };
+    this.filteredModules = [];
+    if (this.selectedStatus == 'ALL') {
+      this.filteredModules = this.modules;
+    } else {
+      for (let m of this.modules) {
+        let topics = m.topics.filter(fTopics);
+        console.log(m, topics);
+        if (topics.length > 0) {
+          let mObj = Object.assign({}, m);
+          mObj.topics = topics;
+          this.filteredModules.push(mObj);
+        }
+      }
+    }
+  }
+
   topicData: any;
   courseTopics: any = {};
 
   course: any;
-
-  modules: any;
 
   findCourse() {
     this.courseClientService.listTopics(this.courseId).subscribe((res) => {
@@ -126,6 +167,8 @@ export class UserCourseTopicsComponent implements OnInit {
     }
   }
 
+  topicsLoaded = false;
+
   topicReviewStatus(topic, status) {
     console.log('Update Review Status:', topic, status);
 
@@ -148,17 +191,17 @@ export class UserCourseTopicsComponent implements OnInit {
       .listCourseTopics(this.selectedUser, this.courseId)
       .subscribe((res) => {
         let data = <[]>res;
-        let modules = this.course.modules;
-        for (let i = 0; i < modules.length; i++) {
-          let moduleObj = modules[i];
+        let modules: any = this.course.modules;
+        for (let [i, moduleObj] of modules.entries()) {
+          //let moduleObj = modules[i];
           let moduleName = moduleObj.name;
           let topics = moduleObj.topics;
           let moduleTopicCompleted = 0;
           let percentage = 0;
           var completed = 0;
           let total = topics.length;
-          for (let j = 0; j < topics.length; j++) {
-            let topic = topics[j];
+          for (let [j, topic] of topics.entries()) {
+            //let topic = topics[j];
 
             const obj = <{}>data.find((t) => t['topicId'] == topic['code']);
             //            console.log(obj);
@@ -176,9 +219,8 @@ export class UserCourseTopicsComponent implements OnInit {
               if (status == 'C') {
                 completed++;
                 moduleTopicCompleted++;
-              } else {
-                topic['status'] = 'P';
               }
+              topic['status'] = status == 'C' ? 'C' : 'P';
               // newTopics.push(topic);
 
               this.modulePercentage[moduleName] = Math.ceil(
@@ -189,7 +231,9 @@ export class UserCourseTopicsComponent implements OnInit {
             }
           }
         }
+        this.topicsLoaded = true;
 
+        this.filterTopics();
         this.createReport();
       });
   }
@@ -208,6 +252,7 @@ export class UserCourseTopicsComponent implements OnInit {
           let percentageImproved = this.report.updateCount(status);
           this.displayReport();
           if (status == 'C') {
+            topic.completionDate = new Date();
             this.toastr.success('Good Job !!!');
           }
         });
@@ -296,6 +341,8 @@ export class UserCourseTopicsComponent implements OnInit {
 
     return color;
   }
+
+  selectedStatus = 'ALL';
 
   sortByDisplayOrder(a, b) {
     if (a.display_order < b.display_order) {

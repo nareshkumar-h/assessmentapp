@@ -4,7 +4,11 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ThemeModule, NavbarModule } from '@nareshkumarh/kt-theme';
+import {
+  ThemeModule,
+  NavbarModule,
+  MaterialModule,
+} from '@nareshkumarh/kt-theme';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { environment } from '../environments/environment';
 import { UsercourseModule } from 'projects/usercourse/src/public-api';
@@ -41,6 +45,7 @@ import { TaskDashboardComponent } from './components/task-dashboard/task-dashboa
 
     //CourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     ThemeModule,
+    MaterialModule,
     NavbarModule,
     DeviceDetectorModule,
     UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),

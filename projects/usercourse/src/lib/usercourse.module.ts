@@ -32,6 +32,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ContentModule } from 'projects/content/src/public-api';
 
 import { AuthGuard } from 'auth';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { StatusPipe } from './pipes/status.pipe';
 
 //import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
 //import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
@@ -57,11 +61,15 @@ FullCalendarModule.registerPlugins([
     CourseCurriculumComponent,
     UserCourseContentComponent,
     CalendarComponent,
+    StatusPipe,
   ],
   imports: [
     FullCalendarModule,
     CommonModule,
     FormsModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatCardModule,
     HttpClientModule,
     CardModule,
     SidenavModule,

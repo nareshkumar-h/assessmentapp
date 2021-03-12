@@ -108,6 +108,7 @@ export class CourseTopicsComponent implements OnInit {
   openDialog(module) {
     console.log(this.dialog);
     const dialogRef = this.dialog.open(AddCourseTopicComponent, {
+      width: '800px',
       data: { moduleObj: module },
     });
     console.log(dialogRef);

@@ -13,77 +13,88 @@
 
 <div *ngIf="modules else loading">
 
-  <div class="row" *ngFor="let i=index;let m of modules">
-    <div class="col">
-      <div class="card card-custom gutter-b">
-        <div class="card-header card-blue">
-          <div class="card-title">
-            <h3 class="card-label text-white">Module #{{i+1}} - {{m.name}} ( {{courseTopics[m.name].length}}
-              Topics )</h3>
-          </div>
+  <p> Show Topics:
+    <mat-radio-group [(ngModel)]="selectedStatus" (change)="filterTopics()">
+      <mat-radio-button class="" value="ALL">All</mat-radio-button> &nbsp;
+      <mat-radio-button class="" value="P">Pending</mat-radio-button> &nbsp;
+      <mat-radio-button class="" value="C">Completed</mat-radio-button> &nbsp;
+      <mat-radio-button class="" value="ASSIGNED">Assigned</mat-radio-button>
+    </mat-radio-group>
+  </p>
 
-        </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-
-                <th width="50%">Topic</th>
-                <th>Assigned Date</th>
-                <th>Completion Date</th>
-                <th *ngIf="userType!='U'">Review Status</th>
-                <th *ngIf="userType!='U'">Reviewed By</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let j=index;let t of getTopics(m)">
+  <div>
+    <div class="row" *ngFor="let i=index;let m of filteredModules">
+      <div class="col">
+        <mat-card color="primary" class="gutter-b" style="padding: 0px; border-radius: 10px;">
+          <mat-card-header style="background-color: #578EBE;">
+            <mat-card-title style="color:white">
+              Module #{{i+1}} - {{m.name}} ( {{m.topics.length}}
+              Topics )
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <table class="table">
+              <thead>
                 <tr>
-                  <td>
-                    <i class="fa fa-check" *ngIf="t.status=='C'" aria-hidden="true"></i>
-                    <i class="fa fa-pencil" *ngIf="t.status=='P'" aria-hidden="true"></i>
-                    <!--[disabled]="userType=='M' || userType=='U'"-->
-                    <input *ngIf="t.status!='C'" type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
-                      alt="{{t.code}}" (change)="updateStatus(t, topicCheckbox.checked)" />
-                  </td>
-                  <!-- <td *ngIf="userType=='M'">{{t.code}}</td>                                                            -->
-                  <td>
-                    <font [color]="getColor(t)"> {{t.name}} </font>
+                  <th>#</th>
 
-                  </td>
-                  <td class="">{{t.lectureDate}}</td>
-                  <td class="">{{t.completionDate}}</td>
-
-                  <td *ngIf="userType!='U'">
-                    <i class="fa fa-check-circle " *ngIf="t.reviewStatus=='A'" style="color:green"
-                      aria-hidden="true"></i>
-                    <i class="fa fa-ban " *ngIf="t.reviewStatus=='R'" style="color:red" aria-hidden="true"></i>
-                    <button *ngIf="t.status=='C' && t.reviewStatus=='P'" class="btn btn-info btn-sm"
-                      (click)="topicReviewStatus(t,'A')">Approve</button> &nbsp;
-                    <button *ngIf="t.status=='C' && t.reviewStatus=='P'" class="btn btn-danger btn-sm"
-                      (click)="topicReviewStatus(t,'R')">Reject</button>
-                    <button *ngIf="t.status!='C' && !t.lectureDate" class="btn btn-primary btn-sm"
-                      (click)="assignTopic(t)">Assign </button>
-                  </td>
-                  <td>
-                    <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info">
-                      Send</button>
-                    <button *ngIf="t.topicSentOn!=null" class="btn btn-success btn-sm">
-                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                    </button>
-                    <button *ngIf="t.status !='C'" class="btn btn-danger btn-sm">
-                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                      Recap
-                    </button>
-
-                  </td>
+                  <th width="50%">Topic</th>
+                  <th>Assigned Date</th>
+                  <th>Completion Date</th>
+                  <th *ngIf="userType!='U'">Review Status</th>
+                  <th *ngIf="userType!='U'">Reviewed By</th>
+                  <th>Action</th>
                 </tr>
-              </ng-container>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let j=index;let t of m.topics">
+                  <tr>
+                    <td>
+                      <i class=" fa fa-check" *ngIf="t.status=='C'" aria-hidden="true"></i>
+                      <i class="fa fa-pencil" *ngIf="t.status=='P'" aria-hidden="true"></i>
+                      <!--[disabled]="userType=='M' || userType=='U'"-->
+                      <!-- <input *ngIf="t.status!='C'" type="checkbox" #topicCheckbox [checked]="t.status=='C'" name="topic"
+                        alt="{{t.code}}" (change)="updateStatus(t, topicCheckbox.checked)" /> -->
+                      <mat-checkbox *ngIf="t.status!='C'" (change)="updateStatus(t, $event.checked)">
 
-        </div>
+                      </mat-checkbox>
+                    </td>
+                    <!-- <td *ngIf="userType=='M'">{{t.code}}</td>                                                            -->
+                    <td>
+                      <font [color]="getColor(t)"> {{t.name}} </font>
+                    </td>
+                    <td class="">{{t.lectureDate | date:'dd-MM-yyyy'}}</td>
+                    <td class="">{{t.completionDate}}</td>
+
+                    <td *ngIf="userType!='U'">
+                      <i class="fa fa-check-circle " *ngIf="t.reviewStatus=='A'" style="color:green"
+                        aria-hidden="true"></i>
+                      <i class="fa fa-ban " *ngIf="t.reviewStatus=='R'" style="color:red" aria-hidden="true"></i>
+                      <button *ngIf="t.status=='C' && t.reviewStatus=='P'" class="btn btn-info btn-sm"
+                        (click)="topicReviewStatus(t,'A')">Approve</button> &nbsp;
+                      <button *ngIf="t.status=='C' && t.reviewStatus=='P'" class="btn btn-danger btn-sm"
+                        (click)="topicReviewStatus(t,'R')">Reject</button>
+                      <button *ngIf="t.status!='C' && !t.lectureDate" class="btn btn-primary btn-sm"
+                        (click)="assignTopic(t)">Assign </button>
+                    </td>
+                    <td>
+                      <button *ngIf="t.topicAvailable && t.topicSentOn==null" class="btn btn-info">
+                        Send</button>
+                      <button *ngIf="t.topicSentOn!=null" class="btn btn-success btn-sm">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                      </button>
+                      <button *ngIf="t.status !='C'" class="btn btn-danger btn-sm">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        Recap
+                      </button>
+
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
   </div>

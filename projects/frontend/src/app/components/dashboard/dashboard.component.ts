@@ -48,9 +48,9 @@ export class DashboardComponent implements OnInit {
     let featureList = [
       {
         name: 'Courses',
-        link: '../' + this.userId + '/courses',
+        link: '../courses',
         image: 'courses.jpg',
-        active: this.authService.hasRole(this.user, ['U']),
+        active: this.authService.hasRole(this.user, ['T']),
       },
       //{name:"Projects", link:"../"+ this.userId + "/projects", image:"project.png",active:this.authService.hasRole(this.user, ["U"])},
       {

@@ -35,7 +35,7 @@ export class AddCourseTopicComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  topic = { name: null, duration: 0, core: true };
+  topic = { name: null, duration: 10, core: true };
 
   save(topic) {
     console.log(this.courseId, this.module.code, topic);

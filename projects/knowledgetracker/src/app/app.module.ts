@@ -26,6 +26,7 @@ import { ProjectFeatureListComponent } from './components/project-feature-list/p
 import { ProjectDetailSidebarComponent } from './components/project-detail-sidebar/project-detail-sidebar.component';
 import { ProjectFeatureRatingListComponent } from './components/project-feature-rating-list/project-feature-rating-list.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ToastrModule } from 'ngx-toastr';
     UsercourseModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     ThemeModule,
     NavbarModule,
+    MatCheckboxModule,
     //ProjectModule.forRoot({ API_ENDPOINT: environment.API_URL }),
     DeviceDetectorModule,
     UsersModule.forRoot({ API_ENDPOINT: environment.API_URL }),

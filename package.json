@@ -32,7 +32,7 @@
     "@fullcalendar/angular": "^5.3.1",
     "@kolkov/angular-editor": "^1.1.3",
     "@ks-sdk-client/rest": "git+https://github.com/knowledgetracker/ks-sdk-client.git",
-    "@nareshkumarh/kt-theme": "^1.0.1",
+    "@nareshkumarh/kt-theme": "^1.0.2",
     "@netlify-builder/deploy": "^3.1.1",
     "@octokit/rest": "^18.0.9",
     "@popperjs/core": "^2.4.0",
