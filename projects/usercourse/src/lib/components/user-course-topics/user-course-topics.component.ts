@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ANALYZE_FOR_ENTRY_COMPONENTS,
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserCourseService } from '../../usercourse.service';
 import { AuthService } from 'auth';
 import { CourseClientService } from '../../course-client.service';
@@ -27,10 +22,7 @@ export class UserCourseTopicsComponent implements OnInit {
   courseName: string;
   report: UserCourseReport;
 
-  breadcrumbItems: any = [
-    { icon: 'home', name: 'Home', link: '/' },
-    { name: 'Courses', link: '../../courses' },
-  ];
+  breadcrumbItems: any = [];
 
   readAccess: boolean = false;
 
@@ -60,7 +52,12 @@ export class UserCourseTopicsComponent implements OnInit {
       this.courseId = params['courseId'];
       this.courseName = params['courseName'];
       // this.breadcrumbItems.push({ name: "Courses", link: "coursedashboard",sidelink:"USER_COURSE"});
-      this.breadcrumbItems.push({ name: this.courseId });
+      //this.breadcrumbItems.push({ name: this.courseId });
+      //this.breadcrumbItems.push({ icon: 'home', name: 'Home', link: '/' });
+      // this.breadcrumbItems.push({
+      //   name: 'Courses',
+      //   link: this.courseId,
+      // });
     });
   }
 
@@ -156,8 +153,10 @@ export class UserCourseTopicsComponent implements OnInit {
     this.userCourseService
       .updateTopicReviewStatus(topic.userTopicId, status)
       .subscribe((res) => {
+        this.report.updateProjectAppliedCount(status);
         topic.reviewStatus = status;
         this.toastr.success('Success');
+        this.displayReport();
       });
   }
 
@@ -218,7 +217,7 @@ export class UserCourseTopicsComponent implements OnInit {
   }
 
   updateStatus(topic, checked, index, moduleIndex) {
-    console.log('Update Status:', topic, checked);
+    //console.log('Update Status:', topic, checked);
     let status = checked ? 'C' : 'P';
     topic.status = status;
     topic.completionDate = status == 'C' ? null : null;
@@ -228,7 +227,7 @@ export class UserCourseTopicsComponent implements OnInit {
         .updateTopicStatus(topic.userTopicId, status)
         .subscribe((res) => {
           console.log(res);
-          let percentageImproved = this.report.updateCount(status);
+          this.report.updateCount(status);
 
           //this.modules[moduleIndex].topics[index].status = status;
 
@@ -264,7 +263,7 @@ export class UserCourseTopicsComponent implements OnInit {
     'green-haze',
     'red-intense',
     'blue-madison',
-    'red-intense',
+    'green-haze',
   ];
 
   createReport() {
@@ -273,6 +272,7 @@ export class UserCourseTopicsComponent implements OnInit {
     let total = 0;
     let completed = 0;
     let pending = 0;
+    let projectApplied = 0;
     let totalDuration = 0;
     let topicDelayed = 0;
     for (let m of this.course.modules) {
@@ -280,6 +280,7 @@ export class UserCourseTopicsComponent implements OnInit {
       for (let c of topics) {
         completed += c.status == 'C' ? 1 : 0;
         pending += c.status == 'P' ? 1 : 0;
+        projectApplied += c.reviewStatus == 'A' ? 1 : 0;
         // totalDuration += c.duration;
         // topicDelayed += ((c.status == 'P' && new Date(c.plannedDate) < this.today) ? 1 : 0);
         total += 1;
@@ -296,6 +297,7 @@ export class UserCourseTopicsComponent implements OnInit {
     report.pending = total - completed;
     report.completed = completed;
     report.total = total;
+    report.projectApplied = projectApplied;
 
     this.report = report;
     //this.reportData.push({ "label": "Topics Due", "value": topicDelayed });
@@ -309,9 +311,14 @@ export class UserCourseTopicsComponent implements OnInit {
     this.reportData.push({ label: 'Topics', value: this.report.topics });
     this.reportData.push({ label: 'Completed', value: this.report.completed });
     this.reportData.push({ label: 'Pending', value: this.report.pending });
+
     this.reportData.push({
       label: 'Percentage',
       value: this.report.getPercentage() + '%',
+    });
+    this.reportData.push({
+      label: 'Project(%)',
+      value: this.report.getProjectPercentage() + '%',
     });
   }
 
@@ -330,7 +337,7 @@ export class UserCourseTopicsComponent implements OnInit {
     return color;
   }
 
-  selectedStatus = 'ALL';
+  selectedStatus = 'P';
 
   sortByDisplayOrder(a, b) {
     if (a.display_order < b.display_order) {
@@ -372,22 +379,33 @@ export class UserCourseTopicsComponent implements OnInit {
   }
 
   fTopics = (topic) => {
-    if (this.selectedStatus == 'ALL') {
-      return true;
-    }
-    if (this.selectedStatus == 'P' && (!topic.status || topic.status == 'P')) {
-      return true;
-    }
-    if (this.selectedStatus == 'C' && topic.status == 'C') {
-      return true;
-    }
-    if (this.selectedStatus == 'ASSIGNED' && topic.lectureDate != null) {
-      return true;
+    switch (this.selectedStatus) {
+      case 'ALL': {
+        return true;
+      }
+      case 'P': {
+        return !topic.status || topic.status == 'P';
+      }
+      case 'C': {
+        return topic.status == 'C';
+      }
+      case 'ASSIGNED': {
+        return topic.lectureDate != null;
+      }
+      case 'PROJECT': {
+        return topic.reviewStatus == 'A';
+      }
+      default: {
+        return false;
+      }
     }
   };
 
+  filteredTopics: any;
+
   getTopics(m) {
     let topics = m.topics.filter(this.fTopics);
+    this.filteredTopics = topics;
     return topics;
   }
 }

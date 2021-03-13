@@ -1,0 +1,42 @@
+.example-chip-list {
+  width: 100%;
+}
+.mat-chip {
+  font-size: 12px;
+  background-color: #44b6ae;
+  color: #fff;
+}
+
+.mat-chip[color="orange"] {
+  font-size: 12px;
+  background-color: orange;
+  color: #fff;
+}
+
+.mat-chip[color="green"] {
+  font-size: 12px;
+  background-color: #44b6ae;
+  color: #fff;
+}
+
+.mat-chip[color="blue"] {
+  font-size: 12px;
+  background-color: #578ebe;
+  color: #fff;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-green {
+  background-color: #44b6ae;
+  color: #fff;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-orange {
+  background-color: orange;
+  color: #fff;
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-red {
+  background-color: orange;
+  color: #fff;
+}
+/*#44b6ae*/

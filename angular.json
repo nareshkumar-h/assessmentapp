@@ -837,7 +837,9 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "projects/knowledgetracker/src/assets/theme2.css",
+              "node_modules/@nareshkumarh/kt-theme/css/theme.css",
+              "node_modules/@nareshkumarh/kt-theme/css/card.css",
+              "node_modules/@nareshkumarh/kt-theme/css/matcard.css",
               "projects/knowledgetracker/src/styles.css"
             ],
             "scripts": [

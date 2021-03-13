@@ -1,8 +1,23 @@
 .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+mat-checkbox ::ng-deep .mat-checkbox-inner-container {
+  width: 20px;
+  height: 20px;
+}
+
+.mat-card {
+  padding: 0px;
+}
+
+.topic-name {
+  font-weight: 300;
+  font-size: 16px;
+  font-family: sans-serif;
 }

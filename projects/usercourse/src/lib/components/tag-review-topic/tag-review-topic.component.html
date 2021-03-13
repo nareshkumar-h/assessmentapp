@@ -1,0 +1,17 @@
+<mat-chip-list #chipList aria-label="Technology selection">
+  <mat-chip-list aria-label="Skills">
+
+    <mat-chip *ngIf="topic?.status=='C' && topic.reviewStatus!='A'" color="blue">
+      Theory
+      <mat-icon matChipRemove *ngIf="isEditable">close</mat-icon>
+    </mat-chip>
+
+    <mat-chip *ngIf="topic?.reviewStatus=='A'" color="green">
+      Project
+      <mat-icon matChipRemove *ngIf="isEditable">close</mat-icon>
+    </mat-chip>
+
+
+
+  </mat-chip-list>
+</mat-chip-list>

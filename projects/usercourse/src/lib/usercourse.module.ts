@@ -36,6 +36,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { StatusPipe } from './pipes/status.pipe';
+import { TagReviewTopicComponent } from './components/tag-review-topic/tag-review-topic.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 //import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
 //import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
@@ -62,6 +64,7 @@ FullCalendarModule.registerPlugins([
     UserCourseContentComponent,
     CalendarComponent,
     StatusPipe,
+    TagReviewTopicComponent,
   ],
   imports: [
     FullCalendarModule,
@@ -70,6 +73,7 @@ FullCalendarModule.registerPlugins([
     MatCheckboxModule,
     MatRadioModule,
     MatCardModule,
+    MatChipsModule,
     HttpClientModule,
     CardModule,
     SidenavModule,

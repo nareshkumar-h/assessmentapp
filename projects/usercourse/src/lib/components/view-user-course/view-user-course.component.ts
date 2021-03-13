@@ -18,9 +18,7 @@ export class ViewUserCourseComponent implements OnInit {
 
   selectedCourse: any;
 
-  breadcrumbItems: any = [
-    { icon: 'home', name: ' Courses', link: '../../courses' },
-  ];
+  breadcrumbItems: any = [];
 
   courseName: string;
 
@@ -37,6 +35,11 @@ export class ViewUserCourseComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.courseId = params['courseId'];
       this.courseName = params['courseName'];
+      this.breadcrumbItems.push({
+        icon: 'home',
+        name: ' Courses',
+        link: '../../',
+      });
       // this.breadcrumbItems.push({ name: "Courses", link: "coursedashboard",sidelink:"USER_COURSE"});
     });
     this.route.queryParams.subscribe((params) => {
