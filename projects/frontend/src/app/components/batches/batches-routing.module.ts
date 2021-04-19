@@ -23,6 +23,7 @@ import { BatchCourseOverviewComponent } from './batch-course-overview/batch-cour
 import { BatchCourseContentComponent } from './batch-course-content/batch-course-content.component';
 import { TrainerDashboardComponent } from '../trainer-dashboard/trainer-dashboard.component';
 import { TrainerCourseListComponent } from '../trainer/trainer-course-list/trainer-course-list.component';
+import { BatchCourseQuestionComponent } from './batch-course-question/batch-course-question.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'plan', component: BatchCoursePlanComponent },
       { path: 'edit', component: EditBatchCourseComponent },
       { path: 'content', component: BatchCourseContentComponent },
+      { path: 'questions', component: BatchCourseQuestionComponent },
     ],
   },
   {

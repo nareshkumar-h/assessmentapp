@@ -54,11 +54,13 @@ export class InterviewDetailComponent implements OnInit {
   interviews: any = {};
   interview: any;
 
+  userinterviews:any;
+
   loadUserInterviews() {
     this.interviewService
       .getUserInterviewByInterviewId(this.interviewId)
       .subscribe((res) => {
-        this.interviews = res;
+        this.userinterviews = res;
         this.createReport(this.interviews);
       });
   }

@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       },
       {
         name: 'Batches',
-        link: '../batches/' + this.userId,
+        link: '../batches',
         image: 'training.jpg',
         active: this.authService.hasRole(this.user, ['T']),
       },
@@ -113,9 +113,18 @@ export class DashboardComponent implements OnInit {
       access: this.authService.hasRole(this.user, ['T', 'HR']),
     });
 
+
+
     this.menus.push({
       title: 'Courses',
       path: ['/courses'],
+      icontype: 'fas fa-cubes',
+      access: this.authService.hasRole(this.user, ['T']),
+    });
+
+    this.menus.push({
+      title: 'Questions',
+      path: ['/questions'],
       icontype: 'fas fa-cubes',
       access: this.authService.hasRole(this.user, ['T']),
     });

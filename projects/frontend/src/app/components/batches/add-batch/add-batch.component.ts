@@ -43,6 +43,7 @@ export class AddBatchComponent implements OnInit {
     name: null,
     startDate: this.today,
     endDate: this.today,
+    org:null
   };
 
   save(batch) {

@@ -26,6 +26,7 @@ import { BatchesModule } from './components/batches/batches.module';
 import { TrainingModule } from './components/trainer/training.module';
 import { HomeComponent } from './components/home.component';
 import { TaskDashboardComponent } from './components/task-dashboard/task-dashboard.component';
+import { HeaderComponent } from './layouts/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TaskDashboardComponent } from './components/task-dashboard/task-dashboa
     DashboardComponent,
     HomeComponent,
     TaskDashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

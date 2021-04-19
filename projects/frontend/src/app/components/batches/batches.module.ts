@@ -40,6 +40,7 @@ import { SecurityModule } from 'projects/security/src/public-api';
 import { BrowserModule } from '@angular/platform-browser';
 import { TrainerCourseListComponent } from '../trainer/trainer-course-list/trainer-course-list.component';
 import { TrainerDashboardComponent } from '../trainer-dashboard/trainer-dashboard.component';
+import { BatchCourseQuestionComponent } from './batch-course-question/batch-course-question.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { TrainerDashboardComponent } from '../trainer-dashboard/trainer-dashboar
     BatchCourseContentComponent,
     TrainerCourseListComponent,
     TrainerDashboardComponent,
+    BatchCourseQuestionComponent,
   ],
   imports: [
     BrowserModule,

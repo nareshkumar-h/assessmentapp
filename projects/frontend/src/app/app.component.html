@@ -4,8 +4,12 @@
 </div>
 
 <div *ngIf="isLoggedIn">
-  <kt-header [navbrand]="name" [user]="user" [bgColor]="headerColor" [menus]="getHeaderMenus()"></kt-header>
-  <div class="wrapper">
+  <!-- <kt-header [navbrand]="name" [user]="user" [bgColor]="headerColor" [menus]="getHeaderMenus()"></kt-header>
+   -->
+
+    <app-header></app-header>
+
+    <div class="wrapper">
 
     <router-outlet></router-outlet>
   </div>
