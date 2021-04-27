@@ -177,7 +177,7 @@ export class ProjectService {
   save(project) {
     let createdBy = this.authService.getLoggedInUsername();
     project['userId'] = createdBy;
-    project['createdBy'] = createdBy;
+    //project['createdBy'] = createdBy;
     let url = `${this.apiUrl}v1/projects`;
     return this.http.post(url, project, { headers: this.getHeaders() });
   }

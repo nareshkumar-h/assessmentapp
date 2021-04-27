@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'auth';
+import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../../project.service';
 @Component({
   selector: 'app-add-project',
@@ -15,7 +16,8 @@ export class AddProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {
     this.userId = this.authService.getLoggedInUsername();
   }
@@ -30,12 +32,22 @@ export class AddProjectComponent implements OnInit {
     name: null,
     startDate: this.today,
     completionDate: this.today,
+    assignedTo: null
   };
+
 
   save(project) {
     this.projectService.save(project).subscribe((res) => {
       console.log(res);
-      this.router.navigate(['projects']);
+      //this.router.navigate(['projects']);
+      this.toastr.success("Added Project Successfully");
+      this.project = {
+        projectPrefix: null,
+        name: null,
+        startDate: this.today,
+        completionDate: this.today,
+        assignedTo: null
+      };
     });
   }
 

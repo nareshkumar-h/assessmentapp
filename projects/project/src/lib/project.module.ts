@@ -61,6 +61,8 @@ import { AddSkillComponent } from './components/add-skill/add-skill.component';
 import { ProjectMainSidebarComponent } from './components/project-main-sidebar/project-main-sidebar.component';
 import { ProjectFeedbackComponent } from './components/project-feedback/project-feedback.component';
 import { TechnologyBadgeComponent } from './components/technology-badge/technology-badge.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -116,6 +118,8 @@ import { TechnologyBadgeComponent } from './components/technology-badge/technolo
     FormsModule,
     ProjectRoutingModule,
     ThemeModule,
+    MatTableModule,
+    MatSortModule,
     SidenavModule,
   ],
   entryComponents: [

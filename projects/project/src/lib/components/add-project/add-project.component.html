@@ -1,5 +1,5 @@
 <lib-project-main-sidebar ></lib-project-main-sidebar>
-<kt-page title="Add Project" showSidebar="true" >    
+<kt-page title="Add Project" showSidebar="true" >
 
     <div class="row">
         <div class="col-6">
@@ -31,19 +31,22 @@
                                 <th width="30%">Start Date</th>
                                 <td width="70%"><input type="date"  class="form-control"  [(ngModel)]="project.startDate" name="startDate" required autofocus /></td>
                             </tr>
-                                                        
+
                             <!-- <tr>
                                 <th width="30%">Completion Date</th>
                                 <td width="70%"><input type="date"  class="form-control"  [(ngModel)]="project.completionDate" name="completionDate" required autofocus /></td>
                             </tr> -->
-
+ <tr>
+                                <th width="30%">Assigned To</th>
+                                <td width="70%"><input type="text"  class="form-control"  [(ngModel)]="project.createdBy" name="createdBy" required autofocus /></td>
+                            </tr>
                             <tr>
                                 <th></th>
                                <td><button type="submit" class="btn btn-success">Submit</button> &nbsp;
                                 <button type="reset" class="btn btn-danger" (click)="cancel()">Cancel</button>
                             </td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
                     </form>
