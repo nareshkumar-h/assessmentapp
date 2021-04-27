@@ -31,7 +31,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { SidenavModule, ThemeModule } from '@nareshkumarh/kt-theme';
+import { MaterialModule, SidenavModule, ThemeModule } from '@nareshkumarh/kt-theme';
 import { ViewProjectDetailComponent } from './components/view-project-detail/view-project-detail.component';
 import { Config, API_URL } from './config';
 import { ProjectService } from './project.service';
@@ -63,6 +63,7 @@ import { ProjectFeedbackComponent } from './components/project-feedback/project-
 import { TechnologyBadgeComponent } from './components/technology-badge/technology-badge.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     ProjectRoutingModule,
     ThemeModule,
+    MatChipsModule,
     MatTableModule,
     MatSortModule,
     SidenavModule,
