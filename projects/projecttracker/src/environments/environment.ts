@@ -7,7 +7,9 @@ export const environment = {
  // API_URL: "http://localhost:5000/api/",
   //API_URL: "http://api.knowledgetracker.in:8080/api/",
   API_URL: 'https://projecttracker-api.herokuapp.com/api/',
-  ORG_ID: "spinsoft"
+  ORG_ID: "spinsoft",
+  //G_API_URL: "https://api.projecttracker.in/api",
+  G_API_URL: "http://localhost:5000/api"
 };
 
 /*

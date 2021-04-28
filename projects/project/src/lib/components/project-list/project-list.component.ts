@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as dayjs from 'dayjs';
+import { ProjectClientService } from '../../project-client.service';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -24,6 +25,7 @@ export class ProjectListComponent implements OnInit {
   constructor(
     private router: Router,
     private projectService: ProjectService,
+    private projectClient : ProjectClientService,
     private authService: AuthService,
     private route: ActivatedRoute
   ) {
@@ -50,10 +52,14 @@ export class ProjectListComponent implements OnInit {
   ];
 
   list() {
-    this.projectService.list().subscribe((res) => {
+    //this.projectService.list().subscribe((res) => {
+      this.projects = this.projectClient.getProjects().subscribe((res)=>{
+        console.log(JSON.stringify(res));
+
+
       this.projects = res;
       this.dataSource = new MatTableDataSource<any>(this.projects);
-      //this.createReport(this.projects);
+      this.createReport(this.projects);
     });
   }
 
@@ -77,7 +83,7 @@ export class ProjectListComponent implements OnInit {
   }
   loadTableViewChild() {
     if (this.projects) {
-      this.dataSource.paginator = this.paginator;
+     // this.dataSource.paginator = this.paginator;
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProjectClientService } from '../../project-client.service';
 import { ProjectService } from '../../project.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class ViewProjectComponent implements OnInit {
 
   breadcrumbItems:any = [];
   projectId:number;
-  constructor(private router:Router, private route:ActivatedRoute, private projectService:ProjectService) {
+  constructor(private router:Router, private route:ActivatedRoute,
+    private projectClient: ProjectClientService,
+    private projectService:ProjectService) {
     this.route.params.subscribe (params=>{
       this.projectId = params["projectId"];
     });
@@ -27,7 +30,7 @@ export class ViewProjectComponent implements OnInit {
   project:any;
 
   findOne(){
-    this.projectService.findOne(this.projectId).subscribe (res=>{
+    this.projectClient.getProject(this.projectId).subscribe (res=>{
       this.project = res;
     });
   }
@@ -52,9 +55,9 @@ export class ViewProjectComponent implements OnInit {
     this.menus.push( {title: "Sprint",  path:["../"+ this.projectId + "/sprints"], icontype:"fas fa-clock",  access: true});
     this.menus.push( {title: "Competency",  path:["../"+ this.projectId + "/competency"], icontype:"fas fa-laptop",  access: true});
     this.menus.push( {title: "Repositories",  path:["../../repositories"], icontype:"fas fa-code-branch",  access: true});
-    
+
     //this.menus.push( {title: "Repositories",  path:["../"+ this.projectId + "/repositories"], icontype:"fas fa-code-branch",  access: true});
-  }  
+  }
 
 
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from 'auth';
 import { API_URL } from './config';
+import { environment } from 'projects/projecttracker/src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +48,14 @@ export class ProjectService {
   }
 
   findMyProjects(userId) {
-    let url = `${this.apiUrl}v1/projects?userId=${userId}`;
+    //let url = `${this.apiUrl}v1/projects?userId=${userId}`;
+
+    let query = `{
+      myprojects(userId:${userId}){ id,name, project_prefix,no_of_features,features{
+          name
+      }}
+  }`;
+  let url = `${environment.G_API_URL}?query=` + query;
     return this.http.get(url);
   }
 

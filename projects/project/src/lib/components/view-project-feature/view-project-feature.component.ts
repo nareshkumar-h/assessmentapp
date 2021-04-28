@@ -3,6 +3,7 @@ import { ProjectService } from '../../project.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'auth';
 import { ToastrService } from 'ngx-toastr';
+import { ProjectClientService } from '../../project-client.service';
 
 @Component({
   selector: 'app-view-project-feature',
@@ -27,6 +28,7 @@ export class ViewProjectFeatureComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
+    private projectClient: ProjectClientService,
     private authService: AuthService,
     private toastr: ToastrService,
     private route: ActivatedRoute

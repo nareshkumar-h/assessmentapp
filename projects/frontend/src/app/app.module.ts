@@ -18,7 +18,7 @@ import { CourseModule } from 'projects/course/src/public-api';
 import { ContentModule } from 'projects/content/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { UsersModule } from 'projects/users/src/public-api';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from 'auth';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProjectModule } from 'projects/project/src/public-api';
@@ -27,6 +27,7 @@ import { TrainingModule } from './components/trainer/training.module';
 import { HomeComponent } from './components/home.component';
 import { TaskDashboardComponent } from './components/task-dashboard/task-dashboard.component';
 import { HeaderComponent } from './layouts/header/header.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,8 @@ import { HeaderComponent } from './layouts/header/header.component';
     HighlightModule,
     BatchesModule,
     AppRoutingModule,
+    GraphQLModule,
+    HttpClientModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

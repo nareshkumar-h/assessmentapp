@@ -3,6 +3,7 @@ import { ProjectService } from '../../project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'auth';
 import { AddRepositoryComponent } from '../add-repository/add-repository.component';
+import { ProjectClientService } from '../../project-client.service';
 
 @Component({
   selector: 'app-my-project-list',
@@ -22,6 +23,7 @@ export class MyProjectListComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
+    private projectClient: ProjectClientService,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
@@ -48,7 +50,8 @@ export class MyProjectListComponent implements OnInit {
   projects: any;
 
   list() {
-    this.projectService.findMyProjects(this.userId).subscribe((res) => {
+    //this.projectService.findMyProjects
+    this.projectClient.getMyProjects(this.userId).subscribe((res) => {
       this.projects = res;
       this.createReport(this.projects);
     });

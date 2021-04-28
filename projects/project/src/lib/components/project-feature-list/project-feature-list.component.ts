@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddProjectFeatureComponent } from '../add-project-feature/add-project-feature.component';
 import { AuthService } from 'auth';
 import * as _ from 'lodash';
+import { ProjectClientService } from '../../project-client.service';
 
 @Component({
   selector: 'app-project-feature-list',
@@ -31,7 +32,8 @@ export class ProjectFeatureListComponent implements OnInit {
     private projectService: ProjectService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private projectClient: ProjectClientService
   ) {
     this.showSidebar = this.authService.isAuthorized();
     this.isMentor = this.authService.hasRoleAccess('T');
@@ -53,9 +55,9 @@ export class ProjectFeatureListComponent implements OnInit {
   ngOnInit(): void {
     if (this.projectId != null) {
       this.findOne();
-      this.listModules();
+      //this.listModules();
     }
-    this.listFeatures();
+   this.listFeatures();
   }
 
   projectFeatures: any;
@@ -64,10 +66,13 @@ export class ProjectFeatureListComponent implements OnInit {
   project: any;
 
   findOne() {
-    this.projectService.findOne(this.projectId).subscribe((res) => {
+    this.projectClient.getProject(this.projectId).subscribe((res) => {
       this.project = res;
+      this.modules = this.project["modules"];
+      this.setFeatures(this.project["features"]);
       this.isLoggedInUser =
-        this.authService.getSelectedUser() == this.project['createdBy'];
+        this.authService.getSelectedUser() == this.project['created_by'];
+
     });
   }
 
@@ -77,21 +82,25 @@ export class ProjectFeatureListComponent implements OnInit {
     });
   }
 
-  listFeatures() {
-    this.getFeatures().subscribe((res) => {
-      this.projectFeatures = <{}>res;
-      if (this.userId != null) {
-        let modules = Object.keys(this.projectFeatures);
-        console.log(modules);
-        let modulesMap = [];
-        for (let m of modules) {
-          modulesMap.push({ name: m });
-        }
-        this.modules = modulesMap;
+  setFeatures(features:any){
+    this.projectFeatures = features;
+    if (this.userId != null) {
+      let modules = Object.keys(this.projectFeatures);
+      console.log(modules);
+      let modulesMap = [];
+      for (let m of modules) {
+        modulesMap.push({ name: m });
       }
-      this.createReport(this.projectFeatures);
-    });
+      this.modules = modulesMap;
+    }
+    this.createReport(this.projectFeatures);
   }
+
+  listFeatures() {
+     this.getFeatures().subscribe((res) => {
+       this.setFeatures(res);
+     });
+   }
 
   getFeatures() {
     if (this.projectId != null) {
