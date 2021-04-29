@@ -60,7 +60,7 @@ export class ProjectClientService {
     const GET_PROJECTS = gql`
     {
       project(projectId:${id}){
-          id,name, project_prefix,no_of_features,modules{
+          id,name, project_prefix,no_of_features,created_by,status,modules{
           id,name
       },
       features {

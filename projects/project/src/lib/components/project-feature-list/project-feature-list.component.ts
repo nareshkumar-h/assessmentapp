@@ -161,14 +161,15 @@ export class ProjectFeatureListComponent implements OnInit {
       let module = { name: moduleName };
       this.projectService.addModule(this.projectId, module).subscribe((res) => {
         this.toastr.success('Successfully Added');
-        this.refresh();
+        //this.refresh();
+        this.findOne();
       });
       console.log(moduleName);
     }
   }
 
   refresh() {
-    this.listModules();
+   // this.listModules();
     this.listFeatures();
   }
 
