@@ -39,7 +39,7 @@ export class ProjectMainSidebarComponent implements OnInit {
       icontype: 'fas fa-laptop',
       access: this.authService.hasRoleAccess(['U', 'T', 'HR']),
     });
-    //this.menus.push( {title: "Add Project",  path:[ "addproject"], icontype:"fas fa-plus", access: this.authService.hasRoleAccess(["U"])});
+    this.menus.push( {title: "Add Project",  path:[ "../addproject"], icontype:"fas fa-plus", access: this.authService.hasRoleAccess(["U","T"])});
     //this.menus.push( {title: "Ratings",  path:[ "../ratings"], icontype:"fas fa-plus", access: true});
     this.menus.push({
       title: 'Reviews',
