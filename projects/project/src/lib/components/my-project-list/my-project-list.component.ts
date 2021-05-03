@@ -50,8 +50,9 @@ export class MyProjectListComponent implements OnInit {
   projects: any;
 
   list() {
-    //this.projectService.findMyProjects
-    this.projectClient.getMyProjects(this.userId).subscribe((res) => {
+    this.projectService.findMyProjects
+    //this.projectClient.getMyProjects
+    (this.userId).subscribe((res) => {
       this.projects = res;
       this.createReport(this.projects);
     });

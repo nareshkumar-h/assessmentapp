@@ -48,14 +48,14 @@ export class ProjectService {
   }
 
   findMyProjects(userId) {
-    //let url = `${this.apiUrl}v1/projects?userId=${userId}`;
+    let url = `${this.apiUrl}v1/projects?userId=${userId}`;
 
-    let query = `{
-      myprojects(userId:${userId}){ id,name, project_prefix,no_of_features,features{
-          name
-      }}
-  }`;
-  let url = `${environment.G_API_URL}?query=` + query;
+  // //   let query = `{
+  // //     myprojects(userId:${userId}){ id,name, project_prefix,no_of_features,features{
+  // //         name
+  // //     }}
+  // // }`;
+  // let url = `${environment.G_API_URL}?query=` + query;
     return this.http.get(url);
   }
 
