@@ -30,7 +30,8 @@ export class ViewProjectComponent implements OnInit {
   project:any;
 
   findOne(){
-    this.projectClient.getProject(this.projectId).subscribe (res=>{
+    //this.projectClient.getProject
+    this.projectService.findOne(this.projectId).subscribe (res=>{
       this.project = res;
     });
   }

@@ -55,7 +55,7 @@ export class ProjectFeatureListComponent implements OnInit {
   ngOnInit(): void {
     if (this.projectId != null) {
       this.findOne();
-      //this.listModules();
+      this.listModules();
     }
    this.listFeatures();
   }
@@ -66,10 +66,12 @@ export class ProjectFeatureListComponent implements OnInit {
   project: any;
 
   findOne() {
-    this.projectClient.getProject(this.projectId).subscribe((res) => {
+    this.projectService.findOne(this.projectId)
+    //this.projectClient.getProject(this.projectId)
+    .subscribe((res) => {
       this.project = res;
-      this.modules = this.project["modules"];
-      this.setFeatures(this.project["features"]);
+     // this.modules = this.project["modules"];
+      //this.setFeatures(this.project["features"]);
       this.isLoggedInUser =
         this.authService.getSelectedUser() == this.project['created_by'];
 

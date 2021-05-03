@@ -52,8 +52,8 @@ export class ProjectListComponent implements OnInit {
   ];
 
   list() {
-    //this.projectService.list().subscribe((res) => {
-      this.projects = this.projectClient.getProjects().subscribe((res)=>{
+    this.projectService.list().subscribe((res) => {
+    //  this.projects = this.projectClient.getProjects().subscribe((res)=>{
         //console.log(JSON.stringify(res));
 
 
