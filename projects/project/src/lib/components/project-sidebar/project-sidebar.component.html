@@ -1,57 +1,60 @@
+<kt-sidebar [menus]="menus" showSidebar="true">
+
+</kt-sidebar>
+<!--
 <div class="sidebar">
-    <!-- <app-brand></app-brand> -->
 
     <ul class="nav sidebar-menu">
 
-        
+
         <li class="nav-item">
             <a class="nav-link" routerLink="/">
                 <i class="fa fa-home"> &nbsp;&nbsp; </i>
                 <span class="title">Home</span>
             </a>
         </li>
-        
+
         <li class="nav-item">
-            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['projects',projectId,'view'])">
+            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate('projects/'+projectId+'/view')">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Project Home</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['projects',projectId,'features', userId])">
+            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate('projects/'+projectId + '/features/' + userId)">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Features</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['projects',projectId,'plan', userId])">
+            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate('projects/'+projectId+'/plan/'+ userId)">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Plan</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['projects',projectId,'tasks', userId])">
+            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate('projects/'+projectId+'/tasks/' + userId)">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Tasks</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['projects',projectId,'sprints'])">
+            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate('projects/'+projectId + '/sprints')">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Sprints</span>
             </a>
-        </li> 
+        </li>
         <li class="nav-item">
-            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate(['projects',projectId,'repositories'])">
+            <a class="nav-link" routerLinkActive="nav-link-active"  (click)="navigate('projects/'+projectId +'/repositories')">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Repositories</span>
             </a>
-        </li> 
-        <!-- <li class="nav-item">
-            <a class="nav-link" (click)="navigate(['projects',projectId,'reviews'],['PROJECT_PROFILE',projectId])">
+        </li>
+         <li class="nav-item">
+            <a class="nav-link" (click)="navigate('projects/'+projectId + '/reviews')">
                 <i class="fa fa-book"> &nbsp;&nbsp; </i>
                 <span class="title">Reviews</span>
             </a>
-        </li> -->
+        </li>
     </ul>
-</div>
+</div> -->

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class ProjectClientService {
   apiUrl: string;
   constructor(private http: HttpClient, private apollo: Apollo) {
-    this.apiUrl = environment.G_API_URL;
+    this.apiUrl = environment.API_URL;
   }
 
   getProjects() {

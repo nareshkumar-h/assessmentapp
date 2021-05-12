@@ -23,10 +23,19 @@ export class ProjectSidebarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadMenus();
+  }
 
   navigate(routeLink) {
     console.log(routeLink);
-    this.router.navigate([{ outlets: { primary: routeLink } }]);
+    this.router.navigateByUrl(routeLink);
+  }
+
+  menus:any;
+
+  loadMenus(){
+    this.menus = [];
+    this.menus.push( {title: "Add Project",  path:"projects/addproject", icontype:"fas fa-plus", access: this.authService.hasRoleAccess(["U","T"])});
   }
 }

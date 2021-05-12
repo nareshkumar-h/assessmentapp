@@ -47,15 +47,15 @@ export class ViewProjectComponent implements OnInit {
   menus = [];
   loadMenus(){
     this.menus = [];
-    this.menus.push( {title: "Back",  path:["../"], icontype:"fas fa-arrow-left",  access: true});
-    this.menus.push( {title: "Overview",  path:["../"+ this.projectId ] , icontype:"fas fa-home",  access: true});
-    this.menus.push( {title: "Features",  path:["../"+ this.projectId + "/features"] , icontype:"fas fa-lightbulb",  access: true});
+    this.menus.push( {title: "Back",  path:"/", icontype:"fas fa-arrow-left",  access: true});
+    this.menus.push( {title: "Overview",  path:"projects/"+ this.projectId , icontype:"fas fa-home",  access: true});
+    this.menus.push( {title: "Features",  path:"projects/"+ this.projectId + "/features" , icontype:"fas fa-lightbulb",  access: true});
     //this.menus.push( {title: "Plan",  path:["../"+ this.projectId + "/plan"], icontype:"fas fa-clipboard",  access: true});
-    this.menus.push( {title: "Tasks",  path:["../"+ this.projectId + "/tasks/ALL"], icontype:"fas fa-tasks",  access: true});
-    this.menus.push( {title: "Issues",  path:["../"+ this.projectId + "/tasks/ISSUES"], icontype:"fas fa-bug",  access: true});
-    this.menus.push( {title: "Sprint",  path:["../"+ this.projectId + "/sprints"], icontype:"fas fa-clock",  access: true});
-    this.menus.push( {title: "Competency",  path:["../"+ this.projectId + "/competency"], icontype:"fas fa-laptop",  access: true});
-    this.menus.push( {title: "Repositories",  path:["../../repositories"], icontype:"fas fa-code-branch",  access: true});
+    this.menus.push( {title: "Tasks",  path:"projects/"+ this.projectId + "/tasks/ALL", icontype:"fas fa-tasks",  access: true});
+    this.menus.push( {title: "Issues",  path:"projects/"+ this.projectId + "/tasks/ISSUES", icontype:"fas fa-bug",  access: true});
+    this.menus.push( {title: "Sprint",  path:"projects/"+ this.projectId + "/sprints", icontype:"fas fa-clock",  access: true});
+    this.menus.push( {title: "Competency",  path:"projects/"+ this.projectId + "/competency", icontype:"fas fa-laptop",  access: true});
+    this.menus.push( {title: "Repositories",  path:"repositories", icontype:"fas fa-code-branch",  access: true});
 
     //this.menus.push( {title: "Repositories",  path:["../"+ this.projectId + "/repositories"], icontype:"fas fa-code-branch",  access: true});
   }

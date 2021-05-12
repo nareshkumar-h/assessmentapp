@@ -4,12 +4,9 @@
 
 export const environment = {
   production: false,
- // API_URL: "http://localhost:5000/api/",
-  //API_URL: "http://api.knowledgetracker.in:8080/api/",
-  API_URL: 'https://projecttracker-api.herokuapp.com/api/',
+  API_URL: 'https://api.projecttracker.in/api/',
+  //API_URL:'http://localhost:5000',
   ORG_ID: "spinsoft",
-  //G_API_URL: "https://api.projecttracker.in/api",
-  G_API_URL: "http://localhost:5000/api"
 };
 
 /*

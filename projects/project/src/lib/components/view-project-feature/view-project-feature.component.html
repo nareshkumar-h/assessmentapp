@@ -8,7 +8,7 @@
                     </div>
                     <!-- <div class="tools pull-right">
                              <button *ngIf="isLoggedInUser" mat-button (click)="addFeatureDialog(m)" class="btn btn btn-sm text-white">
-                                <i class="fa fa-plus "></i></button>  
+                                <i class="fa fa-plus "></i></button>
                      </div>        -->
                 </div>
                 <div class="card-body">
@@ -32,7 +32,7 @@
                                 <td><span class="badge badge-primary">{{feature.priority}}</span> </td>
                                 <td> <i class="fa fa-user-circle-o " aria-hidden="true"></i> {{feature.assignedTo}}</td>
                                 <td> <i class="fa fa-user-circle-o " aria-hidden="true"></i> {{feature.createdBy}}</td>
-                                <td>{{feature.createdDate}}</td>
+                                <td>{{feature.createdDate | moment}}</td>
                                 <td>{{feature.status}}</td>
                                 <td>
                                     <button *ngIf="isLoggedInUser && mode!='edit'" class="btn btn-info btn-sm"

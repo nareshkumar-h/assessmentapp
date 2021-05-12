@@ -64,7 +64,7 @@ import { TechnologyBadgeComponent } from './components/technology-badge/technolo
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
-import { GraphQLModule } from './graphql.module';
+//import { GraphQLModule } from './graphql.module';
 
 
 
@@ -125,8 +125,7 @@ import { GraphQLModule } from './graphql.module';
     MatChipsModule,
     MatTableModule,
     MatSortModule,
-    SidenavModule,
-    GraphQLModule
+    SidenavModule
   ],
   entryComponents: [
     AddProjectFeatureComponent,
